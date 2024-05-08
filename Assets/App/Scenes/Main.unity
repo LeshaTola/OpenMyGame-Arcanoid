@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 1897742263}
   - component: {fileID: 1897742262}
   m_Layer: 5
-  m_Name: MiddleGround
+  m_Name: MiddlegroundCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
