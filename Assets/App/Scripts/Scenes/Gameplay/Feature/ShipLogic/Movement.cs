@@ -16,11 +16,6 @@ namespace Scenes.Gameplay.Feature.ShipLogic
 		private IInput input;
 		private ITimeProvider timeProvider;
 
-		private void Awake()
-		{
-			Init(new MouseInput(Camera.main), new GameplayTimeProvider());
-		}
-
 		public void Init(IInput input, ITimeProvider timeProvider)
 		{
 			this.input = input;
@@ -28,27 +23,6 @@ namespace Scenes.Gameplay.Feature.ShipLogic
 		}
 
 		void IUpdatable.Update()
-		{
-			ApplyDrag();
-			ClampPosition();
-
-			Vector2 targetPosition = input.GetPosition();
-			if (targetPosition.Equals(default))
-			{
-				return;
-			}
-
-			Vector2 direction = GetDirection(targetPosition);
-			if (direction.magnitude < config.DeadZone)
-			{
-				rb.velocity = Vector2.zero;
-				return;
-			}
-
-			rb.velocity = direction.normalized * config.Speed;
-		}
-
-		private void Update()
 		{
 			ApplyDrag();
 			ClampPosition();

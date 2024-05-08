@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Scenes.Main.Bootstrap
 {
+	[AddComponentMenu("Scenes/Gameplay")]
 	public class Bootstrap : MonoBehaviour
 	{
 		[SerializeField] List<SerializableInterface<IInitializable>> initializables;
