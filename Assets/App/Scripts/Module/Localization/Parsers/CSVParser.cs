@@ -8,7 +8,7 @@ namespace Module.Localization.Parsers
 	{
 		private char lineSeparator = '\n';
 		private string surround = "\"";
-		private string[] fieldSeparator = { "\",\"" };
+		private string fieldSeparator = "\",\"";
 
 		public Dictionary<string, string> Parse(string language, string localizationFile)
 		{
@@ -49,7 +49,7 @@ namespace Module.Localization.Parsers
 			{
 				string line = lines[i];
 
-				string[] fields = line.Split(',');
+				string[] fields = line.Split(fieldSeparator);
 				for (int j = 0; j < fields.Length; j++)
 				{
 					fields[j] = removeQuotes(fields[j]);

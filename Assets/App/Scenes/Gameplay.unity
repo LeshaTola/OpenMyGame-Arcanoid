@@ -1208,6 +1208,50 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &974111340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 974111341}
+  - component: {fileID: 974111342}
+  m_Layer: 0
+  m_Name: SceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &974111341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974111340}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1605346081}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &974111342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974111340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a9a4624f94b8b46bfb2de90af31174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1059541119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,19 +1293,98 @@ MonoBehaviour:
   m_GameObject: {fileID: 1059541119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b33fd63d71a8ee9478f23dd89948d52c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f445b0351527b043b1269d6330912a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamplayUpdatables:
-  - mode: 0
-    unityReference: {fileID: 1134754027}
-    rawReference:
-      rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1134754027}
+    - {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    - {fileID: 974111342}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: states
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 1|Features.StateMachine.States.GlobalInitialState, Assembly-CSharp
+    - Name: targetFrameRate
+      Entry: 3
+      Data: 60
+    - Name: nextState
+      Entry: 7
+      Data: 2|GameplayState, Assembly-CSharp
+    - Name: updatables
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|GameplayState, Assembly-CSharp
+    - Name: updatables
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
+    - Name: scene
+      Entry: 7
+      Data: 6|SceneReference.SceneRef, SceneRef
+    - Name: sceneAsset
+      Entry: 10
+      Data: 1
+    - Name: scenePath
+      Entry: 1
+      Data: Assets/App/Scenes/Main.unity
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: sceneController
+      Entry: 10
+      Data: 2
+    - Name: sceneTransition
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
 --- !u!1 &1134754024
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,6 +1944,7 @@ Transform:
   m_Children:
   - {fileID: 1134754025}
   - {fileID: 1396913684}
+  - {fileID: 974111341}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

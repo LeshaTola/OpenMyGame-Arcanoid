@@ -2,9 +2,9 @@
 {
 	public abstract class State
 	{
-		protected readonly StateMachine stateMachine;
+		protected StateMachine stateMachine;
 
-		protected State(StateMachine stateMachine)
+		public void Init(StateMachine stateMachine)
 		{
 			this.stateMachine = stateMachine;
 		}

@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.morzyolo.sceneref": {
+      "version": "https://github.com/morzyolo/SceneRef.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "184b7d1b83b82564f539fc9395e6e4b716e1aeee"
+    },
     "com.unity.2d.animation": {
       "version": "7.0.11",
       "depth": 1,
