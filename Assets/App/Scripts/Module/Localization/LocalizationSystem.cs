@@ -1,12 +1,12 @@
-﻿using Features.Bootstrap;
-using Module.Localization.Localizers;
-using Module.Localization.Parsers;
+﻿using System.Collections.Generic;
+using App.Scripts.Features.Bootstrap;
+using App.Scripts.Module.Localization.Localizers;
+using App.Scripts.Module.Localization.Parsers;
 using Sirenix.OdinInspector;
-using System.Collections.Generic;
 using TNRD;
 using UnityEngine;
 
-namespace Module.Localization
+namespace App.Scripts.Module.Localization
 {
 	public class LocalizationSystem : SerializedMonoBehaviour, IInitializable
 	{

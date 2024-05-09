@@ -2,11 +2,13 @@ using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
+using System.Collections.Generic;
 using System.IO;
+using App.Scripts.Scenes.Gameplay.Feature.LevelCreation;
 using UnityEditor;
 using UnityEngine;
 
-namespace Module.LevelCreation
+namespace Scenes.Gameplay.Features.LevelCreation.Editor
 {
 	public class LevelCreationEditorWindow : OdinEditorWindow
 	{
@@ -29,7 +31,7 @@ namespace Module.LevelCreation
 		[Space(8)]
 		[SerializeField] private BlocksDictionary blocksDictionary;
 
-		[ValueDropdown("@blocksDictionary.IDs")]
+		[ValueDropdown(nameof(GetIds))]
 		[SerializeField] private int value;
 
 		[ShowIf("@ blocksMatrix != null")]
@@ -56,6 +58,19 @@ namespace Module.LevelCreation
 
 			return value;
 		}
+
+		public List<int> GetIds()
+		{
+			if (blocksDictionary == null)
+			{
+				return null;
+			}
+
+			var ids = new List<int>(blocksDictionary.Blocks.Keys);
+			ids.Sort();
+			return ids;
+		}
+
 		#endregion
 
 		#region SaveLoad

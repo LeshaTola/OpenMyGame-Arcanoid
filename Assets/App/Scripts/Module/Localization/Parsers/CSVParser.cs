@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Module.Localization.Parsers
+namespace App.Scripts.Module.Localization.Parsers
 {
 	public class CSVParser : IParser
 	{

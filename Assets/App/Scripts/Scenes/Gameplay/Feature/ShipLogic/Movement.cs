@@ -1,10 +1,11 @@
-﻿using Features.StateMachine;
-using Module.TimeProvider;
-using Scenes.Gameplay.Feature.Field;
-using Scenes.Gameplay.Feature.PlayerInput;
-using Scenes.Gameplay.Feature.ShipLogic.Configs;
+﻿using App.Scripts.Features.StateMachine;
+using App.Scripts.Module.TimeProvider;
+using App.Scripts.Scenes.Gameplay.Feature.Field;
+using App.Scripts.Scenes.Gameplay.Feature.PlayerInput;
+using App.Scripts.Scenes.Gameplay.Feature.ShipLogic.Configs;
 using UnityEngine;
-namespace Scenes.Gameplay.Feature.ShipLogic
+
+namespace App.Scripts.Scenes.Gameplay.Feature.ShipLogic
 {
 	public class Movement : MonoBehaviour, IUpdatable
 	{

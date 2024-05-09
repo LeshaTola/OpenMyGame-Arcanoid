@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Scenes.Gameplay.Feature.Field
+namespace App.Scripts.Scenes.Gameplay.Feature.Field
 {
 	[Serializable]
 	public struct Paddings

@@ -1,4 +1,4 @@
-﻿namespace Features.StateMachine
+﻿namespace App.Scripts.Features.StateMachine
 {
 	public interface IUpdatable
 	{

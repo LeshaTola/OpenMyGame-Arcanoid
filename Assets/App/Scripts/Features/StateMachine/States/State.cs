@@ -1,4 +1,4 @@
-﻿namespace Features.StateMachine.States
+﻿namespace App.Scripts.Features.StateMachine.States
 {
 	public abstract class State
 	{

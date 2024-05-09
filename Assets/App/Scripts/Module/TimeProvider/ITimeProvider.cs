@@ -1,4 +1,4 @@
-﻿namespace Module.TimeProvider
+﻿namespace App.Scripts.Module.TimeProvider
 {
 	public interface ITimeProvider
 	{

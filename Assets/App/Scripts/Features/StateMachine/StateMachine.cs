@@ -1,8 +1,8 @@
-﻿using Features.StateMachine.States;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using App.Scripts.Features.StateMachine.States;
 
-namespace Features.StateMachine
+namespace App.Scripts.Features.StateMachine
 {
 	public class StateMachine
 	{

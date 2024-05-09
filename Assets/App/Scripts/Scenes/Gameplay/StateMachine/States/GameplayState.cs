@@ -1,19 +1,22 @@
-using Features.StateMachine;
-using Features.StateMachine.States;
 using System.Collections.Generic;
+using App.Scripts.Features.StateMachine;
+using App.Scripts.Features.StateMachine.States;
 using UnityEngine;
 
-public class GameplayState : State
+namespace App.Scripts.Scenes.Gameplay.StateMachine.States
 {
-	//[SerializeField] private List<SerializableInterface<IUpdatable>> updatables;
-	[SerializeField] private List<IUpdatable> updatables;
-
-	public override void Update()
+	public class GameplayState : State
 	{
-		base.Update();
-		foreach (var updatable in updatables)
+		//[SerializeField] private List<SerializableInterface<IUpdatable>> updatables;
+		[SerializeField] private List<IUpdatable> updatables;
+
+		public override void Update()
 		{
-			updatable.Update();
+			base.Update();
+			foreach (var updatable in updatables)
+			{
+				updatable.Update();
+			}
 		}
 	}
 }

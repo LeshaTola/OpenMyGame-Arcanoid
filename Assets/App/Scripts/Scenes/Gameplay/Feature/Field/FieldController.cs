@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scenes.Gameplay.Feature.Field
+namespace App.Scripts.Scenes.Gameplay.Feature.Field
 {
 	public class FieldController : MonoBehaviour
 	{

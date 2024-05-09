@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scenes.Gameplay.Feature.PlayerInput
+namespace App.Scripts.Scenes.Gameplay.Feature.PlayerInput
 {
 	public interface IInput
 	{

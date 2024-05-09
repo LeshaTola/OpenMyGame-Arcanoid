@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scenes.Gameplay.Feature.ShipLogic.Configs
+namespace App.Scripts.Scenes.Gameplay.Feature.ShipLogic.Configs
 {
 	[CreateAssetMenu(fileName = "MovementConfig", menuName = "Configs/Ship/Movement")]
 	public class MovementConfig : ScriptableObject

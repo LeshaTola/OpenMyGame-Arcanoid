@@ -1,4 +1,4 @@
-﻿namespace Module.Localization.Localizers
+﻿namespace App.Scripts.Module.Localization.Localizers
 {
 	public interface ITextLocalizer
 	{

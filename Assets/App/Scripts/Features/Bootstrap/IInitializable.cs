@@ -1,4 +1,4 @@
-namespace Features.Bootstrap
+namespace App.Scripts.Features.Bootstrap
 {
 	public interface IInitializable
 	{

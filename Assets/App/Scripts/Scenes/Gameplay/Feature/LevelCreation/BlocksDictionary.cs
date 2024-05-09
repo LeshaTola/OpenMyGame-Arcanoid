@@ -1,7 +1,8 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
-namespace Module.LevelCreation
+
+namespace App.Scripts.Scenes.Gameplay.Feature.LevelCreation
 {
 	[CreateAssetMenu(fileName = "BlocksDictionary", menuName = "Dictionaries/Blocks")]
 	public class BlocksDictionary : SerializedScriptableObject
@@ -9,14 +10,5 @@ namespace Module.LevelCreation
 		[SerializeField] private Dictionary<int, Color> blocks = new();
 
 		public Dictionary<int, Color> Blocks { get => blocks; }
-		public List<int> IDs
-		{
-			get
-			{
-				var ids = new List<int>(Blocks.Keys);
-				ids.Sort();
-				return ids;
-			}
-		}
 	}
 }

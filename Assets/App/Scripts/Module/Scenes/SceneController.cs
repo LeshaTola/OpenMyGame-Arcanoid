@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Module.Scenes
+namespace App.Scripts.Module.Scenes
 {
 	public class SceneController : MonoBehaviour
 	{

@@ -1,12 +1,12 @@
-using Features.Bootstrap;
-using Module.TimeProvider;
-using Scenes.Gameplay.Feature.PlayerInput;
-using Scenes.Gameplay.Feature.ShipLogic;
 using System.Collections.Generic;
+using App.Scripts.Features.Bootstrap;
+using App.Scripts.Module.TimeProvider;
+using App.Scripts.Scenes.Gameplay.Feature.PlayerInput;
+using App.Scripts.Scenes.Gameplay.Feature.ShipLogic;
 using TNRD;
 using UnityEngine;
 
-namespace Scenes.Gameplay.Bootstrap
+namespace App.Scripts.Scenes.Gameplay.Bootstrap
 {
 	[AddComponentMenu("Scenes/Gameplay")]
 	public class Bootstrap : MonoBehaviour

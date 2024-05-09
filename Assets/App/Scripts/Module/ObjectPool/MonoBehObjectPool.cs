@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Module.ObjectPool
+namespace App.Scripts.Module.ObjectPool
 {
-	public class MonoBehObjectPool<T> where T : MonoBehaviour
+	public class MonoBehObjectPool<T> : IPool<T> where T : MonoBehaviour
 	{
 		private ObjectPool<T> core;
 

@@ -1,8 +1,8 @@
-using DG.Tweening;
 using System;
+using DG.Tweening;
 using UnityEngine;
 
-namespace Features.UI.SceneTransitions
+namespace App.Scripts.Features.UI.SceneTransitions
 {
 	public class Fade : MonoBehaviour, ISceneTransition
 	{

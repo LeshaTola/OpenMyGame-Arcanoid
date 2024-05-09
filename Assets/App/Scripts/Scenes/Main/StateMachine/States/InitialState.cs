@@ -1,7 +1,7 @@
-﻿using Features.StateMachine.States;
+﻿using App.Scripts.Features.StateMachine.States;
 using UnityEngine;
 
-namespace Scenes.Main.StateMachine.States
+namespace App.Scripts.Scenes.Main.StateMachine.States
 {
 	public class InitialState : State
 	{

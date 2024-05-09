@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Module.MinMaxValue
+namespace App.Scripts.Module.MinMaxValue
 {
 	public struct MinMaxValue
 	{

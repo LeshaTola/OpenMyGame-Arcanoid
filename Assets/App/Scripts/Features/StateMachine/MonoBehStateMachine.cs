@@ -1,10 +1,10 @@
-using Features.Bootstrap;
-using Features.StateMachine.States;
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using App.Scripts.Features.Bootstrap;
+using App.Scripts.Features.StateMachine.States;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Features.StateMachine
+namespace App.Scripts.Features.StateMachine
 {
 	public class MonoBehStateMachine : SerializedMonoBehaviour, IInitializable
 	{

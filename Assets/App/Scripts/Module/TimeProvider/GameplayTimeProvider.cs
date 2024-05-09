@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Module.TimeProvider
+namespace App.Scripts.Module.TimeProvider
 {
 	public class GameplayTimeProvider : ITimeProvider
 	{

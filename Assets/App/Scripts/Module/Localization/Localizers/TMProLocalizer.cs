@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Module.Localization.Localizers
+namespace App.Scripts.Module.Localization.Localizers
 {
 	public class TMProLocalizer : MonoBehaviour, ITextLocalizer
 	{
