@@ -1300,6 +1300,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
+    - {fileID: 1189566610}
+    - {fileID: 4900000, guid: 4c75ac4aa8615734f9416ad40e094525, type: 3}
     - {fileID: 1134754027}
     - {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     - {fileID: 974111342}
@@ -1310,23 +1312,26 @@ MonoBehaviour:
     SerializationNodes:
     - Name: states
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
+      Data: 0|System.Collections.Generic.List`1[[App.Scripts.Features.StateMachine.States.State,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
-      Data: 1|Features.StateMachine.States.GlobalInitialState, Assembly-CSharp
+      Data: 1|App.Scripts.Features.StateMachine.States.GlobalInitialState, Assembly-CSharp
     - Name: targetFrameRate
       Entry: 3
       Data: 60
     - Name: nextState
       Entry: 7
-      Data: 2|GameplayState, Assembly-CSharp
-    - Name: updatables
-      Entry: 6
-      Data: 
+      Data: 2|App.Scripts.Scenes.Gameplay.StateMachine.States.InitialState, Assembly-CSharp
+    - Name: levelGenerator
+      Entry: 10
+      Data: 0
+    - Name: fileLevelInfo
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -1335,17 +1340,29 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|GameplayState, Assembly-CSharp
+      Data: 3|App.Scripts.Scenes.Gameplay.StateMachine.States.InitialState, Assembly-CSharp
+    - Name: levelGenerator
+      Entry: 10
+      Data: 0
+    - Name: fileLevelInfo
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|App.Scripts.Scenes.Gameplay.StateMachine.States.GameplayState, Assembly-CSharp
     - Name: updatables
       Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
+      Data: 5|System.Collections.Generic.List`1[[App.Scripts.Features.StateMachine.IUpdatable,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 10
-      Data: 0
+      Data: 2
     - Name: 
       Entry: 13
       Data: 
@@ -1357,13 +1374,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
+      Data: 6|App.Scripts.Features.StateMachine.States.LoadSceneState, Assembly-CSharp
     - Name: scene
       Entry: 7
-      Data: 6|SceneReference.SceneRef, SceneRef
+      Data: 7|SceneReference.SceneRef, SceneRef
     - Name: sceneAsset
       Entry: 10
-      Data: 1
+      Data: 3
     - Name: scenePath
       Entry: 1
       Data: Assets/App/Scenes/Main.unity
@@ -1372,7 +1389,7 @@ MonoBehaviour:
       Data: 
     - Name: sceneController
       Entry: 10
-      Data: 2
+      Data: 4
     - Name: sceneTransition
       Entry: 6
       Data: 
@@ -1527,10 +1544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2538bd3faa5feb548a178bcfc1da5e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileLevelInfo: {fileID: 4900000, guid: 4c75ac4aa8615734f9416ad40e094525, type: 3}
   fieldController: {fileID: 1396913685}
+  levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
   blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
-  spacing: 0.05
   blockTemplate: {fileID: 7240198157899510798, guid: 72b0f7db32a1ed54798e26d8a52a4553, type: 3}
 --- !u!1 &1222504796
 GameObject:

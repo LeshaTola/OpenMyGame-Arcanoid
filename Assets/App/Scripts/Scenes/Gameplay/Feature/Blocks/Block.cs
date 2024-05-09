@@ -10,9 +10,8 @@ namespace App.Scripts.Scenes.Gameplay.Feature.Blocks
 		[SerializeField] private BlockVisual blockVisual;
 
 		public BlockVisual BlockVisual { get => blockVisual; }
+		public BlockConfig Config { get => config; }
 
-		public BlockConfig Config  { get => config; }
-				
 		public float Width
 		{
 			get => boxCollider.size.x;
@@ -24,7 +23,7 @@ namespace App.Scripts.Scenes.Gameplay.Feature.Blocks
 			get => boxCollider.size.y;
 			private set => boxCollider.size = new Vector2(boxCollider.size.x, value);
 		}
-		
+
 
 		public void Init(BlockConfig config)
 		{

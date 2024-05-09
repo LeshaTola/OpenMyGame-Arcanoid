@@ -1,10 +1,10 @@
+using App.Scripts.Scenes.Gameplay.Feature.LevelCreation;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
 using System.Collections.Generic;
 using System.IO;
-using App.Scripts.Scenes.Gameplay.Feature.LevelCreation;
 using UnityEditor;
 using UnityEngine;
 
@@ -51,7 +51,7 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 			Color cellColor = Color.black;
 			if (blocksDictionary.Blocks.ContainsKey(value))
 			{
-				cellColor = blocksDictionary.Blocks[value];
+				cellColor = blocksDictionary.Blocks[value].Color;
 			}
 
 			EditorGUI.DrawRect(rect.Padding(1), cellColor);

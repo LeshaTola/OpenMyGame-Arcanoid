@@ -8,7 +8,7 @@ namespace App.Scripts.Features.StateMachine
 {
 	public class MonoBehStateMachine : SerializedMonoBehaviour, IInitializable
 	{
-		[SerializeField] private List<State> states = new List<State>();
+		[SerializeField] private List<State> states = new ();
 
 		private StateMachine core;
 

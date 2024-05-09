@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a1df85a022ae0a4296bdec497199e27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 2996364791874638116}
 --- !u!1 &2996364793074825446
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,5 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3696228f8b42d947971375088c7bacc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  config: {fileID: 0}
   boxCollider: {fileID: 2996364793074825444}
   blockVisual: {fileID: 3857893211875119628}

@@ -1,49 +1,21 @@
-﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.Gameplay.Feature.Blocks.Config
 {
+	[CreateAssetMenu(fileName = "BlockConfig", menuName = "Configs/Block")]
 	public class BlockConfig : SerializedScriptableObject
 	{
+		[SerializeField] private string blockName;
 		[SerializeField] private Sprite sprite;
+		[SerializeField] private Color color;
 		[SerializeField] private List<IComponent> components;
 
 		public Sprite Sprite => sprite;
-
+		public Color Color { get => color; }
 		public List<IComponent> Components => components;
-	}
-
-	public interface IComponent
-	{
-		public void Execute();
-	}
-	
-	public abstract class Component : IComponent
-	{
-		public virtual void Execute()
-		{
-		}
-	}
-
-	public class HealthComponent : Component
-	{
-		[SerializeField] private int health;
-
-		public override void Execute()
-		{
-			base.Execute();
-			ReduceHealth(1);
-		}
-
-		private void ReduceHealth(int health)
-		{
-			this.health -= health;
-
-			if (health == 0)
-			{
-
-			}
-		}
+		public string BlockName { get => blockName; }
 	}
 }
