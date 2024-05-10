@@ -1,6 +1,7 @@
-﻿using Sirenix.OdinInspector;
+﻿using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.General;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using UnityEngine;
 
 namespace App.Scripts.Scenes.Gameplay.Feature.Blocks.Config
@@ -17,5 +18,23 @@ namespace App.Scripts.Scenes.Gameplay.Feature.Blocks.Config
 		public Color Color { get => color; }
 		public List<IComponent> Components => components;
 		public string BlockName { get => blockName; }
+
+		public void Init(Block block)
+		{
+			foreach (IComponent component in Components)
+			{
+				component.Init(block);
+			}
+		}
+
+		public T GetComponent<T>(List<IComponent> components) where T : IComponent
+		{
+			return (T)components.FirstOrDefault(x => x is T);
+		}
+
+		public T GetComponent<T>() where T : IComponent
+		{
+			return GetComponent<T>(components);
+		}
 	}
 }
