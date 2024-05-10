@@ -7,7 +7,6 @@ namespace App.Scripts.Scenes.Gameplay.StateMachine.States
 {
 	public class GameplayState : State
 	{
-		//[SerializeField] private List<SerializableInterface<IUpdatable>> updatables;
 		[SerializeField] private List<IUpdatable> updatables;
 
 		public override void Update()
