@@ -8,7 +8,7 @@ namespace App.Scripts.Scenes.Gameplay.Feature.Field
 
 		private void OnDrawGizmos()
 		{
-			var gameField = controller.GetGameFieldRect();
+			var gameField = controller.GetGameField();
 			Gizmos.color = Color.yellow;
 
 			Gizmos.DrawLine(gameField.TopLeftCorner, gameField.TopRightCorner);

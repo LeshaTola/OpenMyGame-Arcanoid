@@ -14,6 +14,7 @@ namespace App.Scripts.Scenes.Gameplay.Feature.Field
 		public Vector2 BottomLeftCorner => new(MinX, MinY);
 		public Vector2 BottomRightCorner => new(MaxX, MinY);
 		public float Width => MaxX - MinX;
+		public float Height => MaxY - MinY;
 
 		public GameField(float minX, float maxX, float minY, float maxY)
 		{

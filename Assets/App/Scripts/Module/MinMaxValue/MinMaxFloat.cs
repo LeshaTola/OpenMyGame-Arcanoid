@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
 
 namespace App.Scripts.Module.MinMaxValue
 {
-	public struct MinMaxValue
+	[Serializable]
+	public struct MinMaxFloat
 	{
 		public float Min;
 		public float Max;
@@ -14,7 +15,7 @@ namespace App.Scripts.Module.MinMaxValue
 
 		public float GetRandom()
 		{
-			return Random.Range(Min, Max);
+			return UnityEngine.Random.Range(Min, Max);
 		}
 	}
 }
