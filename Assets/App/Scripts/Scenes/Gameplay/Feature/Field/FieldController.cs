@@ -41,7 +41,7 @@ namespace App.Scripts.Scenes.Gameplay.Feature.Field
 			};
 		}
 
-		private void GenerateWalls()
+		private void GenerateWalls()// TODO: ???
 		{
 			var leftWall = Instantiate(wall, transform);
 

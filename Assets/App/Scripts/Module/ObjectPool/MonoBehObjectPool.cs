@@ -9,10 +9,15 @@ namespace App.Scripts.Module.ObjectPool
 
 		public IReadOnlyCollection<T> Active { get => core.Active; }
 
-		public MonoBehObjectPool(T objectTemplate, int startCount)
+		public MonoBehObjectPool(T objectTemplate, int startCount, Transform parent = null)
 		{
 			core = new(
-				() => GameObject.Instantiate(objectTemplate),
+				() =>
+				{
+					T pooledObject = GameObject.Instantiate(objectTemplate, parent);
+					pooledObject.gameObject.SetActive(false);
+					return pooledObject;
+				},
 				null,
 				null,
 				startCount

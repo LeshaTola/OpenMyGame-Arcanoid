@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  minAngle: 4
+  minAngle: 25
   rb: {fileID: 888402264843372841}
 --- !u!1 &7470354349316260838
 GameObject:

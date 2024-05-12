@@ -47,9 +47,9 @@ namespace App.Scripts.Module.ObjectPool
 			T pooledObject = pool.Dequeue();
 			active.Add(pooledObject);
 
-			/*if(obj is IPooledObject)
+			/*if(pooledObject is IPooledObject)
 			{
-				obj.OnGet(this)
+				pooledObject.OnGet(this)
 			}*/
 
 			getAction?.Invoke(pooledObject);
