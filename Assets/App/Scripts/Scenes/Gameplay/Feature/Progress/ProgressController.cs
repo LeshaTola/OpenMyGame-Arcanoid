@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.App.Scripts.Scenes.Gameplay.Feature.Score
+namespace App.Scripts.Scenes.Gameplay.Feature.Progress
 {
-	public class ScoreController : MonoBehaviour
+	public class ProgressController : MonoBehaviour, IProgressController
 	{
+		[SerializeField] private ProgressUI progressUI;
+
 		private List<Block> scoredBlocks;
 		private int startBlocksCount;
 		private int currentBlocksCount;
@@ -28,11 +30,38 @@ namespace Assets.App.Scripts.Scenes.Gameplay.Feature.Score
 
 			startBlocksCount = blocks.Count;
 			currentBlocksCount = startBlocksCount;
+
+			ProcessProgress();
 		}
 
-		private void OnBlockDeath(Block obj)
+		private void OnBlockDeath(Block block)
 		{
-			scoredBlocks.Remove(obj);
+			scoredBlocks.Remove(block);
+
+			var healthComponent = block.Config.GetComponent<HealthComponent>();
+			if (healthComponent != null)
+			{
+				healthComponent.OnDeath += OnBlockDeath;
+			}
+
+			currentBlocksCount--;
+			ProcessProgress();
+		}
+
+		public void ProcessProgress()
+		{
+			int progress = CalculateProgress();
+			progressUI.UpdateProgress(progress);
+
+			if (progress > 0)
+			{
+				//TODO: popup manager show win popup
+			}
+		}
+
+		public int CalculateProgress()
+		{
+			return (int)((1f - ((float)currentBlocksCount / startBlocksCount)) * 100);
 		}
 	}
 }

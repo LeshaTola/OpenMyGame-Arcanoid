@@ -2,7 +2,7 @@ using App.Scripts.Scenes.Gameplay.Feature.Blocks;
 using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config;
 using App.Scripts.Scenes.Gameplay.Feature.Field;
 using App.Scripts.Scenes.Gameplay.Feature.LevelCreation.Configs;
-using Assets.App.Scripts.Scenes.Gameplay.Feature.Score;
+using App.Scripts.Scenes.Gameplay.Feature.Progress;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ namespace App.Scripts.Scenes.Gameplay.Feature.LevelCreation
 	public class LevelGenerator : MonoBehaviour
 	{
 		[SerializeField] private FieldController fieldController;
-		[SerializeField] private ScoreController scoreController;
+		[SerializeField] private ProgressController progressController;
 		[SerializeField] private LevelConfig levelConfig;
 		[SerializeField] private BlocksDictionary blocksDictionary;
 		[SerializeField] private Block blockTemplate;
@@ -35,7 +35,7 @@ namespace App.Scripts.Scenes.Gameplay.Feature.LevelCreation
 				}
 			}
 
-			scoreController.Init(blocks);
+			progressController.Init(blocks);
 		}
 
 		private Block GetPreparedBlock(LevelInfo levelInfo, float blockWidth, int i, int j)

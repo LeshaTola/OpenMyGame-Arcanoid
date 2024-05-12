@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 31654176}
   - component: {fileID: 31654177}
   m_Layer: 0
-  m_Name: ScoreController
+  m_Name: ProgressController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2227cda634dcdf48b943587ecf7441d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressUI: {fileID: 349173688}
 --- !u!1 &107141097
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,8 +297,9 @@ GameObject:
   - component: {fileID: 349173685}
   - component: {fileID: 349173687}
   - component: {fileID: 349173686}
+  - component: {fileID: 349173688}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ProgressText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,6 +422,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349173684}
   m_CullTransparentMesh: 1
+--- !u!114 &349173688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349173684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0efc60e15190c1d4d93aad938a55d9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  progressText: {fileID: 0}
 --- !u!1 &429587182
 GameObject:
   m_ObjectHideFlags: 0
