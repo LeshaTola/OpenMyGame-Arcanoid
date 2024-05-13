@@ -23,31 +23,11 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.IComponent,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
-        Assembly-CSharp
-    - Name: collisionComponents
-      Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.IComponent,
+      Data: 0|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: 
       Entry: 13
       Data: 

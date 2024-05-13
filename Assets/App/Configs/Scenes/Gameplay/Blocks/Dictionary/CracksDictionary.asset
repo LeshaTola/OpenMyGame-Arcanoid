@@ -26,11 +26,11 @@ MonoBehaviour:
     SerializationNodes:
     - Name: cracks
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[App.Scripts.Module.MinMaxValue.MinMaxInt,
+      Data: 0|System.Collections.Generic.Dictionary`2[[Module.MinMaxValue.MinMaxInt,
         Assembly-CSharp],[UnityEngine.Sprite, UnityEngine.CoreModule]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[App.Scripts.Module.MinMaxValue.MinMaxInt,
+      Data: 1|System.Collections.Generic.ObjectEqualityComparer`1[[Module.MinMaxValue.MinMaxInt,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 8
@@ -43,34 +43,34 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 7
-      Data: App.Scripts.Module.MinMaxValue.MinMaxInt, Assembly-CSharp
+      Data: Module.MinMaxValue.MinMaxInt, Assembly-CSharp
     - Name: Min
-      Entry: 3
-      Data: 0
-    - Name: Max
       Entry: 3
       Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: $v
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 7
-      Data: App.Scripts.Module.MinMaxValue.MinMaxInt, Assembly-CSharp
-    - Name: Min
+    - Name: Max
       Entry: 3
       Data: 2
-    - Name: Max
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 7
+      Data: Module.MinMaxValue.MinMaxInt, Assembly-CSharp
+    - Name: Min
       Entry: 3
       Data: 3
+    - Name: Max
+      Entry: 3
+      Data: 4
     - Name: 
       Entry: 8
       Data: 
@@ -85,13 +85,13 @@ MonoBehaviour:
       Data: 
     - Name: $k
       Entry: 7
-      Data: App.Scripts.Module.MinMaxValue.MinMaxInt, Assembly-CSharp
+      Data: Module.MinMaxValue.MinMaxInt, Assembly-CSharp
     - Name: Min
       Entry: 3
-      Data: 4
+      Data: 5
     - Name: Max
       Entry: 3
-      Data: 5
+      Data: 6
     - Name: 
       Entry: 8
       Data: 
