@@ -1475,7 +1475,7 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   paddings:
     Top: 1.5
-    Bottom: 1.2
+    Bottom: 0
     Left: 0.1
     Right: 0.1
   wall: {fileID: 7164249048286099944, guid: 4a3682d0903371148824d5e001f6b88c, type: 3}
@@ -2017,6 +2017,10 @@ MonoBehaviour:
       rid: -2
   - mode: 0
     unityReference: {fileID: 2076856197}
+    rawReference:
+      rid: -2
+  - mode: 0
+    unityReference: {fileID: 467381949}
     rawReference:
       rid: -2
   - mode: 0

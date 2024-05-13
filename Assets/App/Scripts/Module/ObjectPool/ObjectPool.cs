@@ -47,10 +47,10 @@ namespace Module.ObjectPool
 			T pooledObject = pool.Dequeue();
 			active.Add(pooledObject);
 
-			/*if(pooledObject is IPooledObject)
+			if (pooledObject is IPooledObject<T> poolableObject)
 			{
-				pooledObject.OnGet(this)
-			}*/
+				poolableObject.OnGet(this);
+			}
 
 			getAction?.Invoke(pooledObject);
 			return pooledObject;
@@ -61,10 +61,10 @@ namespace Module.ObjectPool
 			active.Remove(obj);
 			pool.Enqueue(obj);
 
-			/*if(obj is IPooledObject)
+			if (obj is IPooledObject<T> poolableObject)
 			{
-				obj.OnRelease()
-			}*/
+				poolableObject.OnRelease();
+			}
 
 			releaseAction?.Invoke(obj);
 		}

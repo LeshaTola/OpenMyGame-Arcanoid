@@ -8,6 +8,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 		[SerializeField] private float minAngle;
 		[SerializeField] private Rigidbody2D rb;
 
+		public Vector2 Direction { get => rb.velocity.normalized; }
+
 		private Vector2[] axes =
 		{
 			Vector2.up,
@@ -19,16 +21,14 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 		public void Push(Vector2 direction)
 		{
 			rb.velocity = direction.normalized * speed;
-			//rb.velocity = Vector2.zero;
-			//rb.AddForce(direction.normalized * speed, ForceMode2D.Impulse);
 		}
 
-		public void ValidateDirection()
+		public Vector2 GetValidDirection()
 		{
-			rb.velocity = ValidateDirection(rb.velocity);
+			return GetValidDirection(rb.velocity);
 		}
 
-		public Vector2 ValidateDirection(Vector2 direction)
+		public Vector2 GetValidDirection(Vector2 direction)
 		{
 			foreach (Vector2 axis in axes)
 			{
