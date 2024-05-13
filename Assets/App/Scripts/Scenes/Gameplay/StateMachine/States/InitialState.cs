@@ -1,9 +1,9 @@
-﻿using App.Scripts.Features.StateMachine.States;
-using App.Scripts.Scenes.Gameplay.Feature.LevelCreation;
+﻿using Features.StateMachine.States;
+using Scenes.Gameplay.Feature.LevelCreation;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.StateMachine.States
+namespace Scenes.Gameplay.StateMachine.States
 {
 	public class InitialState: State
 	{

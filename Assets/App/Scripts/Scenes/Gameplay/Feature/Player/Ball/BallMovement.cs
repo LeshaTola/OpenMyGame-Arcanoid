@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Player.Ball
+namespace Scenes.Gameplay.Feature.Player.Ball
 {
 	public class BallMovement : MonoBehaviour
 	{

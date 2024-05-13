@@ -1,12 +1,12 @@
-using App.Scripts.Scenes.Gameplay.Feature.Blocks;
-using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config;
-using App.Scripts.Scenes.Gameplay.Feature.Field;
-using App.Scripts.Scenes.Gameplay.Feature.LevelCreation.Configs;
-using App.Scripts.Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.Feature.Blocks;
+using Scenes.Gameplay.Feature.Blocks.Config;
+using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.LevelCreation.Configs;
+using Scenes.Gameplay.Feature.Progress;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.LevelCreation
+namespace Scenes.Gameplay.Feature.LevelCreation
 {
 	public class LevelGenerator : MonoBehaviour
 	{

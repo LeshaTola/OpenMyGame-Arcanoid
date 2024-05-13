@@ -1,9 +1,9 @@
-﻿using App.Scripts.Module.MinMaxValue;
+﻿using Module.MinMaxValue;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Blocks.Config
+namespace Scenes.Gameplay.Feature.Blocks.Config
 {
 	[CreateAssetMenu(fileName = "CracksDictionary", menuName = "Dictionaries/Cracks")]
 	public class CracksDictionary : SerializedScriptableObject

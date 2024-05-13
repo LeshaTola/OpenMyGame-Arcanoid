@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Scripts.Module.Localization.Parsers
+namespace Module.Localization.Parsers
 {
 	public interface IParser
 	{

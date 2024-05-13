@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Scripts.Features.UI.SceneTransitions
+namespace Features.UI.SceneTransitions
 {
 	public interface ISceneTransition
 	{

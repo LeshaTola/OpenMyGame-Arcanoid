@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace App.Scripts.Features.StateMachine.States
+namespace Features.StateMachine.States
 {
 	public class GlobalInitialState : State
 	{

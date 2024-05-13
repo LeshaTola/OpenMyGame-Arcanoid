@@ -1,4 +1,4 @@
-using App.Scripts.Scenes.Gameplay.Feature.LevelCreation;
+using Scenes.Gameplay.Feature.LevelCreation;
 using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;

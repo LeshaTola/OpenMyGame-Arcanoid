@@ -1,7 +1,7 @@
-using App.Scripts.Features.Bootstrap;
+using Features.Bootstrap;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Field
+namespace Scenes.Gameplay.Feature.Field
 {
 	public class FieldController : MonoBehaviour, IInitializable
 	{

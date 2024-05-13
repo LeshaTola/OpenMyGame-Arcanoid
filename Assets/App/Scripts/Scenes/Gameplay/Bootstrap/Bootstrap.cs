@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using App.Scripts.Features.Bootstrap;
-using App.Scripts.Module.TimeProvider;
-using App.Scripts.Scenes.Gameplay.Feature.Player;
-using App.Scripts.Scenes.Gameplay.Feature.Player.PlayerInput;
+using Features.Bootstrap;
+using Module.TimeProvider;
+using Scenes.Gameplay.Feature.Player;
+using Scenes.Gameplay.Feature.Player.PlayerInput;
 using TNRD;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Bootstrap
+namespace Scenes.Gameplay.Bootstrap
 {
 	[AddComponentMenu("Scenes/Gameplay")]
 	public class Bootstrap : MonoBehaviour

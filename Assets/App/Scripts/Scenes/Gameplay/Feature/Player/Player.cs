@@ -1,12 +1,12 @@
 ﻿using System;
-using App.Scripts.Features.StateMachine;
-using App.Scripts.Features.StateMachine.States;
-using App.Scripts.Scenes.Gameplay.Feature.Field;
-using App.Scripts.Scenes.Gameplay.Feature.Player.Configs;
-using App.Scripts.Scenes.Gameplay.Feature.Player.PlayerInput;
+using Features.StateMachine;
+using Features.StateMachine.States;
+using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.Player.Configs;
+using Scenes.Gameplay.Feature.Player.PlayerInput;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Player
+namespace Scenes.Gameplay.Feature.Player
 {
     public class Player: MonoBehaviour, IUpdatable, IResetable
     {

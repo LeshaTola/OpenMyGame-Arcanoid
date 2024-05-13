@@ -1,9 +1,9 @@
+using Features.StateMachine;
+using Features.StateMachine.States;
 using System.Collections.Generic;
-using App.Scripts.Features.StateMachine;
-using App.Scripts.Features.StateMachine.States;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.StateMachine.States
+namespace Scenes.Gameplay.StateMachine.States
 {
 	public class GameplayState : State
 	{

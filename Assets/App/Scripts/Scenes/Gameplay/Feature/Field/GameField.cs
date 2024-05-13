@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Field
+namespace Scenes.Gameplay.Feature.Field
 {
 	public struct GameField
 	{

@@ -1,11 +1,11 @@
-﻿using App.Scripts.Scenes.Gameplay.Feature.Blocks;
-using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
-using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
+﻿using Scenes.Gameplay.Feature.Blocks;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Progress
+namespace Scenes.Gameplay.Feature.Progress
 {
 	public class ProgressController : MonoBehaviour, IProgressController
 	{

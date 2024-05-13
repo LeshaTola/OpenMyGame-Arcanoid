@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using App.Scripts.Features.Bootstrap;
+using Features.Bootstrap;
 using TNRD;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Main.Bootstrap
+namespace Scenes.Main.Bootstrap
 {
 	[AddComponentMenu("Scenes/Gameplay")]
 	public class Bootstrap : MonoBehaviour

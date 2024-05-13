@@ -1,13 +1,13 @@
 ﻿using System;
-using App.Scripts.Features.StateMachine;
-using App.Scripts.Module.TimeProvider;
-using App.Scripts.Scenes.Gameplay.Feature.Field;
-using App.Scripts.Scenes.Gameplay.Feature.Player.Configs;
-using App.Scripts.Scenes.Gameplay.Feature.Player.PlayerInput;
+using Features.StateMachine;
+using Module.TimeProvider;
+using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.Player.Configs;
+using Scenes.Gameplay.Feature.Player.PlayerInput;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Player
+namespace Scenes.Gameplay.Feature.Player
 {
 	public interface IMovement
 	{

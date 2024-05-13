@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace App.Scripts.Features.UI.SceneTransitions
+namespace Features.UI.SceneTransitions
 {
 	public class Fade : MonoBehaviour, ISceneTransition
 	{

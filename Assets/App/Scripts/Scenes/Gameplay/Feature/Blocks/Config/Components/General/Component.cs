@@ -1,4 +1,4 @@
-﻿namespace App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.General
+﻿namespace Scenes.Gameplay.Feature.Blocks.Config.Components.General
 {
 	public abstract class Component : IComponent
 	{

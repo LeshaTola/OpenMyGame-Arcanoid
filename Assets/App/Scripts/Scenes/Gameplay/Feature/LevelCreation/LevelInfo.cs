@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.LevelCreation
+namespace Scenes.Gameplay.Feature.LevelCreation
 {
 	[Serializable]
 	public struct LevelInfo

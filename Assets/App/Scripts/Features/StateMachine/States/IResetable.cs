@@ -1,4 +1,4 @@
-﻿namespace App.Scripts.Features.StateMachine.States
+﻿namespace Features.StateMachine.States
 {
     public interface IResetable
     {

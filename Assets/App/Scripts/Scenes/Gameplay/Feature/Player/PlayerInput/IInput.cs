@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Player.PlayerInput
+namespace Scenes.Gameplay.Feature.Player.PlayerInput
 {
 	public interface IInput
 	{

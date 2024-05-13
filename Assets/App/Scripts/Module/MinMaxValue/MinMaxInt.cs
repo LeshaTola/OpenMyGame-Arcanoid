@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Scripts.Module.MinMaxValue
+namespace Module.MinMaxValue
 {
 	[Serializable]
 	public struct MinMaxInt

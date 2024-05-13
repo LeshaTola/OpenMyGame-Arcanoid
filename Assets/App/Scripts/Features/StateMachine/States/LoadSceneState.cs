@@ -1,10 +1,10 @@
-﻿using App.Scripts.Features.UI.SceneTransitions;
-using App.Scripts.Module.Scenes;
+﻿using Features.UI.SceneTransitions;
+using Module.Scenes;
 using DG.Tweening;
 using SceneReference;
 using UnityEngine;
 
-namespace App.Scripts.Features.StateMachine.States
+namespace Features.StateMachine.States
 {
 	public class LoadSceneState : State
 	{

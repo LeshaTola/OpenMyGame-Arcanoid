@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Progress
+namespace Scenes.Gameplay.Feature.Progress
 {
 	public class ProgressUI : MonoBehaviour, IProgressUI
 	{

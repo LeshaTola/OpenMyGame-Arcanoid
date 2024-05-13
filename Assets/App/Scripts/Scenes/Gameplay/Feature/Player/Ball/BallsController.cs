@@ -1,8 +1,8 @@
-﻿using App.Scripts.Features.Bootstrap;
-using App.Scripts.Module.ObjectPool;
+﻿using Features.Bootstrap;
+using Module.ObjectPool;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Player.Ball
+namespace Scenes.Gameplay.Feature.Player.Ball
 {
 	public class BallsController : MonoBehaviour, IInitializable
 	{

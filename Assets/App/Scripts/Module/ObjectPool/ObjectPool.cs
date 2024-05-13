@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace App.Scripts.Module.ObjectPool
+namespace Module.ObjectPool
 {
 	public class ObjectPool<T> : IPool<T>
 	{

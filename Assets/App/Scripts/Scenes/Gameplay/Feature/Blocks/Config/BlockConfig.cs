@@ -1,10 +1,10 @@
-﻿using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.General;
+﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.General;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Blocks.Config
+namespace Scenes.Gameplay.Feature.Blocks.Config
 {
 	[CreateAssetMenu(fileName = "BlockConfig", menuName = "Configs/Block")]
 	public class BlockConfig : SerializedScriptableObject

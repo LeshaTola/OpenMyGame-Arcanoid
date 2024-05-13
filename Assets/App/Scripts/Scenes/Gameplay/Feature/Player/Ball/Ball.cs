@@ -1,8 +1,8 @@
-using App.Scripts.Module.ObjectPool;
-using App.Scripts.Scenes.Gameplay.Feature.Field;
+using Module.ObjectPool;
+using Scenes.Gameplay.Feature.Field;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Player.Ball
+namespace Scenes.Gameplay.Feature.Player.Ball
 {
 	public class Ball : MonoBehaviour, IPooledObject
 	{

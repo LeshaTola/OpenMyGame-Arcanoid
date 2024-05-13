@@ -1,4 +1,4 @@
-﻿namespace App.Scripts.Module.ObjectPool
+﻿namespace Module.ObjectPool
 {
 	public interface IPooledObject
 	{

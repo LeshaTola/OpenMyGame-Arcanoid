@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0efc60e15190c1d4d93aad938a55d9b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressText: {fileID: 0}
+  progressText: {fileID: 349173686}
 --- !u!1 &429587182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldController: {fileID: 1396913685}
-  scoreController: {fileID: 31654177}
+  progressController: {fileID: 31654177}
   levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
   blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
   blockTemplate: {fileID: 7240198157899510798, guid: 72b0f7db32a1ed54798e26d8a52a4553, type: 3}

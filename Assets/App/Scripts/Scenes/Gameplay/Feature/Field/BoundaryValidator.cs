@@ -1,8 +1,8 @@
-﻿using App.Scripts.Features.StateMachine;
-using App.Scripts.Scenes.Gameplay.Feature.Player.Ball;
+﻿using Features.StateMachine;
+using Scenes.Gameplay.Feature.Player.Ball;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Field
+namespace Scenes.Gameplay.Feature.Field
 {
 	public class BoundaryValidator : MonoBehaviour, IUpdatable
 	{

@@ -1,8 +1,8 @@
-using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config;
-using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components;
+using Scenes.Gameplay.Feature.Blocks.Config;
+using Scenes.Gameplay.Feature.Blocks.Config.Components;
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Blocks
+namespace Scenes.Gameplay.Feature.Blocks
 {
 	public class Block : MonoBehaviour
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Scripts.Module.ObjectPool
+namespace Module.ObjectPool
 {
 	public interface IPool<T>
 	{

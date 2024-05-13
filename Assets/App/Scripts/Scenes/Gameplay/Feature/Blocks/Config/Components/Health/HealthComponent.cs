@@ -1,9 +1,9 @@
-﻿using App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.General;
+﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.General;
 using System;
 using System.Collections.Generic;
 
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Blocks.Config.Components.Health
+namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 {
 	public class HealthComponent : Component
 	{

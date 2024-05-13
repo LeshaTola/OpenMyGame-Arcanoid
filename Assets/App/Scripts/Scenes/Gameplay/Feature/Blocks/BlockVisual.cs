@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace App.Scripts.Scenes.Gameplay.Feature.Blocks
+namespace Scenes.Gameplay.Feature.Blocks
 {
 	public class BlockVisual : MonoBehaviour
 	{
