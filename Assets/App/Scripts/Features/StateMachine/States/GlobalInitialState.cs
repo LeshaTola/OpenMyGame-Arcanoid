@@ -17,7 +17,7 @@ namespace Features.StateMachine.States
 				isValid = false;
 				Application.targetFrameRate = targetFrameRate;
 			}
-			stateMachine.ChangeState(nextState.GetType());
+			StateMachine.ChangeState(nextState.GetType());
 		}
 	}
 }

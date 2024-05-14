@@ -804,7 +804,7 @@ Transform:
   - {fileID: 953173411}
   - {fileID: 467381948}
   m_Father: {fileID: 1605346081}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &757622089
 GameObject:
@@ -922,6 +922,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 201}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &935500970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935500971}
+  - component: {fileID: 935500972}
+  m_Layer: 0
+  m_Name: InputController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &935500971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935500970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1605346081}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &935500972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935500970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b58bbc5943e40c64c9f35818835a54d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &953173410
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +1012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldController: {fileID: 1396913685}
   ballsController: {fileID: 2076856197}
+  stateMachine: {fileID: 1059541121}
 --- !u!1 &974111340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,7 +1108,9 @@ MonoBehaviour:
     - {fileID: 1189566610}
     - {fileID: 4900000, guid: 4c75ac4aa8615734f9416ad40e094525, type: 3}
     - {fileID: 1134754029}
+    - {fileID: 935500972}
     - {fileID: 1134754027}
+    - {fileID: 953173412}
     - {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     - {fileID: 974111342}
     SerializedBytesString: 
@@ -1077,7 +1124,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 1|Features.StateMachine.States.GlobalInitialState, Assembly-CSharp
@@ -1113,10 +1160,32 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Scenes.Gameplay.StateMachine.States.GameplayState, Assembly-CSharp
+      Data: 4|Scenes.Gameplay.StateMachine.States.ResetState, Assembly-CSharp
+    - Name: resetables
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[Features.StateMachine.States.IResetable,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: plate
+      Entry: 10
+      Data: 2
+    - Name: inputController
+      Entry: 10
+      Data: 3
     - Name: updatables
       Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
+      Data: 6|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -1126,7 +1195,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 10
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 13
       Data: 
@@ -1138,13 +1207,41 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
-    - Name: scene
+      Data: 7|Scenes.Gameplay.StateMachine.States.GameplayState, Assembly-CSharp
+    - Name: updatables
       Entry: 7
-      Data: 7|SceneReference.SceneRef, SceneRef
-    - Name: sceneAsset
+      Data: 8|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 10
+      Data: 2
+    - Name: 
       Entry: 10
       Data: 4
+    - Name: 
+      Entry: 10
+      Data: 5
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
+    - Name: scene
+      Entry: 7
+      Data: 10|SceneReference.SceneRef, SceneRef
+    - Name: sceneAsset
+      Entry: 10
+      Data: 6
     - Name: scenePath
       Entry: 1
       Data: Assets/App/Scenes/Main.unity
@@ -1153,7 +1250,7 @@ MonoBehaviour:
       Data: 
     - Name: sceneController
       Entry: 10
-      Data: 5
+      Data: 7
     - Name: sceneTransition
       Entry: 6
       Data: 
@@ -1626,6 +1723,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 935500971}
   - {fileID: 755117853}
   - {fileID: 275794117}
   - {fileID: 1134754025}
@@ -2009,7 +2107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
   movement: {fileID: 1134754027}
-  player: {fileID: 1134754029}
+  inputController: {fileID: 935500972}
   initializables:
   - mode: 0
     unityReference: {fileID: 1396913685}
@@ -2584,12 +2682,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 1605346081}
     m_Modifications:
     - target: {fileID: 2312949514156382147, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
+      propertyPath: ballsController
+      value: 
+      objectReference: {fileID: 2076856197}
+    - target: {fileID: 2312949514156382147, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: fieldController
       value: 
       objectReference: {fileID: 1396913685}
+    - target: {fileID: 2312949514156382147, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
+      propertyPath: inputController
+      value: 
+      objectReference: {fileID: 935500972}
     - target: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2633,7 +2739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7227145046741339301, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_Name
-      value: Ship
+      value: Plate
       objectReference: {fileID: 0}
     - target: {fileID: 7227145046741339302, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: fieldController
@@ -2641,7 +2747,7 @@ PrefabInstance:
       objectReference: {fileID: 1396913685}
     - target: {fileID: 7227145046741339303, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_Constraints
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
@@ -2660,9 +2766,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 7470354348135103458, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
       propertyPath: m_LocalPosition.x

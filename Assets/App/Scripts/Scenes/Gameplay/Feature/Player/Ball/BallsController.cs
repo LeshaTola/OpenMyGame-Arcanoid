@@ -16,5 +16,10 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 		{
 			ballPool = new MonoBehObjectPool<Ball>(ballTemplate, ballCount, transform);
 		}
+
+		public Ball GetBall()
+		{
+			return ballPool.Get();
+		}
 	}
 }

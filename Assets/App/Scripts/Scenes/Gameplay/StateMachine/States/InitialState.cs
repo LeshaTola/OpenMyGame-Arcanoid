@@ -1,11 +1,11 @@
 ﻿using Features.StateMachine.States;
-using Scenes.Gameplay.Feature.LevelCreation;
 using Newtonsoft.Json;
+using Scenes.Gameplay.Feature.LevelCreation;
 using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
-	public class InitialState: State
+	public class InitialState : State
 	{
 		[SerializeField] private LevelGenerator levelGenerator;
 		[SerializeField] private TextAsset fileLevelInfo;// TODO Move it to separate reader
@@ -14,9 +14,9 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			base.Enter();
 			levelGenerator.GenerateLevel(GetLevelInfo());
-			stateMachine.ChangeState<GameplayState>();
+			StateMachine.ChangeState<ResetState>();
 		}
-		
+
 		private LevelInfo GetLevelInfo()
 		{
 			string json = fileLevelInfo.text;
