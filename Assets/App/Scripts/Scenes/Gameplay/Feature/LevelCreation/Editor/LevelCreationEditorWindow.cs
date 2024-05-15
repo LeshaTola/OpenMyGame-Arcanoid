@@ -1,5 +1,5 @@
-using Scenes.Gameplay.Feature.LevelCreation;
 using Newtonsoft.Json;
+using Scenes.Gameplay.Feature.LevelCreation;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities;
@@ -91,6 +91,7 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 
 			string json = JsonConvert.SerializeObject(levelInfo, Formatting.Indented);
 			File.WriteAllText(path, json);
+			AssetDatabase.Refresh();
 		}
 
 		[HorizontalGroup("SaveLoad")]
