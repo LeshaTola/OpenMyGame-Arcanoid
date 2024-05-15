@@ -1,6 +1,6 @@
-﻿using Features.StateMachine.States;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Features.StateMachine.States;
 
 namespace Features.StateMachine
 {
@@ -14,7 +14,7 @@ namespace Features.StateMachine
 			states.Add(state.GetType(), state);
 		}
 
-		private void SetState(Type type)
+		public void ChangeState(Type type)
 		{
 			if (currentState != null && currentState.GetType() == type)
 			{
@@ -31,10 +31,10 @@ namespace Features.StateMachine
 			}
 		}
 
-		public void SetState<T>() where T : State
+		public void ChangeState<T>() where T : State
 		{
 			var type = typeof(T);
-			SetState(type);
+			ChangeState(type);
 		}
 
 		public void Update()

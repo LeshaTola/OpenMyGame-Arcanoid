@@ -1,7 +1,7 @@
 using Features.Bootstrap;
 using Module.TimeProvider;
-using Scenes.Gameplay.Feature.PlayerInput;
-using Scenes.Gameplay.Feature.ShipLogic;
+using Scenes.Gameplay.Feature.Player;
+using Scenes.Gameplay.Feature.Player.PlayerInput;
 using System.Collections.Generic;
 using TNRD;
 using UnityEngine;
@@ -14,6 +14,7 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private Camera mainCamera;
 
 		[SerializeField] private Movement movement;
+		[SerializeField] private InputController inputController;
 
 		[SerializeField] List<SerializableInterface<IInitializable>> initializables;
 
@@ -22,7 +23,8 @@ namespace Scenes.Gameplay.Bootstrap
 			IInput input = new MouseInput(mainCamera);
 			ITimeProvider timeProvider = new GameplayTimeProvider();
 
-			movement.Init(input, timeProvider);
+			inputController.Init(input);
+			movement.Init(timeProvider);
 
 			foreach (var initializable in initializables)
 			{

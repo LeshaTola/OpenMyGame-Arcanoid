@@ -2,11 +2,11 @@
 {
 	public abstract class State
 	{
-		protected readonly StateMachine stateMachine;
+		protected StateMachine StateMachine;
 
-		protected State(StateMachine stateMachine)
+		public void Init(StateMachine stateMachine)
 		{
-			this.stateMachine = stateMachine;
+			StateMachine = stateMachine;
 		}
 
 		public virtual void Enter() { }

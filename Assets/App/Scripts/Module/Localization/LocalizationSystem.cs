@@ -1,8 +1,8 @@
-﻿using Features.Bootstrap;
+﻿using System.Collections.Generic;
+using Features.Bootstrap;
 using Module.Localization.Localizers;
 using Module.Localization.Parsers;
 using Sirenix.OdinInspector;
-using System.Collections.Generic;
 using TNRD;
 using UnityEngine;
 

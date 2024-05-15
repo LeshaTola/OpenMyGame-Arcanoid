@@ -1,23 +1,50 @@
 using Features.StateMachine;
 using Features.StateMachine.States;
+using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.Health;
 using System.Collections.Generic;
-using TNRD;
+using UnityEngine;
 
-public class GameplayState : State
+namespace Scenes.Gameplay.StateMachine.States
 {
-	private List<SerializableInterface<IUpdatable>> updatables;
-
-	public GameplayState(StateMachine stateMachine, List<SerializableInterface<IUpdatable>> updatables) : base(stateMachine)
+	public class GameplayState : State
 	{
-		this.updatables = updatables;
-	}
+		[SerializeField] HealthController healthController;
+		[SerializeField] BoundaryValidator boundaryValidator;
+		[SerializeField] private List<IUpdatable> updatables;
 
-	public override void Update()
-	{
-		base.Update();
-		foreach (var updatable in updatables)
+		public override void Enter()
 		{
-			updatable.Value.Update();
+			base.Enter();
+			healthController.OnDeath += OnDeath;
+			boundaryValidator.OnLastBallFall += OnLastBallFall;
+		}
+
+		public override void Update()
+		{
+			base.Update();
+			foreach (var updatable in updatables)
+			{
+				updatable.Update();
+			}
+		}
+
+		public override void Exit()
+		{
+			base.Exit();
+			healthController.OnDeath -= OnDeath;
+			boundaryValidator.OnLastBallFall -= OnLastBallFall;
+		}
+
+		private void OnDeath()
+		{
+			StateMachine.ChangeState<LoadSceneState>();
+		}
+
+		private void OnLastBallFall()
+		{
+			healthController.ReduceHealth(1);
+			StateMachine.ChangeState<ResetState>();
 		}
 	}
 }

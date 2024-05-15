@@ -3,18 +3,23 @@ using UnityEngine;
 
 namespace Module.ObjectPool
 {
-	public class MonoBehObjectPool<T> where T : MonoBehaviour
+	public class MonoBehObjectPool<T> : IPool<T> where T : MonoBehaviour
 	{
 		private ObjectPool<T> core;
 
 		public IReadOnlyCollection<T> Active { get => core.Active; }
 
-		public MonoBehObjectPool(T objectTemplate, int startCount)
+		public MonoBehObjectPool(T objectTemplate, int startCount, Transform parent = null)
 		{
 			core = new(
-				() => GameObject.Instantiate(objectTemplate),
-				null,
-				null,
+				() =>
+				{
+					T pooledObject = GameObject.Instantiate(objectTemplate, parent);
+					pooledObject.gameObject.SetActive(false);
+					return pooledObject;
+				},
+				(obj) => obj.gameObject.SetActive(true),
+				(obj) => obj.gameObject.SetActive(false),
 				startCount
 				);
 		}
@@ -22,13 +27,11 @@ namespace Module.ObjectPool
 		public T Get()
 		{
 			T pooledObject = core.Get();
-			pooledObject.gameObject.SetActive(true);
 			return pooledObject;
 		}
 
 		public void Release(T pooledObject)
 		{
-			pooledObject.gameObject.SetActive(false);
 			core.Release(pooledObject);
 		}
 	}

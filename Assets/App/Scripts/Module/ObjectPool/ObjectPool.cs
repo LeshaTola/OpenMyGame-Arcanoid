@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Module.ObjectPool
 {
-	public class ObjectPool<T>
+	public class ObjectPool<T> : IPool<T>
 	{
 		private Func<T> preloadFunc;
 		private Action<T> getAction;
@@ -47,6 +47,11 @@ namespace Module.ObjectPool
 			T pooledObject = pool.Dequeue();
 			active.Add(pooledObject);
 
+			if (pooledObject is IPooledObject<T> poolableObject)
+			{
+				poolableObject.OnGet(this);
+			}
+
 			getAction?.Invoke(pooledObject);
 			return pooledObject;
 		}
@@ -55,6 +60,11 @@ namespace Module.ObjectPool
 		{
 			active.Remove(obj);
 			pool.Enqueue(obj);
+
+			if (obj is IPooledObject<T> poolableObject)
+			{
+				poolableObject.OnRelease();
+			}
 
 			releaseAction?.Invoke(obj);
 		}
