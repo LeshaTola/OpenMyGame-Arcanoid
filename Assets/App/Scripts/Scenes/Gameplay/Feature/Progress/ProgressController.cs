@@ -53,8 +53,9 @@ namespace Scenes.Gameplay.Feature.Progress
 			int progress = CalculateProgress();
 			progressUI.UpdateProgress(progress);
 
-			if (progress > 0)
+			if (progress == 100)
 			{
+				Debug.Log("Win!");
 				//TODO: popup manager show win popup
 			}
 		}

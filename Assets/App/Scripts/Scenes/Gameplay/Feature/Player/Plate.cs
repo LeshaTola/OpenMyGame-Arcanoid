@@ -34,7 +34,7 @@ namespace Scenes.Gameplay.Feature.Player
 		{
 			Vector2 targetPosition = inputController.Input.GetPosition();
 			Vector2 direction;
-			if (!targetPosition.Equals(default))
+			if (!targetPosition.Equals(default) && fieldController.GameField.IsValid(targetPosition))
 			{
 				direction = GetDirection(targetPosition);
 				movement.Move(direction);

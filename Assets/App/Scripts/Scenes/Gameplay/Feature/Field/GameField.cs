@@ -23,5 +23,12 @@ namespace Scenes.Gameplay.Feature.Field
 			MinY = minY;
 			MaxY = maxY;
 		}
+
+		public bool IsValid(Vector2 position)
+		{
+			bool xPosition = position.x > MinX && position.x < MaxX;
+			bool yPosition = position.y > MinY && position.y < MaxY;
+			return xPosition && yPosition;
+		}
 	}
 }
