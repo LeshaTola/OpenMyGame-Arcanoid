@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Module.Localization.Parsers
 {
@@ -10,37 +9,18 @@ namespace Module.Localization.Parsers
 		private string surround = "\"";
 		private string fieldSeparator = "\",\"";
 
-		public Dictionary<string, string> Parse(string language, string localizationFile)
+		public Dictionary<string, string> Parse(string localizationFile)
 		{
 
 			string[] lines = localizationFile.Split(lineSeparator);
 			string[] headers = lines[0].Split(fieldSeparator, StringSplitOptions.None);
 
-			int languageIndex = GetLanguageIndex(language, headers);
-			if (languageIndex == -1)
-			{
-				Debug.LogError($"Can't find language {language}");
-				return null;
-			}
-			Dictionary<string, string> parsedLanguage = GetDictionary(lines, languageIndex);
+			Dictionary<string, string> parsedLanguage = GetDictionary(lines);
 
 			return parsedLanguage;
 		}
 
-		public List<string> GetLanguages(string localizationFile)
-		{
-			List<string> languages = new();
-			string[] lines = localizationFile.Split(lineSeparator);
-			string[] headers = lines[0].Split(fieldSeparator, StringSplitOptions.None);
-
-			for (int i = 1; i < headers.Length; i++)
-			{
-				languages.Add(headers[i]);
-			}
-			return languages;
-		}
-
-		private Dictionary<string, string> GetDictionary(string[] lines, int languageIndex)
+		private Dictionary<string, string> GetDictionary(string[] lines)
 		{
 			//Regex regex = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
 
@@ -60,7 +40,7 @@ namespace Module.Localization.Parsers
 				{
 					continue;
 				}
-				string value = fields[languageIndex];
+				string value = fields[1];
 				parsedLanguage.Add(key, value);
 			}
 
@@ -70,22 +50,6 @@ namespace Module.Localization.Parsers
 		string removeQuotes(string s)
 		{
 			return s.Replace(surround, "");
-		}
-
-		private int GetLanguageIndex(string language, string[] headers)
-		{
-			int languageIndex = -1;
-
-			for (int i = 0; i < headers.Length; i++)
-			{
-				if (headers[i].Equals(language))
-				{
-					languageIndex = i;
-					break;
-				}
-			}
-
-			return languageIndex;
 		}
 	}
 }

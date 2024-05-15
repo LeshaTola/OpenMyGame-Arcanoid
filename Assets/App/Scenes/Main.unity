@@ -993,6 +993,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initializables:
   - mode: 0
+    unityReference: {fileID: 1393092109}
+    rawReference:
+      rid: -2
+  - mode: 0
     unityReference: {fileID: 238239229}
     rawReference:
       rid: -2
@@ -1278,6 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1393092107}
+  localizationSystem: {fileID: 1470426492}
 --- !u!1 &1470426491
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,18 +1321,8 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  localizationFile: {fileID: 4900000, guid: 7c7c3cccd64338d42b0784a3442a3988, type: 3}
-  language: "ru\r"
-  textLocalizers:
-  - mode: 0
-    unityReference: {fileID: 1393092109}
-    rawReference:
-      rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  localizationDictionary: {fileID: 11400000, guid: b55ea21d0ff4c4446ba40970652197bc, type: 2}
+  language: ru
 --- !u!4 &1470426493
 Transform:
   m_ObjectHideFlags: 0
