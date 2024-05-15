@@ -20,6 +20,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 
 		public void Push(Vector2 direction)
 		{
+			rb.simulated = true;
 			rb.velocity = direction.normalized * speed;
 		}
 

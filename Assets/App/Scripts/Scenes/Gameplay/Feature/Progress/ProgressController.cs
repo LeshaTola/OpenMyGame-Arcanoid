@@ -28,7 +28,7 @@ namespace Scenes.Gameplay.Feature.Progress
 				}
 			}
 
-			startBlocksCount = blocks.Count;
+			startBlocksCount = scoredBlocks.Count;
 			currentBlocksCount = startBlocksCount;
 
 			ProcessProgress();

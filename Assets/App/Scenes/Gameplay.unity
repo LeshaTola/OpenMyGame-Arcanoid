@@ -168,11 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressUI: {fileID: 349173688}
---- !u!4 &275794117 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-  m_PrefabInstance: {fileID: 7470354347861439270}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &349173684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,6 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938f476d35e3b404bba3a0052c0bddf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthController: {fileID: 0}
   fieldController: {fileID: 1396913685}
   ballsController: {fileID: 2076856197}
   stateMachine: {fileID: 1059541121}
@@ -1106,10 +1102,11 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 1189566610}
-    - {fileID: 4900000, guid: 4c75ac4aa8615734f9416ad40e094525, type: 3}
+    - {fileID: 4900000, guid: 73c60fc78a8e4ff46ae2c734749fb8e9, type: 3}
     - {fileID: 1134754029}
     - {fileID: 935500972}
     - {fileID: 1134754027}
+    - {fileID: 467381949}
     - {fileID: 953173412}
     - {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     - {fileID: 974111342}
@@ -1208,6 +1205,12 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 7|Scenes.Gameplay.StateMachine.States.GameplayState, Assembly-CSharp
+    - Name: healthController
+      Entry: 10
+      Data: 5
+    - Name: boundaryValidator
+      Entry: 10
+      Data: 6
     - Name: updatables
       Entry: 7
       Data: 8|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
@@ -1223,7 +1226,7 @@ MonoBehaviour:
       Data: 4
     - Name: 
       Entry: 10
-      Data: 5
+      Data: 6
     - Name: 
       Entry: 13
       Data: 
@@ -1241,7 +1244,7 @@ MonoBehaviour:
       Data: 10|SceneReference.SceneRef, SceneRef
     - Name: sceneAsset
       Entry: 10
-      Data: 6
+      Data: 7
     - Name: scenePath
       Entry: 1
       Data: Assets/App/Scenes/Main.unity
@@ -1250,7 +1253,7 @@ MonoBehaviour:
       Data: 
     - Name: sceneController
       Entry: 10
-      Data: 7
+      Data: 8
     - Name: sceneTransition
       Entry: 6
       Data: 
@@ -1725,7 +1728,6 @@ Transform:
   m_Children:
   - {fileID: 935500971}
   - {fileID: 755117853}
-  - {fileID: 275794117}
   - {fileID: 1134754025}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2695,7 +2697,7 @@ PrefabInstance:
       objectReference: {fileID: 935500972}
     - target: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2751,68 +2753,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
---- !u!1001 &7470354347861439270
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1605346081}
-    m_Modifications:
-    - target: {fileID: 2332535626420645355, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: fieldController
-      value: 
-      objectReference: {fileID: 1396913685}
-    - target: {fileID: 7470354348135103458, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_Name
-      value: Ball
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103458, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.549
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7470354348135103459, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 57f966f13a05bae478b699fb295358d0, type: 3}

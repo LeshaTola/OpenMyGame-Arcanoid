@@ -18,8 +18,8 @@ namespace Module.ObjectPool
 					pooledObject.gameObject.SetActive(false);
 					return pooledObject;
 				},
-				null,
-				null,
+				(obj) => obj.gameObject.SetActive(true),
+				(obj) => obj.gameObject.SetActive(false),
 				startCount
 				);
 		}
@@ -27,13 +27,11 @@ namespace Module.ObjectPool
 		public T Get()
 		{
 			T pooledObject = core.Get();
-			pooledObject.gameObject.SetActive(true);
 			return pooledObject;
 		}
 
 		public void Release(T pooledObject)
 		{
-			pooledObject.gameObject.SetActive(false);
 			core.Release(pooledObject);
 		}
 	}
