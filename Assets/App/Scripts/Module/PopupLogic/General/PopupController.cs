@@ -21,8 +21,13 @@ namespace Module.PopupLogic.General
 		public void ShowPopup<T>() where T : MonoBehaviour, IPopup
 		{
 			IPopup popup = GetPopup<T>();
+			if (popup == null)
+			{
+				return;
+			}
 			DeactivatePrevPopup();
 
+			currentPopups.Push(popup);
 			popup.Activate();
 			popup.Show();
 		}
@@ -47,6 +52,10 @@ namespace Module.PopupLogic.General
 			if (popup == null)
 			{
 				popup = popupFactory.GetPopup<T>();
+				if (popup == null)
+				{
+					return null;
+				}
 				popup.Init();
 				popups.Add(popup);
 			}

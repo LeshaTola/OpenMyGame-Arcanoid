@@ -40,6 +40,7 @@ namespace Scenes.Gameplay.Feature.Player
 
 		void IUpdatable.Update()
 		{
+			movement.ApplyDrag();
 			Vector2 targetPosition = input.GetPosition();
 			Vector2 direction;
 			if (!targetPosition.Equals(default) && fieldController.GameField.IsValid(targetPosition))

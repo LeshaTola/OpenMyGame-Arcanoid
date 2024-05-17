@@ -928,7 +928,7 @@ Transform:
   - {fileID: 953173411}
   - {fileID: 467381948}
   m_Father: {fileID: 1605346081}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &757622089
 GameObject:
@@ -1061,50 +1061,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateMachine: {fileID: 1059541121}
   mainMenuButton: {fileID: 2586215250580297048}
---- !u!1 &935500970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 935500971}
-  - component: {fileID: 935500972}
-  m_Layer: 0
-  m_Name: InputController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &935500971
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935500970}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1605346081}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &935500972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935500970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58bbc5943e40c64c9f35818835a54d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &953173410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938f476d35e3b404bba3a0052c0bddf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthController: {fileID: 0}
   ballsController: {fileID: 2076856197}
   stateMachine: {fileID: 1059541121}
 --- !u!1 &1059505224
@@ -1254,7 +1209,6 @@ MonoBehaviour:
     - {fileID: 467381949}
     - {fileID: 953173412}
     - {fileID: 31654177}
-    - {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1266,7 +1220,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 7
     - Name: 
       Entry: 7
       Data: 1|Features.StateMachine.States.GlobalInitialState, Assembly-CSharp
@@ -1325,9 +1279,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: plate
-      Entry: 10
-      Data: 3
     - Name: updatables
       Entry: 7
       Data: 6|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
@@ -1383,28 +1334,19 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|Scenes.Gameplay.StateMachine.States.Win.WinState, Assembly-CSharp
+      Data: 9|Scenes.Gameplay.StateMachine.States.Loss.LossState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 10|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
-    - Name: scene
-      Entry: 7
-      Data: 11|SceneReference.SceneRef, SceneRef
-    - Name: sceneAsset
-      Entry: 10
-      Data: 7
-    - Name: scenePath
-      Entry: 1
-      Data: Assets/App/Scenes/Main.unity
+      Data: 10|Scenes.Gameplay.StateMachine.States.Win.WinState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
-    - Name: sceneTransition
-      Entry: 10
-      Data: 0
+    - Name: 
+      Entry: 7
+      Data: 11|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -1427,6 +1369,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMachineHandler: {fileID: 1059541121}
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    scenePath: Assets/App/Scenes/MainMenu.unity
+  sceneTransition:
+    mode: 0
+    unityReference: {fileID: 194826146}
+    rawReference:
+      rid: -2
+  plate: {fileID: 1134754029}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!4 &1134754025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
@@ -1976,7 +1932,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 935500971}
   - {fileID: 755117853}
   - {fileID: 1134754025}
   m_Father: {fileID: 0}
@@ -2432,8 +2387,8 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1501909576}
   - {fileID: 1059505226}
-  - {fileID: 261499526}
   - {fileID: 1059541122}
+  - {fileID: 261499526}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -3198,7 +3153,7 @@ PrefabInstance:
     - target: {fileID: 2312949514156382147, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: inputController
       value: 
-      objectReference: {fileID: 935500972}
+      objectReference: {fileID: 0}
     - target: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_RootOrder
       value: 2

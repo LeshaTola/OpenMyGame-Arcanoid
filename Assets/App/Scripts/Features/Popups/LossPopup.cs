@@ -1,7 +1,6 @@
 ﻿using Features.StateMachine;
-using Features.StateMachine.States;
 using Module.PopupLogic.General;
-using TMPro;
+using Scenes.Gameplay.StateMachine.States;
 using TNRD;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,13 +8,10 @@ using Zenject;
 
 namespace Assets.App.Scripts.Features.Popups
 {
-	public class WinPopup : MonoBehaviour, IPopup
+	public class LossPopup : MonoBehaviour, IPopup
 	{
 		[SerializeField] private SerializableInterface<IPopupAnimation> popupAnimation;
-		[SerializeField] private Image packImage;
-		[SerializeField] private Button nextButton;
-		[SerializeField] private TextMeshProUGUI packName;
-		[SerializeField] private TextMeshProUGUI levelInfo;
+		[SerializeField] private Button restartButton;
 
 		private StateMachineHandler stateMachineHandler;
 
@@ -29,18 +25,18 @@ namespace Assets.App.Scripts.Features.Popups
 
 		public void Init()
 		{
-			nextButton.onClick.AddListener(NextButtonClicked);
+			restartButton.onClick.AddListener(RestartButtonClicked);
 			Hide();
 		}
 
 		public void Activate()
 		{
-			nextButton.enabled = true;
+			restartButton.enabled = true;
 		}
 
 		public void Deactivate()
 		{
-			nextButton.enabled = false;
+			restartButton.enabled = false;
 		}
 
 		public void Hide()
@@ -64,9 +60,9 @@ namespace Assets.App.Scripts.Features.Popups
 
 		}
 
-		private void NextButtonClicked()
+		private void RestartButtonClicked()
 		{
-			stateMachineHandler.Core.ChangeState<LoadSceneState>();
+			stateMachineHandler.Core.ChangeState<InitialState>();
 		}
 	}
 }

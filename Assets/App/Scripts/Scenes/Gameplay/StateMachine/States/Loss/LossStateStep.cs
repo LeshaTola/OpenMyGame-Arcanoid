@@ -3,14 +3,14 @@ using Features.StateMachine.States.General;
 using Module.PopupLogic.General;
 using Zenject;
 
-namespace Scenes.Gameplay.StateMachine.States.Win
+namespace Scenes.Gameplay.StateMachine.States.Loss
 {
-	public class WinStateStep : StateStep
+	public class LossStateStep : StateStep
 	{
 		IPopupController popupController;
 
 		[Inject]
-		public WinStateStep(IPopupController popupController)
+		public LossStateStep(IPopupController popupController)
 		{
 			this.popupController = popupController;
 		}
@@ -19,7 +19,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 		{
 			base.Enter();
 
-			popupController.ShowPopup<WinPopup>();
+			popupController.ShowPopup<LossPopup>();
 		}
 
 		public override void Exit()

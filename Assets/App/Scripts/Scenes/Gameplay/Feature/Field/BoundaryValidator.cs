@@ -1,5 +1,4 @@
 ﻿using Features.StateMachine;
-using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.Player.Ball;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,6 @@ namespace Scenes.Gameplay.Feature.Field
 		public event Action OnBallFall;
 		public event Action OnLastBallFall;
 
-		[SerializeField] private HealthController healthController;
 		[SerializeField] private BallsController ballsController;
 		[SerializeField] private StateMachineHandler stateMachine;
 

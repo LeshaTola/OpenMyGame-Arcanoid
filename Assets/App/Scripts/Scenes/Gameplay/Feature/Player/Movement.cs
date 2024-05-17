@@ -1,6 +1,7 @@
 ﻿using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Player.Configs;
 using UnityEngine;
+using Zenject;
 
 namespace Scenes.Gameplay.Feature.Player
 {
@@ -11,7 +12,8 @@ namespace Scenes.Gameplay.Feature.Player
 
 		private ITimeProvider timeProvider;
 
-		public void Init(ITimeProvider timeProvider)
+		[Inject]
+		public void Construct(ITimeProvider timeProvider)
 		{
 			this.timeProvider = timeProvider;
 		}

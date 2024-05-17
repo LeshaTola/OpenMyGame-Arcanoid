@@ -3,6 +3,7 @@ using Features.StateMachine.States;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.StateMachine.States.Loss;
 using Scenes.Gameplay.StateMachine.States.Win;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,13 +44,16 @@ namespace Scenes.Gameplay.StateMachine.States
 
 		private void OnDeath()
 		{
-			StateMachine.ChangeState<LoadSceneState>();
+			StateMachine.ChangeState<LossState>();
 		}
 
 		private void OnLastBallFall()
 		{
 			healthController.ReduceHealth(1);
-			StateMachine.ChangeState<ResetState>();
+			if (healthController.CurrentHealth > 0)
+			{
+				StateMachine.ChangeState<ResetState>();
+			}
 		}
 
 		private void OnWin()

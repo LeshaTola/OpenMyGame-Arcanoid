@@ -1,5 +1,4 @@
-﻿using Module.Scenes;
-using Module.TimeProvider;
+﻿using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using UnityEngine;
 using Zenject;
@@ -12,7 +11,6 @@ namespace Scenes.Gameplay.Bootstrap
 
 		public override void InstallBindings()
 		{
-			BindSceneLoadService();
 			BindTimeProvider();
 			BindInput();
 		}
@@ -27,14 +25,6 @@ namespace Scenes.Gameplay.Bootstrap
 		{
 			Container.Bind<ITimeProvider>()
 				.To<GameplayTimeProvider>()
-				.AsSingle();
-		}
-
-		private void BindSceneLoadService()
-		{
-			Container
-				.Bind<ISceneLoadService>()
-				.To<SceneLoadService>()
 				.AsSingle();
 		}
 	}

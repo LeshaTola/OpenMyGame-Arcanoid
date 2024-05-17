@@ -212,6 +212,10 @@ MonoBehaviour:
     unityReference: {fileID: 8859324881456067391}
     rawReference:
       rid: -2
+  packImage: {fileID: 2015620573601466750}
+  nextButton: {fileID: 7028342188313180138}
+  packName: {fileID: 2015620575051587310}
+  levelInfo: {fileID: 7028342190090014307}
   references:
     version: 2
     RefIds:
