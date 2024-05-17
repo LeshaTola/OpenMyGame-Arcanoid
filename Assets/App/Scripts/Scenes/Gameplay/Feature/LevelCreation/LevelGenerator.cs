@@ -5,18 +5,25 @@ using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.Progress;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Scenes.Gameplay.Feature.LevelCreation
 {
 	public class LevelGenerator : MonoBehaviour
 	{
-		[SerializeField] private FieldController fieldController;
+		private IFieldSizeProvider fieldController;
 		[SerializeField] private ProgressController progressController;
 		[SerializeField] private LevelConfig levelConfig;
 		[SerializeField] private BlocksDictionary blocksDictionary;
 		[SerializeField] private Block blockTemplate;
 
 		private List<Block> blocks = new();
+
+		[Inject]
+		public void Init(IFieldSizeProvider fieldController)
+		{
+			this.fieldController = fieldController;
+		}
 
 		public void GenerateLevel(LevelInfo levelInfo)
 		{

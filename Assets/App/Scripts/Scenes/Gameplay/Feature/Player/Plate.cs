@@ -5,20 +5,27 @@ using Scenes.Gameplay.Feature.Player.Ball;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Scenes.Gameplay.Feature.Player
 {
 	public class Plate : MonoBehaviour, IUpdatable, IResetable
 	{
 		[SerializeField] private BoxCollider2D boxCollider;
-		[SerializeField] private FieldController fieldController;
 		[SerializeField] private BallsController ballsController;
 
 		[SerializeField] private Transform ballPosition;
 		[SerializeField] private Movement movement;
 		[SerializeField] private InputController inputController;
 
+		private IFieldSizeProvider fieldController;
 		private List<Ball.Ball> connectedBalls = new();
+
+		[Inject]
+		public void Init(IFieldSizeProvider fieldController)
+		{
+			this.fieldController = fieldController;
+		}
 
 		public void PushBalls()
 		{

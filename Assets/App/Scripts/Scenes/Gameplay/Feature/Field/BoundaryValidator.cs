@@ -4,6 +4,7 @@ using Scenes.Gameplay.Feature.Player.Ball;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Scenes.Gameplay.Feature.Field
 {
@@ -13,11 +14,17 @@ namespace Scenes.Gameplay.Feature.Field
 		public event Action OnLastBallFall;
 
 		[SerializeField] private HealthController healthController;
-		[SerializeField] private FieldController fieldController;
 		[SerializeField] private BallsController ballsController;
 		[SerializeField] private MonoBehStateMachine stateMachine;
 
 		private List<Ball> ballsToRemove = new();
+		private IFieldSizeProvider fieldSizeProvider;
+
+		[Inject]
+		public void Init(IFieldSizeProvider fieldSizeProvider)
+		{
+			this.fieldSizeProvider = fieldSizeProvider;
+		}
 
 		void IUpdatable.Update()
 		{
@@ -46,14 +53,13 @@ namespace Scenes.Gameplay.Feature.Field
 			{
 				OnLastBallFall?.Invoke();
 			}
-
 		}
 
 		private void GetFalledBalls()
 		{
 			foreach (Ball ball in ballsController.BallPool.Active)
 			{
-				if (ball.transform.position.y < fieldController.GameField.MinY)
+				if (ball.transform.position.y < fieldSizeProvider.GameField.MinY)
 				{
 					ballsToRemove.Add(ball);
 				}
