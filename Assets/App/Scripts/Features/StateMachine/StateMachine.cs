@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Features.StateMachine.States;
+using Features.StateMachine.States.General;
+using System;
 using System.Collections.Generic;
-using Features.StateMachine.States;
 
 namespace Features.StateMachine
 {
@@ -40,6 +41,15 @@ namespace Features.StateMachine
 		public void Update()
 		{
 			currentState?.Update();
+		}
+
+		public void AddStep<T>(IStateStep stateStep) where T : State
+		{
+			var type = typeof(T);
+			if (states.ContainsKey(type))
+			{
+				states[type]?.AddStep(stateStep);
+			}
 		}
 	}
 }

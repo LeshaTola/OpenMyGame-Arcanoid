@@ -1,4 +1,3 @@
-using Features.Bootstrap;
 using Features.StateMachine.States;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -6,7 +5,7 @@ using UnityEngine;
 
 namespace Features.StateMachine
 {
-	public class MonoBehStateMachine : SerializedMonoBehaviour, IInitializable
+	public class StateMachineHandler : SerializedMonoBehaviour
 	{
 		[SerializeField] private List<State> states = new();
 
@@ -23,7 +22,12 @@ namespace Features.StateMachine
 				state.Init(core);
 				core.AddState(state);
 			}
-			core.ChangeState(states[0].GetType());
+
+		}
+
+		public void StartStateMachine<T>() where T : State
+		{
+			core.ChangeState<T>();
 		}
 
 		private void Update()
