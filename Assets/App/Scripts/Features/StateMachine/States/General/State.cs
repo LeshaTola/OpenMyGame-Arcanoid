@@ -44,6 +44,7 @@ namespace Features.StateMachine.States
 		public void AddStep(IStateStep step)
 		{
 			StateSteps.Add(step);
+			step.Init(this, StateMachine);
 		}
 
 		public void RemoveStep(IStateStep step)

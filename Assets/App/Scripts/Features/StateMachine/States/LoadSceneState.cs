@@ -1,16 +1,29 @@
-﻿using Features.UI.SceneTransitions;
+﻿using DG.Tweening;
+using Features.StateMachine.States.General;
+using Features.UI.SceneTransitions;
 using Module.Scenes;
-using DG.Tweening;
 using SceneReference;
-using UnityEngine;
+using Zenject;
 
 namespace Features.StateMachine.States
 {
 	public class LoadSceneState : State
 	{
-		[SerializeField] private SceneRef scene;
-		[SerializeField] private SceneController sceneController;
-		[SerializeField] private ISceneTransition sceneTransition;
+	}
+
+	public class LoadSceneStateStep : StateStep
+	{
+		private SceneRef scene;
+		private ISceneTransition sceneTransition;
+		private ISceneLoadService sceneController;
+
+		[Inject]
+		public LoadSceneStateStep(SceneRef scene, ISceneTransition sceneTransition, ISceneLoadService sceneController)
+		{
+			this.scene = scene;
+			this.sceneTransition = sceneTransition;
+			this.sceneController = sceneController;
+		}
 
 		public override void Enter()
 		{

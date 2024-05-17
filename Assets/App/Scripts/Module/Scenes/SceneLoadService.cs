@@ -1,10 +1,9 @@
 ﻿using SceneReference;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Module.Scenes
 {
-	public class SceneController : MonoBehaviour
+	public class SceneLoadService : ISceneLoadService
 	{
 		public void LoadScene(SceneRef scene)
 		{

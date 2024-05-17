@@ -1,17 +1,17 @@
 ﻿using Features.StateMachine;
 using Features.StateMachine.States;
+using Features.StateMachine.States.General;
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
 	public class ResetState : State
 	{
 		[SerializeField] private List<IResetable> resetables = new();
-		[SerializeField] private Plate plate;
-		[SerializeField] private InputController inputController;
 		[SerializeField] private List<IUpdatable> updatables = new();
 
 		public override void Enter()
@@ -21,22 +21,40 @@ namespace Scenes.Gameplay.StateMachine.States
 			{
 				resetable.Reset();
 			}
-			inputController.Input.OnEndInput += OnEndInput;
 		}
 
 		public override void Update()
 		{
 			base.Update();
-			foreach (var updatable in updatables)
+			foreach (IUpdatable updatable in updatables)
 			{
 				updatable.Update();
 			}
+		}
+	}
+
+	public class ResetStateStep : StateStep
+	{
+		private IInput input;
+		private Plate plate;
+
+		[Inject]
+		public ResetStateStep(IInput input, Plate plate)
+		{
+			this.input = input;
+			this.plate = plate;
+		}
+
+		public override void Enter()
+		{
+			base.Enter();
+			input.OnEndInput += OnEndInput;
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
-			inputController.Input.OnEndInput -= OnEndInput;
+			input.OnEndInput -= OnEndInput;
 		}
 
 		private void OnEndInput()

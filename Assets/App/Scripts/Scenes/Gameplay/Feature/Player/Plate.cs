@@ -16,15 +16,16 @@ namespace Scenes.Gameplay.Feature.Player
 
 		[SerializeField] private Transform ballPosition;
 		[SerializeField] private Movement movement;
-		[SerializeField] private InputController inputController;
 
 		private IFieldSizeProvider fieldController;
+		private IInput input;
 		private List<Ball.Ball> connectedBalls = new();
 
 		[Inject]
-		public void Init(IFieldSizeProvider fieldController)
+		public void Construct(IFieldSizeProvider fieldController, IInput input)
 		{
 			this.fieldController = fieldController;
+			this.input = input;
 		}
 
 		public void PushBalls()
@@ -39,7 +40,7 @@ namespace Scenes.Gameplay.Feature.Player
 
 		void IUpdatable.Update()
 		{
-			Vector2 targetPosition = inputController.Input.GetPosition();
+			Vector2 targetPosition = input.GetPosition();
 			Vector2 direction;
 			if (!targetPosition.Equals(default) && fieldController.GameField.IsValid(targetPosition))
 			{
