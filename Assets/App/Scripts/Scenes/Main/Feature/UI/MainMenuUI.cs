@@ -8,7 +8,7 @@ namespace Scenes.Main.Feature.UI
 {
 	public class MainMenuUI : MonoBehaviour, IInitializable
 	{
-		[SerializeField] private MonoBehStateMachine stateMachine;
+		[SerializeField] private StateMachineHandler stateMachine;
 		[SerializeField] private Button playButton;
 
 		public void Init()

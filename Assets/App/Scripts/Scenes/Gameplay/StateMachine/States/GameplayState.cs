@@ -2,6 +2,8 @@ using Features.StateMachine;
 using Features.StateMachine.States;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
+using Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.StateMachine.States.Win;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,15 +11,17 @@ namespace Scenes.Gameplay.StateMachine.States
 {
 	public class GameplayState : State
 	{
-		[SerializeField] HealthController healthController;
-		[SerializeField] BoundaryValidator boundaryValidator;
+		[SerializeField] private HealthController healthController;
+		[SerializeField] private BoundaryValidator boundaryValidator;
 		[SerializeField] private List<IUpdatable> updatables;
+		[SerializeField] private IProgressController progressController;
 
 		public override void Enter()
 		{
 			base.Enter();
 			healthController.OnDeath += OnDeath;
 			boundaryValidator.OnLastBallFall += OnLastBallFall;
+			progressController.OnWin += OnWin;
 		}
 
 		public override void Update()
@@ -34,6 +38,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			base.Exit();
 			healthController.OnDeath -= OnDeath;
 			boundaryValidator.OnLastBallFall -= OnLastBallFall;
+			progressController.OnWin -= OnWin;
 		}
 
 		private void OnDeath()
@@ -45,6 +50,11 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			healthController.ReduceHealth(1);
 			StateMachine.ChangeState<ResetState>();
+		}
+
+		private void OnWin()
+		{
+			StateMachine.ChangeState<WinState>();
 		}
 	}
 }

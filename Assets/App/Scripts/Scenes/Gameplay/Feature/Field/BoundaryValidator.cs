@@ -15,7 +15,7 @@ namespace Scenes.Gameplay.Feature.Field
 
 		[SerializeField] private HealthController healthController;
 		[SerializeField] private BallsController ballsController;
-		[SerializeField] private MonoBehStateMachine stateMachine;
+		[SerializeField] private StateMachineHandler stateMachine;
 
 		private List<Ball> ballsToRemove = new();
 		private IFieldSizeProvider fieldSizeProvider;

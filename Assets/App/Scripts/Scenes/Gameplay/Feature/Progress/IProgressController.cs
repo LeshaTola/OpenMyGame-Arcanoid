@@ -1,8 +1,11 @@
-﻿namespace Scenes.Gameplay.Feature.Progress
+﻿using System;
+
+namespace Scenes.Gameplay.Feature.Progress
 {
 	public interface IProgressController
 	{
-		int CalculateProgress();
+		public event Action OnWin;
+
 		void ProcessProgress();
 	}
 }

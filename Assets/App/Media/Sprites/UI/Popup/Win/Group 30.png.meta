@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f1d961ddae5809a468d6e6d530c192dc
+guid: 262dd94bcc6174a49bfef698f7d2f20c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -115,91 +115,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: pop_up_win_0
-      rect:
-        serializedVersion: 2
-        x: 78
-        y: 652
-        width: 715
-        height: 845
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c5c37b0054dcf91448404d8eeaff192d
-      internalID: 944352179
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pop_up_win_1
-      rect:
-        serializedVersion: 2
-        x: 296
-        y: 288
-        width: 280
-        height: 327
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f1564f7689ee1244babe6ecf6ff02d8
-      internalID: 699520352
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pop_up_win_2
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 328
-        width: 248
-        height: 248
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9fa23027456963f499916b7a07c6e876
-      internalID: -841747932
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pop_up_win_3
-      rect:
-        serializedVersion: 2
-        x: 358
-        y: 184
-        width: 150
-        height: 53
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4d02d7b48a587fc4ab302886b14f96d2
-      internalID: 625491477
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -210,11 +126,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      pop_up_win_0: 944352179
-      pop_up_win_1: 699520352
-      pop_up_win_2: -841747932
-      pop_up_win_3: 625491477
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
