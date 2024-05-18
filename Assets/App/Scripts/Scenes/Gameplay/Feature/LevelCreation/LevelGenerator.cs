@@ -20,7 +20,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private List<Block> blocks = new();
 
 		[Inject]
-		public void Init(IFieldSizeProvider fieldController)
+		public void Construct(IFieldSizeProvider fieldController)
 		{
 			this.fieldController = fieldController;
 		}

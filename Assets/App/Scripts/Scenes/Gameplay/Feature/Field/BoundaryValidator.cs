@@ -19,7 +19,7 @@ namespace Scenes.Gameplay.Feature.Field
 		private IFieldSizeProvider fieldSizeProvider;
 
 		[Inject]
-		public void Init(IFieldSizeProvider fieldSizeProvider)
+		public void Construct(IFieldSizeProvider fieldSizeProvider)
 		{
 			this.fieldSizeProvider = fieldSizeProvider;
 		}
