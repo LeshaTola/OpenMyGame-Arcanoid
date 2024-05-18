@@ -9,16 +9,27 @@ using Zenject;
 
 namespace Scenes.Main.Bootstrap
 {
-	public class MainMenuStateMachineInstaller : MonoInstaller
+	public class MainMenuEntryPoint : MonoInstaller
 	{
+		[SerializeField] List<SerializableInterface<Features.Bootstrap.IInitializable>> initializables;
+
 		[SerializeField] StateMachineHandler stateMachineHandler;
 		[SerializeField] private SceneRef scene;
 		[SerializeField] private SerializableInterface<ISceneTransition> sceneTransition;
 
 		public override void Start()
 		{
-			stateMachineHandler.Init();
+			foreach (var initializable in initializables)
+			{
+				initializable.Value.Init();
+			}
 
+			InitStateMachine();
+		}
+
+		private void InitStateMachine()
+		{
+			stateMachineHandler.Init();
 
 			SetupLoadSceneState();
 
@@ -38,7 +49,7 @@ namespace Scenes.Main.Bootstrap
 
 		public override void InstallBindings()
 		{
-
+			Container.BindInstance(stateMachineHandler).AsSingle();
 		}
 	}
 }

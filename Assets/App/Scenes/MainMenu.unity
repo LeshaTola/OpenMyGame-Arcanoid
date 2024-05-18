@@ -945,6 +945,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117160535}
   m_CullTransparentMesh: 1
+--- !u!1 &1305989042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1305989043}
+  - component: {fileID: 1305989044}
+  m_Layer: 0
+  m_Name: EntryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1305989043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305989042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1331693402}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1305989044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305989042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c95ed219cb4fcc4d82cfb2b5faae15d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializables:
+  - mode: 0
+    unityReference: {fileID: 1470426492}
+    rawReference:
+      rid: -2
+  - mode: 0
+    unityReference: {fileID: 1393092109}
+    rawReference:
+      rid: -2
+  - mode: 0
+    unityReference: {fileID: 238239229}
+    rawReference:
+      rid: -2
+  stateMachineHandler: {fileID: 1368130882}
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
+    scenePath: Assets/App/Scenes/PackSelection.unity
+  sceneTransition:
+    mode: 0
+    unityReference: {fileID: 1588800995}
+    rawReference:
+      rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &1331693401
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,10 +1025,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1331693402}
-  - component: {fileID: 1331693403}
   - component: {fileID: 1331693404}
   m_Layer: 0
-  m_Name: Bootstrap
+  m_Name: SceneContext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -976,39 +1046,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1368130881}
+  - {fileID: 1305989043}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1331693403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1331693401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b39a409ddd87184e9bc100ef92270b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initializables:
-  - mode: 0
-    unityReference: {fileID: 1393092109}
-    rawReference:
-      rid: -2
-  - mode: 0
-    unityReference: {fileID: 238239229}
-    rawReference:
-      rid: -2
-  - mode: 0
-    unityReference: {fileID: 1470426492}
-    rawReference:
-      rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
 --- !u!114 &1331693404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,7 +1064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 1368130883}
+  - {fileID: 1305989044}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1051,9 +1092,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1368130881}
   - component: {fileID: 1368130882}
-  - component: {fileID: 1368130883}
   m_Layer: 0
-  m_Name: StateMachineInstaller
+  m_Name: StateMachineHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1142,32 +1182,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
---- !u!114 &1368130883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1368130880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c95ed219cb4fcc4d82cfb2b5faae15d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stateMachineHandler: {fileID: 1368130882}
-  scene:
-    sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
-    scenePath: Assets/App/Scenes/PackSelection.unity
-  sceneTransition:
-    mode: 0
-    unityReference: {fileID: 1588800995}
-    rawReference:
-      rid: -2
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
 --- !u!1 &1393092105
 GameObject:
   m_ObjectHideFlags: 0
