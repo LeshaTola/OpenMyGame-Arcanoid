@@ -1,11 +1,11 @@
 ﻿using Features.StateMachine;
 using Features.StateMachine.States;
 using Features.StateMachine.States.General;
+using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
@@ -36,12 +36,13 @@ namespace Scenes.Gameplay.StateMachine.States
 	public class ResetStateStep : StateStep
 	{
 		private IInput input;
+		private IFieldSizeProvider fieldSizeProvider;
 		private Plate plate;
 
-		[Inject]
-		public ResetStateStep(IInput input, Plate plate)
+		public ResetStateStep(IInput input, IFieldSizeProvider fieldSizeProvider, Plate plate)
 		{
 			this.input = input;
+			this.fieldSizeProvider = fieldSizeProvider;
 			this.plate = plate;
 		}
 
@@ -57,8 +58,12 @@ namespace Scenes.Gameplay.StateMachine.States
 			input.OnEndInput -= OnEndInput;
 		}
 
-		private void OnEndInput()
+		private void OnEndInput(Vector2 lastPosition)
 		{
+			if (!fieldSizeProvider.GameField.IsValid(lastPosition))
+			{
+				return;
+			}
 			plate.PushBalls();
 			StateMachine.ChangeState<GameplayState>();
 		}

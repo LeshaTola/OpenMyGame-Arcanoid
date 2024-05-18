@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scenes.Gameplay.Feature.LevelCreation
+namespace Scenes.Gameplay.Feature.LevelCreation.Configs
 {
 	[CreateAssetMenu(fileName = "BlocksDictionary", menuName = "Dictionaries/Blocks")]
 	public class BlocksDictionary : SerializedScriptableObject

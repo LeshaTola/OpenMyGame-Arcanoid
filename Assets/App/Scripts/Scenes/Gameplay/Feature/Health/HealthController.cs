@@ -21,7 +21,6 @@ namespace Scenes.Gameplay.Feature.Health
 		public void Init()
 		{
 			healthBarUI.CreateUI(config.MaxHealth);
-			AddHealth(config.Health);
 		}
 
 		public void AddHealth(int health)
@@ -57,6 +56,11 @@ namespace Scenes.Gameplay.Feature.Health
 			}
 
 			healthBarUI.DeactivateAmount(currentHealth, prevHealth);
+		}
+
+		public void ResetHealth()
+		{
+			AddHealth(config.Health);
 		}
 	}
 }

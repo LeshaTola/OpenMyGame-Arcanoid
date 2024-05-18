@@ -1,5 +1,5 @@
 using Scenes.Gameplay.Feature.Blocks;
-using Scenes.Gameplay.Feature.Blocks.Config;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.Progress;
@@ -11,22 +11,27 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 {
 	public class LevelGenerator : MonoBehaviour
 	{
-		private IFieldSizeProvider fieldController;
 		[SerializeField] private ProgressController progressController;
 		[SerializeField] private LevelConfig levelConfig;
-		[SerializeField] private BlocksDictionary blocksDictionary;
-		[SerializeField] private Block blockTemplate;
 
+		private IFieldSizeProvider fieldController;
+		private IBlockFactory blockFactory;
 		private List<Block> blocks = new();
 
 		[Inject]
-		public void Construct(IFieldSizeProvider fieldController)
+		public void Construct(IFieldSizeProvider fieldController, IBlockFactory blockFactory)
 		{
 			this.fieldController = fieldController;
+			this.blockFactory = blockFactory;
 		}
 
 		public void GenerateLevel(LevelInfo levelInfo)
 		{
+			if (blocks.Count > 0)
+			{
+				DestroyLevel();
+			}
+
 			GameField gameField = fieldController.GetGameField();
 			float blockWidth = GetBlockWidth(levelInfo, gameField);
 
@@ -34,28 +39,61 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			{
 				for (int j = 0; j < levelInfo.Width; j++)
 				{
-					Block block = GetPreparedBlock(levelInfo, blockWidth, i, j);
-					blocks.Add(block);
-
-					Vector2 newPosition = GetNewBlockPosition(gameField, i, j, block);
-					block.transform.position = newPosition;
+					Block block = PrepareBlock(levelInfo, blockWidth, i, j);
+					PlaceBlock(gameField, i, j, block);
 				}
 			}
 
 			progressController.Init(blocks);
 		}
 
-		private Block GetPreparedBlock(LevelInfo levelInfo, float blockWidth, int i, int j)
+		public void DestroyLevel()
 		{
-			Block block = Instantiate(blockTemplate, transform);
+			progressController.CleanUp();
+			foreach (Block block in blocks)
+			{
+				Destroy(block.gameObject);
+			}
+			blocks.Clear();
+		}
 
-			BlockConfig configTemplate = blocksDictionary.Blocks[levelInfo.BlocksMatrix[j, i]];
-			BlockConfig newConfig = Instantiate(configTemplate);
-			newConfig.Init(block);
+		private void PlaceBlock(GameField gameField, int i, int j, Block block)
+		{
+			Vector2 newPosition = GetNewBlockPosition(gameField, i, j, block);
+			block.transform.position = newPosition;
+		}
 
-			block.Init(newConfig);
+		private Block PrepareBlock(LevelInfo levelInfo, float blockWidth, int i, int j)
+		{
+			Block block = blockFactory.GetBlock(levelInfo.BlocksMatrix[j, i]);
 			block.ResizeBlock(blockWidth);
+			SubscribeOnBlock(block);
+			blocks.Add(block);
 			return block;
+		}
+
+		private void SubscribeOnBlock(Block block)
+		{
+			var healthComponent = block.Config.GetComponent<HealthComponent>();
+			if (healthComponent != null)
+			{
+				healthComponent.OnDeath += OnBlockDeath;
+			}
+		}
+
+		private void UnsubscribeFromBlock(Block block)
+		{
+			var healthComponent = block.Config.GetComponent<HealthComponent>();
+			if (healthComponent != null)
+			{
+				healthComponent.OnDeath -= OnBlockDeath;
+			}
+		}
+
+		private void OnBlockDeath(Block block)
+		{
+			blocks.Remove(block);
+			UnsubscribeFromBlock(block);
 		}
 
 		private Vector2 GetNewBlockPosition(GameField gameField, int i, int j, Block block)

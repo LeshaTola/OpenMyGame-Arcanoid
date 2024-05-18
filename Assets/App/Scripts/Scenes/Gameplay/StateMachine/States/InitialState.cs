@@ -1,6 +1,7 @@
 ﻿using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using Newtonsoft.Json;
+using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.LevelCreation;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Scenes.Gameplay.StateMachine.States
 {
 	public class InitialState : State
 	{
+		[SerializeField] private HealthController healthController;
 		[SerializeField] private LevelGenerator levelGenerator;
 		[SerializeField] private ISceneTransition sceneTransition;
 		[SerializeField] private TextAsset fileLevelInfo;// TODO Move it to separate reader
@@ -16,6 +18,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			base.Enter();
 			levelGenerator.GenerateLevel(GetLevelInfo());
+			healthController.ResetHealth();
 			StateMachine.ChangeState<ResetState>();
 		}
 

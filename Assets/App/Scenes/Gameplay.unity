@@ -230,6 +230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
+  blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
+  blockTemplate: {fileID: 7240198157899510798, guid: 72b0f7db32a1ed54798e26d8a52a4553, type: 3}
+  container: {fileID: 1189566609}
 --- !u!1 &349173684
 GameObject:
   m_ObjectHideFlags: 0
@@ -1203,10 +1206,10 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 194826146}
-    - {fileID: 1189566610}
-    - {fileID: 4900000, guid: 73c60fc78a8e4ff46ae2c734749fb8e9, type: 3}
-    - {fileID: 1134754029}
     - {fileID: 467381949}
+    - {fileID: 1189566610}
+    - {fileID: 4900000, guid: 4c75ac4aa8615734f9416ad40e094525, type: 3}
+    - {fileID: 1134754029}
     - {fileID: 953173412}
     - {fileID: 31654177}
     SerializedBytesString: 
@@ -1230,6 +1233,9 @@ MonoBehaviour:
     - Name: nextState
       Entry: 7
       Data: 2|Scenes.Gameplay.StateMachine.States.InitialState, Assembly-CSharp
+    - Name: healthController
+      Entry: 6
+      Data: 
     - Name: levelGenerator
       Entry: 6
       Data: 
@@ -1248,15 +1254,18 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 3|Scenes.Gameplay.StateMachine.States.InitialState, Assembly-CSharp
-    - Name: levelGenerator
+    - Name: healthController
       Entry: 10
       Data: 1
+    - Name: levelGenerator
+      Entry: 10
+      Data: 2
     - Name: sceneTransition
       Entry: 10
       Data: 0
     - Name: fileLevelInfo
       Entry: 10
-      Data: 2
+      Data: 3
     - Name: 
       Entry: 8
       Data: 
@@ -1272,7 +1281,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 10
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 13
       Data: 
@@ -1288,7 +1297,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 10
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 13
       Data: 
@@ -1303,7 +1312,7 @@ MonoBehaviour:
       Data: 7|Scenes.Gameplay.StateMachine.States.GameplayState, Assembly-CSharp
     - Name: healthController
       Entry: 10
-      Data: 4
+      Data: 1
     - Name: boundaryValidator
       Entry: 10
       Data: 5
@@ -1316,7 +1325,7 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 10
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 10
       Data: 5
@@ -1445,8 +1454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressController: {fileID: 31654177}
   levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
-  blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
-  blockTemplate: {fileID: 7240198157899510798, guid: 72b0f7db32a1ed54798e26d8a52a4553, type: 3}
 --- !u!1 &1222504796
 GameObject:
   m_ObjectHideFlags: 0

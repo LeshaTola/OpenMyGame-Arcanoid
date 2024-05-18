@@ -6,8 +6,8 @@ namespace Scenes.Gameplay.Feature.Player.PlayerInput
 {
 	public class MouseInput : IInput, ITickable
 	{
-		public event Action OnStartInput;
-		public event Action OnEndInput;
+		public event Action<Vector2> OnStartInput;
+		public event Action<Vector2> OnEndInput;
 
 		private Camera mainCamera;
 
@@ -20,7 +20,7 @@ namespace Scenes.Gameplay.Feature.Player.PlayerInput
 		{
 			if (Input.GetMouseButton(0))
 			{
-				return mainCamera.ScreenToWorldPoint(Input.mousePosition);
+				return GetMousePosition();
 			}
 			return default;
 		}
@@ -29,12 +29,17 @@ namespace Scenes.Gameplay.Feature.Player.PlayerInput
 		{
 			if (Input.GetMouseButtonDown(0))
 			{
-				OnStartInput?.Invoke();
+				OnStartInput?.Invoke(GetMousePosition());
 			}
 			if (Input.GetMouseButtonUp(0))
 			{
-				OnEndInput?.Invoke();
+				OnEndInput?.Invoke(GetMousePosition());
 			}
+		}
+
+		private Vector2 GetMousePosition()
+		{
+			return mainCamera.ScreenToWorldPoint(Input.mousePosition);
 		}
 	}
 }
