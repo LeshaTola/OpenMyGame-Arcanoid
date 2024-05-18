@@ -1156,8 +1156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateMachineHandler: {fileID: 1368130882}
   scene:
-    sceneAsset: {fileID: 102900000, guid: 7072187d6aa42e8498a551b8af92cd26, type: 3}
-    scenePath: Assets/App/Scenes/Gameplay.unity
+    sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
+    scenePath: Assets/App/Scenes/PackSelection.unity
   sceneTransition:
     mode: 0
     unityReference: {fileID: 1588800995}
@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 768, y: 1366}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
