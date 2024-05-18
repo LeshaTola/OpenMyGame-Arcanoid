@@ -13,14 +13,26 @@ using Zenject;
 
 namespace Scenes.Gameplay.Bootstrap
 {
-	public class StateMachineInstaller : MonoInstaller
+	public class GamePlayEntryPoint : MonoInstaller
 	{
+		[SerializeField] List<SerializableInterface<Features.Bootstrap.IInitializable>> initializables;
+
 		[SerializeField] StateMachineHandler stateMachineHandler;
 		[SerializeField] private SceneRef scene;
 		[SerializeField] private SerializableInterface<ISceneTransition> sceneTransition;
 		[SerializeField] private Plate plate;
 
 		public override void Start()
+		{
+			foreach (var initializable in initializables)
+			{
+				initializable.Value.Init();
+			}
+
+			InitStateMachine();
+		}
+
+		private void InitStateMachine()
 		{
 			stateMachineHandler.Init();
 
