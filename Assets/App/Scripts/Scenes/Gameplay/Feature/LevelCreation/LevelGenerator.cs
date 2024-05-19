@@ -105,7 +105,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 		private float GetBlockWidth(LevelInfo levelInfo, GameField gameField)
 		{
-			return gameField.Width / levelInfo.Width - levelConfig.Spacing;
+			return (gameField.Width - (levelInfo.Width - 1) * levelConfig.Spacing) / levelInfo.Width;
 		}
 	}
 }
