@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: bef11f9887e8806418a984d6b5d98a43, type: 3}
   packName: Minecraft
-  levelsPath: Assets/App/Configs/Scenes/PackSelection/Packs/Minecraft
-  currentLevel: 2
+  relativeLevelsPath: Levels\Minecraft
+  currentLevel: 0
   levelNames:
-  - MineCraft_Test
   - MineCraft_Level_1
+  - MineCraft_Test
   isOpened: 1

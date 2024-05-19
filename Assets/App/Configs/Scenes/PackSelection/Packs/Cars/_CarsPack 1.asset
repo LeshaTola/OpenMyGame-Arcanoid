@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: bef11f9887e8806418a984d6b5d98a43, type: 3}
   packName: Cars
-  levelsPath: Assets/App/Configs/Scenes/PackSelection/Packs/Cars
+  relativeLevelsPath: Levels/Cars
   currentLevel: 0
   levelNames:
   - Cars_Level_Test
