@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace Scenes.PackSelection.Feature.Packs
+namespace Scenes.PackSelection.Feature.Packs.UI
 {
 	public class PackMenu : MonoBehaviour
 	{

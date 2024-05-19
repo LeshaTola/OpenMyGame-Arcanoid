@@ -30,10 +30,22 @@ namespace Scenes.Main.Bootstrap
 		private void InitStateMachine()
 		{
 			stateMachineHandler.Init();
+			AddGlobalInitState();
 
 			SetupLoadSceneState();
 
 			stateMachineHandler.StartStateMachine<GlobalInitialState>();
+		}
+
+		private void AddGlobalInitState()
+		{
+			var globalInitState = Container.Instantiate<GlobalInitialState>(
+			new List<object>
+			{
+				stateMachineHandler.StartState
+			});
+			globalInitState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(globalInitState);
 		}
 
 		private void SetupLoadSceneState()

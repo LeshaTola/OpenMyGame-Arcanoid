@@ -1,6 +1,6 @@
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
-using Scenes.PackSelection.Feature.Packs;
+using Scenes.PackSelection.Feature.Packs.UI;
 using UnityEngine;
 
 namespace Scenes.PackSelection.StateMachine

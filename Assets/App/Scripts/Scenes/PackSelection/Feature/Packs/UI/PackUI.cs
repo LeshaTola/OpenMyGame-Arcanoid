@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scenes.PackSelection.Feature.Packs
+namespace Scenes.PackSelection.Feature.Packs.UI
 {
 	public class PackUI : MonoBehaviour
 	{

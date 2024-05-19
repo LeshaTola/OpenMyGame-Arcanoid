@@ -7,11 +7,13 @@ namespace Features.StateMachine
 {
 	public class StateMachineHandler : SerializedMonoBehaviour
 	{
+		[SerializeField] private State startState;
 		[SerializeField] private List<State> states = new();
 
 		private StateMachine core;
 
 		public StateMachine Core { get => core; }
+		public State StartState { get => startState; }
 
 		public void Init()
 		{

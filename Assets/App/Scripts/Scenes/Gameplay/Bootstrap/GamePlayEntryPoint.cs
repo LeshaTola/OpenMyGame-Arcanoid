@@ -4,6 +4,7 @@ using Features.UI.SceneTransitions;
 using SceneReference;
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.StateMachine.States;
+using Scenes.Gameplay.StateMachine.States.GamePlayInitialState;
 using Scenes.Gameplay.StateMachine.States.Loss;
 using Scenes.Gameplay.StateMachine.States.Win;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private SerializableInterface<ISceneTransition> sceneTransition;
 		[SerializeField] private Plate plate;
 
+		[SerializeField] private TextAsset defaultLevelInfo;
+
 		public override void Start()
 		{
 			foreach (var initializable in initializables)
@@ -36,12 +39,33 @@ namespace Scenes.Gameplay.Bootstrap
 		{
 			stateMachineHandler.Init();
 
+			AddGlobalInitState();
+			SetupInitialState();
 			stateMachineHandler.Core.AddStep<WinState>(Container.Instantiate<WinStateStep>());
 			stateMachineHandler.Core.AddStep<LossState>(Container.Instantiate<LossStateStep>());
 			SetupResetState();
 			SetupLoadSceneState();
 
 			stateMachineHandler.StartStateMachine<GlobalInitialState>();
+		}
+
+		private void SetupInitialState()
+		{
+			stateMachineHandler.Core.AddStep<InitialState>(Container.Instantiate<GameplayInitialStateStep>(new List<object>()
+			{
+				defaultLevelInfo
+			}));
+		}
+
+		private void AddGlobalInitState()
+		{
+			var globalInitState = Container.Instantiate<GlobalInitialState>(
+			new List<object>
+			{
+				stateMachineHandler.StartState
+			});
+			globalInitState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(globalInitState);
 		}
 
 		private void SetupResetState()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scenes.Main.StateMachine.States
 {
-	public class InitialState : State
+	public class MainMenuInitialState : State
 	{
 		[SerializeField] private ISceneTransition sceneTransition;
 

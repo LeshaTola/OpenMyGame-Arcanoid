@@ -9,7 +9,7 @@ namespace Scenes.PackSelection.Feature.Packs.Configs
 	{
 		[SerializeField] private Sprite sprite;
 		[SerializeField] private string packName;
-		[SerializeField] private string levelsPath;
+		[SerializeField] private string relativeLevelsPath;
 
 		[FoldoutGroup("Level")]
 		[SerializeField] private int currentLevel;
@@ -20,7 +20,7 @@ namespace Scenes.PackSelection.Feature.Packs.Configs
 
 		public Sprite Sprite { get => sprite; }
 		public string Name { get => packName; }
-		public string LevelsPath { get => levelsPath; }
+		public string RelativeLevelsPath { get => relativeLevelsPath; }
 		public int CurrentLevel { get => currentLevel; }
 		public int MaxLevel { get => levelNames.Count; }
 		public List<string> LevelNames { get => levelNames; }
