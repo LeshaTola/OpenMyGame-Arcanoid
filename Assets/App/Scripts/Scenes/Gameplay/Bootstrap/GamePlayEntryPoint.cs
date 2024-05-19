@@ -3,6 +3,7 @@ using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using SceneReference;
 using Scenes.Gameplay.Feature.Player;
+using Scenes.Gameplay.Feature.UI;
 using Scenes.Gameplay.StateMachine.States;
 using Scenes.Gameplay.StateMachine.States.GamePlayInitialState;
 using Scenes.Gameplay.StateMachine.States.Loss;
@@ -24,6 +25,7 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private Plate plate;
 
 		[SerializeField] private TextAsset defaultLevelInfo;
+		[SerializeField] private PackInfoUI packInfoUI;
 
 		public override void Start()
 		{
@@ -53,7 +55,8 @@ namespace Scenes.Gameplay.Bootstrap
 		{
 			stateMachineHandler.Core.AddStep<InitialState>(Container.Instantiate<GameplayInitialStateStep>(new List<object>()
 			{
-				defaultLevelInfo
+				defaultLevelInfo,
+				packInfoUI
 			}));
 		}
 

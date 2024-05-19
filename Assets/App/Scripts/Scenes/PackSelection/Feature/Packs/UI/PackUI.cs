@@ -17,7 +17,7 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 			button.onClick.AddListener(() => onPackClicked?.Invoke());
 			image.sprite = sprite;
 			nameText.text = name;
-			levelsText.text = currentLevel + "/" + maxLevel;
+			levelsText.text = (currentLevel + 1) + "/" + (maxLevel + 1);
 		}
 	}
 }

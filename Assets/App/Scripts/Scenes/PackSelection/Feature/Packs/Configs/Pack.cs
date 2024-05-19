@@ -22,7 +22,7 @@ namespace Scenes.PackSelection.Feature.Packs.Configs
 		public string Name { get => packName; }
 		public string RelativeLevelsPath { get => relativeLevelsPath; }
 		public int CurrentLevel { get => currentLevel; set => currentLevel += value; }
-		public int MaxLevel { get => levelNames.Count; }
+		public int MaxLevel { get => levelNames.Count - 1; }
 		public List<string> LevelNames { get => levelNames; }
 		public bool IsOpened { get => isOpened; }
 	}

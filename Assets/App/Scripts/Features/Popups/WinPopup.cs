@@ -38,6 +38,19 @@ namespace Features.Popups
 			Hide();
 		}
 
+		public void UpdateUI()
+		{
+			Pack pack = packProvider.CurrentPack;
+			if (pack == null)
+			{
+				return;
+			}
+
+			packName.text = pack.Name;
+			packImage.sprite = pack.Sprite;
+			levelInfo.text = $"{pack.CurrentLevel + 1}/{pack.MaxLevel + 1}";
+		}
+
 		public void Activate()
 		{
 			nextButton.enabled = true;
@@ -60,6 +73,7 @@ namespace Features.Popups
 
 		public void Show()
 		{
+			UpdateUI();
 			gameObject.SetActive(true);
 			popupAnimation.Value.Show(() =>
 			{
