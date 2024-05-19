@@ -32,7 +32,6 @@ namespace Module.PopupLogic.General
 			DeactivatePrevPopup();
 
 			currentPopups.Push(popup);
-			popup.Activate();
 			popup.Show();
 		}
 
@@ -44,7 +43,6 @@ namespace Module.PopupLogic.General
 			}
 
 			var popup = currentPopups.Pop();
-			popup.Deactivate();
 			popup.Hide();
 
 			ActivatePrevPopup();

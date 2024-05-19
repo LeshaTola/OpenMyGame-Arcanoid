@@ -1,5 +1,7 @@
-﻿using Features.StateMachine;
+﻿using DG.Tweening;
+using Features.StateMachine;
 using Features.StateMachine.States;
+using Features.UI.Animations.SpinAnimation;
 using Module.PopupLogic.General;
 using Scenes.Gameplay.StateMachine.States;
 using Scenes.PackSelection.Feature.Packs;
@@ -19,6 +21,8 @@ namespace Features.Popups
 		[SerializeField] private Button nextButton;
 		[SerializeField] private TextMeshProUGUI packName;
 		[SerializeField] private TextMeshProUGUI levelInfo;
+		[SerializeField] private SpinAnimation lines;
+		[SerializeField] private const float eachAnimationDuration = 0.5f;
 
 		private StateMachineHandler stateMachineHandler;
 		private IPackProvider packProvider;
@@ -38,19 +42,6 @@ namespace Features.Popups
 			Hide();
 		}
 
-		public void UpdateUI()
-		{
-			Pack pack = packProvider.CurrentPack;
-			if (pack == null)
-			{
-				return;
-			}
-
-			packName.text = pack.Name;
-			packImage.sprite = pack.Sprite;
-			levelInfo.text = $"{pack.CurrentLevel + 1}/{pack.MaxLevel + 1}";
-		}
-
 		public void Activate()
 		{
 			nextButton.enabled = true;
@@ -63,6 +54,7 @@ namespace Features.Popups
 
 		public void Hide()
 		{
+			ResetUI();
 			IsActive = false;
 			popupAnimation.Value.Hide(() =>
 			{
@@ -73,14 +65,35 @@ namespace Features.Popups
 
 		public void Show()
 		{
-			UpdateUI();
 			gameObject.SetActive(true);
+			lines.StartAnimation();
 			popupAnimation.Value.Show(() =>
 			{
-				Activate();
+				UpdateUI();
 				IsActive = true;
 			});
 
+		}
+
+		private void UpdateUI()
+		{
+			Pack pack = packProvider.CurrentPack;
+			if (pack == null)
+			{
+				return;
+			}
+
+			Sequence sequence = DOTween.Sequence();
+			SetupLevelAnimation(pack, sequence);
+			SetupButtonAnimation(sequence);
+			sequence.onComplete += Activate;
+		}
+
+		private void ResetUI()
+		{
+			levelInfo.text = "0/0";
+			packName.text = "";
+			nextButton.transform.localScale = Vector3.zero;
 		}
 
 		private void NextButtonClicked()
@@ -94,6 +107,32 @@ namespace Features.Popups
 
 			currentPack.CurrentLevel++;
 			stateMachineHandler.Core.ChangeState<InitialState>();
+		}
+
+		private void SetupLevelAnimation(Pack pack, Sequence sequence)
+		{
+			var maxLevelAnimation = DOVirtual.Int(0, pack.MaxLevel + 1, eachAnimationDuration, value =>
+			{
+				levelInfo.text = $"0/{value}";
+			});
+
+			var levelAnimation = DOVirtual.Int(0, pack.CurrentLevel + 1, eachAnimationDuration, value =>
+			{
+				levelInfo.text = $"{value}/{pack.MaxLevel + 1}";
+			});
+
+			levelAnimation.onComplete += () =>
+			{
+				packName.text = pack.Name;
+				packImage.sprite = pack.Sprite;
+			};
+			sequence.Append(maxLevelAnimation);
+			sequence.Append(levelAnimation);
+		}
+
+		private void SetupButtonAnimation(Sequence sequence)
+		{
+			sequence.Append(nextButton.transform.DOScale(Vector3.one, eachAnimationDuration));
 		}
 	}
 }
