@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ namespace Module.PopupLogic.General
 {
 	public class PopupController : IPopupController
 	{
+		public event Action OnFirstPopupActivates;
+		public event Action OnLastPopupDeactivates;
+
 		private IPopupFactory popupFactory;
 
 		private Stack<IPopup> currentPopups;
@@ -68,7 +72,9 @@ namespace Module.PopupLogic.General
 			if (currentPopups.Count > 0)
 			{
 				currentPopups.Peek().Deactivate();
+				return;
 			}
+			OnFirstPopupActivates?.Invoke();
 		}
 
 		private void ActivatePrevPopup()
@@ -76,7 +82,9 @@ namespace Module.PopupLogic.General
 			if (currentPopups.Count > 0)
 			{
 				currentPopups.Peek().Activate();
+				return;
 			}
+			OnLastPopupDeactivates?.Invoke();
 		}
 	}
 }

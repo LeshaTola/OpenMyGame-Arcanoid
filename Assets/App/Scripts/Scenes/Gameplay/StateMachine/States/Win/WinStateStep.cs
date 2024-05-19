@@ -1,4 +1,4 @@
-﻿using Assets.App.Scripts.Features.Popups;
+﻿using Features.Popups;
 using Features.StateMachine.States.General;
 using Module.PopupLogic.General;
 using Zenject;

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.App.Scripts.Features.Popups
+namespace Features.Popups
 {
 	public class LossPopup : MonoBehaviour, IPopup
 	{
@@ -57,7 +57,6 @@ namespace Assets.App.Scripts.Features.Popups
 				Activate();
 				IsActive = true;
 			});
-
 		}
 
 		private void RestartButtonClicked()

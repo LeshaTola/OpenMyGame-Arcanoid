@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace Assets.App.Scripts.Features.Popups
+namespace Features.Popups
 {
 	public class WinPopup : MonoBehaviour, IPopup
 	{
