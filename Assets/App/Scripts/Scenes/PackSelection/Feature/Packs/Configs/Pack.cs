@@ -21,7 +21,7 @@ namespace Scenes.PackSelection.Feature.Packs.Configs
 		public Sprite Sprite { get => sprite; }
 		public string Name { get => packName; }
 		public string RelativeLevelsPath { get => relativeLevelsPath; }
-		public int CurrentLevel { get => currentLevel; }
+		public int CurrentLevel { get => currentLevel; set => currentLevel += value; }
 		public int MaxLevel { get => levelNames.Count; }
 		public List<string> LevelNames { get => levelNames; }
 		public bool IsOpened { get => isOpened; }

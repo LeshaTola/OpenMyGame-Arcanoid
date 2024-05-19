@@ -10,6 +10,8 @@ namespace Scenes.Gameplay.StateMachine.States
 		[SerializeField] private HealthController healthController;
 		[SerializeField] private ISceneTransition sceneTransition;
 
+		private bool firstPlay = true;
+
 		public override void Enter()
 		{
 			base.Enter();
@@ -20,7 +22,11 @@ namespace Scenes.Gameplay.StateMachine.States
 		public override void Exit()
 		{
 			base.Exit();
-			sceneTransition.PlayOff();
+			if (firstPlay)
+			{
+				sceneTransition.PlayOff();
+				firstPlay = false;
+			}
 		}
 
 	}

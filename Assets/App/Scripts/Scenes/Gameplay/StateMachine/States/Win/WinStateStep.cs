@@ -7,7 +7,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 {
 	public class WinStateStep : StateStep
 	{
-		IPopupController popupController;
+		private IPopupController popupController;
 
 		[Inject]
 		public WinStateStep(IPopupController popupController)

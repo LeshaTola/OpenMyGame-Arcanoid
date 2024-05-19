@@ -1,6 +1,9 @@
 ﻿using Features.StateMachine;
 using Features.StateMachine.States;
 using Module.PopupLogic.General;
+using Scenes.Gameplay.StateMachine.States;
+using Scenes.PackSelection.Feature.Packs;
+using Scenes.PackSelection.Feature.Packs.Configs;
 using TMPro;
 using TNRD;
 using UnityEngine;
@@ -18,13 +21,15 @@ namespace Features.Popups
 		[SerializeField] private TextMeshProUGUI levelInfo;
 
 		private StateMachineHandler stateMachineHandler;
+		private IPackProvider packProvider;
 
 		public bool IsActive { get; private set; }
 
 		[Inject]
-		public void Construct(StateMachineHandler stateMachineHandler)
+		public void Construct(StateMachineHandler stateMachineHandler, IPackProvider packProvider)
 		{
 			this.stateMachineHandler = stateMachineHandler;
+			this.packProvider = packProvider;
 		}
 
 		public void Init()
@@ -66,7 +71,15 @@ namespace Features.Popups
 
 		private void NextButtonClicked()
 		{
-			stateMachineHandler.Core.ChangeState<LoadSceneState>();
+			Pack currentPack = packProvider.CurrentPack;
+			if (currentPack == null || currentPack.CurrentLevel == currentPack.MaxLevel)
+			{
+				stateMachineHandler.Core.ChangeState<LoadSceneState>();
+				return;
+			}
+
+			currentPack.CurrentLevel++;
+			stateMachineHandler.Core.ChangeState<InitialState>();
 		}
 	}
 }

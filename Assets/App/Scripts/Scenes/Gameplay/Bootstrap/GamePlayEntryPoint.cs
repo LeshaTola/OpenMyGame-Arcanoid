@@ -14,7 +14,7 @@ using Zenject;
 
 namespace Scenes.Gameplay.Bootstrap
 {
-	public class GamePlayEntryPoint : MonoInstaller
+	public class GameplayEntryPoint : MonoInstaller
 	{
 		[SerializeField] List<SerializableInterface<Features.Bootstrap.IInitializable>> initializables;
 
