@@ -1136,34 +1136,25 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
+    - Name: startState
+      Entry: 7
+      Data: 0|Scenes.Main.StateMachine.States.MainMenuInitialState, Assembly-CSharp
+    - Name: sceneTransition
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: states
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
+      Data: 1|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 1|Features.StateMachine.States.GlobalInitialState, Assembly-CSharp
-    - Name: targetFrameRate
-      Entry: 3
-      Data: 60
-    - Name: nextState
-      Entry: 7
-      Data: 2|Scenes.Main.StateMachine.States.InitialState, Assembly-CSharp
-    - Name: sceneTransition
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|Scenes.Main.StateMachine.States.InitialState, Assembly-CSharp
+      Data: 2|Scenes.Main.StateMachine.States.MainMenuInitialState, Assembly-CSharp
     - Name: sceneTransition
       Entry: 10
       Data: 0
@@ -1172,7 +1163,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
+      Data: 3|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

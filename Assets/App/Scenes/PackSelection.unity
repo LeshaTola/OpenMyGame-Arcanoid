@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1456138285}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ffa67c6efd492d4892ba1e9598d2566, type: 3}
+  m_Script: {fileID: 11500000, guid: b52ea90137f9aa141ad5178277277fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   packs:
@@ -1342,22 +1342,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
-    - Name: states
+    - Name: startState
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 4
-    - Name: 
-      Entry: 7
-      Data: 1|Features.StateMachine.States.GlobalInitialState, Assembly-CSharp
-    - Name: targetFrameRate
-      Entry: 3
-      Data: 60
-    - Name: nextState
-      Entry: 7
-      Data: 2|Scenes.PackSelection.StateMachine.PackSelectionInitState, Assembly-CSharp
+      Data: 0|Scenes.PackSelection.StateMachine.PackSelectionInitState, Assembly-CSharp
     - Name: packMenu
       Entry: 6
       Data: 
@@ -1367,12 +1354,16 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: states
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
+        Assembly-CSharp]], mscorlib
     - Name: 
-      Entry: 8
-      Data: 
+      Entry: 12
+      Data: 3
     - Name: 
       Entry: 7
-      Data: 3|Scenes.PackSelection.StateMachine.PackSelectionInitState, Assembly-CSharp
+      Data: 2|Scenes.PackSelection.StateMachine.PackSelectionInitState, Assembly-CSharp
     - Name: packMenu
       Entry: 10
       Data: 0
@@ -1384,13 +1375,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
+      Data: 3|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Scenes.PackSelection.StateMachine.LoadMainMenuState, Assembly-CSharp
+      Data: 4|Scenes.PackSelection.StateMachine.LoadMainMenuState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -1587,9 +1578,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 197720448}
     m_Modifications:
+    - target: {fileID: 2586215249678539881, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 21.699951
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586215249678539881, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3.2999878
+      objectReference: {fileID: 0}
     - target: {fileID: 2586215249838442368, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
       propertyPath: m_Name
       value: BackButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586215249838442368, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586215249838442397, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
+      propertyPath: m_Type
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2586215249838442399, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
       propertyPath: m_Pivot.x
@@ -1605,7 +1612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2586215249838442399, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2586215249838442399, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1621,7 +1628,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2586215249838442399, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 228
+      value: -160
       objectReference: {fileID: 0}
     - target: {fileID: 2586215249838442399, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1657,7 +1664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2586215249838442399, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 41
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 2586215249838442399, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1675,6 +1682,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2586215250361503597, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 25.590088
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b661806c2bbd6ff4ea35e4cc51774b3d, type: 3}
 --- !u!1001 &2899247962254445076
@@ -1684,6 +1695,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 197720448}
     m_Modifications:
+    - target: {fileID: 2899247962399446764, guid: 0c1ee26b3eef59149a415ab070e0f463, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899247962399446764, guid: 0c1ee26b3eef59149a415ab070e0f463, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899247962399446764, guid: 0c1ee26b3eef59149a415ab070e0f463, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899247962399446764, guid: 0c1ee26b3eef59149a415ab070e0f463, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899247962399446764, guid: 0c1ee26b3eef59149a415ab070e0f463, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899247962399446765, guid: 0c1ee26b3eef59149a415ab070e0f463, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2899247963142929069, guid: 0c1ee26b3eef59149a415ab070e0f463, type: 3}
       propertyPath: m_Name
       value: BackGround
