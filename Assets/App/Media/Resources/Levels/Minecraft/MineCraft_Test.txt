@@ -1,0 +1,9 @@
+{
+  "Height": 1,
+  "Width": 1,
+  "BlocksMatrix": [
+    [
+      0
+    ]
+  ]
+}

@@ -1,22 +1,21 @@
-﻿using UnityEngine;
+﻿using Features.ProjectInitServices;
 
 namespace Features.StateMachine.States
 {
 	public class GlobalInitialState : State
 	{
-		[SerializeField] private int targetFrameRate = 60;
-		[SerializeField] private State nextState;
+		private State nextState;
+		private IProjectInitService projectInitService;
 
-		private static bool isValid = true;
+		public GlobalInitialState(State nextState, IProjectInitService projectInitService)
+		{
+			this.nextState = nextState;
+			this.projectInitService = projectInitService;
+		}
 
 		public override void Enter()
 		{
-			base.Enter();
-			if (isValid)
-			{
-				isValid = false;
-				Application.targetFrameRate = targetFrameRate;
-			}
+			projectInitService.InitProject();
 			StateMachine.ChangeState(nextState.GetType());
 		}
 	}

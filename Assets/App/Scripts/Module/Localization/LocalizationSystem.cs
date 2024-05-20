@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
-using Features.Bootstrap;
-using Module.Localization.Localizers;
+﻿using Features.Bootstrap;
+using Module.Localization.Configs;
 using Module.Localization.Parsers;
 using Sirenix.OdinInspector;
-using TNRD;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Module.Localization
 {
 	public class LocalizationSystem : SerializedMonoBehaviour, IInitializable
 	{
-		[SerializeField] TextAsset localizationFile;
+		public event Action OnLanguageChanged;
+
+		[SerializeField] LocalizationDictionary localizationDictionary;
 		[ValueDropdown("GetLanguages")]
 		[SerializeField] private string language;
-		[SerializeField] private List<SerializableInterface<ITextLocalizer>> textLocalizers;
 
 		private Dictionary<string, Dictionary<string, string>> languagesDictionary;
 		private IParser parser;
@@ -25,43 +27,29 @@ namespace Module.Localization
 		{
 			languagesDictionary = new();
 			parser = new CSVParser();
-			var languages = parser.GetLanguages(localizationFile.text);
 
-			foreach (var language in languages)
+			foreach (var language in localizationDictionary.Languages)
 			{
-				var parsedLanguage = parser.Parse(language, localizationFile.text);
-				languagesDictionary.Add(language, parsedLanguage);
+				var parsedLanguage = parser.Parse(language.SCVFile.text);
+				languagesDictionary.Add(language.LanguageName, parsedLanguage);
 			}
-
-			foreach (SerializableInterface<ITextLocalizer> textLocalizer in textLocalizers)
-			{
-				textLocalizer.Value.Init(this);
-			}
-			Translate();
+			ChangeLanguage();
 		}
 
-		public void Translate()
+		public void ChangeLanguage()
 		{
-			foreach (SerializableInterface<ITextLocalizer> textLocalizer in textLocalizers)
-			{
-				textLocalizer.Value.Translate();
-			}
+			OnLanguageChanged?.Invoke();
 		}
 
 #if UNITY_EDITOR
 		private List<string> GetLanguages()
 		{
-			if (localizationFile == null)
+			if (localizationDictionary == null)
 			{
 				return null;
 			}
 
-			if (parser == null)
-			{
-				parser = new CSVParser();
-			}
-
-			return parser.GetLanguages(localizationFile.text);
+			return localizationDictionary.Languages.Select(language => language.LanguageName).ToList();
 		}
 #endif
 	}

@@ -1,14 +1,26 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Scenes.Gameplay.Feature.Field
 {
 	public class FieldDrawer : MonoBehaviour
 	{
-		[SerializeField] FieldController controller;
+		private IFieldSizeProvider fieldSizeProvider;
+
+		[Inject]
+		public void Construct(IFieldSizeProvider fieldSizeProvider)
+		{
+			this.fieldSizeProvider = fieldSizeProvider;
+		}
 
 		private void OnDrawGizmos()
 		{
-			var gameField = controller.GetGameField();
+			if (fieldSizeProvider == null)
+			{
+				return;
+			}
+
+			var gameField = fieldSizeProvider.GetGameField();
 			Gizmos.color = Color.yellow;
 
 			Gizmos.DrawLine(gameField.TopLeftCorner, gameField.TopRightCorner);

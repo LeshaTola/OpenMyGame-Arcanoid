@@ -9,7 +9,7 @@ namespace Scenes.Gameplay.Feature.Health.UI
 		[SerializeField] private HealthIconUI healthIconTemplate;
 		[SerializeField] private Transform container;
 
-		private List<HealthIconUI> healthIcons;
+		private List<HealthIconUI> healthIcons = new();
 
 		public void DeactivateAmount(int currentHealth, int prevHealth)
 		{

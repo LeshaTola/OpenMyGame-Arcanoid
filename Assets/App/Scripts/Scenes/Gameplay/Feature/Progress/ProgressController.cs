@@ -1,19 +1,28 @@
 ﻿using Scenes.Gameplay.Feature.Blocks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Progress
 {
-	public class ProgressController : MonoBehaviour, IProgressController
+	public class ProgressController : IProgressController
 	{
-		[SerializeField] private ProgressUI progressUI;
+		public event Action OnWin;
+
+		private IProgressUI progressUI;
+		private int winProgress;
 
 		private List<Block> scoredBlocks;
 		private int startBlocksCount;
 		private int currentBlocksCount;
+
+		public ProgressController(IProgressUI progressUI, int winProgress)
+		{
+			this.progressUI = progressUI;
+			this.winProgress = winProgress;
+		}
 
 		public void Init(List<Block> blocks)
 		{
@@ -21,11 +30,7 @@ namespace Scenes.Gameplay.Feature.Progress
 
 			foreach (var block in scoredBlocks)
 			{
-				var healthComponent = block.Config.GetComponent<HealthComponent>();
-				if (healthComponent != null)
-				{
-					healthComponent.OnDeath += OnBlockDeath;
-				}
+				SubscribeOnBlock(block);
 			}
 
 			startBlocksCount = scoredBlocks.Count;
@@ -34,33 +39,60 @@ namespace Scenes.Gameplay.Feature.Progress
 			ProcessProgress();
 		}
 
-		private void OnBlockDeath(Block block)
-		{
-			scoredBlocks.Remove(block);
-
-			var healthComponent = block.Config.GetComponent<HealthComponent>();
-			if (healthComponent != null)
-			{
-				healthComponent.OnDeath += OnBlockDeath;
-			}
-
-			currentBlocksCount--;
-			ProcessProgress();
-		}
-
 		public void ProcessProgress()
 		{
 			int progress = CalculateProgress();
 			progressUI.UpdateProgress(progress);
 
-			if (progress == 100)
+			if (progress == winProgress)
 			{
-				Debug.Log("Win!");
-				//TODO: popup manager show win popup
+				OnWin?.Invoke();
 			}
 		}
 
-		public int CalculateProgress()
+		public void CleanUp()
+		{
+			foreach (var block in scoredBlocks)
+			{
+				UnsubscribeFromBlock(block);
+			}
+			scoredBlocks.Clear();
+
+			startBlocksCount = 1;
+			currentBlocksCount = startBlocksCount;
+
+			ProcessProgress();
+		}
+
+		private void SubscribeOnBlock(Block block)
+		{
+			var healthComponent = block.Config.GetComponent<HealthComponent>();
+			if (healthComponent != null)
+			{
+				healthComponent.OnDeath += OnBlockDeath;
+			}
+		}
+
+		private void UnsubscribeFromBlock(Block block)
+		{
+			var healthComponent = block.Config.GetComponent<HealthComponent>();
+			if (healthComponent != null)
+			{
+				healthComponent.OnDeath -= OnBlockDeath;
+			}
+		}
+
+		private void OnBlockDeath(Block block)
+		{
+			scoredBlocks.Remove(block);
+
+			UnsubscribeFromBlock(block);
+
+			currentBlocksCount--;
+			ProcessProgress();
+		}
+
+		private int CalculateProgress()
 		{
 			return (int)((1f - ((float)currentBlocksCount / startBlocksCount)) * 100);
 		}
