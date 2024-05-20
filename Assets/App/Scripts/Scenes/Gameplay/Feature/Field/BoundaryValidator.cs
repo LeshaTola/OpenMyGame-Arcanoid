@@ -1,35 +1,33 @@
-﻿using Features.StateMachine;
+﻿using Module.ObjectPool;
 using Scenes.Gameplay.Feature.Player.Ball;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 namespace Scenes.Gameplay.Feature.Field
 {
-	public class BoundaryValidator : MonoBehaviour, IUpdatable
+	public class BoundaryValidator : IBoundaryValidator, ITickable
 	{
 		public event Action OnBallFall;
 		public event Action OnLastBallFall;
 
-		[SerializeField] private BallsController ballsController;
-		[SerializeField] private StateMachineHandler stateMachine;
-
-		private List<Ball> ballsToRemove = new();
+		private IPool<Ball> ballsPool;
 		private IFieldSizeProvider fieldSizeProvider;
+		private List<Ball> ballsToRemove;
 
-		[Inject]
-		public void Construct(IFieldSizeProvider fieldSizeProvider)
+		public BoundaryValidator(IPool<Ball> ballsPool, IFieldSizeProvider fieldSizeProvider)
 		{
+			this.ballsPool = ballsPool;
 			this.fieldSizeProvider = fieldSizeProvider;
+			ballsToRemove = new();
 		}
 
-		void IUpdatable.Update()
+		public void Tick()
 		{
 			ValidateBalls();
 		}
 
-		private void ValidateBalls()
+		public void ValidateBalls()
 		{
 			GetFalledBalls();
 
@@ -40,14 +38,13 @@ namespace Scenes.Gameplay.Feature.Field
 
 			foreach (Ball ball in ballsToRemove)
 			{
-				ball.transform.parent = ballsController.transform;
 				ball.Release();
 			}
 
 			ballsToRemove.Clear();
 			OnBallFall?.Invoke();
 
-			if (ballsController.BallPool.Active.Count == 0)
+			if (ballsPool.Active.Count == 0)
 			{
 				OnLastBallFall?.Invoke();
 			}
@@ -55,7 +52,7 @@ namespace Scenes.Gameplay.Feature.Field
 
 		private void GetFalledBalls()
 		{
-			foreach (Ball ball in ballsController.BallPool.Active)
+			foreach (Ball ball in ballsPool.Active)
 			{
 				if (ball.transform.position.y < fieldSizeProvider.GameField.MinY)
 				{

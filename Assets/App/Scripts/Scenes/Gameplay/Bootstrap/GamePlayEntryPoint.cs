@@ -3,9 +3,7 @@ using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using SceneReference;
 using Scenes.Gameplay.Feature.Player;
-using Scenes.Gameplay.Feature.UI;
 using Scenes.Gameplay.StateMachine.States;
-using Scenes.Gameplay.StateMachine.States.GamePlayInitialState;
 using Scenes.Gameplay.StateMachine.States.Loss;
 using Scenes.Gameplay.StateMachine.States.Win;
 using System.Collections.Generic;
@@ -25,7 +23,6 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private Plate plate;
 
 		[SerializeField] private TextAsset defaultLevelInfo;
-		[SerializeField] private PackInfoUI packInfoUI;
 
 		public override void Start()
 		{
@@ -42,22 +39,51 @@ namespace Scenes.Gameplay.Bootstrap
 			stateMachineHandler.Init();
 
 			AddGlobalInitState();
-			SetupInitialState();
-			stateMachineHandler.Core.AddStep<WinState>(Container.Instantiate<WinStateStep>());
-			stateMachineHandler.Core.AddStep<LossState>(Container.Instantiate<LossStateStep>());
+			AddInitialState();
+			AddGamePlayState();
+			AddWinState();
+			AddLossState();
 			SetupResetState();
 			SetupLoadSceneState();
 
 			stateMachineHandler.StartStateMachine<GlobalInitialState>();
 		}
 
-		private void SetupInitialState()
+		private void AddGamePlayState()
 		{
-			stateMachineHandler.Core.AddStep<InitialState>(Container.Instantiate<GameplayInitialStateStep>(new List<object>()
+			GameplayState gameplayState = Container.Instantiate<GameplayState>(new List<object>
 			{
-				defaultLevelInfo,
-				packInfoUI
-			}));
+				new List<IUpdatable>
+				{
+					plate
+				}
+			});
+			gameplayState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(gameplayState);
+		}
+
+		private void AddLossState()
+		{
+			LossState lossState = Container.Instantiate<LossState>();
+			lossState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(lossState);
+		}
+
+		private void AddWinState()
+		{
+			WinState winState = Container.Instantiate<WinState>();
+			winState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(winState);
+		}
+
+		private void AddInitialState()
+		{
+			var InitialState = Container.Instantiate<InitialState>(new List<object>()
+			{
+				defaultLevelInfo
+			});
+			InitialState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(InitialState);
 		}
 
 		private void AddGlobalInitState()

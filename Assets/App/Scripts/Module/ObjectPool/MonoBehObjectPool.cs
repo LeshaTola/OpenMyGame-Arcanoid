@@ -18,8 +18,19 @@ namespace Module.ObjectPool
 					pooledObject.gameObject.SetActive(false);
 					return pooledObject;
 				},
-				(obj) => obj.gameObject.SetActive(true),
-				(obj) => obj.gameObject.SetActive(false),
+				(obj) =>
+				{
+					obj.gameObject.SetActive(true);
+				},
+				(obj) =>
+				{
+
+					obj.gameObject.SetActive(false);
+					if (parent != null)
+					{
+						obj.transform.SetParent(parent);
+					}
+				},
 				startCount
 				);
 		}

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7227145046741339300}
   - component: {fileID: 2312949514156382147}
-  - component: {fileID: 7227145046741339302}
   - component: {fileID: 7227145046741339303}
   - component: {fileID: 7227145046741339297}
   m_Layer: 0
@@ -50,24 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boxCollider: {fileID: 7227145046741339297}
-  fieldController: {fileID: 0}
   ballsController: {fileID: 0}
   ballPosition: {fileID: 5488720226762618725}
-  movement: {fileID: 7227145046741339302}
---- !u!114 &7227145046741339302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7227145046741339301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f7adae0ae7abd42a632a950f553383, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 78d46ddd9d24dea41bdca5d6ca982b23, type: 2}
-  rb: {fileID: 7227145046741339303}
 --- !u!50 &7227145046741339303
 Rigidbody2D:
   serializedVersion: 4

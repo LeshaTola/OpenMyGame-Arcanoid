@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Scenes.Gameplay.Feature.UI
 {
-	public class PackInfoUI : MonoBehaviour
+	public class PackInfoUI : MonoBehaviour, IPackInfoUI
 	{
 		[SerializeField] private Image packImage;
 		[SerializeField] private TextMeshProUGUI levelText;

@@ -1,36 +1,44 @@
 ﻿using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Player.Configs;
 using UnityEngine;
-using Zenject;
 
 namespace Scenes.Gameplay.Feature.Player
 {
-	public class Movement : MonoBehaviour, IMovement
+	public class Movement : IMovement
 	{
-		[SerializeField] private MovementConfig config;
-		[SerializeField] private Rigidbody2D rb;
-
+		private MovementConfig config;
+		private Rigidbody2D rb;
 		private ITimeProvider timeProvider;
 
-		[Inject]
-		public void Construct(ITimeProvider timeProvider)
+		public Movement(MovementConfig config,
+				  Rigidbody2D rb,
+				  ITimeProvider timeProvider)
 		{
+			this.config = config;
+			this.rb = rb;
 			this.timeProvider = timeProvider;
 		}
 
 		public void Move(Vector2 moveDirection)
 		{
-			rb.velocity = moveDirection.normalized * config.Speed;
 			if (moveDirection.magnitude < config.DeadZone)
 			{
 				rb.velocity = Vector2.zero;
+				return;
 			}
+
+			rb.velocity = moveDirection.normalized * config.Speed;
 		}
 
 		public void ApplyDrag()
 		{
+			ApplyDrag(config.Drag);
+		}
+
+		private void ApplyDrag(float drag)
+		{
 			var velocity = rb.velocity;
-			velocity -= velocity * timeProvider.DeltaTime * config.Drag;
+			velocity -= velocity * timeProvider.DeltaTime * drag;
 			rb.velocity = velocity;
 		}
 	}

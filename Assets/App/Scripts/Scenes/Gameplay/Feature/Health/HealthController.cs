@@ -1,24 +1,28 @@
-using Features.Bootstrap;
 using Scenes.Gameplay.Feature.Health.Configs;
-using Scenes.Gameplay.Feature.Health.UI;
 using System;
-using UnityEngine;
+using Zenject;
 
 namespace Scenes.Gameplay.Feature.Health
 {
-	public class HealthController : MonoBehaviour, IInitializable, IHealthController
+	public class HealthController : IInitializable, IHealthController
 	{
 		public event Action OnDeath;
 
-		[SerializeField] private HealthConfig config;
-		[SerializeField] private HealthBarUI healthBarUI;
+		private HealthConfig config;
+		private IHealthBarUI healthBarUI;
 
 		private int currentHealth;
+
+		public HealthController(HealthConfig config, IHealthBarUI healthBarUI)
+		{
+			this.config = config;
+			this.healthBarUI = healthBarUI;
+		}
 
 		public int MaxHealth { get => config.MaxHealth; }
 		public int CurrentHealth { get => currentHealth; }
 
-		public void Init()
+		public void Initialize()
 		{
 			healthBarUI.CreateUI(config.MaxHealth);
 		}

@@ -11,5 +11,6 @@ namespace Scenes.Gameplay.Feature.Health
 
 		void AddHealth(int health);
 		void ReduceHealth(int health);
+		void ResetHealth();
 	}
 }

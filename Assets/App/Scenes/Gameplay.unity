@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &31654175
+--- !u!1 &85326323
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,44 +131,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 31654176}
-  - component: {fileID: 31654177}
+  - component: {fileID: 85326324}
   m_Layer: 0
-  m_Name: ProgressController
+  m_Name: Blocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &31654176
+--- !u!4 &85326324
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31654175}
+  m_GameObject: {fileID: 85326323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 755117853}
-  m_RootOrder: 2
+  m_Father: {fileID: 1396913684}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &31654177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31654175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2227cda634dcdf48b943587ecf7441d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  progressUI: {fileID: 349173688}
-  winProgress: 100
 --- !u!224 &194826143 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1228948756253052347, guid: fb9a84383ea02e64fa960336f64a3c7d, type: 3}
@@ -230,10 +215,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
-  levelGenerator: {fileID: 1189566610}
+  levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
   blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
   blockTemplate: {fileID: 7240198157899510798, guid: 72b0f7db32a1ed54798e26d8a52a4553, type: 3}
-  container: {fileID: 1189566609}
+  container: {fileID: 85326324}
+  ballCount: 10
+  ballTemplate: {fileID: 2332535626420645355, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
+  ballsContainer: {fileID: 2076856196}
+  winProgress: 100
+  config: {fileID: 11400000, guid: 9104e3cf5bc727641bc7d7f5a1e53a69, type: 2}
 --- !u!1 &349173684
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,57 +513,26 @@ MonoBehaviour:
     unityReference: {fileID: 194826146}
     rawReference:
       rid: -2
+  progressUI:
+    mode: 0
+    unityReference: {fileID: 349173688}
+    rawReference:
+      rid: -2
+  healthBarUI:
+    mode: 0
+    unityReference: {fileID: 719795315}
+    rawReference:
+      rid: -2
+  packInfoUI:
+    mode: 0
+    unityReference: {fileID: 475189898}
+    rawReference:
+      rid: -2
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
---- !u!1 &467381947
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 467381948}
-  - component: {fileID: 467381949}
-  m_Layer: 0
-  m_Name: HealthController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &467381948
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467381947}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 755117853}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &467381949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 467381947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86729075e5d85e748a2b80eb020f7dd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: 9104e3cf5bc727641bc7d7f5a1e53a69, type: 2}
-  healthBarUI: {fileID: 719795315}
 --- !u!1 &475189896
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,14 +958,6 @@ MonoBehaviour:
     unityReference: {fileID: 811101923}
     rawReference:
       rid: -2
-  - mode: 0
-    unityReference: {fileID: 2076856197}
-    rawReference:
-      rid: -2
-  - mode: 0
-    unityReference: {fileID: 467381949}
-    rawReference:
-      rid: -2
   stateMachineHandler: {fileID: 1059541121}
   scene:
     sceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
@@ -1018,7 +969,6 @@ MonoBehaviour:
       rid: -2
   plate: {fileID: 1134754029}
   defaultLevelInfo: {fileID: 4900000, guid: 4c75ac4aa8615734f9416ad40e094525, type: 3}
-  packInfoUI: {fileID: 475189898}
   references:
     version: 2
     RefIds:
@@ -1040,43 +990,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8790b4f2ca4b245bdc34028d45da99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &755117852
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 755117853}
-  m_Layer: 0
-  m_Name: Context
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &755117853
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 755117852}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1396913684}
-  - {fileID: 1189566609}
-  - {fileID: 31654176}
-  - {fileID: 2076856196}
-  - {fileID: 953173411}
-  - {fileID: 467381948}
-  m_Father: {fileID: 1605346081}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &757622089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,7 +1120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuButton: {fileID: 2586215250580297048}
---- !u!1 &953173410
+--- !u!1 &977554556
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1215,44 +1128,44 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 953173411}
-  - component: {fileID: 953173412}
+  - component: {fileID: 977554557}
+  - component: {fileID: 977554558}
   m_Layer: 0
-  m_Name: BoundaryValidator
+  m_Name: PlateInstaller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &953173411
+--- !u!4 &977554557
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953173410}
+  m_GameObject: {fileID: 977554556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 755117853}
-  m_RootOrder: 4
+  m_Father: {fileID: 1942578915}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &953173412
+--- !u!114 &977554558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953173410}
+  m_GameObject: {fileID: 977554556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 938f476d35e3b404bba3a0052c0bddf9, type: 3}
+  m_Script: {fileID: 11500000, guid: 393494c5e18508444a471d349f16ed78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballsController: {fileID: 2076856197}
-  stateMachine: {fileID: 1059541121}
+  config: {fileID: 11400000, guid: 78d46ddd9d24dea41bdca5d6ca982b23, type: 2}
+  rb: {fileID: 1629776038}
 --- !u!1 &1059505224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,11 +1260,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 467381949}
-    - {fileID: 194826146}
     - {fileID: 1134754029}
-    - {fileID: 953173412}
-    - {fileID: 31654177}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1360,12 +1269,6 @@ MonoBehaviour:
     - Name: startState
       Entry: 7
       Data: 0|Scenes.Gameplay.StateMachine.States.InitialState, Assembly-CSharp
-    - Name: healthController
-      Entry: 6
-      Data: 
-    - Name: sceneTransition
-      Entry: 6
-      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -1375,106 +1278,48 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 2|Scenes.Gameplay.StateMachine.States.InitialState, Assembly-CSharp
-    - Name: healthController
-      Entry: 10
-      Data: 0
-    - Name: sceneTransition
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|Scenes.Gameplay.StateMachine.States.ResetState, Assembly-CSharp
+      Data: 2|Scenes.Gameplay.StateMachine.States.ResetState, Assembly-CSharp
     - Name: resetables
       Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[Features.StateMachine.States.IResetable,
+      Data: 3|System.Collections.Generic.List`1[[Features.StateMachine.States.IResetable,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: updatables
-      Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 6|Scenes.Gameplay.StateMachine.States.GameplayState, Assembly-CSharp
-    - Name: healthController
       Entry: 10
       Data: 0
-    - Name: boundaryValidator
-      Entry: 10
-      Data: 3
-    - Name: updatables
-      Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 2
-    - Name: 
-      Entry: 10
-      Data: 3
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-    - Name: progressController
+    - Name: updatables
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[Features.StateMachine.IUpdatable,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
       Entry: 10
-      Data: 4
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|Scenes.Gameplay.StateMachine.States.Loss.LossState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 9|Scenes.Gameplay.StateMachine.States.Win.WinState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 10|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
+      Data: 5|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -1500,52 +1345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866e75fcf8724c8a9fae45110658052b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1189566608
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1189566609}
-  - component: {fileID: 1189566610}
-  m_Layer: 0
-  m_Name: LevelGenerator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1189566609
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189566608}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 755117853}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1189566610
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189566608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2538bd3faa5feb548a178bcfc1da5e7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  progressController: {fileID: 31654177}
-  levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
 --- !u!1 &1222504796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,8 +1485,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 755117853}
+  m_Children:
+  - {fileID: 85326324}
+  m_Father: {fileID: 1605346081}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1396913686
@@ -1955,7 +1755,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 755117853}
+  - {fileID: 1396913684}
+  - {fileID: 2076856196}
   - {fileID: 1134754025}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2062,6 +1863,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!50 &1629776038 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7227145046741339303, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
+  m_PrefabInstance: {fileID: 7227145047771133005}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1686923470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2362,6 +2168,7 @@ Transform:
   - {fileID: 1501909575}
   - {fileID: 1059505225}
   - {fileID: 261499525}
+  - {fileID: 977554557}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2384,6 +2191,7 @@ MonoBehaviour:
   - {fileID: 1059505226}
   - {fileID: 261499526}
   - {fileID: 673245670}
+  - {fileID: 977554558}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -2577,9 +2385,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2076856196}
-  - component: {fileID: 2076856197}
   m_Layer: 0
-  m_Name: BallsController
+  m_Name: BallsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2592,28 +2399,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076856195}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 755117853}
-  m_RootOrder: 3
+  m_Father: {fileID: 1605346081}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2076856197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2076856195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bb7449b35dc8f74fa031a6cc75f3909, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ballCount: 10
-  ballTemplate: {fileID: 2332535626420645355, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
 --- !u!1001 &1228948756058325540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3179,7 +2972,7 @@ PrefabInstance:
     - target: {fileID: 2312949514156382147, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: ballsController
       value: 
-      objectReference: {fileID: 2076856197}
+      objectReference: {fileID: 0}
     - target: {fileID: 2312949514156382147, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: fieldController
       value: 
@@ -3190,7 +2983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3240,9 +3033,6 @@ PrefabInstance:
       propertyPath: fieldController
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7227145046741339303, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7227145046741339302, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}

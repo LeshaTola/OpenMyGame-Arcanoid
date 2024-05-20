@@ -4,20 +4,25 @@ using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Progress
 {
-	public class ProgressController : MonoBehaviour, IProgressController
+	public class ProgressController : IProgressController
 	{
 		public event Action OnWin;
 
-		[SerializeField] private ProgressUI progressUI;
-		[SerializeField] private int winProgress = 100;
+		private IProgressUI progressUI;
+		private int winProgress;
 
 		private List<Block> scoredBlocks;
 		private int startBlocksCount;
 		private int currentBlocksCount;
+
+		public ProgressController(IProgressUI progressUI, int winProgress)
+		{
+			this.progressUI = progressUI;
+			this.winProgress = winProgress;
+		}
 
 		public void Init(List<Block> blocks)
 		{

@@ -1,10 +1,16 @@
 ﻿using Features.FileProvider;
+using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Blocks;
+using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.Health;
+using Scenes.Gameplay.Feature.Health.Configs;
 using Scenes.Gameplay.Feature.LevelCreation;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
+using Scenes.Gameplay.Feature.Player.Ball;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
+using Scenes.Gameplay.Feature.Progress;
 using UnityEngine;
 using Zenject;
 
@@ -15,13 +21,27 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private Camera mainCamera;
 
 		[Header("Level Creation")]
-		[SerializeField] private LevelGenerator levelGenerator;
+		[SerializeField] private LevelConfig levelConfig;
 		[SerializeField] private BlocksDictionary blocksDictionary;
 		[SerializeField] private Block blockTemplate;
 		[SerializeField] private Transform container;
 
+		[Header("Balls")]
+		[SerializeField] private int ballCount;
+		[SerializeField] private Ball ballTemplate;
+		[SerializeField] private Transform ballsContainer;
+
+		[Header("Other")]
+		[SerializeField] private int winProgress = 100;
+		[SerializeField] private HealthConfig config;
+
+
 		public override void InstallBindings()
 		{
+			BindProgressController();
+			BindHealthController();
+			BindBoundaryValidator();
+			BindBallsPool();
 			BindLevelGenerator();
 			BindFileProvider();
 			BindLevelInfoProvider();
@@ -30,9 +50,35 @@ namespace Scenes.Gameplay.Bootstrap
 			BindInput();
 		}
 
+		private void BindBoundaryValidator()
+		{
+			Container.BindInterfacesAndSelfTo<BoundaryValidator>().AsSingle();
+		}
+
+		private void BindHealthController()
+		{
+			Container.BindInterfacesAndSelfTo<HealthController>().AsSingle().WithArguments(config);
+		}
+
+		private void BindProgressController()
+		{
+			Container.Bind<IProgressController>().To<ProgressController>().AsSingle().WithArguments(winProgress);
+		}
+
+		private void BindBallsPool()
+		{
+			Container.Bind<IPool<Ball>>()
+				.To<MonoBehObjectPool<Ball>>()
+				.AsSingle()
+				.WithArguments(ballTemplate, ballCount, ballsContainer);
+		}
+
 		private void BindLevelGenerator()
 		{
-			Container.BindInstance(levelGenerator);//TODO move to interface. Remove from scene
+			Container.Bind<ILevelGenerator>()
+				.To<LevelGenerator>()
+				.AsSingle()
+				.WithArguments(levelConfig);
 		}
 
 		private void BindFileProvider()

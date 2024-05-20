@@ -5,24 +5,28 @@ using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.Progress;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace Scenes.Gameplay.Feature.LevelCreation
 {
-	public class LevelGenerator : MonoBehaviour
+	public class LevelGenerator : ILevelGenerator
 	{
-		[SerializeField] private ProgressController progressController;
-		[SerializeField] private LevelConfig levelConfig;
+		private LevelConfig levelConfig;
 
+		private IProgressController progressController;
 		private IFieldSizeProvider fieldController;
 		private IBlockFactory blockFactory;
+
 		private List<Block> blocks = new();
 
-		[Inject]
-		public void Construct(IFieldSizeProvider fieldController, IBlockFactory blockFactory)
+		public LevelGenerator(IProgressController progressController,
+						IFieldSizeProvider fieldController,
+						IBlockFactory blockFactory,
+						LevelConfig levelConfig)
 		{
+			this.progressController = progressController;
 			this.fieldController = fieldController;
 			this.blockFactory = blockFactory;
+			this.levelConfig = levelConfig;
 		}
 
 		public void GenerateLevel(LevelInfo levelInfo)
@@ -39,8 +43,9 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			{
 				for (int j = 0; j < levelInfo.Width; j++)
 				{
-					Block block = PrepareBlock(levelInfo, blockWidth, i, j);
-					PlaceBlock(gameField, i, j, block);
+					Block block = blockFactory.GetBlock(levelInfo.BlocksMatrix[j, i]);
+					Block preparedBlock = PrepareBlock(block, blockWidth);
+					PlaceBlock(gameField, i, j, preparedBlock);
 				}
 			}
 
@@ -52,7 +57,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			progressController.CleanUp();
 			foreach (Block block in blocks)
 			{
-				Destroy(block.gameObject);
+				GameObject.Destroy(block.gameObject);
 			}
 			blocks.Clear();
 		}
@@ -63,9 +68,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			block.transform.position = newPosition;
 		}
 
-		private Block PrepareBlock(LevelInfo levelInfo, float blockWidth, int i, int j)
+		private Block PrepareBlock(Block block, float blockWidth)
 		{
-			Block block = blockFactory.GetBlock(levelInfo.BlocksMatrix[j, i]);
 			block.ResizeBlock(blockWidth);
 			SubscribeOnBlock(block);
 			blocks.Add(block);
