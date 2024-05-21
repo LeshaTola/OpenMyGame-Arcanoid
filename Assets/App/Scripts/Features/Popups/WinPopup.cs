@@ -3,6 +3,7 @@ using Features.StateMachine;
 using Features.StateMachine.States;
 using Features.UI.Animations.SpinAnimation;
 using Module.PopupLogic.General;
+using Module.PopupLogic.General.Popup;
 using Scenes.Gameplay.StateMachine.States;
 using Scenes.PackSelection.Feature.Packs;
 using Scenes.PackSelection.Feature.Packs.Configs;

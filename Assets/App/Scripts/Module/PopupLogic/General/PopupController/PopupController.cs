@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Module.PopupLogic.General.Factory;
+using Module.PopupLogic.General.Popup;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Module.PopupLogic.General
+namespace Module.PopupLogic.General.Controller
 {
 	public class PopupController : IPopupController
 	{
@@ -75,4 +77,3 @@ namespace Module.PopupLogic.General
 		}
 	}
 }
-

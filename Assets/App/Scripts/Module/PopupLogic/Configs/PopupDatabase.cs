@@ -1,4 +1,4 @@
-﻿using Module.PopupLogic.General;
+﻿using Module.PopupLogic.General.Popup;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;

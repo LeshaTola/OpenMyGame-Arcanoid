@@ -1,4 +1,4 @@
-namespace Module.PopupLogic.General
+namespace Module.PopupLogic.General.Popup
 {
 	public interface IPopup
 	{

@@ -1,7 +1,7 @@
 ﻿using TNRD;
 using UnityEngine;
 
-namespace Module.PopupLogic.General
+namespace Module.PopupLogic.General.Popup
 {
 	[RequireComponent(typeof(CanvasGroup))]
 	public abstract class Popup : MonoBehaviour, IPopup

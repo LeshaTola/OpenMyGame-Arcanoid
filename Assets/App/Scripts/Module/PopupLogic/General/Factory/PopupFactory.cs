@@ -1,8 +1,9 @@
 ﻿using Module.PopupLogic.Configs;
+using Module.PopupLogic.General.Popup;
 using System.Linq;
 using UnityEngine;
 
-namespace Module.PopupLogic.General
+namespace Module.PopupLogic.General.Factory
 {
 	public class PopupFactory : IPopupFactory
 	{
@@ -21,7 +22,7 @@ namespace Module.PopupLogic.General
 				return null;
 			}
 
-			T popup = GameObject.Instantiate(popupTemplate);
+			T popup = Object.Instantiate(popupTemplate);
 			return popup;
 		}
 	}

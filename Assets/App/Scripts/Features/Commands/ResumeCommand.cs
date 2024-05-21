@@ -1,6 +1,6 @@
 ﻿using Features.StateMachine;
 using Module.Commands;
-using Module.PopupLogic.General;
+using Module.PopupLogic.General.Controller;
 using Scenes.Gameplay.StateMachine.States;
 
 namespace Features.Commands

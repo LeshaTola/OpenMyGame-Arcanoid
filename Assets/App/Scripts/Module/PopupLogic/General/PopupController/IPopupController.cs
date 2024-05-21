@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Module.PopupLogic.General.Popup;
+using UnityEngine;
 
-namespace Module.PopupLogic.General
+namespace Module.PopupLogic.General.Controller
 {
 	public interface IPopupController
 	{

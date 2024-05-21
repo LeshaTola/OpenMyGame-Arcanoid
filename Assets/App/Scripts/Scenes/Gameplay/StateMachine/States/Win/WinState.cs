@@ -1,6 +1,6 @@
 ﻿using Features.Popups;
 using Features.StateMachine.States;
-using Module.PopupLogic.General;
+using Module.PopupLogic.General.Controller;
 using Zenject;
 
 namespace Scenes.Gameplay.StateMachine.States.Win

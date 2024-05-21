@@ -1,5 +1,7 @@
 ﻿using Module.PopupLogic.Configs;
 using Module.PopupLogic.General;
+using Module.PopupLogic.General.Controller;
+using Module.PopupLogic.General.Factory;
 using UnityEngine;
 using Zenject;
 

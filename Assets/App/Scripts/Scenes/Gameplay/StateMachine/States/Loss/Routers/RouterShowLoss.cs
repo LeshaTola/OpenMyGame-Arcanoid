@@ -1,7 +1,7 @@
 ﻿using Features.Commands;
 using Features.Popups.Loss;
 using Features.Popups.Loss.ViewModels;
-using Module.PopupLogic.General;
+using Module.PopupLogic.General.Controller;
 using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States.Loss.Routers

@@ -1,7 +1,7 @@
 ﻿using Features.StateMachine;
 using Features.StateMachine.States;
 using Module.Commands;
-using Module.PopupLogic.General;
+using Module.PopupLogic.General.Controller;
 
 namespace Features.Commands
 {
