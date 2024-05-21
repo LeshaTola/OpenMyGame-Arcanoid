@@ -1,10 +1,10 @@
-﻿using Features.Popups.LossPopup.ViewModels;
+﻿using Features.Popups.Loss.ViewModels;
 using Module.PopupLogic.General;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Features.Popups.LossPopup
+namespace Features.Popups.Loss
 {
 	public class LossPopup : Popup
 	{

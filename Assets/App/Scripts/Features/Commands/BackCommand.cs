@@ -1,18 +1,18 @@
 ﻿using Features.StateMachine;
+using Features.StateMachine.States;
 using Module.Commands;
 using Module.PopupLogic.General;
-using Scenes.Gameplay.StateMachine.States;
 
 namespace Features.Commands
 {
-	public class RestartCommand : ILabeledCommand
+	public class BackCommand : ILabeledCommand
 	{
 		private StateMachineHandler stateMachineHandler;
 		private IPopupController popupController;
 
 		public string Label { get; }
 
-		public RestartCommand(StateMachineHandler stateMachineHandler, IPopupController popupController, string label)
+		public BackCommand(StateMachineHandler stateMachineHandler, IPopupController popupController, string label)
 		{
 			this.stateMachineHandler = stateMachineHandler;
 			this.popupController = popupController;
@@ -21,7 +21,7 @@ namespace Features.Commands
 
 		public void Execute()
 		{
-			stateMachineHandler.Core.ChangeState<InitialState>();
+			stateMachineHandler.Core.ChangeState<LoadSceneState>();
 			popupController.HidePopup();
 		}
 	}

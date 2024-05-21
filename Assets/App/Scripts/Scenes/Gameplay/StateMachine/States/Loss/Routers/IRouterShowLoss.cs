@@ -1,4 +1,4 @@
-﻿namespace Scenes.Gameplay.StateMachine.States.Loss
+﻿namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
 {
 	public interface IRouterShowLoss
 	{

@@ -1,6 +1,6 @@
 ﻿using Module.Commands;
 
-namespace Features.Popups.LossPopup.ViewModels
+namespace Features.Popups.Loss.ViewModels
 {
 	public class LossPopupViewModel : ILossPopupViewModel
 	{

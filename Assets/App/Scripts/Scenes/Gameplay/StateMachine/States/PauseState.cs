@@ -1,18 +1,18 @@
-﻿using Features.Popups;
-using Features.StateMachine.States;
-using Module.PopupLogic.General;
+﻿using Features.StateMachine.States;
 using Module.TimeProvider;
+using Scenes.Gameplay.StateMachine.States.Win.Routers;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
 	public class PauseState : State
 	{
-		private IPopupController popupController;
+
+		private IRouterShowMenu routerShowMenu;
 		private ITimeProvider timeProvider;
 
-		public PauseState(IPopupController popupController, ITimeProvider timeProvider)
+		public PauseState(IRouterShowMenu routerShowMenu, ITimeProvider timeProvider)
 		{
-			this.popupController = popupController;
+			this.routerShowMenu = routerShowMenu;
 			this.timeProvider = timeProvider;
 		}
 
@@ -20,14 +20,13 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			base.Enter();
 			timeProvider.TimeMultiplier = 0;
-			popupController.ShowPopup<MenuPopup>();
+			routerShowMenu.ShowMenu();
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
 			timeProvider.TimeMultiplier = 1;
-			popupController.HidePopup();
 		}
 	}
 }
