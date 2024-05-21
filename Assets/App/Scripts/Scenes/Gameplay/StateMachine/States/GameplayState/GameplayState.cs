@@ -2,10 +2,13 @@ using Features.StateMachine;
 using Features.StateMachine.States;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
+using Scenes.Gameplay.Feature.Player;
+using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
 using Scenes.Gameplay.StateMachine.States.Loss;
 using Scenes.Gameplay.StateMachine.States.Win;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
@@ -14,14 +17,23 @@ namespace Scenes.Gameplay.StateMachine.States
 		private IProgressController progressController;
 		private IHealthController healthController;
 		private IBoundaryValidator boundaryValidator;
+		private IInput input;
+		private IFieldSizeProvider fieldSizeProvider;
+		private Plate plate;
 
 		private List<IUpdatable> updatables;
 
 		public GameplayState(IProgressController progressController,
 					   IHealthController healthController,
 					   IBoundaryValidator boundaryValidator,
+					   IInput input,
+					   IFieldSizeProvider fieldSizeProvider,
+					   Plate plate,
 					   List<IUpdatable> updatables)
 		{
+			this.input = input;
+			this.fieldSizeProvider = fieldSizeProvider;
+			this.plate = plate;
 			this.progressController = progressController;
 			this.healthController = healthController;
 			this.boundaryValidator = boundaryValidator;
@@ -34,6 +46,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			progressController.OnWin += OnWin;
 			boundaryValidator.OnLastBallFall += OnLastBallFall;
 			healthController.OnDeath += OnDeath;
+			input.OnEndInput += OnEndInput;
 		}
 
 		public override void Update()
@@ -51,6 +64,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			progressController.OnWin -= OnWin;
 			boundaryValidator.OnLastBallFall -= OnLastBallFall;
 			healthController.OnDeath -= OnDeath;
+			input.OnEndInput -= OnEndInput;
 		}
 
 		private void OnDeath()
@@ -70,6 +84,15 @@ namespace Scenes.Gameplay.StateMachine.States
 		private void OnWin()
 		{
 			StateMachine.ChangeState<WinState>();
+		}
+
+		private void OnEndInput(Vector2 lastPosition)
+		{
+			if (!fieldSizeProvider.GameField.IsValid(lastPosition))
+			{
+				return;
+			}
+			plate.PushBalls();
 		}
 	}
 }

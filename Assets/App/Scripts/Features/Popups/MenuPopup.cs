@@ -17,15 +17,13 @@ namespace Features.Popups
 		[SerializeField] private Button resumeButton;
 
 		private StateMachineHandler stateMachineHandler;
-		private IPopupController popupController;//TODO Move into pause state
 
 		public bool IsActive { get; private set; }
 
 		[Inject]
-		public void Construct(StateMachineHandler stateMachineHandler, IPopupController popupController)
+		public void Construct(StateMachineHandler stateMachineHandler)
 		{
 			this.stateMachineHandler = stateMachineHandler;
-			this.popupController = popupController;
 		}
 
 		public void Init()
@@ -75,18 +73,16 @@ namespace Features.Popups
 		private void OnRestartButtonClicked()
 		{
 			stateMachineHandler.Core.ChangeState<InitialState>();
-			popupController.HidePopup();
 		}
 
 		private void OnBackButtonClicked()
 		{
 			stateMachineHandler.Core.ChangeState<LoadSceneState>();
-			popupController.HidePopup();
 		}
 
 		private void OnResumeButtonClicked()
 		{
-			popupController.HidePopup();
+			stateMachineHandler.Core.ChangeState<GameplayState>();
 		}
 	}
 }

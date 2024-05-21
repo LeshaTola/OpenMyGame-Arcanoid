@@ -41,9 +41,9 @@ namespace Scenes.Gameplay.Bootstrap
 			AddGlobalInitState();
 			AddInitialState();
 			AddGamePlayState();
+			AddPauseState();
 			AddWinState();
 			AddLossState();
-			SetupResetState();
 			SetupLoadSceneState();
 
 			stateMachineHandler.StartStateMachine<GlobalInitialState>();
@@ -62,6 +62,13 @@ namespace Scenes.Gameplay.Bootstrap
 			stateMachineHandler.Core.AddState(gameplayState);
 		}
 
+		private void AddPauseState()
+		{
+			PauseState pauseState = Container.Instantiate<PauseState>();
+			pauseState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(pauseState);
+		}
+
 		private void AddLossState()
 		{
 			LossState lossState = Container.Instantiate<LossState>();
@@ -78,12 +85,12 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void AddInitialState()
 		{
-			var InitialState = Container.Instantiate<InitialState>(new List<object>()
+			var initialState = Container.Instantiate<InitialState>(new List<object>()
 			{
 				defaultLevelInfo
 			});
-			InitialState.Init(stateMachineHandler.Core);
-			stateMachineHandler.Core.AddState(InitialState);
+			initialState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(initialState);
 		}
 
 		private void AddGlobalInitState()
@@ -95,16 +102,6 @@ namespace Scenes.Gameplay.Bootstrap
 			});
 			globalInitState.Init(stateMachineHandler.Core);
 			stateMachineHandler.Core.AddState(globalInitState);
-		}
-
-		private void SetupResetState()
-		{
-			stateMachineHandler.Core.AddStep<ResetState>(Container
-				.Instantiate<ResetStateStep>(
-				new List<object>
-					{
-						plate
-					}));
 		}
 
 		private void SetupLoadSceneState()

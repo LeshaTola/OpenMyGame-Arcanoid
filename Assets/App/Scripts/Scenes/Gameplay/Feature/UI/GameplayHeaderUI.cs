@@ -1,5 +1,6 @@
-﻿using Features.Popups;
+﻿using Features.StateMachine;
 using Module.PopupLogic.General;
+using Scenes.Gameplay.StateMachine.States;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -11,11 +12,14 @@ namespace Scenes.Gameplay.Feature.UI
 		[SerializeField] private Button mainMenuButton;
 
 		private IPopupController popupController;
+		private StateMachineHandler stateMachineHandler;
 
 		[Inject]
-		public void Construct(IPopupController popupController)
+		public void Construct(IPopupController popupController, StateMachineHandler stateMachineHandler)
 		{
 			this.popupController = popupController;
+			this.stateMachineHandler = stateMachineHandler;
+
 			popupController.OnFirstPopupActivates += OnFirstPopupActivates;
 			popupController.OnLastPopupDeactivates += OnLastPopupDeactivates;
 		}
@@ -33,7 +37,7 @@ namespace Scenes.Gameplay.Feature.UI
 
 		public void MenuButtonClicked()
 		{
-			popupController.ShowPopup<MenuPopup>();
+			stateMachineHandler.Core.ChangeState<PauseState>();
 		}
 
 		private void Activate()

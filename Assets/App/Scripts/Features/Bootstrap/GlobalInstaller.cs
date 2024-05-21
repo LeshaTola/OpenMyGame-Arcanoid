@@ -1,4 +1,7 @@
 ﻿using Features.ProjectInitServices;
+using Features.Saves;
+using Features.Saves.Keys;
+using Module.Saves;
 using Module.Scenes;
 using Scenes.PackSelection.Feature.Packs;
 using UnityEngine;
@@ -12,6 +15,11 @@ namespace Features.Bootstrap
 
 		public override void InstallBindings()
 		{
+			Container.Bind<IStorage>().To<PlayerPrefsStorage>().AsSingle();
+			Container.Bind<IDataProvider<PlayerProgressData>>()
+				.To<DataProvider<PlayerProgressData>>()
+				.AsSingle()
+				.WithArguments(PlayerProgressDataKey.KEY);
 			BindInitProjectService();
 			BindSceneLoadService();
 			BindPackProvider();
