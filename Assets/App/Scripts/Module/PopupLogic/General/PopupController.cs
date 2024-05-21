@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,9 +6,6 @@ namespace Module.PopupLogic.General
 {
 	public class PopupController : IPopupController
 	{
-		public event Action OnFirstPopupActivates;
-		public event Action OnLastPopupDeactivates;
-
 		private IPopupFactory popupFactory;
 
 		private Stack<IPopup> currentPopups;
@@ -22,17 +18,30 @@ namespace Module.PopupLogic.General
 			popups = new();
 		}
 
-		public void ShowPopup<T>() where T : MonoBehaviour, IPopup
+		public T ShowPopup<T>() where T : MonoBehaviour, IPopup
 		{
 			IPopup popup = GetPopup<T>();
-			if (popup == null)
-			{
-				return;
-			}
-			DeactivatePrevPopup();
 
+			DeactivatePrevPopup();
 			currentPopups.Push(popup);
 			popup.Show();
+
+			return (T)popup;
+		}
+
+		private IPopup GetPopup<T>() where T : MonoBehaviour, IPopup
+		{
+			IPopup popup = popups.FirstOrDefault(x => x is T);
+			if (popup == null)
+			{
+				popup = popupFactory.GetPopup<T>();
+				if (popup == null)
+				{
+					return null;
+				}
+				popups.Add(popup);
+			}
+			return popup;
 		}
 
 		public void HidePopup()
@@ -44,25 +53,7 @@ namespace Module.PopupLogic.General
 
 			var popup = currentPopups.Pop();
 			popup.Hide();
-
 			ActivatePrevPopup();
-		}
-
-		private IPopup GetPopup<T>() where T : MonoBehaviour, IPopup
-		{
-			IPopup popup = popups.FirstOrDefault(x => x is T && x.IsActive == false);
-			if (popup == null)
-			{
-				popup = popupFactory.GetPopup<T>();
-				if (popup == null)
-				{
-					return null;
-				}
-				popup.Init();
-				popups.Add(popup);
-			}
-
-			return popup;
 		}
 
 		private void DeactivatePrevPopup()
@@ -72,7 +63,6 @@ namespace Module.PopupLogic.General
 				currentPopups.Peek().Deactivate();
 				return;
 			}
-			OnFirstPopupActivates?.Invoke();
 		}
 
 		private void ActivatePrevPopup()
@@ -82,7 +72,6 @@ namespace Module.PopupLogic.General
 				currentPopups.Peek().Activate();
 				return;
 			}
-			OnLastPopupDeactivates?.Invoke();
 		}
 	}
 }

@@ -4,7 +4,7 @@ namespace Module.PopupLogic.General
 {
 	public interface IPopupAnimation
 	{
-		public void Show(Action onComplete);
-		public void Hide(Action onComplete);
+		public void Show(Action onComplete = null);
+		public void Hide(Action onComplete = null);
 	}
 }

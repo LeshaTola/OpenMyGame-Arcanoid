@@ -1,21 +1,16 @@
 ﻿using Module.PopupLogic.Configs;
 using System.Linq;
 using UnityEngine;
-using Zenject;
 
 namespace Module.PopupLogic.General
 {
 	public class PopupFactory : IPopupFactory
 	{
 		private PopupDatabase popupDatabase;
-		private Transform popupsContainer;
-		private DiContainer diContainer;
 
-		public PopupFactory(PopupDatabase popupDatabase, Transform popupsContainer, DiContainer diContainer)
+		public PopupFactory(PopupDatabase popupDatabase)
 		{
 			this.popupDatabase = popupDatabase;
-			this.popupsContainer = popupsContainer;
-			this.diContainer = diContainer;
 		}
 
 		public T GetPopup<T>() where T : MonoBehaviour, IPopup
@@ -26,7 +21,7 @@ namespace Module.PopupLogic.General
 				return null;
 			}
 
-			T popup = diContainer.InstantiatePrefabForComponent<T>(popupTemplate, popupsContainer);
+			T popup = GameObject.Instantiate(popupTemplate);
 			return popup;
 		}
 	}

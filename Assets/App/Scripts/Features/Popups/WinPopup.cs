@@ -36,7 +36,7 @@ namespace Features.Popups
 			this.packProvider = packProvider;
 		}
 
-		public void Init()
+		public void Setup()
 		{
 			nextButton.onClick.AddListener(NextButtonClicked);
 			Hide();

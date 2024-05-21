@@ -26,7 +26,7 @@ namespace Features.Popups
 			this.stateMachineHandler = stateMachineHandler;
 		}
 
-		public void Init()
+		public void Setup()
 		{
 			restartButton.onClick.AddListener(OnRestartButtonClicked);
 			backButton.onClick.AddListener(OnBackButtonClicked);
