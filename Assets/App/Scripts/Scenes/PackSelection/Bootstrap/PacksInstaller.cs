@@ -7,15 +7,13 @@ namespace Scenes.PackSelection.Bootstrap
 {
 	public class PacksInstaller : MonoInstaller
 	{
-		[SerializeField] private PackUI completePackTemplate;
-		[SerializeField] private PackUI inProgressPackTemplate;
-		[SerializeField] private PackUI closedPack;
-		[SerializeField] private Transform container;
+		[SerializeField] private PackUI packTemplate;
 		[SerializeField] private PackMenu menu;
 
 		public override void InstallBindings()
 		{
 			BindPackFactory();
+			BindMenu();
 		}
 
 		private void BindPackFactory()
@@ -23,7 +21,12 @@ namespace Scenes.PackSelection.Bootstrap
 			Container.Bind<IPackFactory>()
 					.To<PackFactory>()
 					.AsSingle()
-					.WithArguments(completePackTemplate, inProgressPackTemplate, closedPack, container);
+					.WithArguments(packTemplate);
+		}
+
+		private void BindMenu()
+		{
+			Container.BindInstance(menu);
 		}
 	}
 }

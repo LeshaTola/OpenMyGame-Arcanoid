@@ -1026,10 +1026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5df9cc113be98f4fbe35ddba42a9ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  completePackTemplate: {fileID: 7093546744993348648, guid: ccfe38ba667757c47aa5bae7408a974e, type: 3}
-  inProgressPackTemplate: {fileID: 1620039005831913214, guid: 4ae8eb718dca08b4a97ee9c267f50bad, type: 3}
-  closedPack: {fileID: 2392761273695476375, guid: 1cac3c562fa623e44bc00b39cae8e927, type: 3}
-  container: {fileID: 1328572255}
+  packTemplate: {fileID: 4844487351293034000, guid: 81862f79501c3724abc26b3179b1e003, type: 3}
   menu: {fileID: 1456138290}
 --- !u!1 &1456138285
 GameObject:
@@ -1152,10 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52ea90137f9aa141ad5178277277fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  packs:
-  - {fileID: 11400000, guid: 08ebcf30aeed2ab44b422aaf9e2f8ba4, type: 2}
-  - {fileID: 11400000, guid: 36eb6d1436ad8684b8db878b1986d0cc, type: 2}
-  - {fileID: 11400000, guid: cb4412270428f5542b7a638becaadf05, type: 2}
+  container: {fileID: 1328572255}
 --- !u!1 &1626528104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,9 +1328,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 1456138290}
-    - {fileID: 856266976}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1345,12 +1337,6 @@ MonoBehaviour:
     - Name: startState
       Entry: 7
       Data: 0|Scenes.PackSelection.StateMachine.PackSelectionInitState, Assembly-CSharp
-    - Name: packMenu
-      Entry: 6
-      Data: 
-    - Name: sceneTransition
-      Entry: 6
-      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -1360,28 +1346,16 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 2|Scenes.PackSelection.StateMachine.PackSelectionInitState, Assembly-CSharp
-    - Name: packMenu
-      Entry: 10
-      Data: 0
-    - Name: sceneTransition
-      Entry: 10
-      Data: 1
+      Data: 2|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|Scenes.PackSelection.StateMachine.LoadMainMenuState, Assembly-CSharp
+      Data: 3|Scenes.PackSelection.StateMachine.LoadMainMenuState, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

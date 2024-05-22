@@ -30,11 +30,21 @@ namespace Scenes.PackSelection.Bootstrap
 		private void InitStateMachine()
 		{
 			stateMachineHandler.Init();
+
+
 			AddGlobalInitState();
+			AddInitState();
 			AddLoadSceneState();
 			AddLoadMainMenuSceneState();
 
 			stateMachineHandler.StartStateMachine<GlobalInitialState>();
+		}
+
+		private void AddInitState()
+		{
+			var initState = Container.Instantiate<PackSelectionInitState>();
+			initState.Init(stateMachineHandler.Core);
+			stateMachineHandler.Core.AddState(initState);
 		}
 
 		private void AddGlobalInitState()

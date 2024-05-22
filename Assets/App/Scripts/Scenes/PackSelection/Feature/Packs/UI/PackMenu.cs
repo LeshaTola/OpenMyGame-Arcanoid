@@ -1,5 +1,6 @@
 ﻿using Scenes.PackSelection.Feature.Packs.Configs;
-using System.Collections.Generic;
+using System;
+using System.Collections;
 using UnityEngine;
 using Zenject;
 
@@ -7,7 +8,9 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 {
 	public class PackMenu : MonoBehaviour
 	{
-		[SerializeField] private List<Pack> packs;
+		public event Action<Pack> OnPackSelected;
+
+		[SerializeField] private RectTransform container;
 
 		private IPackFactory packFactory;
 
@@ -17,11 +20,15 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 			this.packFactory = packFactory;
 		}
 
-		public void GeneratePackList()
+		public void GeneratePackList(IEnumerable packs)
 		{
 			foreach (Pack pack in packs)
 			{
-				packFactory.GetPackUI(pack);
+				var packUI = packFactory.GetPackUI();
+				packUI.UpdateUI(pack);
+				packUI.transform.SetParent(container);
+				packUI.transform.localScale = Vector3.one;
+				packUI.onPackClicked += () => OnPackSelected?.Invoke(pack);
 			}
 		}
 	}

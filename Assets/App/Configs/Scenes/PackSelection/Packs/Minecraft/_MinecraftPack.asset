@@ -19,4 +19,4 @@ MonoBehaviour:
   levelNames:
   - MineCraft_Level_1
   - MineCraft_Test
-  isOpened: 1
+  isOpened: 0
