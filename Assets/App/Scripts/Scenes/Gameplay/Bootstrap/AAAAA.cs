@@ -13,7 +13,7 @@ using Zenject;
 
 namespace Scenes.Gameplay.Bootstrap
 {
-	public class GameplayEntryPoint : MonoInstaller
+	public class AAAAA : MonoInstaller
 	{
 		[SerializeField] List<SerializableInterface<Features.Bootstrap.IInitializable>> initializables;
 
