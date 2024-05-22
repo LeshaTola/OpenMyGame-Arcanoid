@@ -3,7 +3,7 @@ using Module.Commands;
 using Module.PopupLogic.General.Controller;
 using Scenes.Gameplay.StateMachine.States;
 
-namespace Features.Commands
+namespace Scenes.Gameplay.Feature.Commands
 {
 	public class ResumeCommand : ILabeledCommand
 	{

@@ -15,6 +15,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 			Container.Bind<IRouterShowLoss>().To<RouterShowLoss>().AsSingle().WithArguments(popupContainer);
 			Container.Bind<IRouterShowMenu>().To<RouterShowMenu>().AsSingle().WithArguments(popupContainer);
+			Container.Bind<IRouterShowWin>().To<RouterShowWin>().AsSingle().WithArguments(popupContainer);
 		}
 	}
 }

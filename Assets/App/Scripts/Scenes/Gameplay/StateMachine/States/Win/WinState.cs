@@ -1,30 +1,26 @@
-﻿using Features.Popups;
-using Features.StateMachine.States;
-using Module.PopupLogic.General.Controller;
-using Zenject;
+﻿using Features.StateMachine.States;
+using Scenes.Gameplay.StateMachine.States.Win.Routers;
 
 namespace Scenes.Gameplay.StateMachine.States.Win
 {
 	public class WinState : State
 	{
-		private IPopupController popupController;
+		private IRouterShowWin routerShowWin;
 
-		public WinState(IPopupController popupController)
+		public WinState(IRouterShowWin routerShowWin)
 		{
-			this.popupController = popupController;
+			this.routerShowWin = routerShowWin;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
-
-			popupController.ShowPopup<WinPopup>();
+			routerShowWin.ShowWin();
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
-			popupController.HidePopup();
 		}
 	}
 }

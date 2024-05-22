@@ -1,4 +1,4 @@
-﻿using Module.PopupLogic.General.Popup;
+﻿using Module.PopupLogic.General.Popups;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +8,8 @@ namespace Module.PopupLogic.Configs
 	[CreateAssetMenu(fileName = "PopupDatabase", menuName = "Dictionaries/Popup")]
 	public class PopupDatabase : SerializedScriptableObject
 	{
-		[SerializeField] private List<IPopup> popups;
+		[SerializeField] private List<Popup> popups;
 
-		public List<IPopup> Popups { get => popups; }
+		public List<Popup> Popups { get => popups; }
 	}
 }

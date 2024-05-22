@@ -1,5 +1,5 @@
 ﻿using Features.Popups.Menu.ViewModels;
-using Module.PopupLogic.General.Popup;
+using Module.PopupLogic.General.Popups;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

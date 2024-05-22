@@ -1,4 +1,4 @@
-﻿using Features.Commands;
+﻿using Scenes.Gameplay.Feature.Commands;
 using Zenject;
 
 namespace Scenes.Gameplay.Bootstrap
@@ -10,6 +10,7 @@ namespace Scenes.Gameplay.Bootstrap
 			Container.Bind<RestartCommand>().AsSingle().WithArguments("Restart");
 			Container.Bind<BackCommand>().AsSingle().WithArguments("Back");
 			Container.Bind<ResumeCommand>().AsSingle().WithArguments("Resume");
+			Container.Bind<LoadNextLevelCommand>().AsSingle().WithArguments("Next");
 		}
 	}
 }

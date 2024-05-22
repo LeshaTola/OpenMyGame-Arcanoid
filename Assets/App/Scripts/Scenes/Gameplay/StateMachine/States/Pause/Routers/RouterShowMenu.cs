@@ -1,16 +1,11 @@
-﻿using Features.Commands;
-using Features.Popups.Menu;
+﻿using Features.Popups.Menu;
 using Features.Popups.Menu.ViewModels;
 using Module.PopupLogic.General.Controller;
+using Scenes.Gameplay.Feature.Commands;
 using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 {
-	public interface IRouterShowMenu
-	{
-		void ShowMenu();
-	}
-
 	public class RouterShowMenu : IRouterShowMenu
 	{
 		private IPopupController popupController;
@@ -38,10 +33,10 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 
 		public void ShowMenu()
 		{
-			MenuPopup popup = popupController.ShowPopup<MenuPopup>();
+			MenuPopup popup = popupController.GetPopup<MenuPopup>();
 			MenuPopupViewModel popupViewModel = new(restartCommand, backCommand, resumeCommand);
-			popup.transform.SetParent(container);
 			popup.Setup(popupViewModel);
+			popup.Show();
 		}
 	}
 }

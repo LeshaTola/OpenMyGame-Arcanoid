@@ -1,22 +1,21 @@
-﻿using TNRD;
+﻿using Module.PopupLogic.General.Controller;
+using TNRD;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Module.PopupLogic.General.Popup
+namespace Module.PopupLogic.General.Popups
 {
-	[RequireComponent(typeof(CanvasGroup))]
+	[RequireComponent(typeof(Canvas), typeof(GraphicRaycaster))]
 	public abstract class Popup : MonoBehaviour, IPopup
 	{
-		[SerializeField] private SerializableInterface<IPopupAnimation> popupAnimation;
-		[SerializeField] private CanvasGroup canvasGroup;
+		[SerializeField] protected SerializableInterface<IPopupAnimation> popupAnimation;
+		[SerializeField] protected GraphicRaycaster raycaster;
 
-		public void Activate()
-		{
-			canvasGroup.blocksRaycasts = true;
-		}
+		public IPopupController Controller { get; private set; }
 
-		public void Deactivate()
+		public void Init(IPopupController controller)
 		{
-			canvasGroup.blocksRaycasts = false;
+			Controller = controller;
 		}
 
 		public virtual void Hide()
@@ -24,6 +23,7 @@ namespace Module.PopupLogic.General.Popup
 			Deactivate();
 			popupAnimation.Value.Hide(() =>
 			{
+				Controller.RemoveActivePopup(this);
 				gameObject.SetActive(false);
 			});
 		}
@@ -34,7 +34,18 @@ namespace Module.PopupLogic.General.Popup
 			popupAnimation.Value.Show(() =>
 			{
 				Activate();
+				Controller.AddActivePopup(this);
 			});
+		}
+
+		public void Activate()
+		{
+			raycaster.enabled = true;
+		}
+
+		public void Deactivate()
+		{
+			raycaster.enabled = false;
 		}
 	}
 }

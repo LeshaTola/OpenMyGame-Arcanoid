@@ -1,7 +1,7 @@
-﻿using Features.Commands;
-using Features.Popups.Loss;
+﻿using Features.Popups.Loss;
 using Features.Popups.Loss.ViewModels;
 using Module.PopupLogic.General.Controller;
+using Scenes.Gameplay.Feature.Commands;
 using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
@@ -23,10 +23,10 @@ namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
 
 		public void ShowLoss()
 		{
-			LossPopup popup = popupController.ShowPopup<LossPopup>();
+			LossPopup popup = popupController.GetPopup<LossPopup>();
 			LossPopupViewModel lossPopupViewModel = new(restartCommand);
-			popup.transform.SetParent(container);
 			popup.Setup(lossPopupViewModel);
+			popup.Show();
 		}
 	}
 }

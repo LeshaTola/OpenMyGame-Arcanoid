@@ -1,7 +1,6 @@
 ﻿using Module.PopupLogic.Configs;
-using Module.PopupLogic.General;
 using Module.PopupLogic.General.Controller;
-using Module.PopupLogic.General.Factory;
+using Module.PopupLogic.General.Providers;
 using UnityEngine;
 using Zenject;
 
@@ -10,10 +9,10 @@ namespace Scenes.Gameplay.Bootstrap
 	public class PopupInstaller : MonoInstaller
 	{
 		[SerializeField] private PopupDatabase popupDatabase;
-
+		[SerializeField] private RectTransform popupContainer;
 		public override void InstallBindings()
 		{
-			Container.Bind<IPopupFactory>().To<PopupFactory>().AsSingle().WithArguments(popupDatabase);
+			Container.Bind<IPopupProvider>().To<PopupProvider>().AsSingle().WithArguments(popupDatabase, popupContainer);
 			Container.Bind<IPopupController>().To<PopupController>().AsSingle().NonLazy();
 		}
 	}
