@@ -1,10 +1,12 @@
+using Features.Saves;
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
+using Module.Saves;
 using Scenes.PackSelection.Feature.Packs;
 using Scenes.PackSelection.Feature.Packs.Configs;
 using Scenes.PackSelection.Feature.Packs.UI;
 using Scenes.PackSelection.Feature.UI;
-using UnityEngine;
+using System.Linq;
 
 namespace Scenes.PackSelection.StateMachine
 {
@@ -14,16 +16,21 @@ namespace Scenes.PackSelection.StateMachine
 		private HeaderUI headerUI;
 		private IPackProvider packProvider;
 		private ISceneTransition sceneTransition;
+		private IDataProvider<PlayerProgressData> dataProvider;
+
+		private PlayerProgressData playerProgressData;
 
 		public PackSelectionInitState(PackMenu packMenu,
 								HeaderUI headerUI,
 								IPackProvider packProvider,
-								ISceneTransition sceneTransition)
+								ISceneTransition sceneTransition,
+								IDataProvider<PlayerProgressData> dataProvider)
 		{
 			this.packMenu = packMenu;
 			this.headerUI = headerUI;
 			this.packProvider = packProvider;
 			this.sceneTransition = sceneTransition;
+			this.dataProvider = dataProvider;
 		}
 
 		public override void Enter()
@@ -31,8 +38,22 @@ namespace Scenes.PackSelection.StateMachine
 			headerUI.OnExitButtonClicked += OnExitButtonClicked;
 			packMenu.OnPackSelected += OnPackSelected;
 
-			packMenu.GeneratePackList(packProvider.Packs);
+			LoadPlayerProgress();
+			packMenu.GeneratePackList(packProvider.Packs, playerProgressData);
 			sceneTransition.PlayOff();
+		}
+
+		private void LoadPlayerProgress()
+		{
+			var loadedData = dataProvider.GetData();
+
+			if (loadedData == null)
+			{
+				loadedData = FormFirstSaveData();
+				dataProvider.SaveData(loadedData);
+			}
+			playerProgressData = loadedData;
+
 		}
 
 		public override void Exit()
@@ -43,18 +64,44 @@ namespace Scenes.PackSelection.StateMachine
 
 		private void OnPackSelected(Pack pack)
 		{
-			packProvider.IndexOfOriginal = packProvider.Packs.IndexOf(pack);
-			packProvider.CurrentPack = GameObject.Instantiate(pack);
-			if (pack.CurrentLevel == pack.MaxLevel)
+			SavedPackData savedPackData = playerProgressData.Packs[pack.Id];
+
+			packProvider.PackIndex = packProvider.Packs.IndexOf(pack);
+			packProvider.SavedPackData = savedPackData;
+			if (savedPackData.CurrentLevel >= pack.MaxLevel)
 			{
-				packProvider.CurrentPack.CurrentLevel = 0;
+				savedPackData.CurrentLevel = 0;
 			}
+
 			StateMachine.ChangeState<LoadSceneState>();
 		}
 
 		public void OnExitButtonClicked()
 		{
 			StateMachine.ChangeState<LoadMainMenuState>();
+		}
+
+
+		private PlayerProgressData FormFirstSaveData()//TODO Move
+		{
+			PlayerProgressData playerProgress = new();
+
+			foreach (var pack in packProvider.Packs)
+			{
+
+				SavedPackData savedPackData = new()
+				{
+					Id = pack.Id,
+					CurrentLevel = 0,
+					IsOpened = false,
+					IsCompeted = false,
+				};
+
+				playerProgress.Packs.Add(pack.Id, savedPackData);
+			}
+			playerProgress.Packs[packProvider.Packs.Last().Id].IsOpened = true;
+			return playerProgress;
+
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Scenes.PackSelection.Feature.Packs.Configs;
+﻿using Features.Saves;
+using Scenes.PackSelection.Feature.Packs.Configs;
 using System;
 using TMPro;
 using UnityEngine;
@@ -22,15 +23,17 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 
 		public event Action onPackClicked;
 
-		public void UpdateUI(Pack pack)
+		public void UpdateUI(Pack pack, SavedPackData savedPackData)
 		{
-			if (!pack.IsOpened)
+			levelsText.text = (savedPackData.CurrentLevel) + "/" + (pack.MaxLevel + 1);
+
+			if (!savedPackData.IsOpened)
 			{
 				SwapAppearance(appearanceTypes.Closed);
 				return;
 			}
 
-			if (pack.CurrentLevel == pack.MaxLevel)
+			if (savedPackData.IsCompeted)
 			{
 				SwapAppearance(appearanceTypes.Complete);
 			}
@@ -43,7 +46,6 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 
 			packImage.sprite = pack.Sprite;
 			packNameText.text = pack.Name;
-			levelsText.text = (pack.CurrentLevel + 1) + "/" + (pack.MaxLevel + 1);
 		}
 
 		public void SwapAppearance(PackAppearance packAppearance)

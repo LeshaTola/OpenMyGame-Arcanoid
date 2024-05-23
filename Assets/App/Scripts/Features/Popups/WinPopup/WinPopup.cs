@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Features.Popups.WinPopup.ViewModels;
+using Features.Saves;
 using Features.UI.Animations.SpinAnimation;
 using Module.PopupLogic.General.Popups;
 using Scenes.PackSelection.Feature.Packs.Configs;
@@ -47,13 +48,14 @@ namespace Features.Popups.WinPopup
 		public void AnimateUI()
 		{
 			var pack = viewModel.Pack;
-			if (pack == null)
+			var savedPackData = viewModel.SavedPackData;
+			if (pack == null || savedPackData == null)
 			{
 				return;
 			}
 
 			Sequence sequence = DOTween.Sequence();
-			SetupLevelAnimation(pack, sequence);
+			SetupLevelAnimation(pack, savedPackData, sequence);
 			SetupButtonAnimation(sequence);
 			sequence.onComplete += Activate;
 		}
@@ -71,15 +73,15 @@ namespace Features.Popups.WinPopup
 			nextButton.transform.localScale = Vector3.zero;
 		}
 
-		private void SetupLevelAnimation(Pack pack, Sequence sequence)
+		private void SetupLevelAnimation(Pack pack, SavedPackData savedPackData, Sequence sequence)
 		{
 			SetupMaxLevelAnimation(pack, sequence);
-			SetupCurrentLevelAnimation(pack, sequence);
+			SetupCurrentLevelAnimation(pack, savedPackData, sequence);
 		}
 
-		private void SetupCurrentLevelAnimation(Pack pack, Sequence sequence)
+		private void SetupCurrentLevelAnimation(Pack pack, SavedPackData savedPackData, Sequence sequence)
 		{
-			var levelAnimation = DOVirtual.Int(0, pack.CurrentLevel + 1, eachAnimationDuration, value =>
+			var levelAnimation = DOVirtual.Int(0, savedPackData.CurrentLevel, eachAnimationDuration, value =>
 			{
 				levelInfo.text = $"{value}/{pack.MaxLevel + 1}";
 			});

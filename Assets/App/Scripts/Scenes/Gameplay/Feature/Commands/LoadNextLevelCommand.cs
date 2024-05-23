@@ -1,4 +1,5 @@
-﻿using Features.StateMachine.States;
+﻿using Features.Saves;
+using Features.StateMachine.States;
 using Module.Commands;
 using Module.PopupLogic.General.Controller;
 using Scenes.Gameplay.StateMachine.States;
@@ -29,12 +30,13 @@ namespace Scenes.Gameplay.Feature.Commands
 		public void Execute()
 		{
 			Pack currentPack = packProvider.CurrentPack;
-			if (currentPack == null || currentPack.CurrentLevel == currentPack.MaxLevel)
+			SavedPackData savedPackData = packProvider.SavedPackData;
+			if (savedPackData == null || savedPackData.CurrentLevel > currentPack.MaxLevel)
 			{
 				LoadMainMenu();
 				return;
 			}
-			LoadNextLevel(currentPack);
+			LoadNextLevel();
 		}
 
 		private void LoadMainMenu()
@@ -43,9 +45,8 @@ namespace Scenes.Gameplay.Feature.Commands
 			popupController.HidePopup();
 		}
 
-		private void LoadNextLevel(Pack currentPack)
+		private void LoadNextLevel()
 		{
-			currentPack.CurrentLevel++;
 			popupController.HidePopup();
 			stateMachine.ChangeState<InitialState>();
 		}

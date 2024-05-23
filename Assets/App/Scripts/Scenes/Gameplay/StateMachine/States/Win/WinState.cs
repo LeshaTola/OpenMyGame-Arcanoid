@@ -1,6 +1,9 @@
-﻿using Features.StateMachine.States;
+﻿using Features.Saves;
+using Features.StateMachine.States;
+using Module.Saves;
 using Scenes.Gameplay.StateMachine.States.Win.Routers;
 using Scenes.PackSelection.Feature.Packs;
+using Scenes.PackSelection.Feature.Packs.Configs;
 
 namespace Scenes.Gameplay.StateMachine.States.Win
 {
@@ -8,53 +11,65 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 	{
 		private IRouterShowWin routerShowWin;
 		private IPackProvider packProvider;
+		private IDataProvider<PlayerProgressData> dataProvider;
 
-		public WinState(IRouterShowWin routerShowWin, IPackProvider packProvider)
+		public WinState(IRouterShowWin routerShowWin, IPackProvider packProvider, IDataProvider<PlayerProgressData> dataProvider)
 		{
 			this.routerShowWin = routerShowWin;
 			this.packProvider = packProvider;
+			this.dataProvider = dataProvider;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
-			ProcessPacks();
+			PlayerProgressData playerData = dataProvider.GetData();
+
+			ProcessPacks(playerData);
 			routerShowWin.ShowWin();
 
+			SaveData(playerData);
 		}
 
-		private void ProcessPacks()
+		private void SaveData(PlayerProgressData playerData)
 		{
-			if (packProvider.CurrentPack == null)
+			var savedData = packProvider.SavedPackData;
+			playerData.Packs[savedData.Id] = savedData;
+			dataProvider.SaveData(playerData);
+		}
+
+		private void ProcessPacks(PlayerProgressData playerData)
+		{
+			SavedPackData savedPackData = packProvider.SavedPackData;
+			Pack originalPack = packProvider.Packs[packProvider.PackIndex];
+			if (savedPackData == null || originalPack == null)
 			{
 				return;
 			}
 
-			if (packProvider.CurrentPack.CurrentLevel == packProvider.CurrentPack.MaxLevel)
+			if (savedPackData.CurrentLevel <= originalPack.MaxLevel)
 			{
-				OpenNextPack();
+				CompleteLevel(savedPackData);
 			}
 			else
 			{
-				CompleteLevel();
+				OpenNextPack(savedPackData, playerData);
 			}
 		}
 
-		private void CompleteLevel()
+		private void CompleteLevel(SavedPackData savedPackData)
 		{
-			var originalPack = packProvider.Packs[packProvider.IndexOfOriginal];
-			if (originalPack.CurrentLevel < packProvider.CurrentPack.CurrentLevel + 1)
-			{
-				originalPack.CurrentLevel++;
-			}
+			savedPackData.CurrentLevel++;
 		}
 
-		private void OpenNextPack()
+		private void OpenNextPack(SavedPackData savedPackData, PlayerProgressData playerData)
 		{
-			int nextPackIndex = packProvider.IndexOfOriginal - 1;
+			savedPackData.IsCompeted = true;
+			int nextPackIndex = packProvider.PackIndex - 1;
 			if (packProvider.Packs.Count > nextPackIndex)
 			{
-				packProvider.Packs[nextPackIndex].IsOpened = true;
+				string nextPackID = packProvider.Packs[nextPackIndex].Id;
+				playerData.Packs[nextPackID].IsOpened = true;
 			}
 		}
 	}

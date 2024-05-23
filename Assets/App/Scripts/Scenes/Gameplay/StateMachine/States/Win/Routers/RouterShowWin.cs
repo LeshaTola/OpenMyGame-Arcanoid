@@ -28,7 +28,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 		public void ShowWin()
 		{
 			WinPopup popup = popupController.GetPopup<WinPopup>();
-			WinPopupViewModel popupViewModel = new(loadNextLevelCommand, packProvider.CurrentPack);
+			WinPopupViewModel popupViewModel = new(loadNextLevelCommand, packProvider.CurrentPack, packProvider.SavedPackData);
 			popup.Setup(popupViewModel);
 			popup.Show();
 		}

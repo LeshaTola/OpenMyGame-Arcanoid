@@ -1,4 +1,5 @@
-﻿using Scenes.PackSelection.Feature.Packs.Configs;
+﻿using Features.Saves;
+using Scenes.PackSelection.Feature.Packs.Configs;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -20,12 +21,12 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 			this.packFactory = packFactory;
 		}
 
-		public void GeneratePackList(IEnumerable packs)
+		public void GeneratePackList(IEnumerable packs, PlayerProgressData playerProgressData)
 		{
 			foreach (Pack pack in packs)
 			{
-				var packUI = packFactory.GetPackUI();
-				packUI.UpdateUI(pack);
+				PackUI packUI = packFactory.GetPackUI();
+				packUI.UpdateUI(pack, playerProgressData.Packs[pack.Id]);
 				packUI.transform.SetParent(container);
 				packUI.transform.localScale = Vector3.one;
 				packUI.onPackClicked += () => OnPackSelected?.Invoke(pack);
