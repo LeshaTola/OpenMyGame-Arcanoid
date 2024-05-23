@@ -34,8 +34,8 @@ namespace Scenes.PackSelection.Bootstrap
 
 			AddGlobalInitState();
 			AddInitState();
-			AddLoadSceneState();
-			AddLoadMainMenuSceneState();
+			/*AddLoadSceneState();
+			AddLoadMainMenuSceneState();*/
 
 			stateMachineHandler.StartStateMachine<GlobalInitialState>();
 		}
@@ -58,7 +58,7 @@ namespace Scenes.PackSelection.Bootstrap
 			stateMachineHandler.Core.AddState(globalInitState);
 		}
 
-		private void AddLoadMainMenuSceneState()
+		/*private void AddLoadMainMenuSceneState()
 		{
 			stateMachineHandler.Core.AddStep<LoadMainMenuState>(
 					Container.Instantiate<LoadSceneStateStep>(
@@ -76,7 +76,7 @@ namespace Scenes.PackSelection.Bootstrap
 					{
 						scene,
 					}));
-		}
+		}*/
 
 		public override void InstallBindings()
 		{

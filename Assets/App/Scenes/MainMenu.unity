@@ -384,7 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1024e3068e4ab4fa94d93c40b7fc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateMachine: {fileID: 1368130882}
   playButton: {fileID: 1000473250}
 --- !u!1 &519420028
 GameObject:
@@ -986,31 +985,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1305989042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c95ed219cb4fcc4d82cfb2b5faae15d, type: 3}
+  m_Script: {fileID: 11500000, guid: bc47b79580cd32945a67637c0dd8d1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initializables:
   - mode: 0
-    unityReference: {fileID: 1470426492}
-    rawReference:
-      rid: -2
-  - mode: 0
-    unityReference: {fileID: 1393092109}
-    rawReference:
-      rid: -2
-  - mode: 0
     unityReference: {fileID: 238239229}
     rawReference:
       rid: -2
-  stateMachineHandler: {fileID: 1368130882}
-  scene:
-    sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
-    scenePath: Assets/App/Scenes/PackSelection.unity
-  sceneTransition:
-    mode: 0
-    unityReference: {fileID: 1588800995}
-    rawReference:
-      rid: -2
+  stateMachineHandler: {fileID: 1368130883}
   references:
     version: 2
     RefIds:
@@ -1047,6 +1030,7 @@ Transform:
   m_Children:
   - {fileID: 1368130881}
   - {fileID: 1305989043}
+  - {fileID: 1706359019}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1064,7 +1048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 1305989044}
+  - {fileID: 1706359020}
+  - {fileID: 1368130882}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1091,6 +1076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1368130881}
+  - component: {fileID: 1368130883}
   - component: {fileID: 1368130882}
   m_Layer: 0
   m_Name: StateMachineHandler
@@ -1123,56 +1109,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1368130880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f445b0351527b043b1269d6330912a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c95ed219cb4fcc4d82cfb2b5faae15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 1588800995}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: startState
-      Entry: 7
-      Data: 0|Scenes.Main.StateMachine.States.MainMenuInitialState, Assembly-CSharp
-    - Name: sceneTransition
-      Entry: 6
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: states
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 2|Scenes.Main.StateMachine.States.MainMenuInitialState, Assembly-CSharp
-    - Name: sceneTransition
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  stateMachineHandler: {fileID: 1368130883}
+  nextScene:
+    sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
+    scenePath: Assets/App/Scenes/PackSelection.unity
+--- !u!114 &1368130883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368130880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2fc265c8c6d5c047800828249fc1f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1393092105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,6 +1450,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb41eeb778619f418011a6586c2bebb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1706359018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1706359019}
+  - component: {fileID: 1706359020}
+  m_Layer: 0
+  m_Name: ViewInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1706359019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706359018}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1331693402}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1706359020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706359018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4bc7dd31daa2f45800dbb681df5ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuUI: {fileID: 238239229}
+  sceneTransition:
+    mode: 0
+    unityReference: {fileID: 1588800995}
+    rawReference:
+      rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &1897742261
 GameObject:
   m_ObjectHideFlags: 0

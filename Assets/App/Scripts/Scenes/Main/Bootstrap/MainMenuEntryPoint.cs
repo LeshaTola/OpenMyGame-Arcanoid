@@ -1,23 +1,17 @@
-using Features.StateMachine;
+﻿using Features.StateMachine;
 using Features.StateMachine.States;
-using Features.UI.SceneTransitions;
-using SceneReference;
 using System.Collections.Generic;
 using TNRD;
 using UnityEngine;
-using Zenject;
 
 namespace Scenes.Main.Bootstrap
 {
-	public class MainMenuEntryPoint : MonoInstaller
+	public class MainMenuEntryPoint : MonoBehaviour
 	{
 		[SerializeField] List<SerializableInterface<Features.Bootstrap.IInitializable>> initializables;
+		[SerializeField] MainMenuStateMachineHandler stateMachineHandler;
 
-		[SerializeField] StateMachineHandler stateMachineHandler;
-		[SerializeField] private SceneRef scene;
-		[SerializeField] private SerializableInterface<ISceneTransition> sceneTransition;
-
-		public override void Start()
+		public void Start()
 		{
 			foreach (var initializable in initializables)
 			{
@@ -30,38 +24,8 @@ namespace Scenes.Main.Bootstrap
 		private void InitStateMachine()
 		{
 			stateMachineHandler.Init();
-			AddGlobalInitState();
-
-			SetupLoadSceneState();
 
 			stateMachineHandler.StartStateMachine<GlobalInitialState>();
-		}
-
-		private void AddGlobalInitState()
-		{
-			var globalInitState = Container.Instantiate<GlobalInitialState>(
-			new List<object>
-			{
-				stateMachineHandler.StartState
-			});
-			globalInitState.Init(stateMachineHandler.Core);
-			stateMachineHandler.Core.AddState(globalInitState);
-		}
-
-		private void SetupLoadSceneState()
-		{
-			stateMachineHandler.Core.AddStep<LoadSceneState>(Container
-				.Instantiate<LoadSceneStateStep>(
-				new List<object>
-					{
-						scene,
-						sceneTransition.Value
-					}));
-		}
-
-		public override void InstallBindings()
-		{
-			Container.BindInstance(stateMachineHandler).AsSingle();
 		}
 	}
 }

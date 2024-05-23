@@ -1,6 +1,5 @@
 using Features.Bootstrap;
-using Features.StateMachine;
-using Features.StateMachine.States;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +7,13 @@ namespace Scenes.Main.Feature.UI
 {
 	public class MainMenuUI : MonoBehaviour, IInitializable
 	{
-		[SerializeField] private StateMachineHandler stateMachine;
 		[SerializeField] private Button playButton;
+
+		public event Action OnPlayButtonPressed;
 
 		public void Init()
 		{
-			playButton.onClick.AddListener(() => stateMachine.Core.ChangeState<LoadSceneState>());
+			playButton.onClick.AddListener(() => OnPlayButtonPressed?.Invoke());
 		}
 	}
 }

@@ -106,13 +106,13 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void SetupLoadSceneState()
 		{
-			stateMachineHandler.Core.AddStep<LoadSceneState>(Container
+			/*stateMachineHandler.Core.AddStep<LoadSceneState>(Container
 				.Instantiate<LoadSceneStateStep>(
 				new List<object>
 					{
 						scene,
 						sceneTransition.Value
-					}));
+					}));*/
 		}
 
 		public override void InstallBindings()

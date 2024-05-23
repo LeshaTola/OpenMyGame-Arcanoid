@@ -1,22 +1,24 @@
 ﻿using Features.ProjectInitServices;
+using System;
 
 namespace Features.StateMachine.States
 {
 	public class GlobalInitialState : State
 	{
-		private State nextState;
+		private Type nextState;
 		private IProjectInitService projectInitService;
 
-		public GlobalInitialState(State nextState, IProjectInitService projectInitService)
+		public GlobalInitialState(IProjectInitService projectInitService)
 		{
-			this.nextState = nextState;
 			this.projectInitService = projectInitService;
 		}
+
+		public Type NextState { get => nextState; set => nextState = value; }
 
 		public override void Enter()
 		{
 			projectInitService.InitProject();
-			StateMachine.ChangeState(nextState.GetType());
+			StateMachine.ChangeState(nextState);
 		}
 	}
 }
