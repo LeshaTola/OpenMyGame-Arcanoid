@@ -1,5 +1,6 @@
 using Features.StateMachine.Factories;
 using Features.StateMachine.States;
+using SceneReference;
 using Scenes.Main.StateMachine.States;
 using UnityEngine;
 using Zenject;
@@ -8,6 +9,8 @@ namespace Features.StateMachine
 {
 	public class MainMenuStateMachineHandler : MonoBehaviour
 	{
+		[SerializeField] private SceneRef nextScene;
+
 		private StateMachine core;
 		private IStatesFactory statesFactory;
 		private IStateStepsFactory stateStepsFactory;
@@ -26,9 +29,17 @@ namespace Features.StateMachine
 			globalInitState.NextState = typeof(MainMenuInitialState);
 			core.AddState(globalInitState);
 			core.AddState(statesFactory.GetState<MainMenuInitialState>());
+
+			SetupLoadSceneState();
+		}
+
+		private void SetupLoadSceneState()
+		{
 			core.AddState(statesFactory.GetState<LoadSceneState>());
 
-			core.AddStep<LoadSceneState>(stateStepsFactory.GetStateStep<LoadSceneStateStep>());
+			var loadNextSceneStep = stateStepsFactory.GetStateStep<LoadSceneStateStep>();
+			loadNextSceneStep.Scene = nextScene;
+			core.AddStep<LoadSceneState>(loadNextSceneStep);
 		}
 
 		public void StartStateMachine<T>() where T : State

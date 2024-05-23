@@ -796,6 +796,7 @@ MonoBehaviour:
     unityReference: {fileID: 856266976}
     rawReference:
       rid: -2
+  headerUI: {fileID: 197720449}
   references:
     version: 2
     RefIds:
@@ -1183,7 +1184,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1066493574}
   - {fileID: 1368985973}
-  - {fileID: 1805850660}
+  - {fileID: 1965362455}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1270,12 +1271,6 @@ MonoBehaviour:
     rawReference:
       rid: -2
   stateMachineHandler: {fileID: 1965362454}
-  scene:
-    sceneAsset: {fileID: 102900000, guid: 7072187d6aa42e8498a551b8af92cd26, type: 3}
-    scenePath: Assets/App/Scenes/Gameplay.unity
-  mainMenuScene:
-    sceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
-    scenePath: Assets/App/Scenes/MainMenu.unity
   references:
     version: 2
     RefIds:
@@ -1291,6 +1286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1965362453}
   - component: {fileID: 1965362454}
+  - component: {fileID: 1965362455}
   m_Layer: 0
   m_Name: StateMachineHandler
   m_TagString: Untagged
@@ -1322,49 +1318,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1965362452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f445b0351527b043b1269d6330912a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 31c34e71c792c1c429180dd77c2f7553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: startState
-      Entry: 7
-      Data: 0|Scenes.PackSelection.StateMachine.PackSelectionInitState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: states
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 2|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 3|Scenes.PackSelection.StateMachine.LoadMainMenuState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  gameplayScene:
+    sceneAsset: {fileID: 102900000, guid: 7072187d6aa42e8498a551b8af92cd26, type: 3}
+    scenePath: Assets/App/Scenes/Gameplay.unity
+  mainMenuScene:
+    sceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
+    scenePath: Assets/App/Scenes/MainMenu.unity
+--- !u!114 &1965362455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965362452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c8b5cc5a082bc4ebbba3c17d9c5b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachineHandler: {fileID: 1965362454}
 --- !u!224 &1998270650 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2899247963142929070, guid: 0c1ee26b3eef59149a415ab070e0f463, type: 3}
