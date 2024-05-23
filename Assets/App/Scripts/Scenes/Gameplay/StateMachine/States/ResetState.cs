@@ -1,12 +1,16 @@
 ﻿using Features.StateMachine.States;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
 	public class ResetState : State
 	{
-		[SerializeField] private List<IResetable> resetables = new();
+		private IEnumerable<IResetable> resetables;
+
+		public ResetState(IEnumerable<IResetable> resetables)
+		{
+			this.resetables = resetables;
+		}
 
 		public override void Enter()
 		{
@@ -15,6 +19,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			{
 				resetable.Reset();
 			}
+
 			StateMachine.ChangeState<GameplayState>();
 		}
 	}

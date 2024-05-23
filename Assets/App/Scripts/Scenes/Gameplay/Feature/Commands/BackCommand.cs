@@ -1,5 +1,4 @@
-﻿using Features.StateMachine;
-using Features.StateMachine.States;
+﻿using Features.StateMachine.States;
 using Module.Commands;
 using Module.PopupLogic.General.Controller;
 
@@ -7,21 +6,21 @@ namespace Scenes.Gameplay.Feature.Commands
 {
 	public class BackCommand : ILabeledCommand
 	{
-		private StateMachineHandler stateMachineHandler;
+		private Features.StateMachine.StateMachine stateMachine;
 		private IPopupController popupController;
 
 		public string Label { get; }
 
-		public BackCommand(StateMachineHandler stateMachineHandler, IPopupController popupController, string label)
+		public BackCommand(Features.StateMachine.StateMachine stateMachine, IPopupController popupController, string label)
 		{
-			this.stateMachineHandler = stateMachineHandler;
+			this.stateMachine = stateMachine;
 			this.popupController = popupController;
 			Label = label;
 		}
 
 		public void Execute()
 		{
-			stateMachineHandler.Core.ChangeState<LoadSceneState>();
+			stateMachine.ChangeState<LoadSceneState>();
 			popupController.HidePopup();
 		}
 	}

@@ -1005,16 +1005,6 @@ MonoBehaviour:
     rawReference:
       rid: -2
   stateMachineHandler: {fileID: 1059541121}
-  scene:
-    sceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
-    scenePath: Assets/App/Scenes/MainMenu.unity
-  sceneTransition:
-    mode: 0
-    unityReference: {fileID: 194826146}
-    rawReference:
-      rid: -2
-  plate: {fileID: 1134754029}
-  defaultLevelInfo: {fileID: 4900000, guid: 4c75ac4aa8615734f9416ad40e094525, type: 3}
   references:
     version: 2
     RefIds:
@@ -1223,6 +1213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1059541120}
   - component: {fileID: 1059541121}
+  - component: {fileID: 1059541122}
   m_Layer: 0
   m_Name: StateMachineHandler
   m_TagString: Untagged
@@ -1254,66 +1245,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1059541119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f445b0351527b043b1269d6330912a3, type: 3}
+  m_Script: {fileID: 11500000, guid: 51d479b3bb0ae2442adcb3e7d23f7e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 1134754029}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: startState
-      Entry: 7
-      Data: 0|Scenes.Gameplay.StateMachine.States.InitialState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: states
-      Entry: 7
-      Data: 1|System.Collections.Generic.List`1[[Features.StateMachine.States.State,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 2|Scenes.Gameplay.StateMachine.States.ResetState, Assembly-CSharp
-    - Name: resetables
-      Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[Features.StateMachine.States.IResetable,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|Features.StateMachine.States.LoadSceneState, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  nextScene:
+    sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
+    scenePath: Assets/App/Scenes/PackSelection.unity
+--- !u!114 &1059541122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059541119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f18b8a8b6ecfb84ca5022ffa91af7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachineHandler: {fileID: 1059541121}
+  defaultLevelInfo: {fileID: 4900000, guid: 4c75ac4aa8615734f9416ad40e094525, type: 3}
+  plate: {fileID: 1134754029}
 --- !u!4 &1134754025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
@@ -2175,7 +2127,7 @@ MonoBehaviour:
   - {fileID: 1501909576}
   - {fileID: 539058321}
   - {fileID: 261499526}
-  - {fileID: 673245670}
+  - {fileID: 1059541122}
   - {fileID: 977554558}
   _installerPrefabs: []
   _autoRun: 1

@@ -40,7 +40,7 @@ namespace Scenes.PackSelection.StateMachine
 			core.AddState(statesFactory.GetState<LoadMainMenuState>());
 			var loadMainMenuSceneState = stateStepsFactory.GetStateStep<LoadSceneStateStep>();
 			loadMainMenuSceneState.Scene = mainMenuScene;
-			core.AddStep<LoadMainMenuState>(stateStepsFactory.GetStateStep<LoadSceneStateStep>());
+			core.AddStep<LoadMainMenuState>(loadMainMenuSceneState);
 		}
 
 		private void SetupLoadSceneState()

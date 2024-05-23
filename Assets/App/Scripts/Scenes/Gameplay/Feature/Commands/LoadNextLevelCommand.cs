@@ -1,5 +1,4 @@
-﻿using Features.StateMachine;
-using Features.StateMachine.States;
+﻿using Features.StateMachine.States;
 using Module.Commands;
 using Module.PopupLogic.General.Controller;
 using Scenes.Gameplay.StateMachine.States;
@@ -10,18 +9,18 @@ namespace Scenes.Gameplay.Feature.Commands
 {
 	public class LoadNextLevelCommand : ILabeledCommand
 	{
-		private StateMachineHandler stateMachineHandler;
+		private Features.StateMachine.StateMachine stateMachine;
 		private IPopupController popupController;
 		private IPackProvider packProvider;
 
 		public string Label { get; }
 
-		public LoadNextLevelCommand(StateMachineHandler stateMachineHandler,
+		public LoadNextLevelCommand(Features.StateMachine.StateMachine stateMachine,
 							  IPopupController popupController,
 							  IPackProvider packProvider,
 							  string label)
 		{
-			this.stateMachineHandler = stateMachineHandler;
+			this.stateMachine = stateMachine;
 			this.popupController = popupController;
 			this.packProvider = packProvider;
 			Label = label;
@@ -40,7 +39,7 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		private void LoadMainMenu()
 		{
-			stateMachineHandler.Core.ChangeState<LoadSceneState>();
+			stateMachine.ChangeState<LoadSceneState>();
 			popupController.HidePopup();
 		}
 
@@ -48,7 +47,7 @@ namespace Scenes.Gameplay.Feature.Commands
 		{
 			currentPack.CurrentLevel++;
 			popupController.HidePopup();
-			stateMachineHandler.Core.ChangeState<InitialState>();
+			stateMachine.ChangeState<InitialState>();
 		}
 	}
 }
