@@ -1113,9 +1113,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMachineHandler: {fileID: 1368130883}
-  nextScene:
-    sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
-    scenePath: Assets/App/Scenes/PackSelection.unity
 --- !u!114 &1368130883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,6 +1125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fc265c8c6d5c047800828249fc1f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextScene:
+    sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
+    scenePath: Assets/App/Scenes/PackSelection.unity
 --- !u!1 &1393092105
 GameObject:
   m_ObjectHideFlags: 0

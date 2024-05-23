@@ -1,36 +1,44 @@
-using Features.StateMachine;
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using Scenes.PackSelection.Feature.Packs;
 using Scenes.PackSelection.Feature.Packs.Configs;
 using Scenes.PackSelection.Feature.Packs.UI;
+using Scenes.PackSelection.Feature.UI;
 using UnityEngine;
 
 namespace Scenes.PackSelection.StateMachine
 {
 	public class PackSelectionInitState : State
 	{
-		private StateMachineHandler stateMachineHandler;
 		private PackMenu packMenu;
+		private HeaderUI headerUI;
 		private IPackProvider packProvider;
 		private ISceneTransition sceneTransition;
 
-		public PackSelectionInitState(StateMachineHandler stateMachineHandler,
-								PackMenu packMenu,
+		public PackSelectionInitState(PackMenu packMenu,
+								HeaderUI headerUI,
 								IPackProvider packProvider,
 								ISceneTransition sceneTransition)
 		{
-			this.stateMachineHandler = stateMachineHandler;
 			this.packMenu = packMenu;
+			this.headerUI = headerUI;
 			this.packProvider = packProvider;
 			this.sceneTransition = sceneTransition;
 		}
 
 		public override void Enter()
 		{
+			headerUI.OnExitButtonClicked += OnExitButtonClicked;
 			packMenu.OnPackSelected += OnPackSelected;
+
 			packMenu.GeneratePackList(packProvider.Packs);
 			sceneTransition.PlayOff();
+		}
+
+		public override void Exit()
+		{
+			headerUI.OnExitButtonClicked -= OnExitButtonClicked;
+			packMenu.OnPackSelected -= OnPackSelected;
 		}
 
 		private void OnPackSelected(Pack pack)
@@ -41,7 +49,12 @@ namespace Scenes.PackSelection.StateMachine
 			{
 				packProvider.CurrentPack.CurrentLevel = 0;
 			}
-			stateMachineHandler.Core.ChangeState<LoadSceneState>();
+			StateMachine.ChangeState<LoadSceneState>();
+		}
+
+		public void OnExitButtonClicked()
+		{
+			StateMachine.ChangeState<LoadMainMenuState>();
 		}
 	}
 }

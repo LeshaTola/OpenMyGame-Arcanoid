@@ -1,15 +1,14 @@
-using Features.Bootstrap;
-using Features.StateMachine;
+﻿using Features.Bootstrap;
 using Features.StateMachine.States;
-using Scenes.Main.StateMachine.States;
+using Scenes.PackSelection.StateMachine;
 using UnityEngine;
 using Zenject;
 
-namespace Scenes.Main.Bootstrap
+namespace Scenes.PackSelection.Bootstrap
 {
-	public class MainMenuStatesInstaller : MonoInstaller
+	public class PackSelectionStatesInstaller : MonoInstaller
 	{
-		[SerializeField] MainMenuStateMachineHandler stateMachineHandler;
+		[SerializeField] private PackSelectionStateMachineHandler stateMachineHandler;
 
 		public override void InstallBindings()
 		{
@@ -23,12 +22,13 @@ namespace Scenes.Main.Bootstrap
 
 		private void BindInitialState()
 		{
-			Container.Bind<MainMenuInitialState>().AsSingle();
+			Container.Bind<PackSelectionInitState>().AsSingle();
 		}
 
 		private void BindLoadNextState()
 		{
 			Container.Bind<LoadSceneState>().AsSingle();
+			Container.Bind<LoadMainMenuState>().AsSingle();
 			Container.Bind<LoadSceneStateStep>().AsTransient();
 		}
 
