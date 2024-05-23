@@ -26,13 +26,18 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 			PlayerProgressData playerData = dataProvider.GetData();
 
 			ProcessPacks(playerData);
-			routerShowWin.ShowWin();
-
 			SaveData(playerData);
+
+			routerShowWin.ShowWin();
 		}
 
 		private void SaveData(PlayerProgressData playerData)
 		{
+			if (packProvider.SavedPackData == null)
+			{
+				return;
+			}
+
 			var savedData = packProvider.SavedPackData;
 			playerData.Packs[savedData.Id] = savedData;
 			dataProvider.SaveData(playerData);

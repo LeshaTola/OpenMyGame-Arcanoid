@@ -98,8 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce979b7dc914b22920371f58d739fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  minAngle: 25
+  config: {fileID: 11400000, guid: 62ea67c8911865a4784a9d4f9f913369, type: 2}
   rb: {fileID: 888402264843372841}
 --- !u!1 &7470354349316260838
 GameObject:

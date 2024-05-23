@@ -1,43 +1,37 @@
-using Module.ObjectPool;
+using Scenes.Gameplay.Feature.Player.Ball.Services;
+using System;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Player.Ball
 {
-	public class Ball : MonoBehaviour, IPooledObject<Ball>
+	public class Ball : MonoBehaviour
 	{
+		public event Action<Ball, Collision2D> OnCollisionEnter;
+
 		[SerializeField] private BallMovement movement;
 
-		private IPool<Ball> pool;
+		private IBallService service;
 
 		public BallMovement Movement => movement;
 
+		public void Init(IBallService service)
+		{
+			this.service = service;
+		}
+
 		private void OnCollisionEnter2D(Collision2D collision)
 		{
-			Vector2 newDirection = movement.Direction;
-			if (!collision.gameObject.TryGetComponent(out Plate player))
-			{
-				newDirection = movement.GetValidDirection();
-			}
-			movement.Push(newDirection);
+			OnCollisionEnter?.Invoke(this, collision);
 		}
 
 		public void Release()
 		{
-			if (pool != null)
+			if (service != null)
 			{
-				pool.Release(this);
+				service.ReleaseBall(this);
 				return;
 			}
 			Destroy(gameObject);
-		}
-
-		public void OnGet(IPool<Ball> pool)
-		{
-			this.pool = pool;
-		}
-
-		public void OnRelease()
-		{
 		}
 	}
 }

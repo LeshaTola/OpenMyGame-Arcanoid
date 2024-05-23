@@ -9,6 +9,7 @@ using Scenes.Gameplay.Feature.LevelCreation;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
 using Scenes.Gameplay.Feature.Player.Ball;
+using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
 using UnityEngine;
@@ -38,6 +39,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		public override void InstallBindings()
 		{
+			BindBallService();
 			BindProgressController();
 			BindHealthController();
 			BindBoundaryValidator();
@@ -48,6 +50,11 @@ namespace Scenes.Gameplay.Bootstrap
 			BindBlockFactory();
 			BindTimeProvider();
 			BindInput();
+		}
+
+		private void BindBallService()
+		{
+			Container.Bind<IBallService>().To<BallService>().AsSingle();
 		}
 
 		private void BindBoundaryValidator()
