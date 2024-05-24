@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BallMovementConfig
   m_EditorClassIdentifier: 
   speed: 4
-  speedMultiplier: 1.6
+  speedMultiplier: 2.4
   minAngle: 25

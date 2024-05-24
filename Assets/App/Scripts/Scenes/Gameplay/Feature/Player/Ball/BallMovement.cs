@@ -26,7 +26,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 		public void Push(Vector2 direction, float factor)
 		{
 			rb.simulated = true;
-			float additionalSpeed = config.Speed * config.SpeedMultiplier * factor;
+			float additionalSpeed = config.Speed * (config.SpeedMultiplier - 1) * factor;
 			rb.velocity = direction.normalized * (config.Speed + additionalSpeed);
 		}
 
