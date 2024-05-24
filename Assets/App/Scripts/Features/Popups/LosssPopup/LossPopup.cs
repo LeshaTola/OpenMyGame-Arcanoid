@@ -1,21 +1,49 @@
-﻿using Features.Popups.Loss.ViewModels;
+﻿using Features.Popups.Languages;
+using Features.Popups.Loss.ViewModels;
+using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Features.Popups.Loss
 {
 	public class LossPopup : Popup
 	{
-		[SerializeField] private Button restartButton;
-		[SerializeField] private TextMeshProUGUI restartButtonText;
+		[SerializeField] private TMProLocalizer header;
+		[SerializeField] private PopupButton restartButton;
 
-		public void Setup(ILossPopupViewModel popupViewModel)
+		private ILossPopupViewModel viewModel;
+
+		public void Setup(ILossPopupViewModel viewModel)
 		{
-			restartButton.onClick.RemoveAllListeners();
-			restartButton.onClick.AddListener(popupViewModel.RestartCommand.Execute);
-			restartButtonText.text = popupViewModel.RestartCommand.Label;
+			CleanUp();
+
+			Initialize(viewModel);
+
+			restartButton.onButtonClicked += viewModel.RestartCommand.Execute;
+			restartButton.UpdateText(viewModel.RestartCommand.Label);
+
+			Translate();
+		}
+
+		private void Translate()
+		{
+			restartButton.Translate();
+			header.Translate();
+		}
+
+		private void Initialize(ILossPopupViewModel viewModel)
+		{
+			this.viewModel = viewModel;
+			restartButton.Init(viewModel.LocalizationSystem);
+			header.Init(viewModel.LocalizationSystem);
+		}
+
+		private void CleanUp()
+		{
+			if (viewModel != null)
+			{
+				restartButton.onButtonClicked -= viewModel.RestartCommand.Execute;
+			}
 		}
 	}
 }

@@ -10,10 +10,16 @@ namespace Module.Localization.Localizers
 
 		private string key = "";
 
+		public string Key { get => key; set => key = value; }
 		public string Text { get => text.text; set => text.text = value; }
 
 		public void Init(ILocalizationSystem localizationSystem)
 		{
+			if (this.localizationSystem != null)
+			{
+				return;
+			}
+
 			this.localizationSystem = localizationSystem;
 			key = text.text;
 			localizationSystem.OnLanguageChanged += OnLanguageChanged;
@@ -28,6 +34,7 @@ namespace Module.Localization.Localizers
 		{
 			if (!localizationSystem.LanguageDictionary.ContainsKey(key))
 			{
+				text.text = key;
 				return;
 			}
 			string newText = localizationSystem.LanguageDictionary[key];

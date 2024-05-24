@@ -1,38 +1,67 @@
-﻿using Features.Popups.Menu.ViewModels;
+﻿using Features.Popups.Languages;
+using Features.Popups.Menu.ViewModels;
+using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Features.Popups.Menu
 {
 	public class MenuPopup : Popup
 	{
-		[SerializeField] private Button restartButton;
-		[SerializeField] private Button backButton;
-		[SerializeField] private Button resumeButton;
+		[SerializeField] private TMProLocalizer header;
+		[SerializeField] private PopupButton restartButton;
+		[SerializeField] private PopupButton backButton;
+		[SerializeField] private PopupButton resumeButton;
 
-		[SerializeField] private TextMeshProUGUI restartButtonText;
-		[SerializeField] private TextMeshProUGUI backButtonText;
-		[SerializeField] private TextMeshProUGUI resumeButtonText;
 
-		public void Setup(IMenuPopupViewModel menuPopupViewModel)
+		private IMenuPopupViewModel viewModel;
+
+		public void Setup(IMenuPopupViewModel viewModel)
 		{
 			CleanUp();
-			restartButton.onClick.AddListener(menuPopupViewModel.RestartCommand.Execute);
-			backButton.onClick.AddListener(menuPopupViewModel.BackCommand.Execute);
-			resumeButton.onClick.AddListener(menuPopupViewModel.ResumeCommand.Execute);
+			Initialize(viewModel);
+			SetupLogic(viewModel);
+			Translate();
+		}
 
-			restartButtonText.text = menuPopupViewModel.RestartCommand.Label;
-			backButtonText.text = menuPopupViewModel.BackCommand.Label;
-			resumeButtonText.text = menuPopupViewModel.ResumeCommand.Label;
+		private void SetupLogic(IMenuPopupViewModel viewModel)
+		{
+			restartButton.onButtonClicked += viewModel.RestartCommand.Execute;
+			backButton.onButtonClicked += viewModel.BackCommand.Execute;
+			resumeButton.onButtonClicked += viewModel.ResumeCommand.Execute;
+
+			restartButton.UpdateText(viewModel.RestartCommand.Label);
+			backButton.UpdateText(viewModel.BackCommand.Label);
+			resumeButton.UpdateText(viewModel.ResumeCommand.Label);
+		}
+
+		private void Initialize(IMenuPopupViewModel viewModel)
+		{
+			this.viewModel = viewModel;
+			header.Init(viewModel.LocalizationSystem);
+
+			restartButton.Init(viewModel.LocalizationSystem);
+			backButton.Init(viewModel.LocalizationSystem);
+			resumeButton.Init(viewModel.LocalizationSystem);
+		}
+
+		private void Translate()
+		{
+			header.Translate();
+
+			restartButton.Translate();
+			backButton.Translate();
+			resumeButton.Translate();
 		}
 
 		private void CleanUp()
 		{
-			restartButton.onClick.RemoveAllListeners();
-			backButton.onClick.RemoveAllListeners();
-			resumeButton.onClick.RemoveAllListeners();
+			if (viewModel != null)
+			{
+				restartButton.onButtonClicked -= viewModel.RestartCommand.Execute;
+				backButton.onButtonClicked -= viewModel.BackCommand.Execute;
+				resumeButton.onButtonClicked -= viewModel.ResumeCommand.Execute;
+			}
 		}
 	}
 }

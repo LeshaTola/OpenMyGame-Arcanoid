@@ -14,7 +14,7 @@ namespace Features.Popups.Languages
 
 		public void UpdateText(string text)
 		{
-			buttonText.Text = text;
+			buttonText.Key = text;
 		}
 
 		public void Init(ILocalizationSystem localizationSystem)

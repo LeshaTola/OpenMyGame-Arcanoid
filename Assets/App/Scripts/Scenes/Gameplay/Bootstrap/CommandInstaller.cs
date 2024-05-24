@@ -7,10 +7,10 @@ namespace Scenes.Gameplay.Bootstrap
 	{
 		public override void InstallBindings()
 		{
-			Container.Bind<RestartCommand>().AsSingle().WithArguments("Restart");
-			Container.Bind<BackCommand>().AsSingle().WithArguments("Back");
-			Container.Bind<ResumeCommand>().AsSingle().WithArguments("Resume");
-			Container.Bind<LoadNextLevelCommand>().AsSingle().WithArguments("Next");
+			Container.Bind<RestartCommand>().AsSingle().WithArguments("restart");
+			Container.Bind<BackCommand>().AsSingle().WithArguments("back");
+			Container.Bind<ResumeCommand>().AsSingle().WithArguments("resume");
+			Container.Bind<LoadNextLevelCommand>().AsSingle().WithArguments("next");
 		}
 	}
 }

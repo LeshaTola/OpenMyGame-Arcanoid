@@ -214,8 +214,8 @@ MonoBehaviour:
     rawReference:
       rid: -2
   raycaster: {fileID: 1205636041858400872}
-  restartButton: {fileID: 7028342188313180138}
-  restartButtonText: {fileID: 7028342189342854860}
+  header: {fileID: 1633097240522702342}
+  restartButton: {fileID: 5973487851597815341}
   references:
     version: 2
     RefIds:
@@ -282,6 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7028342189029621958}
   - component: {fileID: 7028342189029621960}
+  - component: {fileID: 1633097240522702342}
   - component: {fileID: 7028342189029621961}
   m_Layer: 6
   m_Name: "Youlos\u0435Text"
@@ -318,6 +319,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7028342189029621959}
   m_CullTransparentMesh: 1
+--- !u!114 &1633097240522702342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028342189029621959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3e204a36ccf274cbeb9c05bd9d02ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 7028342189029621961}
 --- !u!114 &7028342189029621961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,7 +352,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0412\u044B \u043F\u0440\u043E\u0438\u0433\u0440\u0430\u043B\u0438!"
+  m_text: you lost!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a740b1f290a38dc48b5bd6fe8c18347a, type: 2}
   m_sharedMaterial: {fileID: 1944959502034670655, guid: a740b1f290a38dc48b5bd6fe8c18347a, type: 2}
@@ -420,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7009702589508987233, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_text
-      value: "\u0420\u0435\u0441\u0442\u0430\u0440\u0442"
+      value: restart
       objectReference: {fileID: 0}
     - target: {fileID: 7009702589508987239, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Layer
@@ -524,15 +538,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4db1f5902713e24aad86666950c7721, type: 3}
---- !u!114 &7028342188313180138 stripped
+--- !u!114 &5973487851597815341 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7009702590521921607, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5920209494438377856, guid: e4db1f5902713e24aad86666950c7721, type: 3}
   m_PrefabInstance: {fileID: 58222054817507245}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: bfb3886dcf5353f4fa1460a4bac856c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &7028342188313180139 stripped
@@ -540,14 +554,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7009702590521921606, guid: e4db1f5902713e24aad86666950c7721, type: 3}
   m_PrefabInstance: {fileID: 58222054817507245}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7028342189342854860 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7009702589508987233, guid: e4db1f5902713e24aad86666950c7721, type: 3}
-  m_PrefabInstance: {fileID: 58222054817507245}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

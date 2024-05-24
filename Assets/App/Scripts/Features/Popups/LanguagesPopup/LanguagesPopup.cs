@@ -12,7 +12,7 @@ namespace Features.Popups.Languages
 		public void Setup(IGeneralPopupViewModel viewModel)
 		{
 			CleanUp();
-			header.Text = viewModel.Header;
+			header.Key = viewModel.Header;
 
 			foreach (var command in viewModel.Commands)
 			{

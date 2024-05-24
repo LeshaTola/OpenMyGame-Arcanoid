@@ -1,7 +1,9 @@
 ﻿using DG.Tweening;
+using Features.Popups.Languages;
 using Features.Popups.WinPopup.ViewModels;
 using Features.Saves;
 using Features.UI.Animations.SpinAnimation;
+using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
 using Scenes.PackSelection.Feature.Packs.Configs;
 using TMPro;
@@ -14,10 +16,12 @@ namespace Features.Popups.WinPopup
 	{
 		[SerializeField] private Image packImage;
 
-		[SerializeField] private Button nextButton;
-		[SerializeField] private TextMeshProUGUI nextButtonText;
+		[SerializeField] private PopupButton nextButton;
 
-		[SerializeField] private TextMeshProUGUI packName;
+		[SerializeField] private TMProLocalizer header;
+		[SerializeField] private TMProLocalizer packPreNameText;
+		[SerializeField] private TMProLocalizer packName;
+
 		[SerializeField] private TextMeshProUGUI levelInfo;
 
 		[SerializeField] private SpinAnimation lines;
@@ -28,10 +32,10 @@ namespace Features.Popups.WinPopup
 		public void Setup(IWinPopupViewModel viewModel)
 		{
 			CleanUp();
-			nextButton.onClick.AddListener(viewModel.LoadNextLevelCommand.Execute);
-			nextButtonText.text = viewModel.LoadNextLevelCommand.Label;
+			Initialize(viewModel);
+			SetupLogic(viewModel);
+			Translate();
 
-			this.viewModel = viewModel;
 		}
 
 		public override void Show()
@@ -60,19 +64,6 @@ namespace Features.Popups.WinPopup
 			sequence.onComplete += Activate;
 		}
 
-		private void CleanUp()
-		{
-			nextButton.onClick.RemoveAllListeners();
-			ResetUI();
-		}
-
-		private void ResetUI()
-		{
-			levelInfo.text = "0/0";
-			packName.text = "";
-			nextButton.transform.localScale = Vector3.zero;
-		}
-
 		private void SetupLevelAnimation(Pack pack, SavedPackData savedPackData, Sequence sequence)
 		{
 			SetupMaxLevelAnimation(pack, sequence);
@@ -88,7 +79,8 @@ namespace Features.Popups.WinPopup
 
 			levelAnimation.onComplete += () =>
 			{
-				packName.text = pack.Name;
+				packName.Key = pack.Name;
+				packName.Translate();
 				packImage.sprite = pack.Sprite;
 			};
 			sequence.Append(levelAnimation);
@@ -106,6 +98,49 @@ namespace Features.Popups.WinPopup
 		private void SetupButtonAnimation(Sequence sequence)
 		{
 			sequence.Append(nextButton.transform.DOScale(Vector3.one, eachAnimationDuration));
+		}
+
+		private void SetupLogic(IWinPopupViewModel viewModel)
+		{
+			nextButton.onButtonClicked += viewModel.LoadNextLevelCommand.Execute;
+			nextButton.UpdateText(viewModel.LoadNextLevelCommand.Label);
+		}
+
+		private void CleanUp()
+		{
+			ResetUI();
+
+			if (viewModel != null)
+			{
+				nextButton.onButtonClicked -= viewModel.LoadNextLevelCommand.Execute;
+			}
+		}
+
+		private void ResetUI()
+		{
+			levelInfo.text = "0/0";
+			packName.Text = "";
+			nextButton.transform.localScale = Vector3.zero;
+		}
+
+		private void Translate()
+		{
+			header.Translate();
+			packPreNameText.Translate();
+
+			nextButton.Translate();
+		}
+
+		private void Initialize(IWinPopupViewModel viewModel)
+		{
+			this.viewModel = viewModel;
+
+			header.Init(viewModel.LocalizationSystem);
+			packName.Init(viewModel.LocalizationSystem);
+			packPreNameText.Init(viewModel.LocalizationSystem);
+
+
+			nextButton.Init(viewModel.LocalizationSystem);
 		}
 	}
 }
