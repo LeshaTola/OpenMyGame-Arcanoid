@@ -25,10 +25,53 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 			base.Enter();
 			PlayerProgressData playerData = dataProvider.GetData();
 
-			routerShowWin.ShowWin();
+			routerShowWin.ShowWin(packProvider.CurrentPack, packProvider.SavedPackData);
 
 			ProcessPacks(playerData);
+		}
+
+		private void ProcessPacks(PlayerProgressData playerData)
+		{
+			SavedPackData savedPackData = packProvider.SavedPackData;
+			Pack currentPack = packProvider.CurrentPack;
+			if (savedPackData == null || currentPack == null)
+			{
+				return;
+			}
+
+			CompleteLevel(savedPackData, playerData);
+			if (savedPackData.CurrentLevel > currentPack.MaxLevel)
+			{
+				OpenNextPack(savedPackData, playerData);
+			}
 			SaveData(playerData);
+		}
+
+		private void CompleteLevel(SavedPackData savedPackData, PlayerProgressData playerData)
+		{
+			savedPackData.CurrentLevel++;
+			playerData.Packs[savedPackData.Id] = savedPackData;
+		}
+
+		private void OpenNextPack(SavedPackData savedPackData, PlayerProgressData playerData)
+		{
+			savedPackData.IsCompeted = true;
+
+			int nextPackIndex = packProvider.PackIndex - 1;
+			if (packProvider.Packs.Count <= nextPackIndex)
+			{
+				return;
+			}
+			string nextPackID = packProvider.Packs[nextPackIndex].Id;
+			playerData.Packs[nextPackID].IsOpened = true;
+
+			SetNextPack(playerData, nextPackIndex, nextPackID);
+		}
+
+		private void SetNextPack(PlayerProgressData playerData, int nextPackIndex, string nextPackID)
+		{
+			packProvider.PackIndex = nextPackIndex;
+			packProvider.SavedPackData = playerData.Packs[nextPackID];
 		}
 
 		private void SaveData(PlayerProgressData playerData)
@@ -37,45 +80,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 			{
 				return;
 			}
-
-			var savedData = packProvider.SavedPackData;
-			playerData.Packs[savedData.Id] = savedData;
 			dataProvider.SaveData(playerData);
-		}
-
-		private void ProcessPacks(PlayerProgressData playerData)
-		{
-			SavedPackData savedPackData = packProvider.SavedPackData;
-			Pack originalPack = packProvider.Packs[packProvider.PackIndex];
-			if (savedPackData == null || originalPack == null)
-			{
-				return;
-			}
-
-			if (savedPackData.CurrentLevel <= originalPack.MaxLevel)
-			{
-				CompleteLevel(savedPackData);
-			}
-			else
-			{
-				OpenNextPack(savedPackData, playerData);
-			}
-		}
-
-		private void CompleteLevel(SavedPackData savedPackData)
-		{
-			savedPackData.CurrentLevel++;
-		}
-
-		private void OpenNextPack(SavedPackData savedPackData, PlayerProgressData playerData)
-		{
-			savedPackData.IsCompeted = true;
-			int nextPackIndex = packProvider.PackIndex - 1;
-			if (packProvider.Packs.Count > nextPackIndex)
-			{
-				string nextPackID = packProvider.Packs[nextPackIndex].Id;
-				playerData.Packs[nextPackID].IsOpened = true;
-			}
 		}
 	}
 }
