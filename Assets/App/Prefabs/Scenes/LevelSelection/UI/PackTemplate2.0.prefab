@@ -177,6 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8485155920874728237}
   - component: {fileID: 8485155920874728239}
+  - component: {fileID: 6463528895577867294}
   - component: {fileID: 8485155920874728238}
   m_Layer: 5
   m_Name: GalaxyText
@@ -202,8 +203,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10.81, y: 10.08}
-  m_SizeDelta: {x: 264.37, y: 35.19}
+  m_AnchoredPosition: {x: -10.81, y: 13.1502}
+  m_SizeDelta: {x: 264.37, y: 29.0496}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8485155920874728239
 CanvasRenderer:
@@ -213,6 +214,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8485155920874728236}
   m_CullTransparentMesh: 1
+--- !u!114 &6463528895577867294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485155920874728236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3e204a36ccf274cbeb9c05bd9d02ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 8485155920874728238}
 --- !u!114 &8485155920874728238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0413\u0430\u043B\u0430\u043A\u0442\u0438\u043A\u0430"
+  m_text: galaxy
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -260,7 +274,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.55
+  m_fontSize: 26.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -380,8 +394,8 @@ MonoBehaviour:
   Background: {fileID: 8485155921278009939}
   PackImageBackground: {fileID: 8485155922234354337}
   packImage: {fileID: 5424233573521167782}
-  headerNameText: {fileID: 8485155920874728238}
-  packNameText: {fileID: 8485155922156332456}
+  headerNameText: {fileID: 6463528895577867294}
+  packNameText: {fileID: 3724130877505731378}
   levelsText: {fileID: 8485155921956274201}
 --- !u!1 &8485155921278009937
 GameObject:
@@ -725,6 +739,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8485155922156332463}
   - component: {fileID: 8485155922156332457}
+  - component: {fileID: 3724130877505731378}
   - component: {fileID: 8485155922156332456}
   m_Layer: 5
   m_Name: PackNameText
@@ -761,6 +776,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8485155922156332462}
   m_CullTransparentMesh: 1
+--- !u!114 &3724130877505731378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485155922156332462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3e204a36ccf274cbeb9c05bd9d02ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 8485155922156332456}
 --- !u!114 &8485155922156332456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +809,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u043D\u0435 \u043E\u0431\u043D\u0430\u0440\u0443\u0436\u0435\u043D\u0430"
+  m_text: has not been detected
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -808,7 +836,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34
+  m_fontSize: 26
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

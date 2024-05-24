@@ -25,10 +25,10 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 			base.Enter();
 			PlayerProgressData playerData = dataProvider.GetData();
 
+			routerShowWin.ShowWin();
+
 			ProcessPacks(playerData);
 			SaveData(playerData);
-
-			routerShowWin.ShowWin();
 		}
 
 		private void SaveData(PlayerProgressData playerData)

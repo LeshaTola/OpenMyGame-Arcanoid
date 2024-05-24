@@ -1,4 +1,6 @@
 ﻿using Features.Saves;
+using Module.Localization;
+using Module.Localization.Localizers;
 using Scenes.PackSelection.Feature.Packs.Configs;
 using System;
 using TMPro;
@@ -17,19 +19,22 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 		[SerializeField] private Image PackImageBackground;
 		[SerializeField] private Image packImage;
 
-		[SerializeField] private TextMeshProUGUI headerNameText;
-		[SerializeField] private TextMeshProUGUI packNameText;
+		[SerializeField] private TMProLocalizer headerNameText;
+		[SerializeField] private TMProLocalizer packNameText;
 		[SerializeField] private TextMeshProUGUI levelsText;
 
 		public event Action onPackClicked;
 
-		public void UpdateUI(Pack pack, SavedPackData savedPackData)
+		public void UpdateUI(Pack pack, SavedPackData savedPackData, ILocalizationSystem localizationSystem)
 		{
+			Initialize(localizationSystem);
+
 			levelsText.text = (savedPackData.CurrentLevel) + "/" + (pack.MaxLevel + 1);
 
 			if (!savedPackData.IsOpened)
 			{
 				SwapAppearance(appearanceTypes.Closed);
+				Translate();
 				return;
 			}
 
@@ -45,15 +50,29 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 			button.onClick.AddListener(() => onPackClicked?.Invoke());
 
 			packImage.sprite = pack.Sprite;
-			packNameText.text = pack.Name;
+			packNameText.Key = pack.Name;
+
+			Translate();
+		}
+
+		private void Initialize(ILocalizationSystem localizationSystem)
+		{
+			packNameText.Init(localizationSystem);
+			headerNameText.Init(localizationSystem);
+		}
+
+		private void Translate()
+		{
+			packNameText.Translate();
+			headerNameText.Translate();
 		}
 
 		public void SwapAppearance(PackAppearance packAppearance)
 		{
 			Background.sprite = packAppearance.Background;
 			PackImageBackground.sprite = packAppearance.PackImageBackground;
-			headerNameText.color = packAppearance.HeaderColor;
-			packNameText.color = packAppearance.NameColor;
+			headerNameText.Text.color = packAppearance.HeaderColor;
+			packNameText.Text.color = packAppearance.NameColor;
 			levelsText.color = packAppearance.LevelColor;
 		}
 

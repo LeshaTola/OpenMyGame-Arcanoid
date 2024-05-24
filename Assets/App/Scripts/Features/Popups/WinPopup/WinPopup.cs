@@ -119,7 +119,7 @@ namespace Features.Popups.WinPopup
 		private void ResetUI()
 		{
 			levelInfo.text = "0/0";
-			packName.Text = "";
+			packName.Text.text = "";
 			nextButton.transform.localScale = Vector3.zero;
 		}
 

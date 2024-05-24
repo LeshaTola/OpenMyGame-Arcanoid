@@ -31,12 +31,33 @@ namespace Scenes.Gameplay.Feature.Commands
 		{
 			Pack currentPack = packProvider.CurrentPack;
 			SavedPackData savedPackData = packProvider.SavedPackData;
-			if (savedPackData == null || savedPackData.CurrentLevel > currentPack.MaxLevel)
+			if ((savedPackData == null || savedPackData.CurrentLevel > currentPack.MaxLevel))
 			{
-				LoadMainMenu();
+				if (savedPackData.IsCompeted)
+				{
+					LoadMainMenu();
+				}
+				else
+				{
+					SetupNextPack(savedPackData);
+					LoadNextLevel();
+				}
 				return;
 			}
 			LoadNextLevel();
+		}
+
+		private void SetupNextPack(SavedPackData savedPackData)
+		{
+			var nextPackIndex = packProvider.PackIndex - 1;
+			packProvider.PackIndex = nextPackIndex;
+			packProvider.SavedPackData = new SavedPackData()
+			{
+				Id = savedPackData.Id,
+				IsCompeted = false,
+				IsOpened = true,
+				CurrentLevel = 0
+			};
 		}
 
 		private void LoadMainMenu()

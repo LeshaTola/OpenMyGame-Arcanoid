@@ -11,7 +11,7 @@ namespace Module.Localization.Localizers
 		private string key = "";
 
 		public string Key { get => key; set => key = value; }
-		public string Text { get => text.text; set => text.text = value; }
+		public TextMeshProUGUI Text { get => text; set => text = value; }
 
 		public void Init(ILocalizationSystem localizationSystem)
 		{

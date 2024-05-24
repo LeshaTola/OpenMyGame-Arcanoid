@@ -68,7 +68,7 @@ namespace Scenes.PackSelection.StateMachine
 
 			packProvider.PackIndex = packProvider.Packs.IndexOf(pack);
 			packProvider.SavedPackData = savedPackData;
-			if (savedPackData.CurrentLevel >= pack.MaxLevel)
+			if (savedPackData.CurrentLevel > pack.MaxLevel)
 			{
 				savedPackData.CurrentLevel = 0;
 			}
