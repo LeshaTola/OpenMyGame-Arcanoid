@@ -2,7 +2,6 @@
 using Features.Popups.Loss.ViewModels;
 using Module.PopupLogic.General.Controller;
 using Scenes.Gameplay.Feature.Commands;
-using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
 {
@@ -10,15 +9,12 @@ namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
 	{
 		private IPopupController popupController;
 		private RestartCommand restartCommand;
-		private Transform container;
 
 		public RouterShowLoss(IPopupController popupController,
-						RestartCommand restartCommand,
-						Transform container)
+						RestartCommand restartCommand)
 		{
 			this.popupController = popupController;
 			this.restartCommand = restartCommand;
-			this.container = container;
 		}
 
 		public void ShowLoss()

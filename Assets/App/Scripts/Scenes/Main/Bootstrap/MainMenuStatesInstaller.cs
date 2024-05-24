@@ -1,7 +1,7 @@
 using Features.Bootstrap;
 using Features.StateMachine;
 using Features.StateMachine.States;
-using Scenes.Main.StateMachine.States;
+using Scenes.Main.StateMachine.States.Initial;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +14,7 @@ namespace Scenes.Main.Bootstrap
 		public override void InstallBindings()
 		{
 			StatesFactoriesInstaller.Install(Container);
+			MainMenuRoutersInstaller.Install(Container);
 
 			BindStateMachine();
 			BindGlobalInitState();

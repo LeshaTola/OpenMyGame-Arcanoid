@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2015620574117540901}
   - component: {fileID: 2015620574117540906}
   - component: {fileID: 2015620574117540907}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 8859324881456067391}
   - component: {fileID: 8661108109095142355}
   - component: {fileID: 70468076734603882}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: MenuPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 8381236891515842556}
   - component: {fileID: 9223012156711440830}
   - component: {fileID: 3086105440628693669}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: YouWinText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 9091286781082028837}
   - component: {fileID: 2312872900843107064}
   - component: {fileID: 1876112090916387334}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,6 +424,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Back
       objectReference: {fileID: 0}
+    - target: {fileID: 7009702589508987239, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921600, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -431,6 +435,10 @@ PrefabInstance:
     - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Name
       value: BackButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921606, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Pivot.x
@@ -556,9 +564,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Restart
       objectReference: {fileID: 0}
+    - target: {fileID: 7009702589508987239, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Name
       value: RestartButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921606, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Pivot.x
@@ -684,6 +700,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Resume
       objectReference: {fileID: 0}
+    - target: {fileID: 7009702589508987239, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921600, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -691,6 +711,10 @@ PrefabInstance:
     - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Name
       value: ResumeButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921606, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Pivot.x

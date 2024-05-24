@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8531121806466334841}
   - component: {fileID: 6297137331025368279}
   - component: {fileID: 2790319151093983453}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2015620574117540901}
   - component: {fileID: 2015620574117540906}
   - component: {fileID: 2015620574117540907}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 797671919831022023}
   - component: {fileID: 7419400496068126763}
   - component: {fileID: 1205636041858400872}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: LossPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 7028342189029621958}
   - component: {fileID: 7028342189029621960}
   - component: {fileID: 7028342189029621961}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: "Youlos\u0435Text"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,9 +422,17 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u0420\u0435\u0441\u0442\u0430\u0440\u0442"
       objectReference: {fileID: 0}
+    - target: {fileID: 7009702589508987239, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Name
       value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921606, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Pivot.x

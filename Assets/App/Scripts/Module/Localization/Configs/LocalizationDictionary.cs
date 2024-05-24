@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Module.Localization.Configs
 {
 	[CreateAssetMenu(fileName = "LocalizationDictionary", menuName = "Dictionaries/Localization")]
-	public class LocalizationDictionary : ScriptableObject
+	public class LocalizationDictionary : SerializedScriptableObject
 	{
-		[SerializeField] private List<Language> languages;
+		[DictionaryDrawerSettings(KeyLabel = "Language Key", ValueLabel = "CSV File")]
+		[SerializeField] private Dictionary<string, TextAsset> languages;
 
-		public List<Language> Languages { get => languages; }
+		public Dictionary<string, TextAsset> Languages { get => languages; }
 	}
 }

@@ -3,7 +3,6 @@ using Features.Popups.WinPopup.ViewModels;
 using Module.PopupLogic.General.Controller;
 using Scenes.Gameplay.Feature.Commands;
 using Scenes.PackSelection.Feature.Packs;
-using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 {
@@ -12,17 +11,14 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 		private IPopupController popupController;
 		private IPackProvider packProvider;
 		private LoadNextLevelCommand loadNextLevelCommand;
-		private Transform container;
 
 		public RouterShowWin(IPopupController popupController,
 					   IPackProvider packProvider,
-					   LoadNextLevelCommand loadNextLevelCommand,
-					   Transform container)
+					   LoadNextLevelCommand loadNextLevelCommand)
 		{
 			this.popupController = popupController;
 			this.packProvider = packProvider;
 			this.loadNextLevelCommand = loadNextLevelCommand;
-			this.container = container;
 		}
 
 		public void ShowWin()

@@ -2,7 +2,6 @@
 using Features.Popups.Menu.ViewModels;
 using Module.PopupLogic.General.Controller;
 using Scenes.Gameplay.Feature.Commands;
-using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 {
@@ -14,21 +13,16 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 		private BackCommand backCommand;
 		private ResumeCommand resumeCommand;
 
-		private Transform container;
 
 		public RouterShowMenu(IPopupController popupController,
 						RestartCommand restartCommand,
 						BackCommand backCommand,
-						ResumeCommand resumeCommand,
-						Transform container)
+						ResumeCommand resumeCommand)
 		{
 			this.popupController = popupController;
-
 			this.restartCommand = restartCommand;
 			this.backCommand = backCommand;
 			this.resumeCommand = resumeCommand;
-
-			this.container = container;
 		}
 
 		public void ShowMenu()

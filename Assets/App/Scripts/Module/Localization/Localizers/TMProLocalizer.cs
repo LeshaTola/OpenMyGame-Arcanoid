@@ -1,32 +1,22 @@
-using Features.Bootstrap;
 using TMPro;
 using UnityEngine;
 
 namespace Module.Localization.Localizers
 {
-	public class TMProLocalizer : MonoBehaviour, IInitializable, ITextLocalizer
+	public class TMProLocalizer : MonoBehaviour, ITextLocalizer
 	{
 		[SerializeField] private TextMeshProUGUI text;
-		[SerializeField] private LocalizationSystem localizationSystem;
+		[SerializeField] private ILocalizationSystem localizationSystem;
 
 		private string key = "";
 
-		public void Init()
-		{
-			key = text.text;
-			localizationSystem.OnLanguageChanged += OnLanguageChanged;
-		}
+		public string Text { get => text.text; set => text.text = value; }
 
-		public void Init(LocalizationSystem localizationSystem)
+		public void Init(ILocalizationSystem localizationSystem)
 		{
 			this.localizationSystem = localizationSystem;
-			Init();
-		}
-
-		private void OnValidate()
-		{
-			TryGetComponent(out text);
-			localizationSystem = FindAnyObjectByType<LocalizationSystem>();
+			key = text.text;
+			localizationSystem.OnLanguageChanged += OnLanguageChanged;
 		}
 
 		private void OnDestroy()
@@ -36,6 +26,10 @@ namespace Module.Localization.Localizers
 
 		public void Translate()
 		{
+			if (!localizationSystem.LanguageDictionary.ContainsKey(key))
+			{
+				return;
+			}
 			string newText = localizationSystem.LanguageDictionary[key];
 			text.text = newText;
 		}

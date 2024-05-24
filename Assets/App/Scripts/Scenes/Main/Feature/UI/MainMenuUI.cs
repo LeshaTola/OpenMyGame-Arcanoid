@@ -8,12 +8,15 @@ namespace Scenes.Main.Feature.UI
 	public class MainMenuUI : MonoBehaviour, IInitializable
 	{
 		[SerializeField] private Button playButton;
+		[SerializeField] private Button SwapLanguageButton;
 
-		public event Action OnPlayButtonPressed;
+		public event Action OnPlayButtonClicked;
+		public event Action OnSwapLanguageButtonClicked;
 
 		public void Init()
 		{
-			playButton.onClick.AddListener(() => OnPlayButtonPressed?.Invoke());
+			playButton.onClick.AddListener(() => OnPlayButtonClicked?.Invoke());
+			SwapLanguageButton.onClick.AddListener(() => OnSwapLanguageButtonClicked?.Invoke());
 		}
 	}
 }

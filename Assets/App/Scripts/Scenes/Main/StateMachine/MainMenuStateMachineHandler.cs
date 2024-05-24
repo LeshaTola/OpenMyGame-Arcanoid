@@ -1,7 +1,7 @@
 using Features.StateMachine.Factories;
 using Features.StateMachine.States;
 using SceneReference;
-using Scenes.Main.StateMachine.States;
+using Scenes.Main.StateMachine.States.Initial;
 using UnityEngine;
 using Zenject;
 
