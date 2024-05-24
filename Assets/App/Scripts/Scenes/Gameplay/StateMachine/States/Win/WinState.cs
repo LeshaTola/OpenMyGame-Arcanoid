@@ -1,6 +1,7 @@
 ﻿using Features.Saves;
 using Features.StateMachine.States;
 using Module.Saves;
+using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.StateMachine.States.Win.Routers;
 using Scenes.PackSelection.Feature.Packs;
@@ -15,17 +16,21 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 		private IDataProvider<PlayerProgressData> dataProvider;
 		private IBallService ballService;
 
+		private Plate plate;
+
 		public float BallsStopDuration;
 
 		public WinState(IRouterShowWin routerShowWin,
 				  IPackProvider packProvider,
 				  IDataProvider<PlayerProgressData> dataProvider,
-				  IBallService ballService)
+				  IBallService ballService,
+				  Plate plate)
 		{
 			this.routerShowWin = routerShowWin;
 			this.packProvider = packProvider;
 			this.dataProvider = dataProvider;
 			this.ballService = ballService;
+			this.plate = plate;
 		}
 
 		public override void Enter()
@@ -37,6 +42,8 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 
 		private async void EnterAsync()
 		{
+			plate.Stop();
+
 			await ballService.StopAllBallsAsync(BallsStopDuration);
 
 			PlayerProgressData playerData = dataProvider.GetData();

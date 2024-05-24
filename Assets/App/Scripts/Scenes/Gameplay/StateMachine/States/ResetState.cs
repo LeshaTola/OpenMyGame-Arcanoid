@@ -1,25 +1,21 @@
 ﻿using Features.StateMachine.States;
-using System.Collections.Generic;
+using Scenes.Gameplay.Feature.Reset.Services;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
 	public class ResetState : State
 	{
-		private IEnumerable<IResetable> resetables;
+		private IResetService resetService;
 
-		public ResetState(IEnumerable<IResetable> resetables)
+		public ResetState(IResetService resetService)
 		{
-			this.resetables = resetables;
+			this.resetService = resetService;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
-			foreach (IResetable resetable in resetables)
-			{
-				resetable.Reset();
-			}
-
+			resetService.Reset();
 			StateMachine.ChangeState<GameplayState>();
 		}
 	}

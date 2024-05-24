@@ -1,5 +1,6 @@
 ﻿using Features.StateMachine.States;
 using Module.TimeProvider;
+using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.StateMachine.States.Win.Routers;
 
 namespace Scenes.Gameplay.StateMachine.States
@@ -9,11 +10,15 @@ namespace Scenes.Gameplay.StateMachine.States
 
 		private IRouterShowMenu routerShowMenu;
 		private ITimeProvider timeProvider;
+		private IBallService ballService;
 
-		public PauseState(IRouterShowMenu routerShowMenu, ITimeProvider timeProvider)
+		public PauseState(IRouterShowMenu routerShowMenu,
+					ITimeProvider timeProvider,
+					IBallService ballService)
 		{
 			this.routerShowMenu = routerShowMenu;
 			this.timeProvider = timeProvider;
+			this.ballService = ballService;
 		}
 
 		public override void Enter()
@@ -21,12 +26,14 @@ namespace Scenes.Gameplay.StateMachine.States
 			base.Enter();
 			timeProvider.TimeMultiplier = 0;
 			routerShowMenu.ShowMenu();
+			ballService.PauseBalls();
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
 			timeProvider.TimeMultiplier = 1;
+			ballService.ResumeBalls();
 		}
 	}
 }

@@ -9,6 +9,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 		[SerializeField] private Rigidbody2D rb;
 
 		public Vector2 Direction { get => rb.velocity.normalized; }
+		public Rigidbody2D Rb { get => rb; }
 
 		private Vector2[] axes =
 		{
@@ -25,7 +26,6 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 
 		public void Push(Vector2 direction, float factor, float multiplier = 1)
 		{
-			rb.simulated = true;
 			float additionalSpeed = config.Speed * (config.SpeedMultiplier - 1) * factor;
 			rb.velocity = direction.normalized * (config.Speed + additionalSpeed) * multiplier;
 		}

@@ -12,6 +12,7 @@ using Scenes.Gameplay.Feature.Player.Ball;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.Feature.Reset.Services;
 using UnityEngine;
 using Zenject;
 
@@ -26,6 +27,7 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private BlocksDictionary blocksDictionary;
 		[SerializeField] private Block blockTemplate;
 		[SerializeField] private Transform container;
+		[SerializeField] private ResetService resetService;
 
 		[Header("Balls")]
 		[SerializeField] private int ballCount;
@@ -39,6 +41,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		public override void InstallBindings()
 		{
+			Container.Bind<IResetService>().FromInstance(resetService).AsSingle();
 			BindBallService();
 			BindProgressController();
 			BindHealthController();

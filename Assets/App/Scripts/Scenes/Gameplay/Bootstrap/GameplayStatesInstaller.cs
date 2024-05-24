@@ -16,7 +16,6 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private GameplayStateMachineHandler stateMachineHandler;
 		[SerializeField] private TextAsset defaultLevelInfo;
 		[SerializeField] private Plate plate;
-		//[SerializeField] private List<IUpdatable> updatables;
 
 		public override void InstallBindings()
 		{
@@ -64,11 +63,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindResetState()
 		{
-			var resetables = new List<IResetable>
-			{
-				plate,
-			};
-			Container.Bind<ResetState>().AsSingle().WithArguments(resetables);//TODO Move it to Service
+			Container.Bind<ResetState>().AsSingle();
 		}
 
 		private void BindLoadNextState()

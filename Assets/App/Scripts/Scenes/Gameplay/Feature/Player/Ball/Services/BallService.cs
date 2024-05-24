@@ -2,6 +2,7 @@
 using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Progress;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Player.Ball.Services
@@ -11,6 +12,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		private IPool<Ball> pool;
 		private IProgressController progressController;
 		private ITimeProvider timeProvider;
+
+		private Dictionary<Ball, Vector2> lastBallsDirections = new();
 
 		public BallService(IPool<Ball> pool, IProgressController progressController, ITimeProvider timeProvider)
 		{
@@ -61,7 +64,46 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 
 				await UniTask.Yield(PlayerLoopTiming.Update);
 			}
+		}
 
+		public void Reset()
+		{
+			List<Ball> balls = new List<Ball>();
+			balls.AddRange(pool.Active);
+			foreach (var ball in balls)
+			{
+				pool.Release(ball);
+
+			}
+		}
+
+		public void PauseBalls()
+		{
+			lastBallsDirections = GetBallsDirections();
+			foreach (Ball ball in pool.Active)
+			{
+				ball.Movement.Push(Vector2.zero);
+			}
+		}
+
+		public void ResumeBalls()
+		{
+			List<Ball> balls = new List<Ball>(lastBallsDirections.Keys);
+			foreach (var ball in balls)
+			{
+				ball.Movement.Push(lastBallsDirections[ball], progressController.NormalizedProgress);
+			}
+		}
+
+		private Dictionary<Ball, Vector2> GetBallsDirections()
+		{
+			Dictionary<Ball, Vector2> ballsDirections = new();
+			foreach (var ball in pool.Active)
+			{
+				ballsDirections.Add(ball, ball.Movement.Direction);
+			}
+
+			return ballsDirections;
 		}
 	}
 }
