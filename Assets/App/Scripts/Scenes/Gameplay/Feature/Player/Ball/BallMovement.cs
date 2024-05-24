@@ -23,11 +23,11 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 			Push(direction, 0);
 		}
 
-		public void Push(Vector2 direction, float factor)
+		public void Push(Vector2 direction, float factor, float multiplier = 1)
 		{
 			rb.simulated = true;
 			float additionalSpeed = config.Speed * (config.SpeedMultiplier - 1) * factor;
-			rb.velocity = direction.normalized * (config.Speed + additionalSpeed);
+			rb.velocity = direction.normalized * (config.Speed + additionalSpeed) * multiplier;
 		}
 
 		public Vector2 GetValidDirection()

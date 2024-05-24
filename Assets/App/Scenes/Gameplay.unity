@@ -1305,6 +1305,7 @@ MonoBehaviour:
   nextScene:
     sceneAsset: {fileID: 102900000, guid: 65003beee7396564fa5bf535d0b034fd, type: 3}
     scenePath: Assets/App/Scenes/PackSelection.unity
+  ballsStopDuration: 1
 --- !u!114 &1059541122
 MonoBehaviour:
   m_ObjectHideFlags: 0

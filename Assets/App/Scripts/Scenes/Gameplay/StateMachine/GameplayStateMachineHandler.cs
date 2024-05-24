@@ -12,6 +12,7 @@ namespace Features.StateMachine
 	public class GameplayStateMachineHandler : MonoBehaviour
 	{
 		[SerializeField] private SceneRef nextScene;
+		[SerializeField] private float ballsStopDuration = 0.5f;
 
 		private StateMachine core;
 		private IStatesFactory statesFactory;
@@ -34,7 +35,10 @@ namespace Features.StateMachine
 			core.AddState(statesFactory.GetState<GameplayState>());
 			core.AddState(statesFactory.GetState<PauseState>());
 			core.AddState(statesFactory.GetState<LossState>());
-			core.AddState(statesFactory.GetState<WinState>());
+
+			var winState = statesFactory.GetState<WinState>();
+			winState.BallsStopDuration = ballsStopDuration;
+			core.AddState(winState);
 
 			SetupLoadSceneState();
 		}
