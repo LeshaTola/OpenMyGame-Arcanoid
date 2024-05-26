@@ -1,8 +1,6 @@
-﻿using Features.Energy.Providers;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Features.Energy.UI
 {
@@ -10,16 +8,7 @@ namespace Features.Energy.UI
 	{
 		[SerializeField] private Slider slider;
 		[SerializeField] private TextMeshProUGUI energyText;
-
-		private IEnergyProvider energyProvider;
-
-		[Inject]
-		public void Construct(IEnergyProvider energyProvider)
-		{
-			this.energyProvider = energyProvider;
-
-			energyProvider.OnEnergyChanged += OnEnergyChanged;
-		}
+		[SerializeField] private TextMeshProUGUI recoveringTimerText;
 
 		public void UpdateUI(int currentValue, int maxValue)
 		{
@@ -29,16 +18,18 @@ namespace Features.Energy.UI
 			slider.value = value;
 		}
 
+		public void UpdateTimer(int totalSeconds)
+		{
+			int minutes = totalSeconds / 60;
+			int seconds = totalSeconds % 60;
+			recoveringTimerText.text = $"{minutes}:{seconds}";
+		}
+
 		private static float CalculateSliderValue(int currentValue, int maxValue)
 		{
 			float value = (float)currentValue / maxValue;
 			value = Mathf.Clamp01(value);
 			return value;
-		}
-
-		private void OnEnergyChanged()
-		{
-			CalculateSliderValue(energyProvider.CurrentEnergy, energyProvider.Config.MaxEnergy);
 		}
 	}
 }

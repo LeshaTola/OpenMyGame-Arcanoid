@@ -14,6 +14,7 @@ namespace Features.Energy
 			this.energyProvider = energyProvider;
 
 			energyProvider.OnEnergyChanged += OnEnergyChanged;
+			energyProvider.OnEnergyTimerChanged += OnEnergyTimerChanged;
 		}
 
 		public void UpdateUI()
@@ -24,6 +25,11 @@ namespace Features.Energy
 		private void OnEnergyChanged()
 		{
 			UpdateUI();
+		}
+
+		private void OnEnergyTimerChanged()
+		{
+			energySliderUI.UpdateTimer((int)energyProvider.RemainingRecoveryTime);
 		}
 	}
 }

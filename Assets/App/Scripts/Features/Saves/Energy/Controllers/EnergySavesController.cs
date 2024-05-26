@@ -48,13 +48,21 @@ namespace Features.Saves.Energy.Controllers
 			}
 
 			TimeSpan timeSpan = DateTime.Now - energyData.ExitTime;
-			float recoverAmount = (float)(timeSpan.TotalSeconds + energyData.RemainingRecoveryTime) / energyProvider.Config.RecoveryTime;
+			float remainingTime = (float)(energyData.RemainingRecoveryTime - timeSpan.TotalSeconds);
+			if (remainingTime >= 0)
+			{
+				energyProvider.RemainingRecoveryTime = remainingTime;
+				return 0;
+			}
+			int offlineEnergy = energyProvider.Config.RecoveryEnergy;
+
+			float recoverAmount = -remainingTime / energyProvider.Config.RecoveryTime;
 			int recoverAmountInt = (int)recoverAmount;
 
-			float remainingRecoveryTime = (recoverAmount - recoverAmountInt) * energyProvider.Config.RecoveryTime;
+			float remainingRecoveryTime = energyProvider.Config.RecoveryTime - (-remainingTime % energyProvider.Config.RecoveryTime);
 			energyProvider.RemainingRecoveryTime = remainingRecoveryTime;
 
-			int offlineEnergy = recoverAmountInt * energyProvider.Config.RecoveryEnergy;
+			offlineEnergy += recoverAmountInt * energyProvider.Config.RecoveryEnergy;
 			int remainingEnergy = energyProvider.Config.MaxEnergy - totalEnergy;
 
 			return GetAdditionalEnergy(offlineEnergy, remainingEnergy);

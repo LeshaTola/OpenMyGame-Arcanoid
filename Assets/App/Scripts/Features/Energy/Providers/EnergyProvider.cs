@@ -9,6 +9,7 @@ namespace Features.Energy.Providers
 	public class EnergyProvider : IEnergyProvider
 	{
 		public event Action OnEnergyChanged;
+		public event Action OnEnergyTimerChanged;
 
 		private ITimeProvider timeProvider;
 		private EnergyConfig config;
@@ -44,6 +45,7 @@ namespace Features.Energy.Providers
 				{
 					await UniTask.Yield();
 					timer -= timeProvider.DeltaTime;
+					OnEnergyTimerChanged?.Invoke();
 				}
 				timer = config.RecoveryTime;
 				AddEnergy(config.RecoveryEnergy);
