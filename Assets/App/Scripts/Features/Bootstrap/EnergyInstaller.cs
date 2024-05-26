@@ -7,7 +7,7 @@ namespace Features.Bootstrap
 	{
 		public override void InstallBindings()
 		{
-			Container.Bind<IEnergyController>().To<EnergyController>().AsSingle().NonLazy();
+			Container.Bind<IEnergyController>().To<EnergyController>().AsSingle();
 		}
 	}
 }

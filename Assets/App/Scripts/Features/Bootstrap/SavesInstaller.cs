@@ -1,6 +1,8 @@
-﻿using Features.ProjectCondition.Providers;
+﻿using Assets.App.Scripts.Features.Saves.PlayerProgress.Controllers;
+using Features.ProjectCondition.Providers;
 using Features.Saves;
 using Features.Saves.Energy;
+using Features.Saves.Energy.Controllers;
 using Features.Saves.Energy.Keys;
 using Features.Saves.Keys;
 using Features.Saves.Localization;
@@ -22,6 +24,9 @@ namespace Features.Bootstrap
 			BindPlayerProgressDataProvider();
 			BindLocalizationDataProvider();
 			BindEnergyDataProvider();
+
+			Container.Bind<IEnergySavesController>().To<EnergySavesController>().AsSingle();
+			Container.Bind<IPlayerProgressSavesController>().To<PlayerProgressSavesController>().AsSingle();
 
 			Container.Bind<IProjectSavesController>().To<ProjectSavesController>().AsSingle().NonLazy();
 			Container.Bind<IProjectConditionProvider>().FromInstance(projectConditionProvider.Value).AsSingle();

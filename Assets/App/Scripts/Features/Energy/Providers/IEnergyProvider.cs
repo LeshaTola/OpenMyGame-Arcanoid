@@ -9,6 +9,7 @@ namespace Features.Energy.Providers
 
 		int CurrentEnergy { get; }
 		EnergyConfig Config { get; }
+		float RemainingRecoveryTime { get; }
 
 		void AddEnergy(int energy);
 		void ReduceEnergy(int energy);

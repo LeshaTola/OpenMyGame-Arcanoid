@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnergyConfig
   m_EditorClassIdentifier: 
   maxEnergy: 100
-  recoveryTime: 1
+  recoveryTime: 4
   recoveryEnergy: 1
   playCost: 4
   continueCostMultiplier: 2

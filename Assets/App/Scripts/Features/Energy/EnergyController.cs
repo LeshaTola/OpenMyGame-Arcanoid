@@ -14,7 +14,6 @@ namespace Features.Energy
 			this.energyProvider = energyProvider;
 
 			energyProvider.OnEnergyChanged += OnEnergyChanged;
-			energyProvider.StartEnergyRecoveringAsync(energyProvider.Config.RecoveryTime);
 		}
 
 		public void UpdateUI()

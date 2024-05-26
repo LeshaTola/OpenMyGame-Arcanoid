@@ -6,6 +6,7 @@ namespace Features.Saves.Energy
 	public class EnergyData
 	{
 		public DateTime ExitTime;
+		public float RemainingRecoveryTime;
 		public int Energy;
 	}
 }

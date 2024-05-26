@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Features.Energy.Configs;
-using Features.Saves.Energy;
-using Module.Saves;
+using Features.Saves.Energy.Controllers;
 using System;
 using UnityEngine;
 
@@ -13,19 +12,22 @@ namespace Features.Energy.Providers
 
 		//private ITimeProvider timeProvider;
 		private EnergyConfig config;
-		private IDataProvider<EnergyData> energyDataProvider;
-
+		IEnergySavesController savesController;
 		private float timer;
 
 		public EnergyProvider(EnergyConfig config,
-							IDataProvider<EnergyData> energyDataProvider)
+						IEnergySavesController savesController)
 		{
 			this.config = config;
-			this.energyDataProvider = energyDataProvider;
+			this.savesController = savesController;
+
+			StartEnergyRecoveringAsync(Config.RecoveryTime);
+
 		}
 
 		public int CurrentEnergy { get; private set; }
 		public EnergyConfig Config { get => config; }
+		public float RemainingRecoveryTime { get => timer; }
 
 		public async void StartEnergyRecoveringAsync(float startTimer = 0)
 		{
@@ -58,7 +60,7 @@ namespace Features.Energy.Providers
 
 			CurrentEnergy += energy;
 			OnEnergyChanged?.Invoke();
-			SaveEnergyData();
+			savesController.SaveEnergyData(this);
 		}
 
 		public void ReduceEnergy(int energy)
@@ -74,17 +76,7 @@ namespace Features.Energy.Providers
 				CurrentEnergy = 0;
 			}
 			OnEnergyChanged?.Invoke();
-			SaveEnergyData();
-		}
-
-		private void SaveEnergyData()
-		{
-			var energyData = new EnergyData()
-			{
-				Energy = CurrentEnergy,
-				ExitTime = DateTime.Now
-			};
-			energyDataProvider.SaveData(energyData);
+			savesController.SaveEnergyData(this);
 		}
 	}
 }
