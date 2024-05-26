@@ -1,13 +1,10 @@
-﻿using Features.Popups.Languages;
+﻿using Features.Energy.Configs;
+using Features.Energy.Providers;
+using Features.Popups.Languages;
 using Features.ProjectInitServices;
-using Features.Saves;
-using Features.Saves.Keys;
-using Features.Saves.Localization;
-using Features.Saves.Localization.Keys;
 using Module.Localization;
 using Module.Localization.Configs;
 using Module.Localization.Parsers;
-using Module.Saves;
 using Module.Scenes;
 using Scenes.PackSelection.Feature.Packs;
 using Scenes.PackSelection.Feature.Packs.Configs;
@@ -23,18 +20,19 @@ namespace Features.Bootstrap
 		[SerializeField] private List<Pack> packs;
 		[SerializeField] private PopupButton popupButtonTemplate;
 
+		[Header("Energy")]
+		[SerializeField] private EnergyConfig energyConfig;
+
 		[Header("Localization")]
 		[SerializeField] private string startLanguage;
 		[SerializeField] private LocalizationDictionary localizationDictionary;
 
 		public override void InstallBindings()
 		{
+			BindEnergyProvider();
+
 			BindParser();
 			BindLocalizationSystem();
-
-			BindStorage();
-			BindPlayerProgressDataProvider();
-			BindLocalizationDataProvider();
 
 			BindInitProjectService();
 			BindSceneLoadService();
@@ -43,12 +41,12 @@ namespace Features.Bootstrap
 			BindButtonsFactory();
 		}
 
-		private void BindLocalizationDataProvider()
+		private void BindEnergyProvider()
 		{
-			Container.Bind<IDataProvider<LocalizationData>>()
-				.To<DataProvider<LocalizationData>>()
+			Container.Bind<IEnergyProvider>()
+				.To<EnergyProvider>()
 				.AsSingle()
-				.WithArguments(LocalizationDataKey.KEY);
+				.WithArguments(energyConfig);
 		}
 
 		private void BindButtonsFactory()
@@ -72,19 +70,6 @@ namespace Features.Bootstrap
 			Container.Bind<IParser>()
 				.To<CSVParser>()
 				.AsSingle();
-		}
-
-		private void BindStorage()
-		{
-			Container.Bind<IStorage>().To<PlayerPrefsStorage>().AsSingle();
-		}
-
-		private void BindPlayerProgressDataProvider()
-		{
-			Container.Bind<IDataProvider<PlayerProgressData>>()
-				.To<DataProvider<PlayerProgressData>>()
-				.AsSingle()
-				.WithArguments(PlayerProgressDataKey.KEY);
 		}
 
 		private void BindPackProvider()

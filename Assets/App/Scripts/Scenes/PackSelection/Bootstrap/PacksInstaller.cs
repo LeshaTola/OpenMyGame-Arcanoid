@@ -1,3 +1,4 @@
+using Features.Bootstrap;
 using Scenes.PackSelection.Feature.Packs;
 using Scenes.PackSelection.Feature.Packs.UI;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Scenes.PackSelection.Bootstrap
 
 		public override void InstallBindings()
 		{
+			EnergyInstaller.Install(Container);
+
 			BindPackFactory();
 			BindMenu();
 		}

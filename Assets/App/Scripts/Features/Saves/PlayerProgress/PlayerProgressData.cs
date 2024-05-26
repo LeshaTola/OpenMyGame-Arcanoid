@@ -4,6 +4,7 @@ namespace Features.Saves
 {
 	public class PlayerProgressData
 	{
+		public bool IsFirstSession = false;
 		public Dictionary<string, SavedPackData> Packs = new();
 	}
 
