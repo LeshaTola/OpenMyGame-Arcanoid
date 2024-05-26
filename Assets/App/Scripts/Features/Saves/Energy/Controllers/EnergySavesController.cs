@@ -32,9 +32,43 @@ namespace Features.Saves.Energy.Controllers
 				energyData = FormFirstEnergyData(energyProvider);
 				energyDataProvider.SaveData(energyData);
 			}
-			//Calculate energy between sessions
 
-			energyProvider.AddEnergy(energyData.Energy);
+			int totalEnergy = energyData.Energy;
+			int additionalEnergy = GetAdditionalEnergyBetweenSessions(energyProvider, energyData, totalEnergy);
+			totalEnergy += additionalEnergy;
+
+			energyProvider.AddEnergy(totalEnergy);
+		}
+
+		private int GetAdditionalEnergyBetweenSessions(IEnergyProvider energyProvider, EnergyData energyData, int totalEnergy)
+		{
+			if (totalEnergy >= energyProvider.Config.MaxEnergy)
+			{
+				return 0;
+			}
+
+			TimeSpan timeSpan = DateTime.Now - energyData.ExitTime;
+			float recoverAmount = (float)(timeSpan.TotalSeconds + energyData.RemainingRecoveryTime) / energyProvider.Config.RecoveryTime;
+			int recoverAmountInt = (int)recoverAmount;
+
+			float remainingRecoveryTime = (recoverAmount - recoverAmountInt) * energyProvider.Config.RecoveryTime;
+			energyProvider.RemainingRecoveryTime = remainingRecoveryTime;
+
+			int offlineEnergy = recoverAmountInt * energyProvider.Config.RecoveryEnergy;
+			int remainingEnergy = energyProvider.Config.MaxEnergy - totalEnergy;
+
+			return GetAdditionalEnergy(offlineEnergy, remainingEnergy);
+		}
+
+		private static int GetAdditionalEnergy(int offlineEnergy, int remainingEnergy)
+		{
+			int additionalEnergy = remainingEnergy;
+			if (remainingEnergy > offlineEnergy)
+			{
+				additionalEnergy = offlineEnergy;
+			}
+
+			return additionalEnergy;
 		}
 
 		private EnergyData FormFirstEnergyData(IEnergyProvider energyProvider)

@@ -22,13 +22,11 @@ namespace Features.Energy.Providers
 			this.config = config;
 			this.savesController = savesController;
 			this.timeProvider = timeProvider;
-
-			StartEnergyRecoveringAsync(Config.RecoveryTime);
 		}
 
 		public int CurrentEnergy { get; private set; }
 		public EnergyConfig Config { get => config; }
-		public float RemainingRecoveryTime { get => timer; }
+		public float RemainingRecoveryTime { get => timer; set => timer = value; }
 
 		public async void StartEnergyRecoveringAsync(float startTimer = 0)
 		{

@@ -44,6 +44,7 @@ namespace Features.Saves
 		private void OnApplicationStart()
 		{
 			LoadAllData();
+			energyProvider.StartEnergyRecoveringAsync(energyProvider.RemainingRecoveryTime);
 		}
 
 		private void OnApplicationPaused(bool pause)
