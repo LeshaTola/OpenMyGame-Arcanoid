@@ -6,6 +6,7 @@ using Module.Localization;
 using Module.Localization.Configs;
 using Module.Localization.Parsers;
 using Module.Scenes;
+using Module.TimeProvider;
 using Scenes.PackSelection.Feature.Packs;
 using Scenes.PackSelection.Feature.Packs.Configs;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace Features.Bootstrap
 
 		public override void InstallBindings()
 		{
+			BindProjectTimeProvider();
 			BindEnergyProvider();
 
 			BindParser();
@@ -41,12 +43,18 @@ namespace Features.Bootstrap
 			BindButtonsFactory();
 		}
 
+		private void BindProjectTimeProvider()
+		{
+			Container.Bind<ITimeProvider>().To<ProjectTimeProvider>().AsSingle().WhenInjectedInto<IEnergyProvider>();
+		}
+
 		private void BindEnergyProvider()
 		{
 			Container.Bind<IEnergyProvider>()
 				.To<EnergyProvider>()
 				.AsSingle()
-				.WithArguments(energyConfig);
+				.WithArguments(energyConfig)
+				.NonLazy();
 		}
 
 		private void BindButtonsFactory()

@@ -1,8 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
 using Features.Energy.Configs;
 using Features.Saves.Energy.Controllers;
+using Module.TimeProvider;
 using System;
-using UnityEngine;
 
 namespace Features.Energy.Providers
 {
@@ -10,19 +10,20 @@ namespace Features.Energy.Providers
 	{
 		public event Action OnEnergyChanged;
 
-		//private ITimeProvider timeProvider;
+		private ITimeProvider timeProvider;
 		private EnergyConfig config;
 		IEnergySavesController savesController;
 		private float timer;
 
 		public EnergyProvider(EnergyConfig config,
-						IEnergySavesController savesController)
+						IEnergySavesController savesController,
+						ITimeProvider timeProvider)
 		{
 			this.config = config;
 			this.savesController = savesController;
+			this.timeProvider = timeProvider;
 
 			StartEnergyRecoveringAsync(Config.RecoveryTime);
-
 		}
 
 		public int CurrentEnergy { get; private set; }
@@ -44,7 +45,7 @@ namespace Features.Energy.Providers
 				while (timer > 0)
 				{
 					await UniTask.Yield();
-					timer -= Time.deltaTime;//timeProvider.DeltaTime;
+					timer -= timeProvider.DeltaTime;
 				}
 				timer = config.RecoveryTime;
 				AddEnergy(config.RecoveryEnergy);
