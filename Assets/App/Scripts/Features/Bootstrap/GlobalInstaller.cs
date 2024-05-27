@@ -30,6 +30,9 @@ namespace Features.Bootstrap
 
 		public override void InstallBindings()
 		{
+			ProjectCommandInstaller.Install(Container);
+			ProjectRoutersInstaller.Install(Container);
+
 			BindProjectTimeProvider();
 			BindEnergyProvider();
 
@@ -45,7 +48,10 @@ namespace Features.Bootstrap
 
 		private void BindProjectTimeProvider()
 		{
-			Container.Bind<ITimeProvider>().To<ProjectTimeProvider>().AsSingle().WhenInjectedInto<IEnergyProvider>();
+			Container.Bind<ITimeProvider>()
+				.To<ProjectTimeProvider>()
+				.AsSingle()
+				.WhenInjectedInto<IEnergyProvider>();
 		}
 
 		private void BindEnergyProvider()

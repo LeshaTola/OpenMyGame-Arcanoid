@@ -4,9 +4,8 @@ using Zenject;
 
 namespace Scenes.Gameplay.Bootstrap
 {
-	public class RouterInstaller : MonoInstaller
+	public class RouterInstaller : Installer<RouterInstaller>
 	{
-
 		public override void InstallBindings()
 		{
 			CommandInstaller.Install(Container);

@@ -1,4 +1,5 @@
 ﻿using Features.Energy.Providers;
+using Features.Routers;
 using Features.StateMachine.States;
 using Module.Commands;
 using Module.PopupLogic.General.Controller;
@@ -10,7 +11,8 @@ namespace Scenes.Gameplay.Feature.Commands
 	{
 		private Features.StateMachine.StateMachine stateMachine;
 		private IPopupController popupController;
-		IEnergyProvider energyProvider;
+		private IEnergyProvider energyProvider;
+		private IRouterShowInfoPopup routerInfoPopup;
 
 		public string Label { get; }
 		public bool IsNextLevel { get; set; } = true;
@@ -18,11 +20,13 @@ namespace Scenes.Gameplay.Feature.Commands
 		public LoadNextLevelCommand(Features.StateMachine.StateMachine stateMachine,
 							  IPopupController popupController,
 							  IEnergyProvider energyProvider,
+							  IRouterShowInfoPopup routerInfoPopup,
 							  string label)
 		{
 			this.stateMachine = stateMachine;
 			this.popupController = popupController;
 			this.energyProvider = energyProvider;
+			this.routerInfoPopup = routerInfoPopup;
 			Label = label;
 		}
 
@@ -46,7 +50,7 @@ namespace Scenes.Gameplay.Feature.Commands
 		{
 			if (energyProvider.CurrentEnergy < energyProvider.Config.MaxEnergy)
 			{
-				//TODO:Show popup
+				routerInfoPopup.ShowInfo("not enough energy");
 				return;
 			}
 			energyProvider.ReduceEnergy(energyProvider.Config.PlayCost);

@@ -74,9 +74,9 @@ namespace Module.PopupLogic.General.Controller
 
 		private void ActivatePrevPopup()
 		{
-			if (currentPopups.Count > 0)
+			if (currentPopups.Count > 1)
 			{
-				currentPopups.Last().Activate();
+				currentPopups[currentPopups.Count - 2].Activate();
 				return;
 			}
 		}

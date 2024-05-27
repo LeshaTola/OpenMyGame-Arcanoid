@@ -41,7 +41,9 @@ namespace Scenes.Gameplay.Bootstrap
 
 		public override void InstallBindings()
 		{
-			Container.Bind<IResetService>().FromInstance(resetService).AsSingle();
+			RouterInstaller.Install(Container);
+
+			BindResetService();
 			BindBallService();
 			BindProgressController();
 			BindHealthController();
@@ -53,6 +55,11 @@ namespace Scenes.Gameplay.Bootstrap
 			BindBlockFactory();
 			BindTimeProvider();
 			BindInput();
+		}
+
+		private void BindResetService()
+		{
+			Container.Bind<IResetService>().FromInstance(resetService).AsSingle();
 		}
 
 		private void BindBallService()
@@ -67,12 +74,17 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindHealthController()
 		{
-			Container.BindInterfacesAndSelfTo<HealthController>().AsSingle().WithArguments(config);
+			Container.BindInterfacesAndSelfTo<HealthController>()
+				.AsSingle()
+				.WithArguments(config);
 		}
 
 		private void BindProgressController()
 		{
-			Container.Bind<IProgressController>().To<ProgressController>().AsSingle().WithArguments(winProgress);
+			Container.Bind<IProgressController>()
+				.To<ProgressController>()
+				.AsSingle()
+				.WithArguments(winProgress);
 		}
 
 		private void BindBallsPool()

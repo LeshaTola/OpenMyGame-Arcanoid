@@ -1,5 +1,6 @@
 using Features.Energy;
 using Features.Energy.Providers;
+using Features.Routers;
 using Features.Saves;
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
@@ -20,6 +21,7 @@ namespace Scenes.PackSelection.StateMachine
 		private IDataProvider<PlayerProgressData> playerProgressDataProvider;
 		private IEnergyController energyController;
 		private IEnergyProvider energyProvider;
+		private IRouterShowInfoPopup routerShowInfo;
 
 		private PlayerProgressData playerProgressData;
 
@@ -29,7 +31,8 @@ namespace Scenes.PackSelection.StateMachine
 								ISceneTransition sceneTransition,
 								IDataProvider<PlayerProgressData> playerProgressDataProvider,
 								IEnergyController energyController,
-								IEnergyProvider energyProvider)
+								IEnergyProvider energyProvider,
+								IRouterShowInfoPopup routerShowInfo)
 		{
 			this.packMenu = packMenu;
 			this.headerUI = headerUI;
@@ -38,6 +41,7 @@ namespace Scenes.PackSelection.StateMachine
 			this.playerProgressDataProvider = playerProgressDataProvider;
 			this.energyController = energyController;
 			this.energyProvider = energyProvider;
+			this.routerShowInfo = routerShowInfo;
 		}
 
 		public override void Enter()
@@ -63,6 +67,7 @@ namespace Scenes.PackSelection.StateMachine
 		{
 			if (energyProvider.CurrentEnergy < energyProvider.Config.PlayCost)
 			{
+				routerShowInfo.ShowInfo("not enough energy");
 				return;
 			}
 
