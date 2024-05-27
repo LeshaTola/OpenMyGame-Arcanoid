@@ -22,6 +22,17 @@ namespace Features.Energy
 			energySliderUI.UpdateUI(energyProvider.CurrentEnergy, energyProvider.Config.MaxEnergy);
 		}
 
+		public void UpdateTimer()
+		{
+			energySliderUI.UpdateTimer((int)energyProvider.RemainingRecoveryTime);
+		}
+
+		public void CleanUp()
+		{
+			energyProvider.OnEnergyChanged -= OnEnergyChanged;
+			energyProvider.OnEnergyTimerChanged -= OnEnergyTimerChanged;
+		}
+
 		private void OnEnergyChanged()
 		{
 			UpdateUI();
@@ -29,7 +40,7 @@ namespace Features.Energy
 
 		private void OnEnergyTimerChanged()
 		{
-			energySliderUI.UpdateTimer((int)energyProvider.RemainingRecoveryTime);
+			UpdateTimer();
 		}
 	}
 }

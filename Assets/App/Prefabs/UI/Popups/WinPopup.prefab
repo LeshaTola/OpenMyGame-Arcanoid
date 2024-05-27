@@ -441,6 +441,11 @@ MonoBehaviour:
     rawReference:
       rid: -2
   raycaster: {fileID: 70468076734603882}
+  energySlider:
+    mode: 0
+    unityReference: {fileID: 7828569910326923292}
+    rawReference:
+      rid: -2
   packImage: {fileID: 2015620573601466750}
   nextButton: {fileID: 7176306540941244104}
   header: {fileID: 3233671272719867423}
@@ -448,7 +453,9 @@ MonoBehaviour:
   packName: {fileID: 4528886024820707130}
   levelInfo: {fileID: 7028342190090014307}
   lines: {fileID: 1779532550204698684}
-  eachAnimationDuration: 0.5
+  energyAnimationDuration: 1
+  levelAnimationDuration: 0.25
+  buttonAnimationDuration: 0.5
   references:
     version: 2
     RefIds:
@@ -1591,3 +1598,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5361364708086654783, guid: 4bfbe98aaab2ae346aef1f0779f4e1a2, type: 3}
   m_PrefabInstance: {fileID: 7028342189686923882}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7828569910326923292 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 949420734738281078, guid: 4bfbe98aaab2ae346aef1f0779f4e1a2, type: 3}
+  m_PrefabInstance: {fileID: 7028342189686923882}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d524b70216c5bf1468020ddcef5f4ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

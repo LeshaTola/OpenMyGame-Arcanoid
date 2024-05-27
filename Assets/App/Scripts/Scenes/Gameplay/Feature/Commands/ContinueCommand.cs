@@ -5,7 +5,7 @@ using Scenes.Gameplay.StateMachine.States;
 
 namespace Scenes.Gameplay.Feature.Commands
 {
-	public class RestartCommand : ILabeledCommand
+	public class ContinueCommand : ILabeledCommand
 	{
 		private Features.StateMachine.StateMachine stateMachine;
 		private IPopupController popupController;
@@ -13,7 +13,7 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		public string Label { get; }
 
-		public RestartCommand(Features.StateMachine.StateMachine stateMachine,
+		public ContinueCommand(Features.StateMachine.StateMachine stateMachine,
 						IPopupController popupController,
 						IEnergyProvider energyProvider,
 						string label)
@@ -26,14 +26,15 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		public void Execute()
 		{
-			if (energyProvider.CurrentEnergy < energyProvider.Config.PlayCost)
+			int continueCost = (int)(energyProvider.Config.PlayCost * energyProvider.Config.ContinueCostMultiplier);
+			if (continueCost < energyProvider.Config.PlayCost)
 			{
 				return;
 			}
-			energyProvider.ReduceEnergy(energyProvider.Config.PlayCost);
+			energyProvider.ReduceEnergy(continueCost);
 
 			popupController.HidePopup();
-			stateMachine.ChangeState<InitialState>();
+			stateMachine.ChangeState<ResetState>();
 		}
 	}
 }

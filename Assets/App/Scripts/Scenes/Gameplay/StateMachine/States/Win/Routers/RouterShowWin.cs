@@ -1,4 +1,5 @@
-﻿using Features.Popups.WinPopup;
+﻿using Features.Energy.Providers;
+using Features.Popups.WinPopup;
 using Features.Popups.WinPopup.ViewModels;
 using Features.Saves;
 using Module.Localization;
@@ -12,15 +13,18 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 	{
 		private IPopupController popupController;
 		private ILocalizationSystem localizationSystem;
+		private IEnergyProvider energyProvider;
 		private LoadNextLevelCommand loadNextLevelCommand;
 
 		public RouterShowWin(IPopupController popupController,
 					   LoadNextLevelCommand loadNextLevelCommand,
-					   ILocalizationSystem localizationSystem)
+					   ILocalizationSystem localizationSystem,
+					   IEnergyProvider energyProvider)
 		{
 			this.popupController = popupController;
 			this.loadNextLevelCommand = loadNextLevelCommand;
 			this.localizationSystem = localizationSystem;
+			this.energyProvider = energyProvider;
 		}
 
 		public void ShowWin(Pack currentPack, SavedPackData savedPackData)
@@ -31,7 +35,8 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 			WinPopupViewModel popupViewModel = new(loadNextLevelCommand,
 										  currentPack,
 										  savedPackData,
-										  localizationSystem);
+										  localizationSystem,
+										  energyProvider);
 			popup.Setup(popupViewModel);
 			popup.Show();
 		}

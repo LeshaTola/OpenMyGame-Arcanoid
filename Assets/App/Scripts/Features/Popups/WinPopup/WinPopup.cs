@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using Features.Energy;
+using Features.Energy.UI;
 using Features.Popups.Languages;
 using Features.Popups.WinPopup.ViewModels;
 using Features.Saves;
@@ -7,6 +9,7 @@ using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
 using Scenes.PackSelection.Feature.Packs.Configs;
 using TMPro;
+using TNRD;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +17,8 @@ namespace Features.Popups.WinPopup
 {
 	public class WinPopup : Popup
 	{
+		[SerializeField] private SerializableInterface<IEnergySliderUI> energySlider;
+
 		[SerializeField] private Image packImage;
 
 		[SerializeField] private PopupButton nextButton;
@@ -25,9 +30,14 @@ namespace Features.Popups.WinPopup
 		[SerializeField] private TextMeshProUGUI levelInfo;
 
 		[SerializeField] private SpinAnimation lines;
-		[SerializeField] private float eachAnimationDuration = 0.5f;
+
+		[Header("Animations")]
+		[SerializeField] private float energyAnimationDuration = 1f;
+		[SerializeField] private float levelAnimationDuration = 0.25f;
+		[SerializeField] private float buttonAnimationDuration = 0.5f;
 
 		private IWinPopupViewModel viewModel;
+		private EnergyController energyController;
 
 		public void Setup(IWinPopupViewModel viewModel)
 		{
@@ -35,7 +45,6 @@ namespace Features.Popups.WinPopup
 			Initialize(viewModel);
 			SetupLogic(viewModel);
 			Translate();
-
 		}
 
 		public override void Show()
@@ -59,9 +68,26 @@ namespace Features.Popups.WinPopup
 			}
 
 			Sequence sequence = DOTween.Sequence();
+			SetupSliderAnimation(sequence);
 			SetupLevelAnimation(pack, savedPackData, sequence);
 			SetupButtonAnimation(sequence);
 			sequence.onComplete += Activate;
+		}
+
+		#region SetupAnimation
+		private void SetupSliderAnimation(Sequence sequence)
+		{
+			var sliderAnimation = DOVirtual.Int(0, viewModel.EnergyProvider.CurrentEnergy, energyAnimationDuration, value =>
+			{
+				energySlider.Value.UpdateUI(value, viewModel.EnergyProvider.Config.MaxEnergy);
+			});
+
+			sliderAnimation.onComplete += () =>
+			{
+				energyController = new EnergyController(energySlider.Value, viewModel.EnergyProvider);
+			};
+
+			sequence.Append(sliderAnimation);
 		}
 
 		private void SetupLevelAnimation(Pack pack, SavedPackData savedPackData, Sequence sequence)
@@ -72,7 +98,7 @@ namespace Features.Popups.WinPopup
 
 		private void SetupCurrentLevelAnimation(Pack pack, SavedPackData savedPackData, Sequence sequence)
 		{
-			var levelAnimation = DOVirtual.Int(0, savedPackData.CurrentLevel, eachAnimationDuration, value =>
+			var levelAnimation = DOVirtual.Int(0, savedPackData.CurrentLevel, levelAnimationDuration, value =>
 			{
 				levelInfo.text = $"{value}/{pack.MaxLevel + 1}";
 			});
@@ -88,7 +114,7 @@ namespace Features.Popups.WinPopup
 
 		private void SetupMaxLevelAnimation(Pack pack, Sequence sequence)
 		{
-			var maxLevelAnimation = DOVirtual.Int(0, pack.MaxLevel + 1, eachAnimationDuration, value =>
+			var maxLevelAnimation = DOVirtual.Int(0, pack.MaxLevel + 1, levelAnimationDuration, value =>
 			{
 				levelInfo.text = $"0/{value}";
 			});
@@ -97,30 +123,25 @@ namespace Features.Popups.WinPopup
 
 		private void SetupButtonAnimation(Sequence sequence)
 		{
-			sequence.Append(nextButton.transform.DOScale(Vector3.one, eachAnimationDuration));
+			sequence.Append(nextButton.transform.DOScale(Vector3.one, buttonAnimationDuration));
+		}
+		#endregion
+
+		private void Initialize(IWinPopupViewModel viewModel)
+		{
+			this.viewModel = viewModel;
+
+			header.Init(viewModel.LocalizationSystem);
+			packName.Init(viewModel.LocalizationSystem);
+			packPreNameText.Init(viewModel.LocalizationSystem);
+
+			nextButton.Init(viewModel.LocalizationSystem);
 		}
 
 		private void SetupLogic(IWinPopupViewModel viewModel)
 		{
 			nextButton.onButtonClicked += viewModel.LoadNextLevelCommand.Execute;
 			nextButton.UpdateText(viewModel.LoadNextLevelCommand.Label);
-		}
-
-		private void CleanUp()
-		{
-			ResetUI();
-
-			if (viewModel != null)
-			{
-				nextButton.onButtonClicked -= viewModel.LoadNextLevelCommand.Execute;
-			}
-		}
-
-		private void ResetUI()
-		{
-			levelInfo.text = "0/0";
-			packName.Text.text = "";
-			nextButton.transform.localScale = Vector3.zero;
 		}
 
 		private void Translate()
@@ -131,16 +152,22 @@ namespace Features.Popups.WinPopup
 			nextButton.Translate();
 		}
 
-		private void Initialize(IWinPopupViewModel viewModel)
+		private void CleanUp()
 		{
-			this.viewModel = viewModel;
+			ResetUI();
 
-			header.Init(viewModel.LocalizationSystem);
-			packName.Init(viewModel.LocalizationSystem);
-			packPreNameText.Init(viewModel.LocalizationSystem);
+			if (viewModel != null)
+			{
+				nextButton.onButtonClicked -= viewModel.LoadNextLevelCommand.Execute;
+				energyController.CleanUp();
+			}
+		}
 
-
-			nextButton.Init(viewModel.LocalizationSystem);
+		private void ResetUI()
+		{
+			levelInfo.text = "0/0";
+			packName.Text.text = "";
+			nextButton.transform.localScale = Vector3.zero;
 		}
 	}
 }

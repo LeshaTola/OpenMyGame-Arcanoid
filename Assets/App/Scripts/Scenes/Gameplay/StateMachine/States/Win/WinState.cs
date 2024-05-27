@@ -1,4 +1,5 @@
-﻿using Features.Saves;
+﻿using Features.Energy.Providers;
+using Features.Saves;
 using Features.StateMachine.States;
 using Module.Saves;
 using Scenes.Gameplay.Feature.Player;
@@ -15,6 +16,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 		private IPackProvider packProvider;
 		private IDataProvider<PlayerProgressData> dataProvider;
 		private IBallService ballService;
+		private IEnergyProvider energyProvider;
 
 		private Plate plate;
 
@@ -24,12 +26,14 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 				  IPackProvider packProvider,
 				  IDataProvider<PlayerProgressData> dataProvider,
 				  IBallService ballService,
+				  IEnergyProvider energyProvider,
 				  Plate plate)
 		{
 			this.routerShowWin = routerShowWin;
 			this.packProvider = packProvider;
 			this.dataProvider = dataProvider;
 			this.ballService = ballService;
+			this.energyProvider = energyProvider;
 			this.plate = plate;
 		}
 
@@ -37,6 +41,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 		{
 			base.Enter();
 
+			energyProvider.AddEnergy(energyProvider.Config.WinReward);
 			EnterAsync();
 		}
 

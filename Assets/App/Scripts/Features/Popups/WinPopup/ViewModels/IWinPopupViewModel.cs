@@ -1,4 +1,5 @@
-﻿using Features.Saves;
+﻿using Features.Energy.Providers;
+using Features.Saves;
 using Module.Commands;
 using Module.Localization;
 using Scenes.PackSelection.Feature.Packs.Configs;
@@ -11,5 +12,6 @@ namespace Features.Popups.WinPopup.ViewModels
 		Pack Pack { get; }
 		public SavedPackData SavedPackData { get; }
 		ILocalizationSystem LocalizationSystem { get; }
+		IEnergyProvider EnergyProvider { get; }
 	}
 }

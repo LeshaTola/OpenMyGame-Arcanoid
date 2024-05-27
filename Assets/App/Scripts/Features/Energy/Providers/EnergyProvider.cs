@@ -38,6 +38,7 @@ namespace Features.Energy.Providers
 				if (CurrentEnergy >= config.MaxEnergy)
 				{
 					await UniTask.Yield();
+					RemainingRecoveryTime = config.RecoveryTime;
 					continue;
 				}
 

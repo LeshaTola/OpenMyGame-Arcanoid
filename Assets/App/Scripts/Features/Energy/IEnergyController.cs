@@ -2,6 +2,8 @@
 {
 	public interface IEnergyController
 	{
+		void CleanUp();
+		void UpdateTimer();
 		void UpdateUI();
 	}
 }
