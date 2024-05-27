@@ -6,7 +6,7 @@ namespace Module.Saves
 	{
 		public string GetString(string key)
 		{
-			return PlayerPrefs.GetString(key);
+			return PlayerPrefs.GetString(key, null);
 		}
 
 		public void SetString(string key, string value)

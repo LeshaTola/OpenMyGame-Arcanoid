@@ -3,7 +3,6 @@ using Features.StateMachine.States.General;
 using Features.UI.SceneTransitions;
 using Module.Scenes;
 using SceneReference;
-using Zenject;
 
 namespace Features.StateMachine.States
 {
@@ -13,13 +12,13 @@ namespace Features.StateMachine.States
 		private ISceneTransition sceneTransition;
 		private ISceneLoadService sceneController;
 
-		[Inject]
-		public LoadSceneStateStep(SceneRef scene, ISceneTransition sceneTransition, ISceneLoadService sceneController)
+		public LoadSceneStateStep(ISceneTransition sceneTransition, ISceneLoadService sceneController)
 		{
-			this.scene = scene;
 			this.sceneTransition = sceneTransition;
 			this.sceneController = sceneController;
 		}
+
+		public SceneRef Scene { get => scene; set => scene = value; }
 
 		public override void Enter()
 		{

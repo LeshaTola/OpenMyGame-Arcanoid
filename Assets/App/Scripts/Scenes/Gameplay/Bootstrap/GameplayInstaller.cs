@@ -9,8 +9,10 @@ using Scenes.Gameplay.Feature.LevelCreation;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
 using Scenes.Gameplay.Feature.Player.Ball;
+using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.Feature.Reset.Services;
 using UnityEngine;
 using Zenject;
 
@@ -25,6 +27,7 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private BlocksDictionary blocksDictionary;
 		[SerializeField] private Block blockTemplate;
 		[SerializeField] private Transform container;
+		[SerializeField] private ResetService resetService;
 
 		[Header("Balls")]
 		[SerializeField] private int ballCount;
@@ -38,6 +41,10 @@ namespace Scenes.Gameplay.Bootstrap
 
 		public override void InstallBindings()
 		{
+			RouterInstaller.Install(Container);
+
+			BindResetService();
+			BindBallService();
 			BindProgressController();
 			BindHealthController();
 			BindBoundaryValidator();
@@ -50,6 +57,16 @@ namespace Scenes.Gameplay.Bootstrap
 			BindInput();
 		}
 
+		private void BindResetService()
+		{
+			Container.Bind<IResetService>().FromInstance(resetService).AsSingle();
+		}
+
+		private void BindBallService()
+		{
+			Container.Bind<IBallService>().To<BallService>().AsSingle();
+		}
+
 		private void BindBoundaryValidator()
 		{
 			Container.BindInterfacesAndSelfTo<BoundaryValidator>().AsSingle();
@@ -57,12 +74,17 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindHealthController()
 		{
-			Container.BindInterfacesAndSelfTo<HealthController>().AsSingle().WithArguments(config);
+			Container.BindInterfacesAndSelfTo<HealthController>()
+				.AsSingle()
+				.WithArguments(config);
 		}
 
 		private void BindProgressController()
 		{
-			Container.Bind<IProgressController>().To<ProgressController>().AsSingle().WithArguments(winProgress);
+			Container.Bind<IProgressController>()
+				.To<ProgressController>()
+				.AsSingle()
+				.WithArguments(winProgress);
 		}
 
 		private void BindBallsPool()

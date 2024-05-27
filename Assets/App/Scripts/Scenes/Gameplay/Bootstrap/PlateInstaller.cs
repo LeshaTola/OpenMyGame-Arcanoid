@@ -9,10 +9,17 @@ namespace Scenes.Gameplay.Bootstrap
 	{
 		[SerializeField] private MovementConfig config;
 		[SerializeField] private Rigidbody2D rb;
+		[SerializeField] private Plate plate;
 
 		public override void InstallBindings()
 		{
 			BindMovement();
+			BindPlate();
+		}
+
+		private void BindPlate()
+		{
+			Container.BindInstance(plate).AsSingle();
 		}
 
 		private void BindMovement()

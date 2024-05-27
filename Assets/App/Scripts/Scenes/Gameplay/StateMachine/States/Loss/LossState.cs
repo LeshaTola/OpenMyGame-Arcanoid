@@ -1,29 +1,27 @@
-﻿using Features.Popups;
-using Features.StateMachine.States;
-using Module.PopupLogic.General;
+﻿using Features.StateMachine.States;
+using Scenes.Gameplay.StateMachine.States.Loss.Routers;
 
 namespace Scenes.Gameplay.StateMachine.States.Loss
 {
 	public class LossState : State
 	{
-		IPopupController popupController;
+		IRouterShowLoss routerShowLoss;
 
-		public LossState(IPopupController popupController)
+		public LossState(IRouterShowLoss routerShowLoss)
 		{
-			this.popupController = popupController;
+			this.routerShowLoss = routerShowLoss;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
 
-			popupController.ShowPopup<LossPopup>();
+			routerShowLoss.ShowLoss();
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
-			popupController.HidePopup();
 		}
 	}
 }

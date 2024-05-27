@@ -1,8 +1,9 @@
 ﻿using Features.StateMachine;
-using Features.StateMachine.States;
-using Module.ObjectPool;
 using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
+using Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.Feature.Reset;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -12,32 +13,43 @@ namespace Scenes.Gameplay.Feature.Player
 	public class Plate : MonoBehaviour, IUpdatable, IResetable
 	{
 		[SerializeField] private BoxCollider2D boxCollider;
-
 		[SerializeField] private Transform ballPosition;
 
 		private IFieldSizeProvider fieldController;
 		private IInput input;
 		private IMovement movement;
-		private IPool<Ball.Ball> ballPool;
+		private IBallService ballService;
+		private IProgressController progressController;
 		private List<Ball.Ball> connectedBalls = new();
 
 		[Inject]
-		public void Construct(IFieldSizeProvider fieldController, IInput input, IMovement movement, IPool<Ball.Ball> ballPool)
+		public void Construct(IFieldSizeProvider fieldController,
+						IInput input,
+						IMovement movement,
+						IBallService ballService,
+						IProgressController progressController)
 		{
 			this.fieldController = fieldController;
 			this.input = input;
 			this.movement = movement;
-			this.ballPool = ballPool;
+			this.ballService = ballService;
+			this.progressController = progressController;
 		}
 
 		public void PushBalls()
 		{
 			foreach (var ball in connectedBalls)
 			{
+				ball.Movement.Rb.simulated = true;
 				ball.transform.SetParent(null);
-				ball.Movement.Push(Vector2.up);
+				ball.Movement.Push(Vector2.up, progressController.NormalizedProgress);
 			}
 			connectedBalls.Clear();
+		}
+
+		public void Stop()
+		{
+			movement.Move(Vector2.zero);
 		}
 
 		void IUpdatable.Update()
@@ -70,9 +82,17 @@ namespace Scenes.Gameplay.Feature.Player
 
 		void IResetable.Reset()
 		{
+			if (connectedBalls.Count > 0)
+			{
+				PushBalls();
+			}
+
+			ballService.Reset();
+
 			transform.position = new Vector2(0, transform.position.y);
-			movement.Move(Vector2.zero);
-			Ball.Ball ball = ballPool.Get();
+			Stop();
+			Ball.Ball ball = ballService.GetBall();
+			ball.Movement.Rb.simulated = false;
 			connectedBalls.Add(ball);
 			ball.transform.position = ballPosition.position;
 			ball.transform.SetParent(transform);

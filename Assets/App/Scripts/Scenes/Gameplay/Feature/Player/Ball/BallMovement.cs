@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using Scenes.Gameplay.Feature.Player.Configs;
+using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Player.Ball
 {
 	public class BallMovement : MonoBehaviour
 	{
-		[SerializeField] private float speed;
-		[SerializeField] private float minAngle;
+		[SerializeField] private BallMovementConfig config;
 		[SerializeField] private Rigidbody2D rb;
 
 		public Vector2 Direction { get => rb.velocity.normalized; }
+		public Rigidbody2D Rb { get => rb; }
 
 		private Vector2[] axes =
 		{
@@ -20,8 +21,13 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 
 		public void Push(Vector2 direction)
 		{
-			rb.simulated = true;
-			rb.velocity = direction.normalized * speed;
+			Push(direction, 0);
+		}
+
+		public void Push(Vector2 direction, float factor, float multiplier = 1)
+		{
+			float additionalSpeed = config.Speed * (config.SpeedMultiplier - 1) * factor;
+			rb.velocity = direction.normalized * (config.Speed + additionalSpeed) * multiplier;
 		}
 
 		public Vector2 GetValidDirection()
@@ -34,9 +40,9 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 			foreach (Vector2 axis in axes)
 			{
 				float angle = Vector2.Angle(direction, axis);
-				if (angle < minAngle)
+				if (angle < config.MinAngle)
 				{
-					float rotateAngle = minAngle - angle;
+					float rotateAngle = config.MinAngle - angle;
 					direction = Quaternion.Euler(0, 0, rotateAngle) * direction;
 				}
 			}

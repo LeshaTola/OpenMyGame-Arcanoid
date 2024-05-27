@@ -1,56 +1,78 @@
-﻿using Features.Bootstrap;
+﻿using Features.Saves.Localization;
 using Module.Localization.Configs;
 using Module.Localization.Parsers;
-using Sirenix.OdinInspector;
+using Module.Saves;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 namespace Module.Localization
 {
-	public class LocalizationSystem : SerializedMonoBehaviour, IInitializable
+	public class LocalizationSystem : ILocalizationSystem
 	{
 		public event Action OnLanguageChanged;
 
-		[SerializeField] LocalizationDictionary localizationDictionary;
-		[ValueDropdown("GetLanguages")]
-		[SerializeField] private string language;
-
-		private Dictionary<string, Dictionary<string, string>> languagesDictionary;
+		private LocalizationDictionary localizationDictionary;
+		private string language;
 		private IParser parser;
+		private IDataProvider<LocalizationData> dataProvider;
 
+		private Dictionary<string, string> languageDictionary = new();
+
+		public LocalizationSystem(LocalizationDictionary localizationDictionary,
+							string language,
+							IParser parser,
+							IDataProvider<LocalizationData> dataProvider)
+		{
+			this.localizationDictionary = localizationDictionary;
+			this.language = language;
+			this.parser = parser;
+			this.dataProvider = dataProvider;
+
+			languageDictionary = new();
+
+			LoadLocalization();
+			ChangeLanguage(this.language);
+		}
 		public string Language { get => language; }
-		public Dictionary<string, string> LanguageDictionary { get => languagesDictionary[language]; }
+		public Dictionary<string, string> LanguageDictionary { get => languageDictionary; }
 
-		public void Init()
+		public void ChangeLanguage(string languageKey)
 		{
-			languagesDictionary = new();
-			parser = new CSVParser();
-
-			foreach (var language in localizationDictionary.Languages)
+			if (!localizationDictionary.Languages.ContainsKey(languageKey))
 			{
-				var parsedLanguage = parser.Parse(language.SCVFile.text);
-				languagesDictionary.Add(language.LanguageName, parsedLanguage);
+				return;
 			}
-			ChangeLanguage();
-		}
 
-		public void ChangeLanguage()
-		{
+			language = languageKey;
+			languageDictionary = parser.Parse(localizationDictionary.Languages[language].text);
 			OnLanguageChanged?.Invoke();
+			SaveLocalization(languageKey);
 		}
 
-#if UNITY_EDITOR
-		private List<string> GetLanguages()
+		public IEnumerable<string> GetLanguages()
 		{
 			if (localizationDictionary == null)
 			{
 				return null;
 			}
 
-			return localizationDictionary.Languages.Select(language => language.LanguageName).ToList();
+			return new List<string>(localizationDictionary.Languages.Keys);
 		}
-#endif
+		private void LoadLocalization()
+		{
+			var loadedLanguage = dataProvider.GetData();
+			if (loadedLanguage != null)
+			{
+				language = loadedLanguage.LanguageKey;
+			}
+		}
+
+		private void SaveLocalization(string languageKey)
+		{
+			dataProvider.SaveData(new LocalizationData()
+			{
+				LanguageKey = languageKey,
+			});
+		}
 	}
 }

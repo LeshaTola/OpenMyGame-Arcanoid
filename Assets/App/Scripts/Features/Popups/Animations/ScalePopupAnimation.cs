@@ -10,14 +10,14 @@ namespace Features.Popups.Animations
 		[SerializeField] private float animationTime;
 		private Tween tweenAnimation;
 
-		public void Hide(Action onComplete)
+		public void Hide(Action onComplete = null)
 		{
 			CleanUp();
 			tweenAnimation = transform.DOScale(Vector2.zero, animationTime);
 			tweenAnimation.onComplete += () => onComplete?.Invoke();
 		}
 
-		public void Show(Action onComplete)
+		public void Show(Action onComplete = null)
 		{
 			CleanUp();
 			tweenAnimation = transform.DOScale(Vector2.one, animationTime);

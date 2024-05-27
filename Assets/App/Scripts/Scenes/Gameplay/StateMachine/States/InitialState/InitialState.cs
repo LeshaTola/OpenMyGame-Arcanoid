@@ -1,4 +1,5 @@
 ﻿using Features.FileProvider;
+using Features.Saves;
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using Scenes.Gameplay.Feature.Health;
@@ -66,20 +67,21 @@ namespace Scenes.Gameplay.StateMachine.States
 		private void SetupLevel()
 		{
 			var currentPack = packProvider.CurrentPack;
-			if (currentPack == null)
+			SavedPackData savedPackData = packProvider.SavedPackData;
+			if (currentPack == null || savedPackData == null)
 			{
 				levelGenerator.GenerateLevel(levelInfoProvider.GetLevelInfo(defaultLevelInfo.text));
 				return;
 			}
 
-			string path = Path.Combine(currentPack.RelativeLevelsPath, currentPack.LevelNames[currentPack.CurrentLevel]);
+			string path = Path.Combine(currentPack.RelativeLevelsPath, currentPack.LevelNames[savedPackData.CurrentLevel]);
 			GenerateLevel(path);
-			SetupUi(currentPack);
+			SetupUi(currentPack, savedPackData);
 		}
 
-		private void SetupUi(Pack currentPack)
+		private void SetupUi(Pack currentPack, SavedPackData savedPackData)
 		{
-			packInfoUI.Init(currentPack.Sprite, currentPack.CurrentLevel, currentPack.MaxLevel);
+			packInfoUI.Init(currentPack.Sprite, savedPackData.CurrentLevel, currentPack.MaxLevel);
 		}
 
 		private void GenerateLevel(string path)

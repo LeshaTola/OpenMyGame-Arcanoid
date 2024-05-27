@@ -2,7 +2,7 @@
 {
 	public interface ITextLocalizer
 	{
-		public void Init(LocalizationSystem localizationSystem);
+		public void Init(ILocalizationSystem localizationSystem);
 		public void Translate();
 	}
 }

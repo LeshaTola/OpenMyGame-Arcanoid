@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655dcc44c03d0c542b10da8a0ad9c1ec, type: 3}
   m_Name: _MinecraftPack
   m_EditorClassIdentifier: 
+  id: Minecraft
   sprite: {fileID: 21300000, guid: 6309acb4fd38c2d47830e0a4cf7cbeea, type: 3}
   packName: Minecraft
   relativeLevelsPath: Levels\Minecraft
-  currentLevel: 0
   levelNames:
   - MineCraft_Level_1
   - MineCraft_Test
-  isOpened: 1

@@ -24,6 +24,16 @@ namespace Scenes.Gameplay.Feature.Progress
 			this.winProgress = winProgress;
 		}
 
+		public int Progress
+		{
+			get => (int)(NormalizedProgress * 100);
+		}
+
+		public float NormalizedProgress
+		{
+			get => 1f - ((float)currentBlocksCount / startBlocksCount);
+		}
+
 		public void Init(List<Block> blocks)
 		{
 			scoredBlocks = blocks.Where(x => x.Config.GetComponent<ScoreComponent>() != null).ToList();
@@ -41,10 +51,9 @@ namespace Scenes.Gameplay.Feature.Progress
 
 		public void ProcessProgress()
 		{
-			int progress = CalculateProgress();
-			progressUI.UpdateProgress(progress);
+			progressUI.UpdateProgress(Progress);
 
-			if (progress == winProgress)
+			if (Progress == winProgress)
 			{
 				OnWin?.Invoke();
 			}
@@ -92,9 +101,6 @@ namespace Scenes.Gameplay.Feature.Progress
 			ProcessProgress();
 		}
 
-		private int CalculateProgress()
-		{
-			return (int)((1f - ((float)currentBlocksCount / startBlocksCount)) * 100);
-		}
+
 	}
 }

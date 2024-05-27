@@ -589,8 +589,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 587794396139564028}
-  image: {fileID: 5424233573521167782}
-  nameText: {fileID: 8485155922156332456}
+  Background: {fileID: 0}
+  PackImageBackground: {fileID: 0}
+  packImage: {fileID: 0}
+  headerNameText: {fileID: 0}
+  packNameText: {fileID: 0}
   levelsText: {fileID: 8485155921956274201}
 --- !u!1 &8485155921278009937
 GameObject:

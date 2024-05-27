@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7009702589508987232}
+  - component: {fileID: 7281893853719376079}
   - component: {fileID: 7009702589508987234}
   - component: {fileID: 7009702589508987233}
   m_Layer: 5
@@ -38,6 +39,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0.69999695, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7281893853719376079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7009702589508987239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3e204a36ccf274cbeb9c05bd9d02ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 7009702589508987233}
 --- !u!222 &7009702589508987234
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -66,7 +80,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0414\u0430\u043B\u0435\u0435"
+  m_text: '
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a740b1f290a38dc48b5bd6fe8c18347a, type: 2}
   m_sharedMaterial: {fileID: 1944959502034670655, guid: a740b1f290a38dc48b5bd6fe8c18347a, type: 2}
@@ -147,6 +163,7 @@ GameObject:
   - component: {fileID: 7009702590521921601}
   - component: {fileID: 7009702590521921600}
   - component: {fileID: 7009702590521921607}
+  - component: {fileID: 5920209494438377856}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -257,3 +274,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5920209494438377856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7009702590521921605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb3886dcf5353f4fa1460a4bac856c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 7281893853719376079}
+  button: {fileID: 7009702590521921607}

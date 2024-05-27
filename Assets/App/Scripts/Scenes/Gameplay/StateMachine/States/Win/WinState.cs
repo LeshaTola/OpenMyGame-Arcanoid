@@ -1,30 +1,113 @@
-﻿using Features.Popups;
+﻿using Features.Energy.Providers;
+using Features.Saves;
 using Features.StateMachine.States;
-using Module.PopupLogic.General;
-using Zenject;
+using Module.Saves;
+using Scenes.Gameplay.Feature.Player;
+using Scenes.Gameplay.Feature.Player.Ball.Services;
+using Scenes.Gameplay.StateMachine.States.Win.Routers;
+using Scenes.PackSelection.Feature.Packs;
+using Scenes.PackSelection.Feature.Packs.Configs;
 
 namespace Scenes.Gameplay.StateMachine.States.Win
 {
 	public class WinState : State
 	{
-		private IPopupController popupController;
+		private IRouterShowWin routerShowWin;
+		private IPackProvider packProvider;
+		private IDataProvider<PlayerProgressData> dataProvider;
+		private IBallService ballService;
+		private IEnergyProvider energyProvider;
 
-		public WinState(IPopupController popupController)
+		private Plate plate;
+
+		public float BallsStopDuration;
+
+		public WinState(IRouterShowWin routerShowWin,
+				  IPackProvider packProvider,
+				  IDataProvider<PlayerProgressData> dataProvider,
+				  IBallService ballService,
+				  IEnergyProvider energyProvider,
+				  Plate plate)
 		{
-			this.popupController = popupController;
+			this.routerShowWin = routerShowWin;
+			this.packProvider = packProvider;
+			this.dataProvider = dataProvider;
+			this.ballService = ballService;
+			this.energyProvider = energyProvider;
+			this.plate = plate;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
 
-			popupController.ShowPopup<WinPopup>();
+			energyProvider.AddEnergy(energyProvider.Config.WinReward);
+			EnterAsync();
 		}
 
-		public override void Exit()
+		private async void EnterAsync()
 		{
-			base.Exit();
-			popupController.HidePopup();
+			plate.Stop();
+
+			await ballService.StopAllBallsAsync(BallsStopDuration);
+
+			PlayerProgressData playerData = dataProvider.GetData();
+			routerShowWin.ShowWin(packProvider.CurrentPack, packProvider.SavedPackData);
+			ProcessPacks(playerData);
+		}
+
+
+		private void ProcessPacks(PlayerProgressData playerData)
+		{
+			SavedPackData savedPackData = packProvider.SavedPackData;
+			Pack currentPack = packProvider.CurrentPack;
+			if (savedPackData == null || currentPack == null)
+			{
+				return;
+			}
+
+			CompleteLevel(savedPackData, playerData);
+			if (savedPackData.CurrentLevel > currentPack.MaxLevel)
+			{
+				OpenNextPack(savedPackData, playerData);
+			}
+			SaveData(playerData);
+		}
+
+		private void CompleteLevel(SavedPackData savedPackData, PlayerProgressData playerData)
+		{
+			savedPackData.CurrentLevel++;
+			playerData.Packs[savedPackData.Id] = savedPackData;
+		}
+
+		private void OpenNextPack(SavedPackData savedPackData, PlayerProgressData playerData)
+		{
+			savedPackData.IsCompeted = true;
+
+			int nextPackIndex = packProvider.PackIndex - 1;
+			if (packProvider.Packs.Count <= nextPackIndex)
+			{
+				return;
+			}
+			string nextPackID = packProvider.Packs[nextPackIndex].Id;
+			playerData.Packs[nextPackID].IsOpened = true;
+
+			SetNextPack(playerData, nextPackIndex, nextPackID);
+		}
+
+		private void SetNextPack(PlayerProgressData playerData, int nextPackIndex, string nextPackID)
+		{
+			packProvider.PackIndex = nextPackIndex;
+			packProvider.SavedPackData = playerData.Packs[nextPackID];
+		}
+
+		private void SaveData(PlayerProgressData playerData)
+		{
+			if (packProvider.SavedPackData == null)
+			{
+				return;
+			}
+			dataProvider.SaveData(playerData);
 		}
 	}
 }

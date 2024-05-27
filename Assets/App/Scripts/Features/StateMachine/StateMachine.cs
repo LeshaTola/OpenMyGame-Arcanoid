@@ -10,6 +10,8 @@ namespace Features.StateMachine
 		private State currentState;
 		private Dictionary<Type, State> states = new();
 
+		public State CurrentState { get => currentState; }
+
 		public void AddState(State state)
 		{
 			states.Add(state.GetType(), state);
