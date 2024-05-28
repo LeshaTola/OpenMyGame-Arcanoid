@@ -36,5 +36,14 @@ namespace Scenes.Gameplay.Feature.Blocks.Config
 		{
 			return GetComponent<T>(components);
 		}
+
+		public void AddComponentIfNull<T>(T component, List<IComponent> components) where T : IComponent
+		{
+			T foundComponent = GetComponent<T>(components);
+			if (foundComponent == null)
+			{
+				components.Add(component);
+			}
+		}
 	}
 }
