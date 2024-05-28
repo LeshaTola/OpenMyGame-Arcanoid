@@ -1,8 +1,11 @@
 using Scenes.Gameplay.Feature.Blocks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
+using Scenes.Gameplay.Feature.Bonuses.Configs;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.Progress;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +13,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 {
 	public class LevelGenerator : ILevelGenerator
 	{
+		public event Action<Block> OnBlockDestroyed;
+
 		private LevelConfig levelConfig;
+		private BonusesDatabase bonusesDatabase;
 
 		private IProgressController progressController;
 		private IFieldSizeProvider fieldController;
@@ -21,12 +27,14 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		public LevelGenerator(IProgressController progressController,
 						IFieldSizeProvider fieldController,
 						IBlockFactory blockFactory,
-						LevelConfig levelConfig)
+						LevelConfig levelConfig,
+						BonusesDatabase bonusesDatabase)
 		{
 			this.progressController = progressController;
 			this.fieldController = fieldController;
 			this.blockFactory = blockFactory;
 			this.levelConfig = levelConfig;
+			this.bonusesDatabase = bonusesDatabase;
 		}
 
 		public void GenerateLevel(LevelInfo levelInfo)
@@ -43,13 +51,35 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			{
 				for (int j = 0; j < levelInfo.Width; j++)
 				{
+					if (levelInfo.BlocksMatrix[j, i] == -1)
+					{
+						continue;
+					}
+
 					Block block = blockFactory.GetBlock(levelInfo.BlocksMatrix[j, i]);
+					AddBonusComponent(levelInfo, i, j, block);
+
 					Block preparedBlock = PrepareBlock(block, blockWidth);
 					PlaceBlock(gameField, i, j, preparedBlock);
 				}
 			}
 
 			progressController.Init(blocks);
+		}
+
+		void AddBonusComponent(LevelInfo levelInfo, int i, int j, Block block)
+		{
+			string bonusId = levelInfo.BonusesMatrix[j, i];
+
+			var healthComponent = block.Config.GetComponent<HealthComponent>();
+			if (healthComponent == null || !bonusesDatabase.Bonuses.ContainsKey(bonusId))
+			{
+				return;
+			}
+
+			DropBonusComponent dropBonusComponent = new(bonusId);
+			block.Config.AddComponentIfNull(dropBonusComponent, healthComponent.DeathComponents);
+			block.Visual.SetBonus(bonusesDatabase.Bonuses[bonusId].BlockSprite);
 		}
 
 		public void DestroyLevel()
@@ -71,6 +101,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private Block PrepareBlock(Block block, float blockWidth)
 		{
 			block.ResizeBlock(blockWidth);
+
+
+
+
 			SubscribeOnBlock(block);
 			blocks.Add(block);
 			return block;
@@ -96,6 +130,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 		private void OnBlockDeath(Block block)
 		{
+			OnBlockDestroyed?.Invoke(block);
 			blocks.Remove(block);
 			UnsubscribeFromBlock(block);
 		}

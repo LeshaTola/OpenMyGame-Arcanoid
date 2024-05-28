@@ -8,5 +8,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		public int Height;
 		public int Width;
 		public int[,] BlocksMatrix;
+		public string[,] BonusesMatrix;
 	}
 }
