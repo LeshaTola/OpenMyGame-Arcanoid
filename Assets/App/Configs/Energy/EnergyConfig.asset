@@ -15,6 +15,6 @@ MonoBehaviour:
   maxEnergy: 100
   recoveryTime: 20
   recoveryEnergy: 1
-  playCost: 100
+  playCost: 4
   winReward: 10
   continueCostMultiplier: 2

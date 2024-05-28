@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40814fd577d26324e920195043cf85f6, type: 3}
+  m_Name: BonusesDatabase
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: e4f4f5cad217f03458ff8e4396e388b5, type: 3}
+    - {fileID: 21300000, guid: 81e43397f6a8b7b4f9440a401ab658dc, type: 3}
+    - {fileID: 21300000, guid: e146c0dd7c6c06349a80f0afab6cad08, type: 3}
+    - {fileID: 21300000, guid: c53df5bcc1363b44892019af1e3b72b7, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: bonuses
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Scenes.Gameplay.Feature.Bonuses.Commands.IBonusCommand,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: AddHealth
+    - Name: $v
+      Entry: 7
+      Data: 2|Scenes.Gameplay.Feature.Bonuses.Commands.Health.AddHealthBonusCommand,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 0
+    - Name: blockSprite
+      Entry: 10
+      Data: 1
+    - Name: health
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: ReduceHealth
+    - Name: $v
+      Entry: 7
+      Data: 3|Scenes.Gameplay.Feature.Bonuses.Commands.Health.ReduceHealthBonusCommand,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 2
+    - Name: blockSprite
+      Entry: 10
+      Data: 3
+    - Name: health
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
