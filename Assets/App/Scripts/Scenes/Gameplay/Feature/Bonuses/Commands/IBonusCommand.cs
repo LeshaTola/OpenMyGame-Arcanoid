@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Commands
 {
@@ -8,6 +9,8 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands
 		Sprite Sprite { get; }
 		Sprite BlockSprite { get; }
 		float Duration { get; }
+
+		List<int> Conflicts { get; }
 
 		float Timer { get; set; }
 

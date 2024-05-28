@@ -59,6 +59,8 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 				return;
 			}
 
+			RemoveAllConflicts(bonusCommand);
+
 			bonusCommand.StartBonus();
 			if (bonusCommand.Duration <= 0)
 			{
@@ -66,6 +68,19 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			}
 
 			bonusCommands.Add(bonusCommand);
+		}
+
+		private void RemoveAllConflicts(IBonusCommand bonusCommand)
+		{
+			foreach (int bonusId in bonusCommand.Conflicts)
+			{
+				var conflictBonus = bonusCommands.FirstOrDefault(x => x.Id == bonusId);
+				if (conflictBonus != null)
+				{
+					commandsToRemove.Add(conflictBonus);
+				}
+			}
+			StopCommandsToRemove();
 		}
 
 		public void UpdateBonus()
@@ -80,10 +95,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 				}
 			}
 
-			foreach (var command in commandsToRemove)
-			{
-				StopBonus(command);
-			}
+			StopCommandsToRemove();
 		}
 
 		public void StopBonus(IBonusCommand bonusCommand)
@@ -114,6 +126,15 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			bonus.Setup(bonusCommand, pool, this);
 
 			bonus.transform.position = block.transform.position;
+		}
+
+		private void StopCommandsToRemove()
+		{
+			foreach (var command in commandsToRemove)
+			{
+				StopBonus(command);
+			}
+			commandsToRemove.Clear();
 		}
 	}
 }
