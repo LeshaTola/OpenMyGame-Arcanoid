@@ -72,7 +72,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			string bonusId = levelInfo.BonusesMatrix[j, i];
 
 			var healthComponent = block.Config.GetComponent<HealthComponent>();
-			if (healthComponent == null || !bonusesDatabase.Bonuses.ContainsKey(bonusId))
+			if (healthComponent == null || bonusId == null || !bonusesDatabase.Bonuses.ContainsKey(bonusId))
 			{
 				return;
 			}
