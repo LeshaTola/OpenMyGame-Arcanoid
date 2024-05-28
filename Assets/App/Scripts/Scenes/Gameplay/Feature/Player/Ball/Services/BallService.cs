@@ -75,12 +75,12 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 
 		public void Reset()
 		{
+			SpeedMultiplier = 1;
 			List<Ball> balls = new List<Ball>();
 			balls.AddRange(pool.Active);
 			foreach (var ball in balls)
 			{
 				pool.Release(ball);
-
 			}
 		}
 

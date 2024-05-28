@@ -52,6 +52,8 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			base.Enter();
 			headerUI.OnMenuButtonCLicked += OnMenuButtonCLicked;
+			headerUI.OnNextLevelButtonCLicked += OnNextLevelButtonCLicked;
+
 			progressController.OnWin += OnWin;
 			boundaryValidator.OnLastBallFall += OnLastBallFall;
 			healthController.OnDeath += OnDeath;
@@ -72,6 +74,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			base.Exit();
 			headerUI.OnMenuButtonCLicked -= OnMenuButtonCLicked;
+			headerUI.OnNextLevelButtonCLicked -= OnNextLevelButtonCLicked;
 			progressController.OnWin -= OnWin;
 			boundaryValidator.OnLastBallFall -= OnLastBallFall;
 			healthController.OnDeath -= OnDeath;
@@ -109,6 +112,11 @@ namespace Scenes.Gameplay.StateMachine.States
 		private void OnMenuButtonCLicked()
 		{
 			StateMachine.ChangeState<PauseState>();
+		}
+
+		private void OnNextLevelButtonCLicked()
+		{
+			progressController.InitiateWin();
 		}
 	}
 }
