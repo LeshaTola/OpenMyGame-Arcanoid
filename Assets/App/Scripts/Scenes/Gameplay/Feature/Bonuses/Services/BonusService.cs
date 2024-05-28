@@ -33,7 +33,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 
 			Bonus bonus = pool.Get();
 			IBonusCommand bonusCommand = bonusCommandsFactory.GetBonusCommand(bonusId);
-			bonus.Setup(bonusCommand);
+			bonus.Setup(bonusCommand, pool);
 
 			bonus.transform.position = block.transform.position;
 		}

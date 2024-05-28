@@ -1,4 +1,5 @@
-﻿using Scenes.Gameplay.Feature.Bonuses.Commands;
+﻿using Module.ObjectPool;
+using Scenes.Gameplay.Feature.Bonuses.Commands;
 using Scenes.Gameplay.Feature.Player;
 using UnityEngine;
 
@@ -10,8 +11,11 @@ namespace Scenes.Gameplay.Feature.Bonuses
 
 		private IBonusCommand bonusCommand;
 
-		public void Setup(IBonusCommand bonusCommand)
+		private IPool<Bonus> pool;
+
+		public void Setup(IBonusCommand bonusCommand, IPool<Bonus> pool)
 		{
+			this.pool = pool;
 			this.bonusCommand = bonusCommand;
 			bonusVisual.UpdateVisual(bonusCommand.Sprite);
 		}
@@ -21,8 +25,13 @@ namespace Scenes.Gameplay.Feature.Bonuses
 			if (collision.gameObject.TryGetComponent(out Plate plate))
 			{
 				bonusCommand.StartBonus();
-				Destroy(gameObject);
+				Release();
 			}
+		}
+
+		public void Release()
+		{
+			pool.Release(this);
 		}
 	}
 }
