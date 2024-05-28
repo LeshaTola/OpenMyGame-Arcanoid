@@ -15,6 +15,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 
 		private Dictionary<Ball, Vector2> lastBallsDirections = new();
 
+		public float SpeedMultiplier { get; private set; } = 1;
+
 		public BallService(IPool<Ball> pool, IProgressController progressController, ITimeProvider timeProvider)
 		{
 			this.pool = pool;
@@ -43,7 +45,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			{
 				newDirection = ball.Movement.GetValidDirection();
 			}
-			ball.Movement.Push(newDirection, progressController.NormalizedProgress);
+			ball.Movement.Push(newDirection, progressController.NormalizedProgress, SpeedMultiplier);
 		}
 
 		public async UniTask StopAllBallsAsync(float duration)
@@ -56,13 +58,18 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 				elapsedTime += timeProvider.DeltaTime;
 				multiplier = Mathf.Lerp(1, 0, elapsedTime / duration);
 
-				foreach (var ball in pool.Active)
-				{
-					Vector2 direction = ball.Movement.Direction;
-					ball.Movement.Push(direction, progressController.NormalizedProgress, multiplier);
-				}
-
+				ChangeBallsSpeed(multiplier);
 				await UniTask.Yield(PlayerLoopTiming.Update);
+			}
+		}
+
+		public void ChangeBallsSpeed(float multiplier)
+		{
+			SpeedMultiplier = multiplier;
+			foreach (var ball in pool.Active)
+			{
+				Vector2 direction = ball.Movement.Direction;
+				ball.Movement.Push(direction, progressController.NormalizedProgress, multiplier);
 			}
 		}
 

@@ -3,11 +3,9 @@ using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Commands.Health
 {
-	public class AddHealthBonusCommand : IBonusCommand
+	public class AddHealthBonusCommand : BonusCommand
 	{
-		[SerializeField] private Sprite sprite;
-		[SerializeField] private Sprite blockSprite;
-		[SerializeField] private int health;
+		[SerializeField, Min(0)] private int health;
 
 		private IHealthController controller;
 
@@ -16,17 +14,14 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands.Health
 			this.controller = controller;
 		}
 
-		public Sprite Sprite { get => sprite; }
-		public Sprite BlockSprite { get => blockSprite; }
-
-		public void Clone(IBonusCommand command)
+		public override void Clone(IBonusCommand command)
 		{
+			base.Clone(command);
 			AddHealthBonusCommand concreteCommand = ((AddHealthBonusCommand)command);
 			health = concreteCommand.health;
-			sprite = concreteCommand.sprite;
 		}
 
-		public void StartBonus()
+		public override void StartBonus()
 		{
 			controller.AddHealth(health);
 		}

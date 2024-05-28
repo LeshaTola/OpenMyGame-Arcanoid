@@ -20,6 +20,10 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 81e43397f6a8b7b4f9440a401ab658dc, type: 3}
     - {fileID: 21300000, guid: e146c0dd7c6c06349a80f0afab6cad08, type: 3}
     - {fileID: 21300000, guid: c53df5bcc1363b44892019af1e3b72b7, type: 3}
+    - {fileID: 21300000, guid: 80bf961859811714da50a4ac86341b1b, type: 3}
+    - {fileID: 21300000, guid: fcb14f6594f04044b8f97bb71112eae3, type: 3}
+    - {fileID: 21300000, guid: b89ab4054f4a43441a179fa8543f8e89, type: 3}
+    - {fileID: 21300000, guid: bb9e0445cb8088f449962df979e83f60, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -38,7 +42,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 4
     - Name: 
       Entry: 7
       Data: 
@@ -49,12 +53,18 @@ MonoBehaviour:
       Entry: 7
       Data: 2|Scenes.Gameplay.Feature.Bonuses.Commands.Health.AddHealthBonusCommand,
         Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 1
     - Name: sprite
       Entry: 10
       Data: 0
     - Name: blockSprite
       Entry: 10
       Data: 1
+    - Name: duration
+      Entry: 4
+      Data: 0
     - Name: health
       Entry: 3
       Data: 1
@@ -74,15 +84,83 @@ MonoBehaviour:
       Entry: 7
       Data: 3|Scenes.Gameplay.Feature.Bonuses.Commands.Health.ReduceHealthBonusCommand,
         Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 2
     - Name: sprite
       Entry: 10
       Data: 2
     - Name: blockSprite
       Entry: 10
       Data: 3
+    - Name: duration
+      Entry: 4
+      Data: 0
     - Name: health
       Entry: 3
       Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SpeedUpBalls
+    - Name: $v
+      Entry: 7
+      Data: 4|Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed.SpeedControlBallsCommand,
+        Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 4
+    - Name: sprite
+      Entry: 10
+      Data: 4
+    - Name: blockSprite
+      Entry: 10
+      Data: 5
+    - Name: duration
+      Entry: 4
+      Data: 5
+    - Name: multiplier
+      Entry: 4
+      Data: 1.2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SlowDownBalls
+    - Name: $v
+      Entry: 7
+      Data: 5|Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed.SpeedControlBallsCommand,
+        Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 3
+    - Name: sprite
+      Entry: 10
+      Data: 6
+    - Name: blockSprite
+      Entry: 10
+      Data: 7
+    - Name: duration
+      Entry: 4
+      Data: 5
+    - Name: multiplier
+      Entry: 4
+      Data: 0.1
     - Name: 
       Entry: 8
       Data: 
