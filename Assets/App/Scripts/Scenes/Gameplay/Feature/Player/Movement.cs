@@ -19,7 +19,7 @@ namespace Scenes.Gameplay.Feature.Player
 			this.timeProvider = timeProvider;
 		}
 
-		public void Move(Vector2 moveDirection)
+		public void Move(Vector2 moveDirection, float speedMultiplier = 1f)
 		{
 			if (moveDirection.magnitude < config.DeadZone)
 			{
@@ -27,7 +27,7 @@ namespace Scenes.Gameplay.Feature.Player
 				return;
 			}
 
-			rb.velocity = moveDirection.normalized * config.Speed;
+			rb.velocity = moveDirection.normalized * config.Speed * speedMultiplier;
 		}
 
 		public void ApplyDrag()

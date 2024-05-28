@@ -24,6 +24,7 @@ namespace Scenes.Gameplay.Feature.Player
 		private List<Ball.Ball> connectedBalls = new();
 
 		private float defaultWidth;
+		public float SpeedMultiplier { get; set; } = 1;
 
 		[Inject]
 		public void Construct(IFieldSizeProvider fieldController,
@@ -78,7 +79,7 @@ namespace Scenes.Gameplay.Feature.Player
 			if (!targetPosition.Equals(default) && fieldController.GameField.IsValid(targetPosition))
 			{
 				direction = GetDirection(targetPosition);
-				movement.Move(direction);
+				movement.Move(direction, SpeedMultiplier);
 			}
 
 			ClampPosition();

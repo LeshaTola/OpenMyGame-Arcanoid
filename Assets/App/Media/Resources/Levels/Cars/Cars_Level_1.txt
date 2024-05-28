@@ -13,12 +13,12 @@
   ],
   "BonusesMatrix": [
     [
-      "AddHealth",
-      "none"
+      "SpeedUpPlate",
+      "SlowDownPlate"
     ],
     [
-      "none",
-      "ReduceHealth"
+      "SlowDownPlate",
+      "SpeedUpPlate"
     ]
   ]
 }

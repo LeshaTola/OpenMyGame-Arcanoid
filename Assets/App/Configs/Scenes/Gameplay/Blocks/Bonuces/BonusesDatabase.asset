@@ -28,6 +28,10 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 07e7ad7fa8b2fe747be0bc0e7002c7f0, type: 3}
     - {fileID: 21300000, guid: 7593a0701e3876844b15d605062213a4, type: 3}
     - {fileID: 21300000, guid: 3433fec8c69dc4647897ab4d3acc0c4a, type: 3}
+    - {fileID: 21300000, guid: 72324236e0afd8245a117be4e9783e03, type: 3}
+    - {fileID: 21300000, guid: d1264e3e6264f3049b4263848ccf5494, type: 3}
+    - {fileID: 21300000, guid: 0bd948ddff69fa040b8f8be3290349af, type: 3}
+    - {fileID: 21300000, guid: 1a86d196ecbdd7c43909f2287b4ea730, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -46,7 +50,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 6
+      Data: 8
     - Name: 
       Entry: 7
       Data: 
@@ -311,6 +315,98 @@ MonoBehaviour:
     - Name: multiplier
       Entry: 4
       Data: 0.7
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SpeedUpPlate
+    - Name: $v
+      Entry: 7
+      Data: 14|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSpeedControlCommand,
+        Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 8
+    - Name: sprite
+      Entry: 10
+      Data: 12
+    - Name: blockSprite
+      Entry: 10
+      Data: 13
+    - Name: duration
+      Entry: 4
+      Data: 5
+    - Name: conflicts
+      Entry: 7
+      Data: 15|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 7
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: multiplier
+      Entry: 4
+      Data: 1.5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SlowDownPlate
+    - Name: $v
+      Entry: 7
+      Data: 16|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSpeedControlCommand,
+        Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 7
+    - Name: sprite
+      Entry: 10
+      Data: 14
+    - Name: blockSprite
+      Entry: 10
+      Data: 15
+    - Name: duration
+      Entry: 4
+      Data: 5
+    - Name: conflicts
+      Entry: 7
+      Data: 17|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 8
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: multiplier
+      Entry: 4
+      Data: 0.8
     - Name: 
       Entry: 8
       Data: 
