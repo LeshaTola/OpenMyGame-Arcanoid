@@ -22,7 +22,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private IFieldSizeProvider fieldController;
 		private IBlockFactory blockFactory;
 
-		private List<Block> blocks = new();
+		private Dictionary<Vector2Int, Block> blocks = new();
 
 		public LevelGenerator(IProgressController progressController,
 						IFieldSizeProvider fieldController,
@@ -57,14 +57,17 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 					}
 
 					Block block = blockFactory.GetBlock(levelInfo.BlocksMatrix[j, i]);
+					Vector2Int blockPosition = new Vector2Int(j, i);
+					block.Setup(blocks, blockPosition);
 					AddBonusComponent(levelInfo, i, j, block);
 
 					Block preparedBlock = PrepareBlock(block, blockWidth);
 					PlaceBlock(gameField, i, j, preparedBlock);
+					blocks.Add(blockPosition, block);
 				}
 			}
 
-			progressController.Init(blocks);
+			progressController.Init(new List<Block>(blocks.Values));
 		}
 
 		void AddBonusComponent(LevelInfo levelInfo, int i, int j, Block block)
@@ -85,7 +88,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		public void DestroyLevel()
 		{
 			progressController.CleanUp();
-			foreach (Block block in blocks)
+			foreach (Block block in blocks.Values)
 			{
 				GameObject.Destroy(block.gameObject);
 			}
@@ -101,12 +104,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private Block PrepareBlock(Block block, float blockWidth)
 		{
 			block.ResizeBlock(blockWidth);
-
-
-
-
 			SubscribeOnBlock(block);
-			blocks.Add(block);
 			return block;
 		}
 
@@ -131,7 +129,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private void OnBlockDeath(Block block)
 		{
 			OnBlockDestroyed?.Invoke(block);
-			blocks.Remove(block);
+			blocks.Remove(block.MatrixPosition);
 			UnsubscribeFromBlock(block);
 		}
 

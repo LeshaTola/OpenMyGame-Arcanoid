@@ -1,5 +1,6 @@
 using Scenes.Gameplay.Feature.Blocks.Config;
 using Scenes.Gameplay.Feature.Blocks.Config.Components;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Blocks
@@ -12,6 +13,8 @@ namespace Scenes.Gameplay.Feature.Blocks
 
 		public BlockVisual Visual { get => visual; }
 		public BlockConfig Config { get => config; }
+		public Vector2Int MatrixPosition { get; private set; }
+		public Dictionary<Vector2Int, Block> Neighbors { get; private set; }
 
 		public float Width
 		{
@@ -28,7 +31,15 @@ namespace Scenes.Gameplay.Feature.Blocks
 		public void Init(BlockConfig config)
 		{
 			this.config = config;
+
+
 			visual.Init(config.Sprite);
+		}
+
+		public void Setup(Dictionary<Vector2Int, Block> neighbors, Vector2Int matrixPosition)
+		{
+			this.Neighbors = neighbors;
+			MatrixPosition = matrixPosition;
 		}
 
 		public void ResizeBlock(float width)
