@@ -21,3 +21,5 @@ MonoBehaviour:
   - Tutorial_BallSpeed
   - Tutorial_PlateSize
   - Tutorial_PlateSpeed
+  - Tutorial_Bombs
+  - Tutorial_ColorBomb

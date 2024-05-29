@@ -28,7 +28,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
@@ -95,6 +95,13 @@ MonoBehaviour:
     - Name: 
       Entry: 7
       Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb.ColorBombTargetComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8

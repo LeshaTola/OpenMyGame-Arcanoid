@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be3cb94c1a974454ab8c03d6d096a7e5, type: 3}
-  m_Name: Red
+  m_Name: Bomb
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -28,21 +28,70 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 3
     - Name: 
       Entry: 7
-      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
+      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
+        Assembly-CSharp
+    - Name: health
+      Entry: 3
+      Data: 1
+    - Name: cracksDictionary
+      Entry: 10
+      Data: 0
+    - Name: deathComponents
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 3|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.BombComponent,
+        Assembly-CSharp
+    - Name: radius
+      Entry: 3
+      Data: 2
+    - Name: damage
+      Entry: 3
+      Data: 1
+    - Name: pauseBetweenExplosions
+      Entry: 4
+      Data: 0.2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
         Assembly-CSharp
     - Name: collisionComponents
       Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 6|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 3|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
+      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
         Assembly-CSharp
     - Name: damage
       Entry: 3
@@ -61,24 +110,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
-        Assembly-CSharp
-    - Name: health
-      Entry: 3
-      Data: 2
-    - Name: cracksDictionary
-      Entry: 10
-      Data: 0
-    - Name: deathComponents
-      Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 6|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+      Data: 8|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8
@@ -89,29 +121,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
-        Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 8|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb.ColorBombTargetComponent,
-        Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-  blockName: Red
-  sprite: {fileID: 21300000, guid: ad31e49992e51294ea308531899d0ed6, type: 3}
-  color: {r: 1, g: 0, b: 0.13118649, a: 1}
+  blockName: Bomb
+  sprite: {fileID: 21300000, guid: 03e0c7f6baf271e40954baf08bee5329, type: 3}
+  color: {r: 1, g: 0.75977707, b: 0, a: 1}
