@@ -28,6 +28,8 @@ namespace Module.PopupLogic.General.Controller
 		public void AddActivePopup(Popup popup)
 		{
 			DeactivatePrevPopup();
+			popup.Canvas.sortingLayerName = "UI";//TODO: remove magic
+			popup.Canvas.sortingOrder = currentPopups.Count + 1;
 			currentPopups.Add(popup);
 		}
 
