@@ -31,10 +31,10 @@ namespace Module.PopupLogic.General.Popups
 		public virtual void Show()
 		{
 			gameObject.SetActive(true);
+			Controller.AddActivePopup(this);
 			popupAnimation.Value.Show(() =>
 			{
 				Activate();
-				Controller.AddActivePopup(this);
 			});
 		}
 
