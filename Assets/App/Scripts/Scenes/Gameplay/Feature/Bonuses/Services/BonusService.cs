@@ -69,13 +69,14 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			RemoveAllConflicts(bonusCommand);
 
 			bonusCommand.StartBonus();
-			OnBonusStart?.Invoke(bonusCommand);
+
 			if (bonusCommand.Duration <= 0)
 			{
 				return;
 			}
 
 			bonusCommands.Add(bonusCommand);
+			OnBonusStart?.Invoke(bonusCommand);
 		}
 
 		public void UpdateBonus()

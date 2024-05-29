@@ -48,7 +48,7 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		private void LoadNextLevel()
 		{
-			if (energyProvider.CurrentEnergy < energyProvider.Config.MaxEnergy)
+			if (energyProvider.CurrentEnergy < energyProvider.Config.PlayCost)
 			{
 				routerInfoPopup.ShowInfo("not enough energy");
 				return;
