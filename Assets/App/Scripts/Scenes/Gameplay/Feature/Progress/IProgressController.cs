@@ -13,5 +13,6 @@ namespace Scenes.Gameplay.Feature.Progress
 		void CleanUp();
 		void Init(List<Block> blocks);
 		void ProcessProgress();
+		void InitiateWin();
 	}
 }

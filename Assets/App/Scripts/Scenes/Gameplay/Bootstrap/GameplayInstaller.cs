@@ -1,15 +1,13 @@
 ﻿using Features.FileProvider;
-using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Blocks;
+using Scenes.Gameplay.Feature.Bonuses.Configs;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.Health.Configs;
 using Scenes.Gameplay.Feature.LevelCreation;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
-using Scenes.Gameplay.Feature.Player.Ball;
-using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
 using Scenes.Gameplay.Feature.Reset.Services;
@@ -25,31 +23,27 @@ namespace Scenes.Gameplay.Bootstrap
 		[Header("Level Creation")]
 		[SerializeField] private LevelConfig levelConfig;
 		[SerializeField] private BlocksDictionary blocksDictionary;
+		[SerializeField] private BonusesDatabase bonusesDatabase;
 		[SerializeField] private Block blockTemplate;
 		[SerializeField] private Transform container;
 		[SerializeField] private ResetService resetService;
 
-		[Header("Balls")]
-		[SerializeField] private int ballCount;
-		[SerializeField] private Ball ballTemplate;
-		[SerializeField] private Transform ballsContainer;
-
-		[Header("Other")]
+		[Header("Progress")]
 		[SerializeField] private int winProgress = 100;
-		[SerializeField] private HealthConfig config;
 
+		[Header("Health")]
+		[SerializeField] private HealthConfig config;
 
 		public override void InstallBindings()
 		{
 			RouterInstaller.Install(Container);
 
 			BindResetService();
-			BindBallService();
 			BindProgressController();
 			BindHealthController();
 			BindBoundaryValidator();
-			BindBallsPool();
 			BindLevelGenerator();
+
 			BindFileProvider();
 			BindLevelInfoProvider();
 			BindBlockFactory();
@@ -60,11 +54,6 @@ namespace Scenes.Gameplay.Bootstrap
 		private void BindResetService()
 		{
 			Container.Bind<IResetService>().FromInstance(resetService).AsSingle();
-		}
-
-		private void BindBallService()
-		{
-			Container.Bind<IBallService>().To<BallService>().AsSingle();
 		}
 
 		private void BindBoundaryValidator()
@@ -87,20 +76,12 @@ namespace Scenes.Gameplay.Bootstrap
 				.WithArguments(winProgress);
 		}
 
-		private void BindBallsPool()
-		{
-			Container.Bind<IPool<Ball>>()
-				.To<MonoBehObjectPool<Ball>>()
-				.AsSingle()
-				.WithArguments(ballTemplate, ballCount, ballsContainer);
-		}
-
 		private void BindLevelGenerator()
 		{
 			Container.Bind<ILevelGenerator>()
 				.To<LevelGenerator>()
 				.AsSingle()
-				.WithArguments(levelConfig);
+				.WithArguments(levelConfig, bonusesDatabase);
 		}
 
 		private void BindFileProvider()

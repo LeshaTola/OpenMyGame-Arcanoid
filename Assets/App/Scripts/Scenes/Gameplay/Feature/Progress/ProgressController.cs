@@ -59,6 +59,16 @@ namespace Scenes.Gameplay.Feature.Progress
 			}
 		}
 
+		public void InitiateWin()
+		{
+			List<Block> blocksToDestroy = new(scoredBlocks);
+			foreach (var block in blocksToDestroy)
+			{
+				block.Config.GetComponent<HealthComponent>()?.Kill();
+			}
+			scoredBlocks.Clear();
+		}
+
 		public void CleanUp()
 		{
 			foreach (var block in scoredBlocks)
@@ -100,7 +110,5 @@ namespace Scenes.Gameplay.Feature.Progress
 			currentBlocksCount--;
 			ProcessProgress();
 		}
-
-
 	}
 }

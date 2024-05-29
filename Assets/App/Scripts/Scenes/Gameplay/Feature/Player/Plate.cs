@@ -14,6 +14,7 @@ namespace Scenes.Gameplay.Feature.Player
 	{
 		[SerializeField] private BoxCollider2D boxCollider;
 		[SerializeField] private Transform ballPosition;
+		[SerializeField] private PlateVisual visual;
 
 		private IFieldSizeProvider fieldController;
 		private IInput input;
@@ -21,6 +22,9 @@ namespace Scenes.Gameplay.Feature.Player
 		private IBallService ballService;
 		private IProgressController progressController;
 		private List<Ball.Ball> connectedBalls = new();
+
+		private float defaultWidth;
+		public float SpeedMultiplier { get; set; } = 1;
 
 		[Inject]
 		public void Construct(IFieldSizeProvider fieldController,
@@ -34,6 +38,21 @@ namespace Scenes.Gameplay.Feature.Player
 			this.movement = movement;
 			this.ballService = ballService;
 			this.progressController = progressController;
+
+			defaultWidth = boxCollider.size.x;
+			visual.Init();
+		}
+
+		public void ChangeWidth(float multiplier)
+		{
+			boxCollider.size = new Vector2(defaultWidth * multiplier, boxCollider.size.y);
+			visual.ChangeWidth(multiplier);
+		}
+
+		public void ResetWidth()
+		{
+			boxCollider.size = new Vector2(defaultWidth, boxCollider.size.y);
+			visual.ResetWidth();
 		}
 
 		public void PushBalls()
@@ -60,7 +79,7 @@ namespace Scenes.Gameplay.Feature.Player
 			if (!targetPosition.Equals(default) && fieldController.GameField.IsValid(targetPosition))
 			{
 				direction = GetDirection(targetPosition);
-				movement.Move(direction);
+				movement.Move(direction, SpeedMultiplier);
 			}
 
 			ClampPosition();
@@ -88,7 +107,6 @@ namespace Scenes.Gameplay.Feature.Player
 			}
 
 			ballService.Reset();
-
 			transform.position = new Vector2(0, transform.position.y);
 			Stop();
 			Ball.Ball ball = ballService.GetBall();

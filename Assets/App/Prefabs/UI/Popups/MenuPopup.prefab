@@ -140,6 +140,7 @@ MonoBehaviour:
     rawReference:
       rid: -2
   raycaster: {fileID: 70468076734603882}
+  canvas: {fileID: 8661108109095142355}
   header: {fileID: 1005379262407769309}
   restartButton: {fileID: 3355527572035590827}
   backButton: {fileID: 2217043810424779060}
@@ -176,7 +177,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0

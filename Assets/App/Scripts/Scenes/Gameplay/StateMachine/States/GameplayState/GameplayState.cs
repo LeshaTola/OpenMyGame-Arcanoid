@@ -1,5 +1,6 @@
 using Features.StateMachine;
 using Features.StateMachine.States;
+using Scenes.Gameplay.Feature.Bonuses.Services;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.Player;
@@ -18,6 +19,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		private IProgressController progressController;
 		private IHealthController healthController;
 		private IBoundaryValidator boundaryValidator;
+		private IBonusService bonusService;
 		private IInput input;
 		private IFieldSizeProvider fieldSizeProvider;
 		private Plate plate;
@@ -30,6 +32,7 @@ namespace Scenes.Gameplay.StateMachine.States
 					   IBoundaryValidator boundaryValidator,
 					   IInput input,
 					   IFieldSizeProvider fieldSizeProvider,
+					   IBonusService bonusService,
 					   Plate plate,
 					   GameplayHeaderUI headerUI,
 					   List<IUpdatable> updatables)
@@ -41,6 +44,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			this.progressController = progressController;
 			this.healthController = healthController;
 			this.boundaryValidator = boundaryValidator;
+			this.bonusService = bonusService;
 			this.updatables = updatables;
 		}
 
@@ -48,6 +52,8 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			base.Enter();
 			headerUI.OnMenuButtonCLicked += OnMenuButtonCLicked;
+			headerUI.OnNextLevelButtonCLicked += OnNextLevelButtonCLicked;
+
 			progressController.OnWin += OnWin;
 			boundaryValidator.OnLastBallFall += OnLastBallFall;
 			healthController.OnDeath += OnDeath;
@@ -61,12 +67,14 @@ namespace Scenes.Gameplay.StateMachine.States
 			{
 				updatable.Update();
 			}
+			bonusService.UpdateBonus();
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
 			headerUI.OnMenuButtonCLicked -= OnMenuButtonCLicked;
+			headerUI.OnNextLevelButtonCLicked -= OnNextLevelButtonCLicked;
 			progressController.OnWin -= OnWin;
 			boundaryValidator.OnLastBallFall -= OnLastBallFall;
 			healthController.OnDeath -= OnDeath;
@@ -104,6 +112,11 @@ namespace Scenes.Gameplay.StateMachine.States
 		private void OnMenuButtonCLicked()
 		{
 			StateMachine.ChangeState<PauseState>();
+		}
+
+		private void OnNextLevelButtonCLicked()
+		{
+			progressController.InitiateWin();
 		}
 	}
 }

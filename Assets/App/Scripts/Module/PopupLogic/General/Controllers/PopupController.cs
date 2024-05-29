@@ -3,17 +3,20 @@ using Module.PopupLogic.General.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 
 namespace Module.PopupLogic.General.Controller
 {
 	public class PopupController : IPopupController
 	{
 		private IPopupProvider popupProvider;
+		private Image screenBlocker;
 		private List<Popup> currentPopups;
 
-		public PopupController(IPopupProvider popupProvider)
+		public PopupController(IPopupProvider popupProvider, Image screenBlocker)
 		{
 			this.popupProvider = popupProvider;
+			this.screenBlocker = screenBlocker;
 			currentPopups = new();
 		}
 
@@ -25,6 +28,8 @@ namespace Module.PopupLogic.General.Controller
 		public void AddActivePopup(Popup popup)
 		{
 			DeactivatePrevPopup();
+			popup.Canvas.sortingLayerName = "UI";//TODO: remove magic
+			popup.Canvas.sortingOrder = currentPopups.Count + 1;
 			currentPopups.Add(popup);
 		}
 
@@ -70,6 +75,7 @@ namespace Module.PopupLogic.General.Controller
 				currentPopups.Last().Deactivate();
 				return;
 			}
+			screenBlocker.gameObject.SetActive(true);
 		}
 
 		private void ActivatePrevPopup()
@@ -79,6 +85,7 @@ namespace Module.PopupLogic.General.Controller
 				currentPopups[currentPopups.Count - 2].Activate();
 				return;
 			}
+			screenBlocker.gameObject.SetActive(false);
 		}
 	}
 }

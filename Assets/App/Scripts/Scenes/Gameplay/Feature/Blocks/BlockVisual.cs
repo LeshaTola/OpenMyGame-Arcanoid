@@ -6,6 +6,7 @@ namespace Scenes.Gameplay.Feature.Blocks
 	{
 		[SerializeField] private SpriteRenderer spriteRenderer;
 		[SerializeField] private SpriteRenderer crackRenderer;
+		[SerializeField] private SpriteRenderer bonusRenderer;
 
 		public void Init(Sprite sprite)
 		{
@@ -22,6 +23,11 @@ namespace Scenes.Gameplay.Feature.Blocks
 		public void SetCrack(Sprite sprite)
 		{
 			crackRenderer.sprite = sprite;
+		}
+
+		public void SetBonus(Sprite sprite)
+		{
+			bonusRenderer.sprite = sprite;
 		}
 	}
 }

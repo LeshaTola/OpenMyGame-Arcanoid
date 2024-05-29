@@ -215,6 +215,7 @@ MonoBehaviour:
     rawReference:
       rid: -2
   raycaster: {fileID: 1205636041858400872}
+  canvas: {fileID: 7419400496068126763}
   header: {fileID: 1633097240522702342}
   buttonsContainer: {fileID: 7273620191803479521}
   references:
@@ -249,7 +250,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25

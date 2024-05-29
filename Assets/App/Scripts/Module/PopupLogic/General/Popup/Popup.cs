@@ -10,8 +10,10 @@ namespace Module.PopupLogic.General.Popups
 	{
 		[SerializeField] protected SerializableInterface<IPopupAnimation> popupAnimation;
 		[SerializeField] protected GraphicRaycaster raycaster;
+		[SerializeField] protected Canvas canvas;
 
 		public IPopupController Controller { get; private set; }
+		public Canvas Canvas { get => canvas; }
 
 		public void Init(IPopupController controller)
 		{
@@ -31,10 +33,10 @@ namespace Module.PopupLogic.General.Popups
 		public virtual void Show()
 		{
 			gameObject.SetActive(true);
+			Controller.AddActivePopup(this);
 			popupAnimation.Value.Show(() =>
 			{
 				Activate();
-				Controller.AddActivePopup(this);
 			});
 		}
 

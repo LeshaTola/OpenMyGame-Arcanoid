@@ -13,6 +13,8 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 		[UnityEngine.SerializeField] private CracksDictionary cracksDictionary;
 		[UnityEngine.SerializeField] List<IComponent> deathComponents;
 
+		public List<IComponent> DeathComponents { get => deathComponents; }
+
 		public override void Init(Block block)
 		{
 			base.Init(block);

@@ -1,4 +1,5 @@
 ﻿using Features.UI.SceneTransitions;
+using Scenes.Gameplay.Feature.Bonuses.UI;
 using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.Progress;
 using Scenes.Gameplay.Feature.UI;
@@ -14,6 +15,7 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private SerializableInterface<IProgressUI> progressUI;
 		[SerializeField] private SerializableInterface<IHealthBarUI> healthBarUI;
 		[SerializeField] private SerializableInterface<IPackInfoUI> packInfoUI;
+		[SerializeField] private SerializableInterface<IBonusesUI> bonusesUI;
 		[SerializeField] private GameplayHeaderUI headerUI;
 
 		public override void InstallBindings()
@@ -22,6 +24,7 @@ namespace Scenes.Gameplay.Bootstrap
 			Container.BindInstance(progressUI.Value);
 			Container.BindInstance(healthBarUI.Value);
 			Container.BindInstance(packInfoUI.Value);
+			Container.BindInstance(bonusesUI.Value);
 			Container.BindInstance(headerUI);
 		}
 	}

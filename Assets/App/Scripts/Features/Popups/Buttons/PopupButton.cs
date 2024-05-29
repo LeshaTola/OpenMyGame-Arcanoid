@@ -19,6 +19,7 @@ namespace Features.Popups.Languages
 
 		public void Init(ILocalizationSystem localizationSystem)
 		{
+			button.onClick.RemoveAllListeners();
 			button.onClick.AddListener(() => onButtonClicked?.Invoke());
 			buttonText.Init(localizationSystem);
 		}

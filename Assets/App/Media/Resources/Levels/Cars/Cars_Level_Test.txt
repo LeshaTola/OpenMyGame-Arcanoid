@@ -5,5 +5,10 @@
     [
       0
     ]
+  ],
+  "BonusesMatrix": [
+    [
+      null
+    ]
   ]
 }

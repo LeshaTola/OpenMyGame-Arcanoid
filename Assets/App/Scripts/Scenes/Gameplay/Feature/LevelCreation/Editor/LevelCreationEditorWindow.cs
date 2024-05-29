@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Scenes.Gameplay.Feature.Bonuses.Configs;
 using Scenes.Gameplay.Feature.LevelCreation;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Sirenix.OdinInspector;
@@ -20,28 +21,34 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 		[HorizontalGroup("Create/Size")]
 		[SerializeField] private int width;
 
+		[Space(8)]
+		[SerializeField] private BlocksDictionary blocksDictionary;
+		[SerializeField] private BonusesDatabase bonusesDatabase;
+
 		[VerticalGroup("Create")]
+		[ShowIf("@blocksDictionary != null && bonusesDatabase != null")]
 		[Button(ButtonSizes.Small)]
 		public void CreateMatrix()
 		{
 			blocksMatrix = new int[width, height];
+			bonusesMatrix = new string[width, height];
 		}
 		#endregion
 
 		#region Matrix
-		[Space(8)]
-		[SerializeField] private BlocksDictionary blocksDictionary;
 
+		[FoldoutGroup("Blocks")]
 		[ValueDropdown(nameof(GetIds))]
 		[SerializeField] private int value;
 
-		[ShowIf("@ blocksMatrix != null")]
+		[FoldoutGroup("Blocks")]
+		[ShowIf("@blocksMatrix != null")]
 		[TableMatrix(DrawElementMethod = nameof(DrawCustomElement))]
 		[SerializeField] private int[,] blocksMatrix;
 
 		private int DrawCustomElement(Rect rect, int value)
 		{
-			if (Event.current.type == EventType.MouseDrag
+			if (Event.current.button == 0 && (Event.current.type == EventType.MouseDrag || Event.current.type == EventType.MouseDown)
 				&& rect.Contains(Event.current.mousePosition))
 			{
 				value = this.value;
@@ -49,13 +56,21 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 				Event.current.Use();
 			}
 
-			Color cellColor = Color.black;
+
+			if (Event.current.button == 1 && (Event.current.type == EventType.MouseDrag || Event.current.type == EventType.MouseDown)
+				&& rect.Contains(Event.current.mousePosition))
+			{
+				value = -1;
+				GUI.changed = true;
+				Event.current.Use();
+			}
+
+			Color cellColor;
 			if (blocksDictionary.Blocks.ContainsKey(value))
 			{
 				cellColor = blocksDictionary.Blocks[value].Color;
+				EditorGUI.DrawRect(rect.Padding(1), cellColor);
 			}
-
-			EditorGUI.DrawRect(rect.Padding(1), cellColor);
 
 			return value;
 		}
@@ -71,7 +86,53 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 			ids.Sort();
 			return ids;
 		}
+		#endregion
 
+		#region BonusMatrix
+
+		[FoldoutGroup("Bonuses")]
+		[ValueDropdown(nameof(GetBonusesId))]
+		[SerializeField] private string bonusValue = "";
+
+		[FoldoutGroup("Bonuses")]
+		[ShowIf("@bonusesMatrix != null")]
+		[TableMatrix(DrawElementMethod = nameof(DrawCustomBonusElement))]
+		[SerializeField] private string[,] bonusesMatrix;
+
+		private string DrawCustomBonusElement(Rect rect, string value)
+		{
+			if (Event.current.button == 0 && (Event.current.type == EventType.MouseDrag || Event.current.type == EventType.MouseDown)
+				&& rect.Contains(Event.current.mousePosition))
+			{
+				value = bonusValue;
+				GUI.changed = true;
+				Event.current.Use();
+			}
+
+			if (Event.current.button == 1 && (Event.current.type == EventType.MouseDrag || Event.current.type == EventType.MouseDown)
+				&& rect.Contains(Event.current.mousePosition))
+			{
+				value = "none";
+				GUI.changed = true;
+				Event.current.Use();
+			}
+
+			if (value != null && bonusesDatabase.Bonuses.ContainsKey(value))
+			{
+				GUI.DrawTexture(rect, bonusesDatabase.Bonuses[value].BlockSprite?.texture);
+			}
+			return value;
+		}
+
+		private List<string> GetBonusesId()
+		{
+			if (bonusesDatabase == null)
+			{
+				return null;
+			}
+
+			return new List<string>(bonusesDatabase.Bonuses.Keys);
+		}
 		#endregion
 
 		#region SaveLoad
@@ -88,6 +149,7 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 				Height = height,
 				Width = width,
 				BlocksMatrix = blocksMatrix,
+				BonusesMatrix = bonusesMatrix
 			};
 
 			string json = JsonConvert.SerializeObject(levelInfo, Formatting.Indented);
@@ -96,6 +158,7 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 		}
 
 		[HorizontalGroup("SaveLoad")]
+		[ShowIf("@blocksDictionary != null && bonusesDatabase != null")]
 		[Button(ButtonSizes.Small)]
 		public void Load()
 		{
@@ -106,6 +169,7 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 			height = levelInfo.Height;
 			width = levelInfo.Width;
 			blocksMatrix = levelInfo.BlocksMatrix;
+			bonusesMatrix = levelInfo.BonusesMatrix;
 		}
 		#endregion
 
