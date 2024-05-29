@@ -27,6 +27,16 @@ namespace Scenes.Gameplay.Feature.Blocks.Config
 			}
 		}
 
+		public bool TryGetComponent<T>(out T component) where T : IComponent
+		{
+			component = GetComponent<T>();
+			if (component == null)
+			{
+				return false;
+			}
+			return true;
+		}
+
 		public T GetComponent<T>(List<IComponent> components) where T : IComponent
 		{
 			return (T)components.FirstOrDefault(x => x is T);
