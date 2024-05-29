@@ -158,7 +158,7 @@ MonoBehaviour:
       Data: 5
     - Name: duration
       Entry: 4
-      Data: 5
+      Data: 30
     - Name: conflicts
       Entry: 7
       Data: 7|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
@@ -342,7 +342,7 @@ MonoBehaviour:
       Data: 13
     - Name: duration
       Entry: 4
-      Data: 5
+      Data: 30
     - Name: conflicts
       Entry: 7
       Data: 15|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
@@ -360,7 +360,7 @@ MonoBehaviour:
       Data: 
     - Name: multiplier
       Entry: 4
-      Data: 1.5
+      Data: 2
     - Name: 
       Entry: 8
       Data: 

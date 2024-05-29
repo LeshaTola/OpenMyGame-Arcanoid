@@ -1,8 +1,10 @@
 ﻿using Module.ObjectPool;
 using Scenes.Gameplay.Feature.Bonuses;
 using Scenes.Gameplay.Feature.Bonuses.Configs;
+using Scenes.Gameplay.Feature.Bonuses.Controllers;
 using Scenes.Gameplay.Feature.Bonuses.Factories;
 using Scenes.Gameplay.Feature.Bonuses.Services;
+using Scenes.Gameplay.Feature.Bonuses.UI;
 using UnityEngine;
 using Zenject;
 
@@ -10,17 +12,38 @@ namespace Scenes.Gameplay.Bootstrap
 {
 	public class BonusInstaller : MonoInstaller
 	{
+		[Header("Bonus")]
+		[SerializeField] private BonusesDatabase bonusesDatabase;
 		[SerializeField] private Bonus bonusTemplate;
 		[SerializeField] private Transform container;
 		[SerializeField] private int preloadCount;
 
-		[SerializeField] private BonusesDatabase bonusesDatabase;
+
+		[Header("UI")]
+		[SerializeField] private BonusTimerUI bonusesTimerTemplate;
+		[SerializeField] private RectTransform BonusTimersContainer;
 
 		public override void InstallBindings()
 		{
+			BindBonusTimersPool();
+			BindBonusesController();
+
 			BindBonusesPool();
 			BindBonusCommandsFactory();
 			BindBonusService();
+		}
+
+		private void BindBonusesController()
+		{
+			Container.Bind<IBonusesController>().To<BonusesController>().AsSingle().NonLazy();
+		}
+
+		private void BindBonusTimersPool()
+		{
+			Container.Bind<IPool<BonusTimerUI>>()
+						.To<MonoBehObjectPool<BonusTimerUI>>()
+						.AsSingle()
+						.WithArguments(bonusesTimerTemplate, preloadCount, BonusTimersContainer);
 		}
 
 		private void BindBonusCommandsFactory()

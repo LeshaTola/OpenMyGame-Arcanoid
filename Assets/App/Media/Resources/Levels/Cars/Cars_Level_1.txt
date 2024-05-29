@@ -14,11 +14,11 @@
   "BonusesMatrix": [
     [
       "SpeedUpPlate",
-      "SlowDownPlate"
+      "SpeedUpPlate"
     ],
     [
-      "SlowDownPlate",
-      "SpeedUpPlate"
+      "SpeedUpBalls",
+      "SpeedUpBalls"
     ]
   ]
 }

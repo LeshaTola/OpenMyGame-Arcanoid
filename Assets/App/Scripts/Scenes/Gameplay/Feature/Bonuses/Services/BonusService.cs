@@ -5,7 +5,9 @@ using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
 using Scenes.Gameplay.Feature.Bonuses.Commands;
 using Scenes.Gameplay.Feature.Bonuses.Factories;
+using Scenes.Gameplay.Feature.Bonuses.UI;
 using Scenes.Gameplay.Feature.LevelCreation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,9 +15,14 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 {
 	public class BonusService : IBonusService
 	{
+		public event Action<IBonusCommand> OnBonusStart;
+		public event Action<IBonusCommand> OnBonusUpdate;
+		public event Action<IBonusCommand> OnBonusStop;
+
 		private IPool<Bonus> pool;
 		private IBonusCommandsFactory bonusCommandsFactory;
 		private ITimeProvider timeProvider;
+		private IBonusesUI bonusesUI;
 
 		private List<IBonusCommand> bonusCommands = new();
 		private List<IBonusCommand> commandsToRemove = new();
@@ -62,12 +69,45 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			RemoveAllConflicts(bonusCommand);
 
 			bonusCommand.StartBonus();
+			OnBonusStart?.Invoke(bonusCommand);
 			if (bonusCommand.Duration <= 0)
 			{
 				return;
 			}
 
 			bonusCommands.Add(bonusCommand);
+		}
+
+		public void UpdateBonus()
+		{
+			foreach (var command in bonusCommands)
+			{
+				command.Timer -= timeProvider.DeltaTime;
+				OnBonusUpdate?.Invoke(command);
+				if (command.Timer <= 0)
+				{
+					commandsToRemove.Add(command);
+				}
+			}
+			StopCommandsToRemove();
+		}
+
+		public void StopBonus(IBonusCommand bonusCommand)
+		{
+			bonusCommand.StopBonus();
+			OnBonusStop?.Invoke(bonusCommand);
+			bonusCommands.Remove(bonusCommand);
+		}
+
+		public void Cleanup()
+		{
+			var bonuses = new List<IBonusCommand>(bonusCommands);
+			foreach (var command in bonuses)
+			{
+				StopBonus(command);
+			}
+			bonusCommands.Clear();
+			bonuses.Clear();
 		}
 
 		private void RemoveAllConflicts(IBonusCommand bonusCommand)
@@ -81,36 +121,6 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 				}
 			}
 			StopCommandsToRemove();
-		}
-
-		public void UpdateBonus()
-		{
-
-			foreach (var command in bonusCommands)
-			{
-				command.Timer -= timeProvider.DeltaTime;
-				if (command.Timer <= 0)
-				{
-					commandsToRemove.Add(command);
-				}
-			}
-
-			StopCommandsToRemove();
-		}
-
-		public void StopBonus(IBonusCommand bonusCommand)
-		{
-			bonusCommand.StopBonus();
-			bonusCommands.Remove(bonusCommand);
-		}
-
-		public void Cleanup()
-		{
-			foreach (var command in bonusCommands)
-			{
-				command.StopBonus();
-			}
-			bonusCommands.Clear();
 		}
 
 		private void OnBlockDestroyed(Block block)
