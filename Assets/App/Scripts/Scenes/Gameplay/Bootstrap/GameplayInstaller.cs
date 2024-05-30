@@ -8,6 +8,7 @@ using Scenes.Gameplay.Feature.Health.Configs;
 using Scenes.Gameplay.Feature.LevelCreation;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
+using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
 using Scenes.Gameplay.Feature.Reset.Services;
@@ -42,13 +43,22 @@ namespace Scenes.Gameplay.Bootstrap
 			BindProgressController();
 			BindHealthController();
 			BindBoundaryValidator();
-			BindLevelGenerator();
 
 			BindFileProvider();
 			BindLevelInfoProvider();
 			BindBlockFactory();
+			BindLevelGenerator();
+			BindLevelProvider();
+
 			BindTimeProvider();
 			BindInput();
+		}
+
+		private void BindLevelProvider()
+		{
+			Container.Bind<ILevelProvider>()
+				.To<LevelProvider>()
+				.AsSingle();
 		}
 
 		private void BindResetService()

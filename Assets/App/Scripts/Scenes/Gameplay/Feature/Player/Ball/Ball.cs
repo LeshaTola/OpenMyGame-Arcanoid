@@ -9,10 +9,12 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 		public event Action<Ball, Collision2D> OnCollisionEnter;
 
 		[SerializeField] private BallMovement movement;
+		[SerializeField] private BallVisual visual;
 
 		private IBallService service;
 
 		public BallMovement Movement => movement;
+		public BallVisual Visual { get => visual; }
 
 		public void Init(IBallService service)
 		{

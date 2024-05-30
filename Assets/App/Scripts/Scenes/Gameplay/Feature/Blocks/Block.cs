@@ -1,5 +1,6 @@
 using Scenes.Gameplay.Feature.Blocks.Config;
 using Scenes.Gameplay.Feature.Blocks.Config.Components;
+using Scenes.Gameplay.Feature.Player.Ball;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace Scenes.Gameplay.Feature.Blocks
 		public BlockConfig Config { get => config; }
 		public Vector2Int MatrixPosition { get; private set; }
 		public Dictionary<Vector2Int, Block> Neighbors { get; private set; }
+		public BoxCollider2D BoxCollider { get => boxCollider; }
 
 		public float Width
 		{
@@ -60,6 +62,17 @@ namespace Scenes.Gameplay.Feature.Blocks
 		{
 			var collisionComponent = config.GetComponent<CollisionComponent>();
 			collisionComponent?.Execute();
+		}
+
+		private void OnTriggerEnter2D(Collider2D collision)
+		{
+			if (!collision.gameObject.TryGetComponent(out Ball ball))
+			{
+				return;
+			}
+
+			var triggerComponent = config.GetComponent<TriggerComponent>();
+			triggerComponent?.Execute();
 		}
 	}
 }

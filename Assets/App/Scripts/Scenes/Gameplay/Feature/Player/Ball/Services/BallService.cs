@@ -38,6 +38,22 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			pool.Release(ball);
 		}
 
+		public void ActivateRageMode()
+		{
+			foreach (Ball ball in pool.Active)
+			{
+				ball.Visual.ActivateRageMode();
+			}
+		}
+
+		public void DeactivateRageMode()
+		{
+			foreach (Ball ball in pool.Active)
+			{
+				ball.Visual.DeactivateRageMode();
+			}
+		}
+
 		private void OnBallCollisionEnter(Ball ball, Collision2D collision)
 		{
 			Vector2 newDirection = ball.Movement.Direction;
