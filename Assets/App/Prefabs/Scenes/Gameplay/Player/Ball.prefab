@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1824832681251466558}
   - component: {fileID: 2182177023239078481}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 888402264843372841}
   - component: {fileID: 2332535626420645355}
   - component: {fileID: 4805211528838333326}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 7470354349316260839}
   - component: {fileID: 7470354349316260836}
   - component: {fileID: 9122943620017408730}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

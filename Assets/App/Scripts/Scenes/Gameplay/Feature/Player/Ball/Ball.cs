@@ -15,6 +15,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 
 		public BallMovement Movement => movement;
 		public BallVisual Visual { get => visual; }
+		public IBallService Service { get => service; }
 
 		public void Init(IBallService service)
 		{

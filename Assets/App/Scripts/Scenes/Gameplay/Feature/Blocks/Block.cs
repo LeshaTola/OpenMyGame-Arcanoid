@@ -1,8 +1,10 @@
 using Scenes.Gameplay.Feature.Blocks.Config;
 using Scenes.Gameplay.Feature.Blocks.Config.Components;
 using Scenes.Gameplay.Feature.Player.Ball;
+using Scenes.Gameplay.Feature.Player.Ball.Services;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Scenes.Gameplay.Feature.Blocks
 {
@@ -17,6 +19,7 @@ namespace Scenes.Gameplay.Feature.Blocks
 		public Vector2Int MatrixPosition { get; private set; }
 		public Dictionary<Vector2Int, Block> Neighbors { get; private set; }
 		public BoxCollider2D BoxCollider { get => boxCollider; }
+		public IBallService BallService { get; private set; }
 
 		public float Width
 		{
@@ -30,17 +33,23 @@ namespace Scenes.Gameplay.Feature.Blocks
 			private set => boxCollider.size = new Vector2(boxCollider.size.x, value);
 		}
 
+
+		[Inject]
+		public void Construct(IBallService ballService)
+		{
+			BallService = ballService;
+		}
+
 		public void Init(BlockConfig config)
 		{
 			this.config = config;
-
 
 			visual.Init(config.Sprite);
 		}
 
 		public void Setup(Dictionary<Vector2Int, Block> neighbors, Vector2Int matrixPosition)
 		{
-			this.Neighbors = neighbors;
+			Neighbors = neighbors;
 			MatrixPosition = matrixPosition;
 		}
 
@@ -60,8 +69,11 @@ namespace Scenes.Gameplay.Feature.Blocks
 
 		private void OnCollisionEnter2D(Collision2D col)
 		{
-			var collisionComponent = config.GetComponent<CollisionComponent>();
-			collisionComponent?.Execute();
+			if (config.TryGetComponent(out CollisionComponent collisionComponent))
+			{
+				collisionComponent.CollisionGameObject = col.gameObject;
+				collisionComponent.Execute();
+			}
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)
@@ -71,8 +83,11 @@ namespace Scenes.Gameplay.Feature.Blocks
 				return;
 			}
 
-			var triggerComponent = config.GetComponent<TriggerComponent>();
-			triggerComponent?.Execute();
+			if (config.TryGetComponent(out TriggerComponent triggerComponent))
+			{
+				triggerComponent.TriggerGameObject = collision.gameObject;
+				triggerComponent.Execute();
+			}
 		}
 	}
 }

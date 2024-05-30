@@ -1,11 +1,14 @@
 ﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.General;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Blocks.Config.Components
 {
-	public class CollisionComponent : Component
+	public class CollisionComponent : General.Component
 	{
-		[UnityEngine.SerializeField] private List<IComponent> collisionComponents;
+		[SerializeField] private List<IComponent> collisionComponents;
+
+		public GameObject CollisionGameObject { get; set; }
 
 		public override void Init(Block block)
 		{

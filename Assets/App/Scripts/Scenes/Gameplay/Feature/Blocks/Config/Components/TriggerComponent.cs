@@ -1,11 +1,14 @@
 ﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.General;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Blocks.Config.Components
 {
-	public class TriggerComponent : Component
+	public class TriggerComponent : General.Component
 	{
-		[UnityEngine.SerializeField] private List<IComponent> triggerComponents;
+		[SerializeField] private List<IComponent> triggerComponents;
+
+		public GameObject TriggerGameObject { get; set; }
 
 		public override void Init(Block block)
 		{
