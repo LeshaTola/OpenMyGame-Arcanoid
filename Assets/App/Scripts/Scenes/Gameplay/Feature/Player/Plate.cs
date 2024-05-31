@@ -23,8 +23,11 @@ namespace Scenes.Gameplay.Feature.Player
 		private IProgressController progressController;
 		private List<Ball.Ball> connectedBalls = new();
 
+
 		private float defaultWidth;
+
 		public float SpeedMultiplier { get; set; } = 1;
+		public bool IsSticky { get; set; } = false;
 
 		[Inject]
 		public void Construct(IFieldSizeProvider fieldController,
@@ -42,6 +45,18 @@ namespace Scenes.Gameplay.Feature.Player
 			defaultWidth = boxCollider.size.x;
 			visual.Init();
 		}
+
+		private void OnCollisionEnter2D(Collision2D collision)
+		{
+			if (!IsSticky || !collision.gameObject.TryGetComponent(out Ball.Ball ball))
+			{
+				return;
+			}
+			connectedBalls.Add(ball);
+			ball.transform.SetParent(transform);
+			ball.Movement.Rb.simulated = false;
+		}
+
 
 		public void ChangeWidth(float multiplier)
 		{

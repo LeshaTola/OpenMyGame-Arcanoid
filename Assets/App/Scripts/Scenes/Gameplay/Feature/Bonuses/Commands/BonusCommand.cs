@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Commands
@@ -6,8 +7,15 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands
 	public abstract class BonusCommand : IBonusCommand
 	{
 		[SerializeField] private int id;
-		[SerializeField] private Sprite sprite;
-		[SerializeField] private Sprite blockSprite;
+
+		[PreviewField]
+		[SerializeField]
+		private Sprite sprite;
+
+		[PreviewField]
+		[SerializeField]
+		private Sprite blockSprite;
+
 		[SerializeField] private float duration;
 		[SerializeField] private List<int> conflicts;
 

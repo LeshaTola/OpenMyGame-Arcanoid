@@ -18,8 +18,8 @@ namespace Scenes.Gameplay.StateMachine.States
 		public override void Enter()
 		{
 			base.Enter();
-			resetService.Reset();
 			bonusService.Cleanup();
+			resetService.Reset();
 			StateMachine.ChangeState<GameplayState>();
 		}
 	}
