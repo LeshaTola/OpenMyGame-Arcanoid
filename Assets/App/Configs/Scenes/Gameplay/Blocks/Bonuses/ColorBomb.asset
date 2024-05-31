@@ -28,64 +28,21 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
-      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
+      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
         Assembly-CSharp
-    - Name: health
-      Entry: 3
-      Data: 1
-    - Name: cracksDictionary
-      Entry: 10
-      Data: 0
-    - Name: deathComponents
+    - Name: collisionComponents
       Entry: 7
       Data: 2|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: 3|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb.ColorBombComponent,
-        Assembly-CSharp
-    - Name: pauseBetweenExplosions
-      Entry: 4
-      Data: 0.1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
-        Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 5|Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
-        Assembly-CSharp
-    - Name: collisionComponents
-      Entry: 7
-      Data: 6|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
+      Data: 3|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
         Assembly-CSharp
     - Name: damage
       Entry: 3
@@ -104,7 +61,64 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 8|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
+      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.TriggerComponent,
+        Assembly-CSharp
+    - Name: triggerComponents
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 6|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
+        Assembly-CSharp
+    - Name: damage
+      Entry: 3
+      Data: 99999
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
+        Assembly-CSharp
+    - Name: health
+      Entry: 3
+      Data: 1
+    - Name: cracksDictionary
+      Entry: 10
+      Data: 0
+    - Name: deathComponents
+      Entry: 7
+      Data: 8|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb.ColorBombComponent,
+        Assembly-CSharp
+    - Name: pauseBetweenExplosions
+      Entry: 4
+      Data: 0.1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8
@@ -115,6 +129,22 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  blockName: Bomb
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  blockName: ColorBomb
   sprite: {fileID: 21300000, guid: c25c911a6482c004484de9b1ffb2dcf8, type: 3}
   color: {r: 1, g: 0.39305976, b: 0, a: 1}

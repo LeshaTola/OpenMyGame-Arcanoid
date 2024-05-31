@@ -1,0 +1,68 @@
+{
+  "Height": 4,
+  "Width": 5,
+  "BlocksMatrix": [
+    [
+      56,
+      2,
+      4,
+      0
+    ],
+    [
+      2,
+      56,
+      4,
+      4
+    ],
+    [
+      56,
+      2,
+      4,
+      56
+    ],
+    [
+      2,
+      56,
+      4,
+      4
+    ],
+    [
+      56,
+      2,
+      4,
+      0
+    ]
+  ],
+  "BonusesMatrix": [
+    [
+      "none",
+      "none",
+      "none",
+      "Rage"
+    ],
+    [
+      "none",
+      "none",
+      null,
+      "none"
+    ],
+    [
+      "none",
+      "none",
+      "none",
+      "none"
+    ],
+    [
+      "none",
+      "none",
+      null,
+      "none"
+    ],
+    [
+      null,
+      "none",
+      "none",
+      "Rage"
+    ]
+  ]
+}

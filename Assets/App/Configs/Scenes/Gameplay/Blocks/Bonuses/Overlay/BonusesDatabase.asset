@@ -32,6 +32,12 @@ MonoBehaviour:
     - {fileID: 21300000, guid: d1264e3e6264f3049b4263848ccf5494, type: 3}
     - {fileID: 21300000, guid: 0bd948ddff69fa040b8f8be3290349af, type: 3}
     - {fileID: 21300000, guid: 1a86d196ecbdd7c43909f2287b4ea730, type: 3}
+    - {fileID: 21300000, guid: 7454ab0eca9a022418ab08c7d1680d0c, type: 3}
+    - {fileID: 21300000, guid: fdc74b82fc11b114a981954e137a89c1, type: 3}
+    - {fileID: 21300000, guid: 2e0b8a18b42e662489afe2d68fc842a0, type: 3}
+    - {fileID: 21300000, guid: 51927907c07cc0e4fb98a1a5a4e7a711, type: 3}
+    - {fileID: 21300000, guid: 42204dfcf2deb534eba0ee44a77c752e, type: 3}
+    - {fileID: 21300000, guid: 969d67079c3ef66428b1bc1797c9e407, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -50,7 +56,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 8
+      Data: 11
     - Name: 
       Entry: 7
       Data: 
@@ -407,6 +413,143 @@ MonoBehaviour:
     - Name: multiplier
       Entry: 4
       Data: 0.8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Rage
+    - Name: $v
+      Entry: 7
+      Data: 18|Scenes.Gameplay.Feature.Bonuses.Commands.Rage.RageCommand, Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 9
+    - Name: sprite
+      Entry: 10
+      Data: 16
+    - Name: blockSprite
+      Entry: 10
+      Data: 17
+    - Name: duration
+      Entry: 4
+      Data: 30
+    - Name: conflicts
+      Entry: 7
+      Data: 19|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: StickyPlate
+    - Name: $v
+      Entry: 7
+      Data: 20|Scenes.Gameplay.Feature.Bonuses.Commands.StickyPlate.StickyPlateCommand,
+        Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 10
+    - Name: sprite
+      Entry: 10
+      Data: 18
+    - Name: blockSprite
+      Entry: 10
+      Data: 19
+    - Name: duration
+      Entry: 4
+      Data: 10
+    - Name: conflicts
+      Entry: 7
+      Data: 21|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Machinegun
+    - Name: $v
+      Entry: 7
+      Data: 22|Scenes.Gameplay.Feature.Bonuses.Commands.Machineguns.MachinegunCommand,
+        Assembly-CSharp
+    - Name: id
+      Entry: 3
+      Data: 11
+    - Name: sprite
+      Entry: 10
+      Data: 20
+    - Name: blockSprite
+      Entry: 10
+      Data: 21
+    - Name: duration
+      Entry: 4
+      Data: 20
+    - Name: conflicts
+      Entry: 7
+      Data: 23|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: timeBetweenShots
+      Entry: 4
+      Data: 1
+    - Name: bulletParams
+      Entry: 7
+      Data: Scenes.Gameplay.Feature.Player.Machineguns.Bullets.BulletParams, Assembly-CSharp
+    - Name: Damage
+      Entry: 3
+      Data: 1
+    - Name: Speed
+      Entry: 4
+      Data: 4
+    - Name: IsArmorPiercing
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

@@ -28,10 +28,40 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.TriggerComponent,
+        Assembly-CSharp
+    - Name: triggerComponents
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
+      Data: 3|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
+        Assembly-CSharp
+    - Name: damage
+      Entry: 3
+      Data: 999999
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
         Assembly-CSharp
     - Name: health
       Entry: 3
@@ -41,14 +71,14 @@ MonoBehaviour:
       Data: 0
     - Name: deathComponents
       Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 5|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 3|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+      Data: 6|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be3cb94c1a974454ab8c03d6d096a7e5, type: 3}
-  m_Name: Yellow
+  m_Name: BallSpawnPoint
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -28,12 +28,12 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 5
+      Data: 4
     - Name: 
       Entry: 7
-      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.TriggerComponent,
+      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
         Assembly-CSharp
-    - Name: triggerComponents
+    - Name: collisionComponents
       Entry: 7
       Data: 2|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
@@ -46,7 +46,7 @@ MonoBehaviour:
         Assembly-CSharp
     - Name: damage
       Entry: 3
-      Data: 99999
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -61,9 +61,9 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
+      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.TriggerComponent,
         Assembly-CSharp
-    - Name: collisionComponents
+    - Name: triggerComponents
       Entry: 7
       Data: 5|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
@@ -76,7 +76,7 @@ MonoBehaviour:
         Assembly-CSharp
     - Name: damage
       Entry: 3
-      Data: 1
+      Data: 99999
     - Name: 
       Entry: 8
       Data: 
@@ -105,10 +105,17 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
-      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.BallSpawnPoint.BallSpawnPointComponent,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8
@@ -124,14 +131,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 10|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
-        Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb.ColorBombTargetComponent,
+      Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8
@@ -142,6 +142,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  blockName: Yellow
-  sprite: {fileID: 21300000, guid: 6e3831da25756d146bfbaadfff95a4de, type: 3}
-  color: {r: 1, g: 0.9492414, b: 0, a: 1}
+  blockName: BallSpawnPoint
+  sprite: {fileID: 21300000, guid: 04e05a81ca9ccad46a8db28b597e4ec5, type: 3}
+  color: {r: 0.53333336, g: 0.2509804, b: 1, a: 1}
