@@ -9,6 +9,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components
 		[SerializeField] private List<IComponent> collisionComponents;
 
 		public GameObject CollisionGameObject { get; set; }
+		public List<IComponent> CollisionComponents { get => collisionComponents; }
 
 		public override void Init(Block block)
 		{

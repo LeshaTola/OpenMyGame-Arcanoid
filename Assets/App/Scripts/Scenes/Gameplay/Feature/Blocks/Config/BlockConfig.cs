@@ -27,14 +27,19 @@ namespace Scenes.Gameplay.Feature.Blocks.Config
 			}
 		}
 
-		public bool TryGetComponent<T>(out T component) where T : IComponent
+		public bool TryGetComponent<T>(out T component, List<IComponent> components) where T : IComponent
 		{
-			component = GetComponent<T>();
+			component = GetComponent<T>(components);
 			if (component == null)
 			{
 				return false;
 			}
 			return true;
+		}
+
+		public bool TryGetComponent<T>(out T component) where T : IComponent
+		{
+			return TryGetComponent(out component, Components);
 		}
 
 		public T GetComponent<T>(List<IComponent> components) where T : IComponent

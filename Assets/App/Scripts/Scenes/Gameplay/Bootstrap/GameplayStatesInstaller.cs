@@ -1,11 +1,9 @@
 ﻿using Features.Bootstrap;
 using Features.StateMachine;
 using Features.StateMachine.States;
-using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.StateMachine.States;
 using Scenes.Gameplay.StateMachine.States.Loss;
 using Scenes.Gameplay.StateMachine.States.Win;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +13,6 @@ namespace Scenes.Gameplay.Bootstrap
 	{
 		[SerializeField] private GameplayStateMachineHandler stateMachineHandler;
 		[SerializeField] private TextAsset defaultLevelInfo;
-		[SerializeField] private Plate plate;
 
 		public override void InstallBindings()
 		{
@@ -34,11 +31,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindGameplayState()
 		{
-			var updatables = new List<IUpdatable>
-			{
-				plate,
-			};
-			Container.Bind<GameplayState>().AsSingle().WithArguments(updatables);
+			Container.Bind<GameplayState>().AsSingle();
 		}
 
 		private void BindWinState()

@@ -1,6 +1,7 @@
 ﻿using Features.StateMachine;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
+using Scenes.Gameplay.Feature.Player.Machineguns;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
 using Scenes.Gameplay.Feature.Reset;
@@ -15,6 +16,7 @@ namespace Scenes.Gameplay.Feature.Player
 		[SerializeField] private BoxCollider2D boxCollider;
 		[SerializeField] private Transform ballPosition;
 		[SerializeField] private PlateVisual visual;
+		[SerializeField] private Machinegun machinegun;
 
 		private IFieldSizeProvider fieldController;
 		private IInput input;
@@ -22,7 +24,6 @@ namespace Scenes.Gameplay.Feature.Player
 		private IBallService ballService;
 		private IProgressController progressController;
 		private List<Ball.Ball> connectedBalls = new();
-
 
 		private float defaultWidth;
 
@@ -43,6 +44,7 @@ namespace Scenes.Gameplay.Feature.Player
 			this.progressController = progressController;
 
 			defaultWidth = boxCollider.size.x;
+
 			visual.Init();
 		}
 
@@ -57,17 +59,20 @@ namespace Scenes.Gameplay.Feature.Player
 			ball.Movement.Rb.simulated = false;
 		}
 
-
 		public void ChangeWidth(float multiplier)
 		{
 			boxCollider.size = new Vector2(defaultWidth * multiplier, boxCollider.size.y);
+
 			visual.ChangeWidth(multiplier);
+			machinegun.ChangeWidth(multiplier);
 		}
 
 		public void ResetWidth()
 		{
 			boxCollider.size = new Vector2(defaultWidth, boxCollider.size.y);
+
 			visual.ResetWidth();
+			machinegun.ResetWidth();
 		}
 
 		public void PushBalls()
