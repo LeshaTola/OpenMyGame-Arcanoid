@@ -1,10 +1,11 @@
+using Scenes.Gameplay.Feature.Damage;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using System;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Player.Ball
 {
-	public class Ball : MonoBehaviour
+	public class Ball : MonoBehaviour, IDamager
 	{
 		public event Action<Ball, Collision2D> OnCollisionEnter;
 

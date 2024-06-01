@@ -2,18 +2,20 @@
 using Scenes.Gameplay.Feature.Blocks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
-using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.Damage;
 using System;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Player.Machineguns.Bullets
 {
-	public class Bullet : MonoBehaviour, IPooledObject<Bullet>
+	public class Bullet : MonoBehaviour, IPooledObject<Bullet>, IDamager
 	{
 		[SerializeField] private Rigidbody2D rb;
 
 		private BulletParams bulletParams;
 		private IPool<Bullet> pool;
+
+		public BulletParams BulletParams { get => bulletParams; }
 
 		public void Setup(BulletParams bulletParams)
 		{
@@ -41,12 +43,12 @@ namespace Scenes.Gameplay.Feature.Player.Machineguns.Bullets
 
 		private void OnTriggerEnter2D(Collider2D collision)
 		{
-			Block block = collision.gameObject.GetComponent<Block>();
-			if (block != null || collision.TryGetComponent(out Wall wall))
+			if (collision.TryGetComponent(out IDamageable damageable))
 			{
 				Release();
 			}
 
+			Block block = collision.gameObject.GetComponent<Block>();
 			if (block == null || !block.Config.TryGetComponent(out HealthComponent healthComponent))
 			{
 				return;

@@ -1,5 +1,6 @@
 using Scenes.Gameplay.Feature.Blocks.Config;
 using Scenes.Gameplay.Feature.Blocks.Config.Components;
+using Scenes.Gameplay.Feature.Damage;
 using Scenes.Gameplay.Feature.Player.Ball;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using Zenject;
 
 namespace Scenes.Gameplay.Feature.Blocks
 {
-	public class Block : MonoBehaviour
+	public class Block : MonoBehaviour, IDamageable
 	{
 		[SerializeField] private BlockConfig config;
 		[SerializeField] private BlockVisual visual;

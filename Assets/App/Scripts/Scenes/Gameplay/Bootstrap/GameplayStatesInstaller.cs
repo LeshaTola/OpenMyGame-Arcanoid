@@ -12,7 +12,6 @@ namespace Scenes.Gameplay.Bootstrap
 	public class GameplayStatesInstaller : MonoInstaller
 	{
 		[SerializeField] private GameplayStateMachineHandler stateMachineHandler;
-		[SerializeField] private TextAsset defaultLevelInfo;
 
 		public override void InstallBindings()
 		{
@@ -46,7 +45,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindInitialState()
 		{
-			Container.Bind<InitialState>().AsSingle().WithArguments(defaultLevelInfo);
+			Container.Bind<InitialState>().AsSingle();
 		}
 
 		private void BindPauseState()

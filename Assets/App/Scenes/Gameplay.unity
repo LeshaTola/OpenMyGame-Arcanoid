@@ -439,13 +439,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
   levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
+  defaultLevelInfo: {fileID: 4900000, guid: f8a70986f33c1f84e95ea69bc28c1d35, type: 3}
+  levelMechanics:
+  - rid: 4565741859545284608
   blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
   bonusesDatabase: {fileID: 11400000, guid: c297a95a1444a594592e4272acc36a10, type: 2}
   blockTemplate: {fileID: 7240198157899510798, guid: 72b0f7db32a1ed54798e26d8a52a4553, type: 3}
   container: {fileID: 85326324}
   resetService: {fileID: 447664090}
+  birdTemplate: {fileID: 3994772951983974607, guid: 2bf00d655e33b4f4c96408290635e377, type: 3}
+  birdConfig: {fileID: 11400000, guid: ac35249a5216cd84d9c9d84d5980cb0a, type: 2}
+  preloadCount: 2
+  birdContainer: {fileID: 2046049237}
   winProgress: 100
   config: {fileID: 11400000, guid: 9104e3cf5bc727641bc7d7f5a1e53a69, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4565741859545284608
+      type: {class: BirdLevelMechanics, ns: Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird, asm: Assembly-CSharp}
+      data:
+        config: {fileID: 11400000, guid: ac35249a5216cd84d9c9d84d5980cb0a, type: 2}
 --- !u!1 &303288089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1163,6 +1177,7 @@ Transform:
   - {fileID: 2076856196}
   - {fileID: 2107351653}
   - {fileID: 336536619}
+  - {fileID: 2046049237}
   m_Father: {fileID: 1605346081}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1682,7 +1697,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMachineHandler: {fileID: 1059541121}
-  defaultLevelInfo: {fileID: 4900000, guid: f8a70986f33c1f84e95ea69bc28c1d35, type: 3}
 --- !u!4 &1134754025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7227145046741339300, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
@@ -2866,6 +2880,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &2046049236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2046049237}
+  m_Layer: 0
+  m_Name: BirdContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2046049237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046049236}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 575408181}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2048885251
 GameObject:
   m_ObjectHideFlags: 0
