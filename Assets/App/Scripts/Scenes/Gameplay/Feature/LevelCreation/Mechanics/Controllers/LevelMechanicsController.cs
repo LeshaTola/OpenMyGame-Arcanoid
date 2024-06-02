@@ -29,6 +29,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers
 			{
 				levelMechanics.StopMechanics();
 			}
+			levelMechanicsList.Clear();
 		}
 	}
 }

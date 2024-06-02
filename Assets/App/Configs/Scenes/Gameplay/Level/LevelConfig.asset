@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: LevelConfig
   m_EditorClassIdentifier: 
   spacing: 0.05
+  buildingTime: 3

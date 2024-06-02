@@ -12,6 +12,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 		[UnityEngine.SerializeField] private int health;
 		[UnityEngine.SerializeField] private CracksDictionary cracksDictionary;
 		[UnityEngine.SerializeField] List<IComponent> deathComponents;
+		[UnityEngine.SerializeField] List<IComponent> damageComponents;
 
 		public List<IComponent> DeathComponents { get => deathComponents; }
 
@@ -19,6 +20,10 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 		{
 			base.Init(block);
 			foreach (var component in deathComponents)
+			{
+				component.Init(block);
+			}
+			foreach (var component in damageComponents)
 			{
 				component.Init(block);
 			}
@@ -38,11 +43,15 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 		public void ReduceHealth(int damage)
 		{
 			health -= damage;
-
 			if (health <= 0)
 			{
 				Kill();
 				return;
+			}
+
+			foreach (IComponent component in damageComponents)
+			{
+				component.Execute();
 			}
 
 			SetCrack();

@@ -1,4 +1,5 @@
-﻿using Features.FileProvider;
+﻿using Cysharp.Threading.Tasks;
+using Features.FileProvider;
 using Features.Saves;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics;
@@ -37,30 +38,31 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 			this.levelMechanics = levelMechanics;
 		}
 
-		public void SetupLevel()
+		public async UniTask SetupLevelAsync()
 		{
 			var currentPack = packProvider.CurrentPack;
 			SavedPackData savedPackData = packProvider.SavedPackData;
 			if (currentPack == null || savedPackData == null)
 			{
-				levelGenerator.GenerateLevel(levelInfoProvider.GetLevelInfo(defaultLevelInfo.text));
 				levelMechanicsController.CleanUp();
+				await levelGenerator.GenerateLevelAsync(levelInfoProvider.GetLevelInfo(defaultLevelInfo.text));
 				levelMechanicsController.StartLevelMechanics(levelMechanics);
 				return;
 			}
 
-			var currentLevel = currentPack.LevelSettings[savedPackData.CurrentLevel];
 			levelMechanicsController.CleanUp();
-			levelMechanicsController.StartLevelMechanics(currentLevel.LevelMechanics);
 
+			var currentLevel = currentPack.LevelSettings[savedPackData.CurrentLevel];
 			string path = Path.Combine(currentPack.RelativeLevelsPath, currentLevel.LevelName);
-			GenerateLevel(path);
+			await GenerateLevelAsync(path);
+
+			levelMechanicsController.StartLevelMechanics(currentLevel.LevelMechanics);
 		}
 
-		private void GenerateLevel(string path)
+		private async UniTask GenerateLevelAsync(string path)
 		{
 			TextAsset levelFile = fileProvider.GetTextAsset(path);
-			levelGenerator.GenerateLevel(levelInfoProvider.GetLevelInfo(levelFile.text));
+			await levelGenerator.GenerateLevelAsync(levelInfoProvider.GetLevelInfo(levelFile.text));
 		}
 	}
 }

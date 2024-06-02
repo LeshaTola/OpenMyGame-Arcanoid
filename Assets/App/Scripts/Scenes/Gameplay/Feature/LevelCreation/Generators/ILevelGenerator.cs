@@ -1,4 +1,5 @@
-﻿using Scenes.Gameplay.Feature.Blocks;
+﻿using Cysharp.Threading.Tasks;
+using Scenes.Gameplay.Feature.Blocks;
 using System;
 
 namespace Scenes.Gameplay.Feature.LevelCreation
@@ -7,7 +8,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 	{
 		event Action<Block> OnBlockDestroyed;
 
-		void DestroyLevel();
-		void GenerateLevel(LevelInfo levelInfo);
+		UniTask DestroyLevelAsync();
+		UniTask GenerateLevelAsync(LevelInfo levelInfo);
 	}
 }

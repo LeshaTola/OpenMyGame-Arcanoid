@@ -153,7 +153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 182341187}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &17976835
 MonoBehaviour:
@@ -237,7 +237,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 447664089}
   - {fileID: 17976834}
   m_Father: {fileID: 1605346081}
   m_RootOrder: 0
@@ -421,9 +420,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 977554557}
   m_Father: {fileID: 1942578915}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &261499526
 MonoBehaviour:
@@ -438,28 +438,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 519420031}
-  levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
-  defaultLevelInfo: {fileID: 4900000, guid: f8a70986f33c1f84e95ea69bc28c1d35, type: 3}
-  levelMechanics:
-  - rid: 4565741859545284608
-  blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
-  bonusesDatabase: {fileID: 11400000, guid: c297a95a1444a594592e4272acc36a10, type: 2}
-  blockTemplate: {fileID: 7240198157899510798, guid: 72b0f7db32a1ed54798e26d8a52a4553, type: 3}
-  container: {fileID: 85326324}
-  resetService: {fileID: 447664090}
-  birdTemplate: {fileID: 3994772951983974607, guid: 2bf00d655e33b4f4c96408290635e377, type: 3}
-  birdConfig: {fileID: 11400000, guid: ac35249a5216cd84d9c9d84d5980cb0a, type: 2}
-  preloadCount: 2
-  birdContainer: {fileID: 2046049237}
+  cameraAnimation:
+    rid: 4565741859545284613
   winProgress: 100
   config: {fileID: 11400000, guid: 9104e3cf5bc727641bc7d7f5a1e53a69, type: 2}
   references:
     version: 2
     RefIds:
-    - rid: 4565741859545284608
-      type: {class: BirdLevelMechanics, ns: Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird, asm: Assembly-CSharp}
+    - rid: 4565741859545284613
+      type: {class: ShakeGameObjectAnimation, ns: Scenes.Gameplay.Feature.Blocks.Animation, asm: Assembly-CSharp}
       data:
-        config: {fileID: 11400000, guid: ac35249a5216cd84d9c9d84d5980cb0a, type: 2}
+        duration: 0.5
+        strength: 0.2
+        vibrato: 10
+        randomness: 90
 --- !u!1 &303288089
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,8 +483,9 @@ Transform:
   - {fileID: 1348235407}
   - {fileID: 1886680167}
   - {fileID: 564203752}
+  - {fileID: 2022617618}
   m_Father: {fileID: 1942578915}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &330768450 stripped
 RectTransform:
@@ -781,76 +774,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
---- !u!1 &447664088
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 447664089}
-  - component: {fileID: 447664090}
-  m_Layer: 0
-  m_Name: ResetService
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &447664089
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447664088}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 182341187}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &447664090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447664088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54558927dd3e474498155c4d275a84b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 1134754029}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: resetables
-      Entry: 7
-      Data: 0|Unity.Plastic.Antlr3.Runtime.Misc.ListStack`1[[Scenes.Gameplay.Feature.Reset.IResetable,
-        Assembly-CSharp]], Unity.Plastic.Antlr3.Runtime
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
 --- !u!1 &451991788
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +804,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1942578915}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &451991790
 MonoBehaviour:
@@ -1455,6 +1378,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb8790b4f2ca4b245bdc34028d45da99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &722038637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 722038638}
+  - component: {fileID: 722038639}
+  m_Layer: 0
+  m_Name: LevelInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &722038638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722038637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1501909575}
+  m_Father: {fileID: 1942578915}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &722038639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722038637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64751bfa2a61f4941805e4dade792e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
+  defaultLevelInfo: {fileID: 4900000, guid: f8a70986f33c1f84e95ea69bc28c1d35, type: 3}
+  levelMechanics:
+  - rid: 4565741859545284612
+  blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
+  bonusesDatabase: {fileID: 11400000, guid: c297a95a1444a594592e4272acc36a10, type: 2}
+  blockTemplate: {fileID: 7240198157899510798, guid: 72b0f7db32a1ed54798e26d8a52a4553, type: 3}
+  container: {fileID: 85326324}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4565741859545284612
+      type: {class: BirdLevelMechanics, ns: Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird, asm: Assembly-CSharp}
+      data:
+        config: {fileID: 11400000, guid: ac35249a5216cd84d9c9d84d5980cb0a, type: 2}
 --- !u!1 &757622089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,13 +1594,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 977554556}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1942578915}
-  m_RootOrder: 6
+  m_Father: {fileID: 261499525}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &977554558
 MonoBehaviour:
@@ -2193,13 +2176,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501909574}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1942578915}
-  m_RootOrder: 4
+  m_Father: {fileID: 722038638}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1501909576
 MonoBehaviour:
@@ -2749,11 +2732,10 @@ Transform:
   m_Children:
   - {fileID: 1059541120}
   - {fileID: 673245669}
+  - {fileID: 261499525}
+  - {fileID: 722038638}
   - {fileID: 303288090}
   - {fileID: 451991789}
-  - {fileID: 1501909575}
-  - {fileID: 261499525}
-  - {fileID: 977554557}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2772,6 +2754,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 451991790}
+  - {fileID: 722038639}
   - {fileID: 1501909576}
   - {fileID: 261499526}
   - {fileID: 1059541122}
@@ -2779,6 +2762,7 @@ MonoBehaviour:
   - {fileID: 1348235408}
   - {fileID: 1886680168}
   - {fileID: 564203753}
+  - {fileID: 2022617619}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -2796,6 +2780,54 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
+--- !u!1 &2022617617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2022617618}
+  - component: {fileID: 2022617619}
+  m_Layer: 0
+  m_Name: BirdInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2022617618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022617617}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 303288090}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2022617619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022617617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 994dac331a98c4849980d6a14f740cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  birdTemplate: {fileID: 3994772951983974607, guid: 2bf00d655e33b4f4c96408290635e377, type: 3}
+  preloadCount: 2
+  birdContainer: {fileID: 2046049237}
+  birdConfig: {fileID: 11400000, guid: ac35249a5216cd84d9c9d84d5980cb0a, type: 2}
 --- !u!1 &2039079405
 GameObject:
   m_ObjectHideFlags: 0

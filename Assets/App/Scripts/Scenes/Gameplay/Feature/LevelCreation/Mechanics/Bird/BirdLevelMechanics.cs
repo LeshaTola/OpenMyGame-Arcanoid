@@ -43,9 +43,12 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 
 		public override void StopMechanics()
 		{
-			birdsPool.Release(bird);
-			bird = null;
-			isBirdAlive = false;
+			if (bird != null)
+			{
+				birdsPool.Release(bird);
+				bird = null;
+				isBirdAlive = false;
+			}
 
 			if (cancellationTokenSource != null)
 			{

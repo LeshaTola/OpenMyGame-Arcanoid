@@ -47,6 +47,45 @@ MonoBehaviour:
     - Name: damage
       Entry: 3
       Data: 999999
+    - Name: damageComponents
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 5|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
+        Assembly-CSharp
+    - Name: blockAnimation
+      Entry: 7
+      Data: 6|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
+        Assembly-CSharp
+    - Name: duration
+      Entry: 4
+      Data: 0.5
+    - Name: strength
+      Entry: 4
+      Data: 0.2
+    - Name: vibrato
+      Entry: 3
+      Data: 10
+    - Name: randomness
+      Entry: 4
+      Data: 90
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -61,7 +100,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
+      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
         Assembly-CSharp
     - Name: health
       Entry: 3
@@ -71,14 +110,14 @@ MonoBehaviour:
       Data: 0
     - Name: deathComponents
       Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 8|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 6|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8

@@ -3,6 +3,7 @@ using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.LevelCreation.Services;
+using Scenes.Gameplay.Feature.Reset.Services;
 using Scenes.Gameplay.Feature.UI;
 using Scenes.PackSelection.Feature.Packs;
 
@@ -15,6 +16,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		private IPackProvider packProvider;
 		private ILevelService levelService;
 		private IPackInfoUI packInfoUI;
+		private IResetService resetService;
 
 		private bool firstPlay = true;
 
@@ -22,28 +24,38 @@ namespace Scenes.Gameplay.StateMachine.States
 					  ISceneTransition sceneTransition,
 					  ILevelService levelService,
 					  IPackInfoUI packInfoUI,
-					  IPackProvider packProvider)
+					  IPackProvider packProvider,
+					  IResetService resetService)
 		{
 			this.healthController = healthController;
 			this.sceneTransition = sceneTransition;
 			this.levelService = levelService;
 			this.packInfoUI = packInfoUI;
 			this.packProvider = packProvider;
+			this.resetService = resetService;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
-			levelService.SetupLevel();
-			healthController.ResetHealth();
-
-			StateMachine.ChangeState<ResetState>();
-			SetupUi();
+			EnterAsync();
 		}
 
-		public override void Exit()
+		private async void EnterAsync()
 		{
-			base.Exit();
+			resetService.Reset();
+			PlaySceneTransition();
+
+			await levelService.SetupLevelAsync();
+
+			healthController.ResetHealth();
+			SetupUi();
+
+			StateMachine.ChangeState<ResetState>();
+		}
+
+		private void PlaySceneTransition()
+		{
 			if (firstPlay)
 			{
 				sceneTransition.PlayOff();

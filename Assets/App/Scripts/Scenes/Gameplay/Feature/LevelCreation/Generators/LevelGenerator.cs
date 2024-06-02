@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Scenes.Gameplay.Feature.Blocks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
@@ -8,6 +10,8 @@ using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
 using Scenes.Gameplay.Feature.Progress;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.LevelCreation
@@ -20,11 +24,13 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private BonusesDatabase bonusesDatabase;
 
 		private IProgressController progressController;
-		private IFieldSizeProvider fieldController;
+		private IFieldSizeProvider fieldSizeProvider;
 		private IBlockFactory blockFactory;
 		private ILevelProvider levelProvider;
 
 		private Dictionary<Vector2Int, Block> blocks = new();
+		private float animationTime;
+		private float blockWidth;
 
 		public LevelGenerator(IProgressController progressController,
 						IFieldSizeProvider fieldController,
@@ -34,22 +40,25 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 						BonusesDatabase bonusesDatabase)
 		{
 			this.progressController = progressController;
-			this.fieldController = fieldController;
+			this.fieldSizeProvider = fieldController;
 			this.blockFactory = blockFactory;
 			this.levelConfig = levelConfig;
 			this.bonusesDatabase = bonusesDatabase;
 			this.levelProvider = levelProvider;
 		}
 
-		public void GenerateLevel(LevelInfo levelInfo)
+		public async UniTask GenerateLevelAsync(LevelInfo levelInfo)
 		{
 			if (blocks.Count > 0)
 			{
-				DestroyLevel();
+				await DestroyLevelAsync();
 			}
 
-			GameField gameField = fieldController.GetGameField();
-			float blockWidth = GetBlockWidth(levelInfo, gameField);
+			GameField gameField = fieldSizeProvider.GetGameField();
+			blockWidth = GetBlockWidth(levelInfo, gameField);
+
+			int blocksCount = levelInfo.BlocksMatrix.Cast<int>().Count(x => x != -1);
+			animationTime = levelConfig.BuildingTime / blocksCount;
 
 			for (int i = 0; i < levelInfo.Height; i++)
 			{
@@ -61,13 +70,13 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 					}
 
 					Block block = blockFactory.GetBlock(levelInfo.BlocksMatrix[j, i]);
-					Vector2Int blockPosition = new Vector2Int(j, i);
-					block.Setup(blocks, blockPosition);
+					Vector2Int blockMatrixPosition = new Vector2Int(j, i);
+					block.Setup(blocks, blockMatrixPosition);
 					AddBonusComponent(levelInfo, i, j, block);
 
-					Block preparedBlock = PrepareBlock(block, blockWidth);
-					PlaceBlock(gameField, i, j, preparedBlock);
-					blocks.Add(blockPosition, block);
+					Block preparedBlock = PrepareBlock(block);
+					await PlaceBlockAsync(i, j, preparedBlock);
+					blocks.Add(blockMatrixPosition, block);
 				}
 			}
 
@@ -90,23 +99,37 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			block.Visual.SetBonus(bonusesDatabase.Bonuses[bonusId].BlockSprite);
 		}
 
-		public void DestroyLevel()
+		public async UniTask DestroyLevelAsync()
 		{
 			progressController.CleanUp();
+
 			foreach (Block block in blocks.Values)
 			{
-				GameObject.Destroy(block.gameObject);
+				await DestroyBlockAsync(block);
 			}
 			blocks.Clear();
 		}
 
-		private void PlaceBlock(GameField gameField, int i, int j, Block block)
+		private async Task DestroyBlockAsync(Block block)
 		{
-			Vector2 newPosition = GetNewBlockPosition(gameField, i, j, block);
-			block.transform.position = newPosition;
+			Vector2 newPosition = GetTopPosition(block, block.transform.position);
+			Tween animation = block.transform.DOMove(newPosition, animationTime);
+			animation.SetEase(Ease.InBounce);
+			await animation.AsyncWaitForCompletion();
+			GameObject.Destroy(block.gameObject);
 		}
 
-		private Block PrepareBlock(Block block, float blockWidth)
+		private async UniTask PlaceBlockAsync(int i, int j, Block block)
+		{
+			Vector2 newPosition = GetNewBlockPosition(fieldSizeProvider.GameField, i, j, block);
+			block.transform.position = GetTopPosition(block, newPosition);
+
+			var animation = block.transform.DOMove(newPosition, animationTime);
+			animation.SetEase(Ease.OutBounce);
+			await animation.AsyncWaitForCompletion();
+		}
+
+		private Block PrepareBlock(Block block)
 		{
 			block.ResizeBlock(blockWidth);
 			SubscribeOnBlock(block);
@@ -148,6 +171,11 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private float GetBlockWidth(LevelInfo levelInfo, GameField gameField)
 		{
 			return (gameField.Width - (levelInfo.Width - 1) * levelConfig.Spacing) / levelInfo.Width;
+		}
+
+		private Vector2 GetTopPosition(Block block, Vector2 position)
+		{
+			return new Vector2(position.x, fieldSizeProvider.GameField.MaxY + block.Height);
 		}
 	}
 }
