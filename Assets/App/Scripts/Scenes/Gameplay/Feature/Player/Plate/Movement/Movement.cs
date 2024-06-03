@@ -45,5 +45,10 @@ namespace Scenes.Gameplay.Feature.Player
 			velocity -= velocity * timeProvider.DeltaTime * drag;
 			rb.velocity = velocity;
 		}
+
+		public void Stop()
+		{
+			rb.velocity = Vector2.zero;
+		}
 	}
 }

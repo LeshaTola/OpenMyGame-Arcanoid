@@ -89,7 +89,7 @@ namespace Scenes.Gameplay.Feature.Player
 
 		public void Stop()
 		{
-			movement.Move(Vector2.zero);
+			movement.Stop();
 		}
 
 		void IUpdatable.Update()

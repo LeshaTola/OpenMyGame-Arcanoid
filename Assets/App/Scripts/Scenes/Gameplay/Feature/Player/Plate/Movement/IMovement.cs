@@ -6,5 +6,6 @@ namespace Scenes.Gameplay.Feature.Player
 	{
 		public void Move(Vector2 moveDirection, float speedMultiplier = 1f);
 		public void ApplyDrag();
+		public void Stop();
 	}
 }

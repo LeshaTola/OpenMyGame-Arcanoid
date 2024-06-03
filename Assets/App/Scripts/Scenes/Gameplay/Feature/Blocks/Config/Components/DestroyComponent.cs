@@ -16,6 +16,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components
 				return;
 			}
 
+			Block.BoxCollider.enabled = false;
 			animation.PlayAnimation(Block.gameObject);
 			animation.Tween.onComplete += DestroyBlock;
 		}
