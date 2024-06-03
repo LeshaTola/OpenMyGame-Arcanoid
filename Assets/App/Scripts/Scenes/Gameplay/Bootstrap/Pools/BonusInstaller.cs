@@ -53,7 +53,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindBonusService()
 		{
-			Container.Bind<IBonusService>().To<BonusService>().AsSingle().NonLazy();
+			Container.BindInterfacesTo<BonusService>().AsSingle().NonLazy();
 		}
 
 		private void BindBonusesPool()

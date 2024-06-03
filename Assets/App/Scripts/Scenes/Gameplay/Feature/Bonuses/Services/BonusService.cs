@@ -1,11 +1,11 @@
-﻿using Module.ObjectPool;
+﻿using Features.StateMachine;
+using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Blocks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
 using Scenes.Gameplay.Feature.Bonuses.Commands;
 using Scenes.Gameplay.Feature.Bonuses.Factories;
-using Scenes.Gameplay.Feature.Bonuses.UI;
 using Scenes.Gameplay.Feature.LevelCreation;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Services
 {
-	public class BonusService : IBonusService
+	public class BonusService : IBonusService, IUpdatable
 	{
 		public event Action<IBonusCommand> OnBonusStart;
 		public event Action<IBonusCommand> OnBonusUpdate;
@@ -22,7 +22,6 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 		private IPool<Bonus> pool;
 		private IBonusCommandsFactory bonusCommandsFactory;
 		private ITimeProvider timeProvider;
-		private IBonusesUI bonusesUI;
 
 		private List<IBonusCommand> bonusCommands = new();
 		private List<IBonusCommand> commandsToRemove = new();
@@ -37,24 +36,6 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			this.bonusCommandsFactory = bonusCommandsFactory;
 
 			levelGenerator.OnBlockDestroyed += OnBlockDestroyed;
-		}
-
-		private static string GetBonusId(Block block)
-		{
-			var healthComponent = block.Config.GetComponent<HealthComponent>();
-			if (healthComponent == null)
-			{
-				return default;
-			}
-
-			var dropBonusComponent = block.Config.GetComponent<DropBonusComponent>(healthComponent.DeathComponents);
-			if (dropBonusComponent == null)
-			{
-				return default;
-			}
-
-			string bonusId = dropBonusComponent.BonusId;
-			return bonusId;
 		}
 
 		public void StartBonus(IBonusCommand bonusCommand)
@@ -111,6 +92,14 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			bonuses.Clear();
 		}
 
+		public void Update()
+		{
+			foreach (Bonus bonus in pool.Active)
+			{
+				bonus.Movement.Move(timeProvider.DeltaTime);
+			}
+		}
+
 		private void RemoveAllConflicts(IBonusCommand bonusCommand)
 		{
 			foreach (int bonusId in bonusCommand.Conflicts)
@@ -122,6 +111,24 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 				}
 			}
 			StopCommandsToRemove();
+		}
+
+		private string GetBonusId(Block block)
+		{
+			var healthComponent = block.Config.GetComponent<HealthComponent>();
+			if (healthComponent == null)
+			{
+				return default;
+			}
+
+			var dropBonusComponent = block.Config.GetComponent<DropBonusComponent>(healthComponent.DeathComponents);
+			if (dropBonusComponent == null)
+			{
+				return default;
+			}
+
+			string bonusId = dropBonusComponent.BonusId;
+			return bonusId;
 		}
 
 		private void OnBlockDestroyed(Block block)
