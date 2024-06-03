@@ -10,24 +10,24 @@ namespace Scenes.Gameplay.Feature.Blocks.Animation
 		[SerializeField] private int vibrato = 5;
 		[SerializeField] private float randomness = 90f;
 
-		private Tween tween;
+		public Tween Tween { get; private set; }
 
 		public void PlayAnimation(GameObject gameObject)
 		{
 			CleanUp();
-			tween = gameObject.transform.DOShakePosition(duration,
+			Tween = gameObject.transform.DOShakePosition(duration,
 								   new Vector3(strength, 0, 0),
 								   vibrato,
 								   randomness,
 								   randomnessMode: ShakeRandomnessMode.Harmonic);
-
 		}
 
-		private void CleanUp()
+		public void CleanUp()
 		{
-			if (tween != null)
+			if (Tween != null)
 			{
-				tween.Kill();
+				Tween.Complete();
+				Tween.Kill();
 			}
 		}
 	}

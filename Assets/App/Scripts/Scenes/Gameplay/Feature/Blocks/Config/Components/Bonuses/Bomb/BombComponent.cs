@@ -1,16 +1,16 @@
 ﻿using Cysharp.Threading.Tasks;
-using Scenes.Gameplay.Feature.Blocks.Config.Components.General;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb
 {
-	public class BombComponent : Component
+	public class BombComponent : General.Component
 	{
-		[UnityEngine.SerializeField] private int radius;
-		[UnityEngine.SerializeField] private int damage;
-		[UnityEngine.SerializeField] private float pauseBetweenExplosions;
+		[SerializeField] private int damage;
+		[SerializeField] private float pauseBetweenExplosions;
+		[SerializeField] private ParticleSystem explosionParticles;
 
 		public override void Execute()
 		{
@@ -19,52 +19,61 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb
 
 		private async void ExecuteAsync()
 		{
-			int currentRadius = 1;
-
 			List<Block> blocksToDamage;
-			while (currentRadius <= radius)
-			{
-				blocksToDamage = GetBlocksOnRadius(Block.MatrixPosition, currentRadius);
-				DamageBlocks(blocksToDamage);
-				currentRadius++;
-				await UniTask.Delay(TimeSpan.FromSeconds(pauseBetweenExplosions));
-			}
+
+			blocksToDamage = GetBlocksOnRadius(Block.MatrixPosition);
+			await DamageBlocksAsync(blocksToDamage);
 		}
 
-		private List<Block> GetBlocksOnRadius(UnityEngine.Vector2Int center, int radius)
+		private List<Block> GetBlocksOnRadius(Vector2Int center)
 		{
 			List<Block> blocksToDamage = new();
 
-			for (int x = -radius; x <= radius; x++)
+			for (int i = -1; i <= 1; i++)
 			{
-				for (int y = -radius; y <= radius; y++)
+				for (int j = -1; j <= 1; j++)
 				{
-					if (UnityEngine.Mathf.Abs(x) + UnityEngine.Mathf.Abs(y) != radius)
+					if (i == 0 && j == 0)
 					{
 						continue;
 					}
 
-					UnityEngine.Vector2Int pos = new(center.x + x, center.y + y);
+					Vector2Int pos = new(center.x + i, center.y + j);
 					if (Block.Neighbors.TryGetValue(pos, out Block block))
 					{
 						blocksToDamage.Add(block);
 					}
 				}
 			}
+
 			return blocksToDamage;
 		}
 
-		private void DamageBlocks(List<Block> blocksToDamage)
+		private async UniTask DamageBlocksAsync(List<Block> blocksToDamage)
 		{
 			foreach (var block in blocksToDamage)
 			{
+				if (block == null)
+				{
+					continue;
+				}
+
 				HealthComponent healthComponent = block.Config.GetComponent<HealthComponent>();
 				if (healthComponent == null)
 				{
 					return;
 				}
 				healthComponent.ReduceHealth(damage);
+				SpawnExplosion(block);
+				await UniTask.Delay(TimeSpan.FromSeconds(pauseBetweenExplosions));
 			}
+		}
+
+		private void SpawnExplosion(Block blockToDamage)
+		{
+			var newExplosion = GameObject.Instantiate(explosionParticles);//TODO swap with objectPool
+			newExplosion.transform.position = blockToDamage.transform.position;
+			newExplosion.Play();
 		}
 	}
 }

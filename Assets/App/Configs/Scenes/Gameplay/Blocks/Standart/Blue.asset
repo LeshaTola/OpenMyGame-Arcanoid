@@ -110,6 +110,45 @@ MonoBehaviour:
       Entry: 7
       Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
         Assembly-CSharp
+    - Name: animation
+      Entry: 7
+      Data: 10|Scenes.Gameplay.Feature.Blocks.Animation.ScaleAnimation, Assembly-CSharp
+    - Name: duration
+      Entry: 4
+      Data: 0.5
+    - Name: startScale
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: targetScale
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -121,18 +160,18 @@ MonoBehaviour:
       Data: 
     - Name: damageComponents
       Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 11|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
+      Data: 12|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
         Assembly-CSharp
     - Name: blockAnimation
       Entry: 7
-      Data: 12|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
+      Data: 13|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
         Assembly-CSharp
     - Name: duration
       Entry: 4
@@ -163,14 +202,14 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
+      Data: 14|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb.ColorBombTargetComponent,
+      Data: 15|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb.ColorBombTargetComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8

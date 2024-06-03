@@ -47,20 +47,62 @@ MonoBehaviour:
     - Name: damage
       Entry: 3
       Data: 999999
-    - Name: damageComponents
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
+        Assembly-CSharp
+    - Name: health
+      Entry: 3
+      Data: 2
+    - Name: cracksDictionary
+      Entry: 10
+      Data: 0
+    - Name: deathComponents
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 5|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
+      Data: 6|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: damageComponents
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 8|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
         Assembly-CSharp
     - Name: blockAnimation
       Entry: 7
-      Data: 6|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
+      Data: 9|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
         Assembly-CSharp
     - Name: duration
       Entry: 4
@@ -77,48 +119,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
-        Assembly-CSharp
-    - Name: health
-      Entry: 3
-      Data: 2
-    - Name: cracksDictionary
-      Entry: 10
-      Data: 0
-    - Name: deathComponents
-      Entry: 7
-      Data: 8|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
-        Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

@@ -17,5 +17,5 @@ MonoBehaviour:
   speed: 0.25
   frequency: 1
   amplitude: 0.01
-  timeToRespawn: 1
-  health: 1
+  timeToRespawn: 10
+  health: 2

@@ -9,6 +9,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 	{
 		[SerializeField] private float pauseBetweenExplosions;
 		[SerializeField] private List<Vector2Int> steps;
+		[SerializeField] private ParticleSystem explosionParticles;
 
 		public override void Execute()
 		{
@@ -73,6 +74,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 
 				if (block.Config.TryGetComponent(out HealthComponent healthComponent))
 				{
+					SpawnExplosion(block);
 					healthComponent.Kill();
 				}
 				await UniTask.Delay(System.TimeSpan.FromSeconds(pauseBetweenExplosions));
@@ -106,17 +108,11 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 			return new Vector2Int(maxX, maxY);
 		}
 
-		private Block[,] BuildMatrixFromDictionary(Dictionary<Vector2Int, Block> blocks, Vector2Int size)
+		private void SpawnExplosion(Block blockToDamage)
 		{
-			Block[,] matrix = new Block[size.x, size.y];
-
-			foreach (var blockPair in blocks)
-			{
-				Vector2Int position = blockPair.Key;
-				matrix[position.x, position.y] = blockPair.Value;
-			}
-
-			return matrix;
+			var newExplosion = GameObject.Instantiate(explosionParticles);//TODO swap with objectPool
+			newExplosion.transform.position = blockToDamage.transform.position;
+			newExplosion.Play();
 		}
 	}
 }

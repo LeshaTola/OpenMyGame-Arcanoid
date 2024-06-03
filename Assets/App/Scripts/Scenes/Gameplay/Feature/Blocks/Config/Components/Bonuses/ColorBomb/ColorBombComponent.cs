@@ -10,6 +10,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 	public class ColorBombComponent : General.Component
 	{
 		[SerializeField] private float pauseBetweenExplosions;
+		[SerializeField] private ParticleSystem explosionParticles;
 
 		public override void Execute()
 		{
@@ -53,6 +54,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 
 				if (block.Config.TryGetComponent(out HealthComponent component))
 				{
+					SpawnExplosion(block);
 					component.Kill();
 				}
 				await UniTask.Delay(TimeSpan.FromSeconds(pauseBetweenExplosions));
@@ -105,6 +107,13 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 				neighbors.Add(block);
 			}
 			return neighbors;
+		}
+
+		private void SpawnExplosion(Block blockToDamage)
+		{
+			var newExplosion = GameObject.Instantiate(explosionParticles);//TODO swap with objectPool
+			newExplosion.transform.position = blockToDamage.transform.position;
+			newExplosion.Play();
 		}
 	}
 }
