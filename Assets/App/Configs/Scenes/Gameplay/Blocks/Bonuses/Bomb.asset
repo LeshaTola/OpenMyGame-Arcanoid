@@ -17,6 +17,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 01e9ec3208433514c86f40327b57db26, type: 2}
+    - {fileID: 6293484886570509708, guid: 7fe4928e5bb102341b63eb575536ccb8, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -117,8 +118,8 @@ MonoBehaviour:
       Entry: 4
       Data: 0.2
     - Name: explosionParticles
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
