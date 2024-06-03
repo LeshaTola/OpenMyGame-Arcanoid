@@ -1424,7 +1424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
-  defaultLevelInfo: {fileID: 4900000, guid: 0a9fa6888bc548a42a9e8acd5f1ee9d8, type: 3}
+  defaultLevelInfo: {fileID: 4900000, guid: d3bb464fd635acb48972cd9376619034, type: 3}
   levelMechanics:
   - rid: 4565741859545284612
   blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}

@@ -2,7 +2,6 @@
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
@@ -20,27 +19,46 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 				return;
 			}
 
-			string PopularBlockName = GetMostPopularBlockName(neighbors);
-			List<Block> validNeighbors = neighbors.Where(x => x.Config.BlockName.Equals(PopularBlockName)).ToList();
-
-			List<List<Vector2Int>> blocksPositionsToDestroy = GetBlocksPositionsToDestroy(validNeighbors);
-
-			foreach (List<Vector2Int> positions in blocksPositionsToDestroy)
-			{
-				DestroyAllAsync(positions);
-			}
+			List<Vector2Int> maxChain = GetMaxChain(neighbors);
+			DestroyAllAsync(maxChain);
 		}
 
-		private static List<List<Vector2Int>> GetBlocksPositionsToDestroy(List<Block> validNeighbors)
+		private static List<Vector2Int> GetMaxChain(List<Block> neighbors)
 		{
-			List<List<Vector2Int>> blocksPositionsToDestroy = new();
+			Dictionary<string, List<Vector2Int>> chainsDictionary = new();
+
 			BlockSearcher searcher = new();
-			foreach (Block neighbor in validNeighbors)
+			foreach (Block neighbor in neighbors)
 			{
-				blocksPositionsToDestroy.Add(searcher.GetSameBlocksPositions(neighbor));
+				if (!chainsDictionary.ContainsKey(neighbor.Config.BlockName))
+				{
+					chainsDictionary[neighbor.Config.BlockName] = new List<Vector2Int>();
+				}
+
+				if (chainsDictionary[neighbor.Config.BlockName].FindIndex(x => x.Equals(neighbor.MatrixPosition)) == -1)
+				{
+					chainsDictionary[neighbor.Config.BlockName].AddRange(searcher.GetSameBlocksPositions(neighbor));
+				}
 			}
 
-			return blocksPositionsToDestroy;
+			return GetMaxChain(chainsDictionary);
+		}
+
+		private static List<Vector2Int> GetMaxChain(Dictionary<string, List<Vector2Int>> chainsDictionary)
+		{
+			int maxListCount = 0;
+			string key = null;
+
+			foreach (var chain in chainsDictionary)
+			{
+				if (chain.Value.Count > maxListCount)
+				{
+					maxListCount = chain.Value.Count;
+					key = chain.Key;
+				}
+			}
+			var maxChain = chainsDictionary[key];
+			return maxChain;
 		}
 
 		private async void DestroyAllAsync(List<Vector2Int> positions)
@@ -59,25 +77,6 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 				}
 				await UniTask.Delay(TimeSpan.FromSeconds(pauseBetweenExplosions));
 			}
-		}
-
-		private string GetMostPopularBlockName(List<Block> neighbors)
-		{
-			Dictionary<string, int> counts = new();
-
-			foreach (var neighbor in neighbors)
-			{
-				if (counts.ContainsKey(neighbor.Config.BlockName))
-				{
-					counts[neighbor.Config.BlockName]++;
-				}
-				else
-				{
-					counts[neighbor.Config.BlockName] = 1;
-				}
-			}
-
-			return counts.OrderByDescending(pair => pair.Value).First().Key;
 		}
 
 		private List<Block> GetNeighbors()
