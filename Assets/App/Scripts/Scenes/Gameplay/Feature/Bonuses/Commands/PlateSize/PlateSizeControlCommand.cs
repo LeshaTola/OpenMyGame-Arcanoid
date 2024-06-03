@@ -6,6 +6,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize
 	public class PlateSizeControlCommand : BonusCommand
 	{
 		[SerializeField, Min(0)] private float multiplier;
+		[SerializeField, Min(0)] private float resizeDuration;
 
 		private Plate plate;
 
@@ -20,17 +21,18 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize
 
 			PlateSizeControlCommand concreteCommand = (PlateSizeControlCommand)command;
 			multiplier = concreteCommand.multiplier;
+			resizeDuration = concreteCommand.resizeDuration;
 		}
 
 		public override void StartBonus()
 		{
 			base.StartBonus();
-			plate.ChangeWidth(multiplier);
+			plate.ChangeWidth(multiplier, resizeDuration);
 		}
 
 		public override void StopBonus()
 		{
-			plate.ResetWidth();
+			plate.ResetWidth(resizeDuration);
 		}
 	}
 }

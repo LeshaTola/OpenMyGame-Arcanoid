@@ -1,4 +1,5 @@
-﻿using Features.StateMachine;
+﻿using DG.Tweening;
+using Features.StateMachine;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.Feature.Player.Machineguns;
@@ -59,20 +60,20 @@ namespace Scenes.Gameplay.Feature.Player
 			ball.Movement.Rb.simulated = false;
 		}
 
-		public void ChangeWidth(float multiplier)
+		public void ChangeWidth(float multiplier, float duration = 0)
 		{
-			boxCollider.size = new Vector2(defaultWidth * multiplier, boxCollider.size.y);
+			AnimateWidth(defaultWidth, defaultWidth * multiplier, duration);
 
-			visual.ChangeWidth(multiplier);
-			machinegun.ChangeWidth(multiplier);
+			visual.ChangeWidth(multiplier, duration);
+			machinegun.ChangeWidth(multiplier, duration);
 		}
 
-		public void ResetWidth()
+		public void ResetWidth(float duration = 0)
 		{
-			boxCollider.size = new Vector2(defaultWidth, boxCollider.size.y);
+			AnimateWidth(boxCollider.size.x, defaultWidth, duration);
 
-			visual.ResetWidth();
-			machinegun.ResetWidth();
+			visual.ResetWidth(duration);
+			machinegun.ResetWidth(duration);
 		}
 
 		public void PushBalls()
@@ -103,6 +104,14 @@ namespace Scenes.Gameplay.Feature.Player
 			}
 
 			ClampPosition();
+		}
+
+		private void AnimateWidth(float from, float to, float duration = 0)
+		{
+			DOVirtual.Float(from, to, duration, value =>
+			{
+				boxCollider.size = new Vector2(value, boxCollider.size.y);
+			});
 		}
 
 		private Vector2 GetDirection(Vector2 targetPosition)

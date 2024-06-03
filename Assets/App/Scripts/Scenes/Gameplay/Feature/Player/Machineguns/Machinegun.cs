@@ -1,4 +1,5 @@
-﻿using Features.StateMachine;
+﻿using DG.Tweening;
+using Features.StateMachine;
 using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Player.Machineguns.Bullets;
@@ -68,7 +69,7 @@ namespace Scenes.Gameplay.Feature.Player.Machineguns
 			}
 		}
 
-		public void ChangeWidth(float multiplier)
+		public void ChangeWidth(float multiplier, float duration = 0)
 		{
 			foreach (var spawnPoint in bulletSpawnPoints)
 			{
@@ -77,12 +78,21 @@ namespace Scenes.Gameplay.Feature.Player.Machineguns
 			}
 		}
 
-		public void ResetWidth()
+		public void ResetWidth(float duration = 0)
 		{
 			for (int i = 0; i < bulletSpawnPoints.Count; i++)
 			{
-				bulletSpawnPoints[i].localPosition = defaultBulletSpawnPoints[i];
+				AnimateWidth(bulletSpawnPoints[i], bulletSpawnPoints[i].localPosition.x, defaultBulletSpawnPoints[i].x, duration);
 			}
+		}
+
+		private void AnimateWidth(Transform spawnPoint, float from, float to, float duration = 0)
+		{
+			DOVirtual.Float(from, to, duration, value =>
+			{
+
+				spawnPoint.localPosition = new Vector2(value, spawnPoint.localPosition.y);
+			});
 		}
 	}
 }
