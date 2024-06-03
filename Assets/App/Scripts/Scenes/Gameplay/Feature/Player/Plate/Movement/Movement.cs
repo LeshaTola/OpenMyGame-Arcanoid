@@ -23,11 +23,15 @@ namespace Scenes.Gameplay.Feature.Player
 		{
 			if (moveDirection.magnitude < config.DeadZone)
 			{
-				rb.velocity = Vector2.zero;
+				rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, config.Deceleration * timeProvider.DeltaTime);
 				return;
 			}
 
-			rb.velocity = moveDirection.normalized * config.Speed * speedMultiplier;
+			rb.velocity =
+				Vector2.Lerp(
+					rb.velocity,
+					moveDirection.normalized * config.Speed * speedMultiplier,
+					config.Acceleration * timeProvider.DeltaTime);
 		}
 
 		public void ApplyDrag()

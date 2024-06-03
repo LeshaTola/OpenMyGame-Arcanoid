@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   drag: 4
-  deadZone: 0.1
+  deceleration: 12
+  acceleration: 12
+  deadZone: 0.25
