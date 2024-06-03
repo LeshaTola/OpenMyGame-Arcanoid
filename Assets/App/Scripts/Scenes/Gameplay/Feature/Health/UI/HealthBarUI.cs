@@ -13,6 +13,11 @@ namespace Scenes.Gameplay.Feature.Health.UI
 
 		public void DeactivateAmount(int currentHealth, int prevHealth)
 		{
+			currentHealth -= 1;
+			prevHealth -= 1;
+			currentHealth = Mathf.Clamp(currentHealth, 0, healthIcons.Count);
+			prevHealth = Mathf.Clamp(prevHealth, 0, healthIcons.Count);
+
 			for (int i = currentHealth; i < prevHealth; i++)
 			{
 				healthIcons[i].Hide();
@@ -21,6 +26,11 @@ namespace Scenes.Gameplay.Feature.Health.UI
 
 		public void ActivateAmount(int currentHealth, int prevHealth)
 		{
+			currentHealth -= 1;
+			prevHealth -= 1;
+			currentHealth = Mathf.Clamp(currentHealth, 0, healthIcons.Count);
+			prevHealth = Mathf.Clamp(prevHealth, 0, healthIcons.Count);
+
 			for (int i = prevHealth; i < currentHealth; i++)
 			{
 				healthIcons[i].Show();
@@ -29,14 +39,14 @@ namespace Scenes.Gameplay.Feature.Health.UI
 
 		public void CreateUI(int maxHealth)
 		{
-			healthIcons = new(maxHealth);
-			for (int i = 0; i < maxHealth; i++)
+			healthIcons = new(maxHealth - 1);
+			for (int i = 0; i < maxHealth - 1; i++)
 			{
 				var healthIcon = Instantiate(healthIconTemplate, container);
 				healthIcons.Add(healthIcon);
 			}
 
-			DeactivateAmount(0, maxHealth);
+			DeactivateAmount(maxHealth, 0);
 
 			healthIcons.Reverse();
 		}
