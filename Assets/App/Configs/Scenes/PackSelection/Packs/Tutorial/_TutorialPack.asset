@@ -16,14 +16,27 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: bef11f9887e8806418a984d6b5d98a43, type: 3}
   packName: Tutorial
   relativeLevelsPath: Levels\Tutorial
-  levelNames:
-  - Tutorial_AddReduceHealth
-  - Tutorial_BallSpeed
-  - Tutorial_PlateSize
-  - Tutorial_PlateSpeed
-  - Tutorial_Bombs
-  - Tutorial_ColorBomb
-  - Tutorial_LinedBombs
-  - Tutorial_AdditionalBalls
-  - Tutorial_StickyPlatform
-  - Tutorial_Machinegun
+  levelsSettings:
+  - LevelName: Tutorial_AddReduceHealth
+    LevelMechanics: []
+  - LevelName: Tutorial_BallSpeed
+    LevelMechanics: []
+  - LevelName: Tutorial_PlateSize
+    LevelMechanics: []
+  - LevelName: Tutorial_PlateSpeed
+    LevelMechanics: []
+  - LevelName: Tutorial_Bombs
+    LevelMechanics: []
+  - LevelName: Tutorial_ColorBomb
+    LevelMechanics: []
+  - LevelName: Tutorial_LinedBombs
+    LevelMechanics: []
+  - LevelName: Tutorial_AdditionalBalls
+    LevelMechanics: []
+  - LevelName: Tutorial_StickyPlatform
+    LevelMechanics: []
+  - LevelName: Tutorial_Machinegun
+    LevelMechanics: []
+  references:
+    version: 2
+    RefIds: []
