@@ -16,6 +16,11 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 039620090c425c942b6cbb5d47007855, type: 3}
   packName: Cars
   relativeLevelsPath: Levels\Cars
-  levelNames:
-  - Cars_Level_1
-  - Cars_Level_Test
+  levelsSettings:
+  - LevelName: Cars_Level_1
+    LevelMechanics: []
+  - LevelName: Cars_Level_Test
+    LevelMechanics: []
+  references:
+    version: 2
+    RefIds: []

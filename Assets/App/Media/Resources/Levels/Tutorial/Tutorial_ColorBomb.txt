@@ -1,0 +1,68 @@
+{
+  "Height": 4,
+  "Width": 5,
+  "BlocksMatrix": [
+    [
+      0,
+      2,
+      3,
+      52
+    ],
+    [
+      0,
+      2,
+      2,
+      2
+    ],
+    [
+      0,
+      0,
+      53,
+      -1
+    ],
+    [
+      0,
+      2,
+      2,
+      2
+    ],
+    [
+      0,
+      2,
+      3,
+      52
+    ]
+  ],
+  "BonusesMatrix": [
+    [
+      null,
+      "none",
+      "AddHealth",
+      null
+    ],
+    [
+      null,
+      "none",
+      "AddHealth",
+      null
+    ],
+    [
+      null,
+      "none",
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      "AddHealth",
+      null
+    ],
+    [
+      null,
+      null,
+      "AddHealth",
+      null
+    ]
+  ]
+}

@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be3cb94c1a974454ab8c03d6d096a7e5, type: 3}
+  m_Name: BallSpawnPoint
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 01e9ec3208433514c86f40327b57db26, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: components
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 1|Scenes.Gameplay.Feature.Blocks.Config.Components.CollisionComponent,
+        Assembly-CSharp
+    - Name: collisionComponents
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 3|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
+        Assembly-CSharp
+    - Name: damage
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.TriggerComponent,
+        Assembly-CSharp
+    - Name: triggerComponents
+      Entry: 7
+      Data: 5|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 6|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
+        Assembly-CSharp
+    - Name: damage
+      Entry: 3
+      Data: 99999
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
+        Assembly-CSharp
+    - Name: health
+      Entry: 3
+      Data: 1
+    - Name: cracksDictionary
+      Entry: 10
+      Data: 0
+    - Name: deathComponents
+      Entry: 7
+      Data: 8|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.BallSpawnPoint.BallSpawnPointComponent,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+        Assembly-CSharp
+    - Name: animation
+      Entry: 7
+      Data: 11|Scenes.Gameplay.Feature.Blocks.Animation.ScaleAnimation, Assembly-CSharp
+    - Name: duration
+      Entry: 4
+      Data: 0.5
+    - Name: startScale
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: targetScale
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: damageComponents
+      Entry: 7
+      Data: 12|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 13|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
+        Assembly-CSharp
+    - Name: blockAnimation
+      Entry: 7
+      Data: 14|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
+        Assembly-CSharp
+    - Name: duration
+      Entry: 4
+      Data: 0.5
+    - Name: strength
+      Entry: 4
+      Data: 0.2
+    - Name: vibrato
+      Entry: 3
+      Data: 10
+    - Name: randomness
+      Entry: 4
+      Data: 90
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  blockName: BallSpawnPoint
+  sprite: {fileID: 21300000, guid: 04e05a81ca9ccad46a8db28b597e4ec5, type: 3}
+  color: {r: 0.53333336, g: 0.2509804, b: 1, a: 1}

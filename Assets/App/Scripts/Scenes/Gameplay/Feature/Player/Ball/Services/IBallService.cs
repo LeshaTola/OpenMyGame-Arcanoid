@@ -13,5 +13,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		void Reset();
 		void ResumeBalls();
 		UniTask StopAllBallsAsync(float duration);
+		void ActivateRageMode();
+		void DeactivateRageMode();
 	}
 }

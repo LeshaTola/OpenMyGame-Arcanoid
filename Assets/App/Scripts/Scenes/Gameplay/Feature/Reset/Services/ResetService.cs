@@ -1,12 +1,16 @@
-﻿using Sirenix.OdinInspector;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 namespace Scenes.Gameplay.Feature.Reset.Services
 {
-	public class ResetService : SerializedMonoBehaviour, IResetService
+	public class ResetService : IResetService
 	{
-		[SerializeField] List<IResetable> resetables;
+		private List<IResetable> resetables;
+
+		public ResetService(List<IResetable> resetables)
+		{
+			this.resetables = resetables;
+		}
+
 		public void Reset()
 		{
 			foreach (var resetable in resetables)

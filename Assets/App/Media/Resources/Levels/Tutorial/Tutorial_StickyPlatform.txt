@@ -1,0 +1,68 @@
+{
+  "Height": 4,
+  "Width": 5,
+  "BlocksMatrix": [
+    [
+      56,
+      2,
+      1,
+      0
+    ],
+    [
+      2,
+      56,
+      1,
+      0
+    ],
+    [
+      56,
+      2,
+      56,
+      0
+    ],
+    [
+      2,
+      56,
+      1,
+      0
+    ],
+    [
+      56,
+      2,
+      1,
+      0
+    ]
+  ],
+  "BonusesMatrix": [
+    [
+      null,
+      "StickyPlate",
+      "none",
+      "none"
+    ],
+    [
+      "StickyPlate",
+      null,
+      null,
+      "StickyPlate"
+    ],
+    [
+      null,
+      "StickyPlate",
+      "none",
+      "none"
+    ],
+    [
+      "StickyPlate",
+      "none",
+      null,
+      "StickyPlate"
+    ],
+    [
+      null,
+      "StickyPlate",
+      "none",
+      "none"
+    ]
+  ]
+}

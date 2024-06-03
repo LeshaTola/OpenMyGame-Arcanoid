@@ -1,15 +1,11 @@
-﻿using Features.FileProvider;
-using Features.Saves;
+﻿using Features.Saves;
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using Scenes.Gameplay.Feature.Health;
-using Scenes.Gameplay.Feature.LevelCreation;
-using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
+using Scenes.Gameplay.Feature.LevelCreation.Services;
+using Scenes.Gameplay.Feature.Reset.Services;
 using Scenes.Gameplay.Feature.UI;
 using Scenes.PackSelection.Feature.Packs;
-using Scenes.PackSelection.Feature.Packs.Configs;
-using System.IO;
-using UnityEngine;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
@@ -17,46 +13,49 @@ namespace Scenes.Gameplay.StateMachine.States
 	{
 		private IHealthController healthController;
 		private ISceneTransition sceneTransition;
-		private TextAsset defaultLevelInfo;
-		private ILevelGenerator levelGenerator;
 		private IPackProvider packProvider;
-		private IFileProvider fileProvider;
-		private ILevelInfoProvider levelInfoProvider;
+		private ILevelService levelService;
 		private IPackInfoUI packInfoUI;
+		private IResetService resetService;
 
 		private bool firstPlay = true;
 
 		public InitialState(IHealthController healthController,
 					  ISceneTransition sceneTransition,
-					  TextAsset defaultLevelInfo,
-					  ILevelGenerator levelGenerator,
+					  ILevelService levelService,
+					  IPackInfoUI packInfoUI,
 					  IPackProvider packProvider,
-					  IFileProvider fileProvider,
-					  ILevelInfoProvider levelInfoProvider,
-					  IPackInfoUI packInfoUI)
+					  IResetService resetService)
 		{
 			this.healthController = healthController;
 			this.sceneTransition = sceneTransition;
-			this.defaultLevelInfo = defaultLevelInfo;
-			this.levelGenerator = levelGenerator;
-			this.packProvider = packProvider;
-			this.fileProvider = fileProvider;
-			this.levelInfoProvider = levelInfoProvider;
+			this.levelService = levelService;
 			this.packInfoUI = packInfoUI;
+			this.packProvider = packProvider;
+			this.resetService = resetService;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
-			SetupLevel();
+			EnterAsync();
+		}
+
+		private async void EnterAsync()
+		{
+			resetService.Reset();
+			PlaySceneTransition();
+
+			await levelService.SetupLevelAsync();
+
 			healthController.ResetHealth();
+			SetupUi();
 
 			StateMachine.ChangeState<ResetState>();
 		}
 
-		public override void Exit()
+		private void PlaySceneTransition()
 		{
-			base.Exit();
 			if (firstPlay)
 			{
 				sceneTransition.PlayOff();
@@ -64,30 +63,15 @@ namespace Scenes.Gameplay.StateMachine.States
 			}
 		}
 
-		private void SetupLevel()
+		private void SetupUi()
 		{
 			var currentPack = packProvider.CurrentPack;
 			SavedPackData savedPackData = packProvider.SavedPackData;
 			if (currentPack == null || savedPackData == null)
 			{
-				levelGenerator.GenerateLevel(levelInfoProvider.GetLevelInfo(defaultLevelInfo.text));
 				return;
 			}
-
-			string path = Path.Combine(currentPack.RelativeLevelsPath, currentPack.LevelNames[savedPackData.CurrentLevel]);
-			GenerateLevel(path);
-			SetupUi(currentPack, savedPackData);
-		}
-
-		private void SetupUi(Pack currentPack, SavedPackData savedPackData)
-		{
 			packInfoUI.Init(currentPack.Sprite, savedPackData.CurrentLevel, currentPack.MaxLevel);
-		}
-
-		private void GenerateLevel(string path)
-		{
-			TextAsset levelFile = fileProvider.GetTextAsset(path);
-			levelGenerator.GenerateLevel(levelInfoProvider.GetLevelInfo(levelFile.text));
 		}
 	}
 }

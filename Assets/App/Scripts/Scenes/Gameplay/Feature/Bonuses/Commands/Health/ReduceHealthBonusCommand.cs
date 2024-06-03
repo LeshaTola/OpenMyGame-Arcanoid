@@ -23,7 +23,10 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands.Health
 
 		public override void StartBonus()
 		{
-			controller.ReduceHealth(health);
+			if (controller.CurrentHealth > 1)
+			{
+				controller.ReduceHealth(health);
+			}
 		}
 	}
 }

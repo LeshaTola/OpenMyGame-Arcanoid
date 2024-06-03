@@ -102,6 +102,18 @@ MonoBehaviour:
   spriteRenderer: {fileID: 2996364791874638116}
   crackRenderer: {fileID: 7461581045706251389}
   bonusRenderer: {fileID: 4703644708045714186}
+  blockAnimation:
+    rid: 4565741859545284611
+  references:
+    version: 2
+    RefIds:
+    - rid: 4565741859545284611
+      type: {class: ShakeBlockAnimation, ns: Scenes.Gameplay.Feature.Blocks.Animation, asm: Assembly-CSharp}
+      data:
+        duration: 0.5
+        strength: 1
+        vibrato: 5
+        randomness: 90
 --- !u!1 &2996364793074825446
 GameObject:
   m_ObjectHideFlags: 0

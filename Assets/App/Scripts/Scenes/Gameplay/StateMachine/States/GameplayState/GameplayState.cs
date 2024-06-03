@@ -1,5 +1,6 @@
 using Features.StateMachine;
 using Features.StateMachine.States;
+using Scenes.Gameplay.Feature.Blocks.Animation;
 using Scenes.Gameplay.Feature.Bonuses.Services;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
@@ -21,7 +22,9 @@ namespace Scenes.Gameplay.StateMachine.States
 		private IBoundaryValidator boundaryValidator;
 		private IBonusService bonusService;
 		private IInput input;
+		private IAnimation cameraAnimation;
 		private IFieldSizeProvider fieldSizeProvider;
+		private Camera camera;
 		private Plate plate;
 		private GameplayHeaderUI headerUI;
 
@@ -31,13 +34,17 @@ namespace Scenes.Gameplay.StateMachine.States
 					   IHealthController healthController,
 					   IBoundaryValidator boundaryValidator,
 					   IInput input,
+					   IAnimation cameraAnimation,
 					   IFieldSizeProvider fieldSizeProvider,
 					   IBonusService bonusService,
 					   Plate plate,
 					   GameplayHeaderUI headerUI,
-					   List<IUpdatable> updatables)
+					   List<IUpdatable> updatables,
+					   Camera camera)
 		{
 			this.input = input;
+			this.camera = camera;
+			this.cameraAnimation = cameraAnimation;
 			this.fieldSizeProvider = fieldSizeProvider;
 			this.plate = plate;
 			this.headerUI = headerUI;
@@ -88,6 +95,7 @@ namespace Scenes.Gameplay.StateMachine.States
 
 		private void OnLastBallFall()
 		{
+			cameraAnimation.PlayAnimation(camera.gameObject);
 			healthController.ReduceHealth(1);
 			if (healthController.CurrentHealth > 0)
 			{

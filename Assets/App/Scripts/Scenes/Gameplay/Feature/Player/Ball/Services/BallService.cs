@@ -14,7 +14,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		private ITimeProvider timeProvider;
 
 		private Dictionary<Ball, Vector2> lastBallsDirections = new();
-
+		private bool isRageMode = false;
 		public float SpeedMultiplier { get; private set; } = 1;
 
 		public BallService(IPool<Ball> pool, IProgressController progressController, ITimeProvider timeProvider)
@@ -29,6 +29,11 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			Ball ball = pool.Get();
 			ball.Init(this);
 			ball.OnCollisionEnter += OnBallCollisionEnter;
+			if (isRageMode)
+			{
+				ball.Visual.ActivateRageMode();
+			}
+
 			return ball;
 		}
 
@@ -36,6 +41,24 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		{
 			ball.OnCollisionEnter -= OnBallCollisionEnter;
 			pool.Release(ball);
+		}
+
+		public void ActivateRageMode()
+		{
+			isRageMode = true;
+			foreach (Ball ball in pool.Active)
+			{
+				ball.Visual.ActivateRageMode();
+			}
+		}
+
+		public void DeactivateRageMode()
+		{
+			isRageMode = false;
+			foreach (Ball ball in pool.Active)
+			{
+				ball.Visual.DeactivateRageMode();
+			}
 		}
 
 		private void OnBallCollisionEnter(Ball ball, Collision2D collision)
