@@ -1,4 +1,5 @@
-﻿using Module.PopupLogic.General.Controller;
+﻿using Cysharp.Threading.Tasks;
+using Module.PopupLogic.General.Controller;
 using Sirenix.OdinInspector;
 using TNRD;
 using UnityEngine;
@@ -24,24 +25,22 @@ namespace Module.PopupLogic.General.Popups
 			Controller = controller;
 		}
 
-		public virtual void Hide()
+		public async virtual UniTask Hide()
 		{
 			Deactivate();
-			popupAnimation.Value.Hide(() =>
-			{
-				Controller.RemoveActivePopup(this);
-				gameObject.SetActive(false);
-			});
+
+			await popupAnimation.Value.Hide();
+			Controller.RemoveActivePopup(this);
+			gameObject.SetActive(false);
 		}
 
-		public virtual void Show()
+		public async virtual UniTask Show()
 		{
 			gameObject.SetActive(true);
 			Controller.AddActivePopup(this);
-			popupAnimation.Value.Show(() =>
-			{
-				Activate();
-			});
+
+			await popupAnimation.Value.Show();
+			Activate();
 		}
 
 		public void Activate()

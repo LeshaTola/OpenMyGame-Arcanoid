@@ -1,7 +1,9 @@
-﻿using Features.Popups.Languages;
+﻿using Cysharp.Threading.Tasks;
+using Features.Popups.Languages;
 using Features.Popups.Menu.ViewModels;
 using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Features.Popups.Menu
@@ -12,16 +14,38 @@ namespace Features.Popups.Menu
 		[SerializeField] private PopupButton restartButton;
 		[SerializeField] private PopupButton backButton;
 		[SerializeField] private PopupButton resumeButton;
-
+		[SerializeField] private float animationDuration = 0.1f;
 
 		private IMenuPopupViewModel viewModel;
 
 		public void Setup(IMenuPopupViewModel viewModel)
 		{
+			viewModel.PopupAnimator.Setup(
+				header,
+				new List<PopupButton>
+				{
+					restartButton,
+					backButton,
+					resumeButton
+				},
+				animationDuration);
+			viewModel.PopupAnimator.ResetAnimation();
 			CleanUp();
 			Initialize(viewModel);
 			SetupLogic(viewModel);
 			Translate();
+			viewModel.PopupAnimator.ShowAnimation();
+		}
+
+		public async override UniTask Hide()
+		{
+			Deactivate();
+
+			await viewModel.PopupAnimator.HideAnimation();
+			await popupAnimation.Value.Hide();
+
+			Controller.RemoveActivePopup(this);
+			gameObject.SetActive(false);
 		}
 
 		private void SetupLogic(IMenuPopupViewModel viewModel)
@@ -56,12 +80,15 @@ namespace Features.Popups.Menu
 
 		private void CleanUp()
 		{
-			if (viewModel != null)
+			if (viewModel == null)
 			{
-				restartButton.onButtonClicked -= viewModel.RestartCommand.Execute;
-				backButton.onButtonClicked -= viewModel.BackCommand.Execute;
-				resumeButton.onButtonClicked -= viewModel.ResumeCommand.Execute;
+				return;
 			}
+
+			restartButton.onButtonClicked -= viewModel.RestartCommand.Execute;
+			backButton.onButtonClicked -= viewModel.BackCommand.Execute;
+			resumeButton.onButtonClicked -= viewModel.ResumeCommand.Execute;
+
 		}
 	}
 }

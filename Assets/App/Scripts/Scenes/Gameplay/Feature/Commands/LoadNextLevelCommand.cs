@@ -1,4 +1,5 @@
-﻿using Features.Energy.Providers;
+﻿using Cysharp.Threading.Tasks;
+using Features.Energy.Providers;
 using Features.Routers;
 using Features.StateMachine.States;
 using Module.Commands;
@@ -32,21 +33,16 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		public void Execute()
 		{
-			if (IsNextLevel)
-			{
-				LoadNextLevel();
-				return;
-			}
-			LoadMainMenu();
+			ExecuteAsync();
 		}
 
-		private void LoadMainMenu()
+		private async UniTask LoadMainMenu()
 		{
+			await popupController.HidePopup();
 			stateMachine.ChangeState<LoadSceneState>();
-			popupController.HidePopup();
 		}
 
-		private void LoadNextLevel()
+		private async UniTask LoadNextLevel()
 		{
 			if (energyProvider.CurrentEnergy < energyProvider.Config.PlayCost)
 			{
@@ -55,8 +51,18 @@ namespace Scenes.Gameplay.Feature.Commands
 			}
 			energyProvider.ReduceEnergy(energyProvider.Config.PlayCost);
 
-			popupController.HidePopup();
+			await popupController.HidePopup();
 			stateMachine.ChangeState<InitialState>();
+		}
+
+		public async void ExecuteAsync()
+		{
+			if (IsNextLevel)
+			{
+				await LoadNextLevel();
+				return;
+			}
+			await LoadMainMenu();
 		}
 	}
 }

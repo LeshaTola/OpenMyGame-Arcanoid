@@ -25,7 +25,7 @@ namespace Features.Routers
 			this.closeCommand = closeCommand;
 		}
 
-		public void ShowInfo(string info)
+		public async void ShowInfo(string info)
 		{
 			InfoPopup popup = popupController.GetPopup<InfoPopup>();
 
@@ -35,7 +35,7 @@ namespace Features.Routers
 			};
 			GeneralPopupViewModel viewModel = new(info, commands, localizationSystem, buttonsFactory);
 			popup.Setup(viewModel);
-			popup.Show();
+			await popup.Show();
 		}
 	}
 }

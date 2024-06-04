@@ -27,7 +27,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 			this.energyProvider = energyProvider;
 		}
 
-		public void ShowWin(Pack currentPack, SavedPackData savedPackData)
+		public async void ShowWin(Pack currentPack, SavedPackData savedPackData)
 		{
 			WinPopup popup = popupController.GetPopup<WinPopup>();
 			SetupCommand(currentPack, savedPackData);
@@ -38,7 +38,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 										  localizationSystem,
 										  energyProvider);
 			popup.Setup(popupViewModel);
-			popup.Show();
+			await popup.Show();
 		}
 
 		private void SetupCommand(Pack currentPack, SavedPackData savedPackData)

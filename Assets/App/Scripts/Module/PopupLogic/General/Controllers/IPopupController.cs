@@ -1,12 +1,13 @@
-﻿using Module.PopupLogic.General.Popups;
+﻿using Cysharp.Threading.Tasks;
+using Module.PopupLogic.General.Popups;
 
 namespace Module.PopupLogic.General.Controller
 {
 	public interface IPopupController
 	{
-		void HidePopup();
+		UniTask HidePopup();
 		T GetPopup<T>() where T : Popup;
-		void ShowPopup(Popup popup);
+		UniTask ShowPopup(Popup popup);
 		void AddActivePopup(Popup popup);
 		void RemoveActivePopup(Popup popup);
 	}

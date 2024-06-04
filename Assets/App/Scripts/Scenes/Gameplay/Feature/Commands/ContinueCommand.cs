@@ -30,6 +30,13 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		public void Execute()
 		{
+
+
+			ExecuteAsync();
+		}
+
+		public async void ExecuteAsync()
+		{
 			int continueCost = (int)(energyProvider.Config.PlayCost * energyProvider.Config.ContinueCostMultiplier);
 			if (continueCost < energyProvider.Config.PlayCost)
 			{
@@ -38,7 +45,7 @@ namespace Scenes.Gameplay.Feature.Commands
 			}
 			energyProvider.ReduceEnergy(continueCost);
 
-			popupController.HidePopup();
+			await popupController.HidePopup();
 			stateMachine.ChangeState<ResetState>();
 		}
 	}

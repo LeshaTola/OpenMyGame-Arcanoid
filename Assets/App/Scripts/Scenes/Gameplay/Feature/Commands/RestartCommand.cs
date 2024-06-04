@@ -31,6 +31,11 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		public void Execute()
 		{
+			ExecuteAsync();
+		}
+
+		public async void ExecuteAsync()
+		{
 			if (energyProvider.CurrentEnergy < energyProvider.Config.PlayCost)
 			{
 				routerInfoPopup.ShowInfo("not enough energy");
@@ -38,7 +43,7 @@ namespace Scenes.Gameplay.Feature.Commands
 			}
 			energyProvider.ReduceEnergy(energyProvider.Config.PlayCost);
 
-			popupController.HidePopup();
+			await popupController.HidePopup();
 			stateMachine.ChangeState<InitialState>();
 		}
 	}

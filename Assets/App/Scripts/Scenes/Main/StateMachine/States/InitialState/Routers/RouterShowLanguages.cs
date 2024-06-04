@@ -21,13 +21,13 @@ namespace Scenes.Main.StateMachine.States.InitialState.Routers
 			this.buttonsFactory = buttonsFactory;
 		}
 
-		public void ShowLanguages()
+		public async void ShowLanguages()
 		{
 			var languagesPopup = popupController.GetPopup<LanguagesPopup>();
 			IEnumerable<ILabeledCommand> commands = FormCommands();
 			IGeneralPopupViewModel viewModel = new GeneralPopupViewModel("languages", commands, localizationSystem, buttonsFactory);
 			languagesPopup.Setup(viewModel);
-			languagesPopup.Show();
+			await languagesPopup.Show();
 
 		}
 

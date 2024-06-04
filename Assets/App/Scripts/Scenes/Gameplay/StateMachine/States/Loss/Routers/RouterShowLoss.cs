@@ -27,12 +27,12 @@ namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
 			this.localizationSystem = localizationSystem;
 		}
 
-		public void ShowLoss()
+		public async void ShowLoss()
 		{
 			LossPopup popup = popupController.GetPopup<LossPopup>();
 			LossPopupViewModel lossPopupViewModel = new(restartCommand, continueCommand, backCommand, localizationSystem);
 			popup.Setup(lossPopupViewModel);
-			popup.Show();
+			await popup.Show();
 		}
 	}
 }

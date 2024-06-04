@@ -59,18 +59,11 @@ namespace Features.Popups.WinPopup
 			Initialize(viewModel);
 			SetupLogic(viewModel);
 			Translate();
-		}
 
-		public override void Show()
-		{
-			gameObject.SetActive(true);
 			lines.StartAnimation();
 			SetStartEnergyValue();
-			popupAnimation.Value.Show(() =>
-			{
-				Controller.AddActivePopup(this);
-				AnimateUI();
-			});
+			AnimateUI();
+
 		}
 
 		public void AnimateUI()

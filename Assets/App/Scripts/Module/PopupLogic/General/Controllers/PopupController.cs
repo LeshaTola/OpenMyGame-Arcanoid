@@ -1,4 +1,5 @@
-﻿using Module.PopupLogic.General.Popups;
+﻿using Cysharp.Threading.Tasks;
+using Module.PopupLogic.General.Popups;
 using Module.PopupLogic.General.Providers;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,9 @@ namespace Module.PopupLogic.General.Controller
 			currentPopups = new();
 		}
 
-		public void ShowPopup(Popup popup)
+		public async UniTask ShowPopup(Popup popup)
 		{
-			popup.Show();
+			await popup.Show();
 		}
 
 		public void AddActivePopup(Popup popup)
@@ -57,7 +58,7 @@ namespace Module.PopupLogic.General.Controller
 			return (T)popup;
 		}
 
-		public void HidePopup()
+		public async UniTask HidePopup()
 		{
 			if (currentPopups.Count <= 0)
 			{
@@ -65,7 +66,7 @@ namespace Module.PopupLogic.General.Controller
 			}
 
 			var popup = currentPopups.Last();
-			popup.Hide();
+			await popup.Hide();
 		}
 
 		private void DeactivatePrevPopup()
