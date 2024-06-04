@@ -49,6 +49,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 		public async UniTask GenerateLevelAsync(LevelInfo levelInfo)
 		{
+			progressController.ProcessProgress();
+
 			if (blocks.Count > 0)
 			{
 				await DestroyLevelAsync();

@@ -46,10 +46,10 @@ namespace Scenes.Gameplay.StateMachine.States
 			resetService.Reset();
 			PlaySceneTransition();
 
+			SetupUi();
 			await levelService.SetupLevelAsync();
 
 			healthController.ResetHealth();
-			SetupUi();
 
 			StateMachine.ChangeState<ResetState>();
 		}

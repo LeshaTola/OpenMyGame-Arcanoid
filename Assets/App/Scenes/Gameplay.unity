@@ -594,7 +594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10%
+  m_text: 0%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a740b1f290a38dc48b5bd6fe8c18347a, type: 2}
   m_sharedMaterial: {fileID: 1944959502034670655, guid: a740b1f290a38dc48b5bd6fe8c18347a, type: 2}
@@ -2250,7 +2250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preloadCount: 20
-  particleTemplate: {fileID: 0}
+  particleTemplate: {fileID: -1098025931163850044, guid: 7fe4928e5bb102341b63eb575536ccb8, type: 3}
   container: {fileID: 1569730024}
 --- !u!1 &1569730023
 GameObject:
@@ -2843,6 +2843,7 @@ MonoBehaviour:
   - {fileID: 1886680168}
   - {fileID: 564203753}
   - {fileID: 2022617619}
+  - {fileID: 1561481617}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
