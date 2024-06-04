@@ -1424,7 +1424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
-  defaultLevelInfo: {fileID: 4900000, guid: d3bb464fd635acb48972cd9376619034, type: 3}
+  defaultLevelInfo: {fileID: 4900000, guid: 6dc1f0a2bf7b4014a8510c0047c9456a, type: 3}
   levelMechanics:
   - rid: 4565741859545284612
   blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
@@ -2291,7 +2291,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 768, y: 1366}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -3609,7 +3609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -54.999878, y: 0}
+  m_AnchoredPosition: {x: -54.999695, y: 0}
   m_SizeDelta: {x: -97, y: 86}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &2586215250580297050
