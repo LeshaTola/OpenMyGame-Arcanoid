@@ -74,12 +74,15 @@ namespace Scenes.Gameplay.StateMachine.States
 			{
 				updatable.Update();
 			}
-			bonusService.UpdateBonus();
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
+
+			bonusService.CleanupActiveBonuses();
+			bonusService.CleanupFallingBonuses();
+
 			headerUI.OnMenuButtonCLicked -= OnMenuButtonCLicked;
 			headerUI.OnNextLevelButtonCLicked -= OnNextLevelButtonCLicked;
 			progressController.OnWin -= OnWin;

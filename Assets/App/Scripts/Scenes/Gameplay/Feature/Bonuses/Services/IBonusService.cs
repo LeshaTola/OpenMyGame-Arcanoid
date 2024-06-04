@@ -12,6 +12,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 		void StartBonus(IBonusCommand bonusCommand);
 		void UpdateBonus();
 		void StopBonus(IBonusCommand bonusCommand);
-		void Cleanup();
+		void CleanupActiveBonuses();
+		void CleanupFallingBonuses();
 	}
 }

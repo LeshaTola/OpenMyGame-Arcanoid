@@ -1,5 +1,4 @@
 ﻿using Features.StateMachine.States;
-using Scenes.Gameplay.Feature.Bonuses.Services;
 using Scenes.Gameplay.Feature.Reset.Services;
 
 namespace Scenes.Gameplay.StateMachine.States
@@ -7,18 +6,16 @@ namespace Scenes.Gameplay.StateMachine.States
 	public class ResetState : State
 	{
 		private IResetService resetService;
-		private IBonusService bonusService;
 
-		public ResetState(IResetService resetService, IBonusService bonusService)
+		public ResetState(IResetService resetService)
 		{
 			this.resetService = resetService;
-			this.bonusService = bonusService;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
-			bonusService.Cleanup();
+
 			resetService.Reset();
 			StateMachine.ChangeState<GameplayState>();
 		}

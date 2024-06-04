@@ -81,7 +81,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			bonusCommands.Remove(bonusCommand);
 		}
 
-		public void Cleanup()
+		public void CleanupActiveBonuses()
 		{
 			var bonuses = new List<IBonusCommand>(bonusCommands);
 			foreach (var command in bonuses)
@@ -92,8 +92,19 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			bonuses.Clear();
 		}
 
+		public void CleanupFallingBonuses()
+		{
+			var bonuses = new List<Bonus>(pool.Active);
+			foreach (Bonus bonus in bonuses)
+			{
+				bonus.Release();
+			}
+			bonuses.Clear();
+		}
+
 		public void Update()
 		{
+			UpdateBonus();
 			foreach (Bonus bonus in pool.Active)
 			{
 				bonus.Movement.Move(timeProvider.DeltaTime);
