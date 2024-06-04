@@ -1,3 +1,4 @@
+using Module.ObjectPool;
 using Scenes.Gameplay.Feature.Blocks.Config;
 using Scenes.Gameplay.Feature.Blocks.Config.Components;
 using Scenes.Gameplay.Feature.Damage;
@@ -21,6 +22,7 @@ namespace Scenes.Gameplay.Feature.Blocks
 		public Dictionary<Vector2Int, Block> Neighbors { get; private set; }
 		public BoxCollider2D BoxCollider { get => boxCollider; }
 		public IBallService BallService { get; private set; }
+		public IPool<PooledParticle> ExplosionsPool { get; private set; }
 
 		public float Width
 		{
@@ -36,9 +38,10 @@ namespace Scenes.Gameplay.Feature.Blocks
 
 
 		[Inject]
-		public void Construct(IBallService ballService)
+		public void Construct(IBallService ballService, IPool<PooledParticle> explosionsPool)
 		{
 			BallService = ballService;
+			ExplosionsPool = explosionsPool;
 		}
 
 		public void Init(BlockConfig config)

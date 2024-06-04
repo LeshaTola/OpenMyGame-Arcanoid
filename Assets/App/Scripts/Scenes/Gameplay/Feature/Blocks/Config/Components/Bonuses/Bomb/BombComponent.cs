@@ -10,7 +10,6 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb
 	{
 		[SerializeField] private int damage;
 		[SerializeField] private float pauseBetweenExplosions;
-		[SerializeField] private ParticleSystem explosionParticles;
 
 		public override void Execute()
 		{
@@ -71,9 +70,9 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb
 
 		private void SpawnExplosion(Block blockToDamage)
 		{
-			var newExplosion = GameObject.Instantiate(explosionParticles);//TODO swap with objectPool
+			var newExplosion = blockToDamage.ExplosionsPool.Get();
 			newExplosion.transform.position = blockToDamage.transform.position;
-			newExplosion.Play();
+			newExplosion.Particle.Play();
 		}
 	}
 }
