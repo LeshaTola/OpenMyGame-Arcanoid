@@ -33,6 +33,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 			if (service != null)
 			{
 				service.ReleaseBall(this);
+				visual.DeactivateRageMode();
 				return;
 			}
 			Destroy(gameObject);
