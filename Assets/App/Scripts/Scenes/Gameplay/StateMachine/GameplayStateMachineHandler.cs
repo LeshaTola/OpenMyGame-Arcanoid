@@ -2,6 +2,7 @@ using Features.StateMachine.Factories;
 using Features.StateMachine.States;
 using SceneReference;
 using Scenes.Gameplay.StateMachine.States;
+using Scenes.Gameplay.StateMachine.States.LoadScene;
 using Scenes.Gameplay.StateMachine.States.Loss;
 using Scenes.Gameplay.StateMachine.States.Win;
 using UnityEngine;
@@ -65,8 +66,10 @@ namespace Features.StateMachine
 			core.AddState(statesFactory.GetState<LoadSceneState>());
 
 			var loadNextSceneStep = stateStepsFactory.GetStateStep<LoadSceneStateStep>();
+			var cleanupStep = stateStepsFactory.GetStateStep<CleanupLoadSceneStateStep>();
 			loadNextSceneStep.Scene = nextScene;
 			core.AddStep<LoadSceneState>(loadNextSceneStep);
+			core.AddStep<LoadSceneState>(cleanupStep);
 		}
 	}
 }
