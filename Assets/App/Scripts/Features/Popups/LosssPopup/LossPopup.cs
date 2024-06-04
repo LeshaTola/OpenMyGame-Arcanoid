@@ -1,7 +1,9 @@
-﻿using Features.Popups.Languages;
+﻿using Cysharp.Threading.Tasks;
+using Features.Popups.Languages;
 using Features.Popups.Loss.ViewModels;
 using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Features.Popups.Loss
@@ -13,6 +15,7 @@ namespace Features.Popups.Loss
 		[SerializeField] private PopupButton restartButton;
 		[SerializeField] private PopupButton backButton;
 		[SerializeField] private PopupButton continueButton;
+		[SerializeField] private float animationDuration = 0.15f;
 
 		private ILossPopupViewModel viewModel;
 
@@ -22,6 +25,28 @@ namespace Features.Popups.Loss
 			Initialize(viewModel);
 			SetupLogic(viewModel);
 			Translate();
+
+			viewModel.PopupAnimator.Setup(header,
+				new List<PopupButton>
+					{
+						restartButton,
+						backButton,
+						continueButton,
+					},
+				animationDuration);
+			viewModel.PopupAnimator.ResetAnimation();
+		}
+
+		public async override UniTask Show()
+		{
+			await base.Show();
+			await viewModel.PopupAnimator.ShowAnimation();
+		}
+
+		public async override UniTask Hide()
+		{
+			await viewModel.PopupAnimator.HideAnimation();
+			await base.Hide();
 		}
 
 		private void SetupLogic(ILossPopupViewModel viewModel)

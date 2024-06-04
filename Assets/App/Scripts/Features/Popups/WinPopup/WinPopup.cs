@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Features.Energy;
 using Features.Energy.UI;
 using Features.Popups.Languages;
@@ -62,11 +63,20 @@ namespace Features.Popups.WinPopup
 
 			lines.StartAnimation();
 			SetStartEnergyValue();
-			AnimateUI();
 
 		}
 
-		public void AnimateUI()
+		public async override UniTask Show()
+		{
+			gameObject.SetActive(true);
+			Controller.AddActivePopup(this);
+
+			await popupAnimation.Value.Show();
+			await AnimateUI();
+			Activate();
+		}
+
+		public async UniTask AnimateUI()
 		{
 			Sequence sequence = DOTween.Sequence();
 
@@ -76,7 +86,7 @@ namespace Features.Popups.WinPopup
 			SetupLevelAnimation(viewModel.Pack, viewModel.SavedPackData, sequence);
 			SetupButtonAnimation(sequence);
 
-			sequence.onComplete += Activate;
+			await sequence.AsyncWaitForCompletion();
 		}
 
 		#region SetupAnimation

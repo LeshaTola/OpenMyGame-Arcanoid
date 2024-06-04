@@ -1,4 +1,5 @@
-﻿using Module.Commands;
+﻿using Features.Popups.Animations.Animator;
+using Module.Commands;
 using Module.Localization;
 using System.Collections.Generic;
 
@@ -10,5 +11,6 @@ namespace Features.Popups.Languages
 		public IEnumerable<ILabeledCommand> Commands { get; }
 		public ILocalizationSystem LocalizationSystem { get; }
 		public IButtonsFactory ButtonsFactory { get; }
+		public IPopupAnimator PopupAnimator { get; }
 	}
 }

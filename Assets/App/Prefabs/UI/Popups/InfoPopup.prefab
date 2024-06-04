@@ -218,6 +218,7 @@ MonoBehaviour:
   canvas: {fileID: 7419400496068126763}
   header: {fileID: 1633097240522702342}
   buttonsContainer: {fileID: 7273620191803479521}
+  animationDuration: 0.15
   references:
     version: 2
     RefIds:
@@ -235,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6320ecc365bb0424eb15eed72dc4e808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationTime: 0.5
+  animationTime: 0.3
 --- !u!223 &7419400496068126763
 Canvas:
   m_ObjectHideFlags: 0
