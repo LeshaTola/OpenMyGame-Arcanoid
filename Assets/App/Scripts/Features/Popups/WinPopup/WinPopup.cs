@@ -8,6 +8,7 @@ using Features.UI.Animations.SpinAnimation;
 using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
 using Scenes.PackSelection.Feature.Packs.Configs;
+using Sirenix.OdinInspector;
 using TMPro;
 using TNRD;
 using UnityEngine;
@@ -18,22 +19,35 @@ namespace Features.Popups.WinPopup
 	public class WinPopup : Popup
 	{
 		[SerializeField] private SerializableInterface<IEnergySliderUI> energySlider;
-
-		[SerializeField] private Image packImage;
-
 		[SerializeField] private PopupButton nextButton;
 
+		[FoldoutGroup("Pack Image")]
+		[SerializeField] private SpinAnimation lines;
+		[FoldoutGroup("Pack Image")]
+		[SerializeField] private RectTransform packImageContainer;
+		[FoldoutGroup("Pack Image")]
+		[SerializeField] private Image packImage;
+
+		[FoldoutGroup("Text")]
 		[SerializeField] private TMProLocalizer header;
+		[FoldoutGroup("Text")]
 		[SerializeField] private TMProLocalizer packPreNameText;
+		[FoldoutGroup("Text")]
 		[SerializeField] private TMProLocalizer packName;
 
+		[FoldoutGroup("Text/Label")]
+		[SerializeField] private RectTransform levelLabel;
+		[FoldoutGroup("Text/Label")]
 		[SerializeField] private TextMeshProUGUI levelInfo;
 
-		[SerializeField] private SpinAnimation lines;
 
-		[Header("Animations")]
+		[FoldoutGroup("Animations")]
 		[SerializeField] private float energyAnimationDuration = 1f;
+		[FoldoutGroup("Animations")]
+		[SerializeField] private float imageAnimationDuration = 0.5f;
+		[FoldoutGroup("Animations")]
 		[SerializeField] private float levelAnimationDuration = 0.25f;
+		[FoldoutGroup("Animations")]
 		[SerializeField] private float buttonAnimationDuration = 0.5f;
 
 		private IWinPopupViewModel viewModel;
@@ -51,6 +65,7 @@ namespace Features.Popups.WinPopup
 		{
 			gameObject.SetActive(true);
 			lines.StartAnimation();
+			SetStartEnergyValue();
 			popupAnimation.Value.Show(() =>
 			{
 				Controller.AddActivePopup(this);
@@ -60,24 +75,62 @@ namespace Features.Popups.WinPopup
 
 		public void AnimateUI()
 		{
-			var pack = viewModel.Pack;
-			var savedPackData = viewModel.SavedPackData;
-			if (pack == null || savedPackData == null)
-			{
-				return;
-			}
-
 			Sequence sequence = DOTween.Sequence();
+
+			SetupHeaderAnimation(sequence);
 			SetupSliderAnimation(sequence);
-			SetupLevelAnimation(pack, savedPackData, sequence);
+			SetupImageAnimation(viewModel.Pack, sequence);
+			SetupLevelAnimation(viewModel.Pack, viewModel.SavedPackData, sequence);
 			SetupButtonAnimation(sequence);
+
 			sequence.onComplete += Activate;
 		}
 
 		#region SetupAnimation
+
+		private void SetStartEnergyValue()
+		{
+			energySlider.Value.UpdateUI(viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward, viewModel.EnergyProvider.Config.MaxEnergy);
+		}
+
+		private void SetupHeaderAnimation(Sequence sequence)
+		{
+			sequence.Append(header.transform.DOScale(Vector3.one, levelAnimationDuration).SetEase(Ease.OutBack));
+		}
+
+		private void SetupImageAnimation(Pack pack, Sequence sequence)
+		{
+			sequence.Append(packImageContainer
+				.DOScale(Vector3.one, imageAnimationDuration)
+				.SetEase(Ease.OutBack));
+
+			if (pack == null || packImage.sprite == pack.Sprite)
+			{
+				return;
+			}
+			Tween halfOfRotation = packImage.transform.DORotate(new Vector3(0, 90f, 0), imageAnimationDuration / 2);
+			halfOfRotation.onComplete += () => packImage.sprite = pack.Sprite;
+			Tween secondHalfOfRotation = packImage.transform.DORotate(new Vector3(0, 0, 0), imageAnimationDuration / 2);
+
+			secondHalfOfRotation.onComplete += () =>
+			{
+				packName.Key = pack.Name;
+				packName.Translate();
+			};
+
+			sequence.Append(halfOfRotation);
+			sequence.Append(secondHalfOfRotation);
+		}
+
 		private void SetupSliderAnimation(Sequence sequence)
 		{
-			var sliderAnimation = DOVirtual.Int(0, viewModel.EnergyProvider.CurrentEnergy, energyAnimationDuration, value =>
+			int startValue = viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward;
+			var sliderAnimation =
+				DOVirtual.Int(
+					startValue,
+					viewModel.EnergyProvider.CurrentEnergy,
+					energyAnimationDuration,
+					value =>
 			{
 				energySlider.Value.UpdateUI(value, viewModel.EnergyProvider.Config.MaxEnergy);
 			});
@@ -92,6 +145,16 @@ namespace Features.Popups.WinPopup
 
 		private void SetupLevelAnimation(Pack pack, SavedPackData savedPackData, Sequence sequence)
 		{
+			sequence.Append(levelLabel
+				.DOLocalMove(
+				new Vector2(
+					levelLabel.localPosition.x,
+					levelLabel.localPosition.y - levelLabel.rect.height),
+				imageAnimationDuration).SetEase(Ease.OutBounce));
+			if (pack == null || savedPackData == null)
+			{
+				return;
+			}
 			SetupMaxLevelAnimation(pack, sequence);
 			SetupCurrentLevelAnimation(pack, savedPackData, sequence);
 		}
@@ -102,13 +165,6 @@ namespace Features.Popups.WinPopup
 			{
 				levelInfo.text = $"{value}/{pack.MaxLevel + 1}";
 			});
-
-			levelAnimation.onComplete += () =>
-			{
-				packName.Key = pack.Name;
-				packName.Translate();
-				packImage.sprite = pack.Sprite;
-			};
 			sequence.Append(levelAnimation);
 		}
 
@@ -123,7 +179,7 @@ namespace Features.Popups.WinPopup
 
 		private void SetupButtonAnimation(Sequence sequence)
 		{
-			sequence.Append(nextButton.transform.DOScale(Vector3.one, buttonAnimationDuration));
+			sequence.Append(nextButton.transform.DOScale(Vector3.one, buttonAnimationDuration).SetEase(Ease.OutBack));
 		}
 		#endregion
 
@@ -167,7 +223,13 @@ namespace Features.Popups.WinPopup
 		{
 			levelInfo.text = "0/0";
 			packName.Text.text = "";
+
+			header.transform.localScale = Vector3.zero;
 			nextButton.transform.localScale = Vector3.zero;
+			packImageContainer.localScale = Vector3.zero;
+			levelLabel.localPosition = new Vector2(
+				levelLabel.localPosition.x,
+				levelLabel.localPosition.y + levelLabel.rect.height);
 		}
 	}
 }

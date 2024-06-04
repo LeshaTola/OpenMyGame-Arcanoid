@@ -1,4 +1,5 @@
 ﻿using Module.PopupLogic.General.Controller;
+using Sirenix.OdinInspector;
 using TNRD;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,8 +9,11 @@ namespace Module.PopupLogic.General.Popups
 	[RequireComponent(typeof(Canvas), typeof(GraphicRaycaster))]
 	public abstract class Popup : MonoBehaviour, IPopup
 	{
+		[FoldoutGroup("General")]
 		[SerializeField] protected SerializableInterface<IPopupAnimation> popupAnimation;
+		[FoldoutGroup("General")]
 		[SerializeField] protected GraphicRaycaster raycaster;
+		[FoldoutGroup("General")]
 		[SerializeField] protected Canvas canvas;
 
 		public IPopupController Controller { get; private set; }

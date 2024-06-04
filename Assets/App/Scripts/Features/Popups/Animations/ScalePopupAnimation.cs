@@ -13,14 +13,14 @@ namespace Features.Popups.Animations
 		public void Hide(Action onComplete = null)
 		{
 			CleanUp();
-			tweenAnimation = transform.DOScale(Vector2.zero, animationTime);
+			tweenAnimation = transform.DOScale(Vector2.zero, animationTime).SetEase(Ease.InBack);
 			tweenAnimation.onComplete += () => onComplete?.Invoke();
 		}
 
 		public void Show(Action onComplete = null)
 		{
 			CleanUp();
-			tweenAnimation = transform.DOScale(Vector2.one, animationTime);
+			tweenAnimation = transform.DOScale(Vector2.one, animationTime).SetEase(Ease.OutBack);
 			tweenAnimation.onComplete += () => onComplete?.Invoke();
 		}
 

@@ -59,6 +59,7 @@ namespace Scenes.PackSelection.StateMachine
 
 		public override void Exit()
 		{
+			energyController.CleanUp();
 			headerUI.OnExitButtonClicked -= OnExitButtonClicked;
 			packMenu.OnPackSelected -= OnPackSelected;
 		}

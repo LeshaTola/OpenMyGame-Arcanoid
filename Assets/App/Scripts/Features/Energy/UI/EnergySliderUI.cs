@@ -14,6 +14,15 @@ namespace Features.Energy.UI
 		{
 			energyText.text = $"{currentValue}/{maxValue}";
 
+			if (currentValue >= maxValue)
+			{
+				recoveringTimerText.gameObject.SetActive(false);
+			}
+			else
+			{
+				recoveringTimerText.gameObject.SetActive(true);
+			}
+
 			float value = CalculateSliderValue(currentValue, maxValue);
 			slider.value = value;
 		}
@@ -22,7 +31,8 @@ namespace Features.Energy.UI
 		{
 			int minutes = totalSeconds / 60;
 			int seconds = totalSeconds % 60;
-			recoveringTimerText.text = $"{minutes}:{seconds}";
+			string timeString = string.Format("{0:00}:{1:00}", minutes, seconds);
+			recoveringTimerText.text = timeString;
 		}
 
 		private static float CalculateSliderValue(int currentValue, int maxValue)
