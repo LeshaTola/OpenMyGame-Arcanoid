@@ -56,11 +56,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 				await DestroyLevelAsync();
 			}
 
-			GameField gameField = fieldSizeProvider.GetGameField();
-			blockWidth = GetBlockWidth(levelInfo, gameField);
-
-			int blocksCount = levelInfo.BlocksMatrix.Cast<int>().Count(x => x != -1);
-			animationTime = levelConfig.BuildingTime / blocksCount;
+			blockWidth = GetBlockWidth(levelInfo);
+			SetAnimationTime(levelInfo);
 
 			for (int i = 0; i < levelInfo.Height; i++)
 			{
@@ -83,7 +80,13 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			}
 
 			progressController.Init(new List<Block>(blocks.Values));
-			levelProvider.Init(blocks);
+			levelProvider.Init(blocks, levelInfo);
+		}
+
+		private void SetAnimationTime(LevelInfo levelInfo)
+		{
+			int blocksCount = levelInfo.BlocksMatrix.Cast<int>().Count(x => x != -1);
+			animationTime = levelConfig.BuildingTime / blocksCount;
 		}
 
 		private void AddBonusComponent(LevelInfo levelInfo, int i, int j, Block block)
@@ -170,9 +173,9 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			return new Vector2(horizontalOffset, verticalOffset);
 		}
 
-		private float GetBlockWidth(LevelInfo levelInfo, GameField gameField)
+		private float GetBlockWidth(LevelInfo levelInfo)
 		{
-			return (gameField.Width - (levelInfo.Width - 1) * levelConfig.Spacing) / levelInfo.Width;
+			return (fieldSizeProvider.GameField.Width - (levelInfo.Width - 1) * levelConfig.Spacing) / levelInfo.Width;
 		}
 
 		private Vector2 GetTopPosition(Block block, Vector2 position)

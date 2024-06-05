@@ -6,7 +6,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands
 {
 	public abstract class BonusCommand : IBonusCommand
 	{
-		[SerializeField] private int id;
+		private string id;
 
 		[PreviewField]
 		[SerializeField]
@@ -17,16 +17,20 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands
 		private Sprite blockSprite;
 
 		[SerializeField] private float duration;
-		[SerializeField] private List<int> conflicts;
+		[SerializeField] private List<string> conflicts;
 
-		public int Id { get => id; }
+		public string Id { get => id; }
 		public Sprite Sprite { get => sprite; }
 		public Sprite BlockSprite { get => blockSprite; }
 		public float Duration { get => duration; }
-		public List<int> Conflicts => conflicts;
+		public List<string> Conflicts => conflicts;
 
 		public float Timer { get; set; }
 
+		public void Init(string id)
+		{
+			this.id = id;
+		}
 
 		public virtual void Clone(IBonusCommand command)
 		{

@@ -45,7 +45,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 		{
 			plate.Stop();
 
-			await ballService.StopAllBallsAsync(BallsStopDuration);
+			await ballService.StopBallsAsync(BallsStopDuration);
 
 			routerShowWin.ShowWin();
 			ProcessPacks();

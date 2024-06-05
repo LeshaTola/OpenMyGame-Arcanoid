@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Features.Saves.Gameplay;
 using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Progress;
@@ -61,17 +62,17 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			}
 		}
 
-		private void OnBallCollisionEnter(Ball ball, Collision2D collision)
+		public void ChangeBallsSpeed(float multiplier)
 		{
-			Vector2 newDirection = ball.Movement.Direction;
-			if (!collision.gameObject.TryGetComponent(out Plate player))
+			SpeedMultiplier = multiplier;
+			foreach (var ball in pool.Active)
 			{
-				newDirection = ball.Movement.GetValidDirection();
+				Vector2 direction = ball.Movement.Direction;
+				ball.Movement.Push(direction, progressController.NormalizedProgress, multiplier);
 			}
-			ball.Movement.Push(newDirection, progressController.NormalizedProgress, SpeedMultiplier);
 		}
 
-		public async UniTask StopAllBallsAsync(float duration)
+		public async UniTask StopBallsAsync(float duration)
 		{
 			float elapsedTime = 0f;
 
@@ -86,14 +87,44 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			}
 		}
 
-		public void ChangeBallsSpeed(float multiplier)
+		public void StopBalls()
 		{
-			SpeedMultiplier = multiplier;
+			lastBallsDirections = GetBallsDirections();
+			foreach (Ball ball in pool.Active)
+			{
+				ball.Movement.Push(Vector2.zero);
+			}
+		}
+
+		public void PushBalls()
+		{
+			PushBalls(lastBallsDirections);
+		}
+
+		public void PushBalls(Dictionary<Ball, Vector2> ballsDirections)
+		{
+			List<Ball> balls = new List<Ball>(ballsDirections.Keys);
+			foreach (var ball in balls)
+			{
+				ball.Movement.Push(ballsDirections[ball], progressController.NormalizedProgress);
+			}
+		}
+
+		public List<BallData> GetBallsData()
+		{
+			List<BallData> ballsData = new();
+
 			foreach (var ball in pool.Active)
 			{
-				Vector2 direction = ball.Movement.Direction;
-				ball.Movement.Push(direction, progressController.NormalizedProgress, multiplier);
+				ballsData.Add(new BallData
+				{
+					Position = ball.transform.position,
+					Direction = ball.Movement.Direction,
+					IsOnPlate = ball.transform.parent != null,
+				});
 			}
+
+			return ballsData;
 		}
 
 		public void Reset()
@@ -107,24 +138,6 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			}
 		}
 
-		public void PauseBalls()
-		{
-			lastBallsDirections = GetBallsDirections();
-			foreach (Ball ball in pool.Active)
-			{
-				ball.Movement.Push(Vector2.zero);
-			}
-		}
-
-		public void ResumeBalls()
-		{
-			List<Ball> balls = new List<Ball>(lastBallsDirections.Keys);
-			foreach (var ball in balls)
-			{
-				ball.Movement.Push(lastBallsDirections[ball], progressController.NormalizedProgress);
-			}
-		}
-
 		private Dictionary<Ball, Vector2> GetBallsDirections()
 		{
 			Dictionary<Ball, Vector2> ballsDirections = new();
@@ -134,6 +147,16 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			}
 
 			return ballsDirections;
+		}
+
+		private void OnBallCollisionEnter(Ball ball, Collision2D collision)
+		{
+			Vector2 newDirection = ball.Movement.Direction;
+			if (!collision.gameObject.TryGetComponent(out Plate player))
+			{
+				newDirection = ball.Movement.GetValidDirection();
+			}
+			ball.Movement.Push(newDirection, progressController.NormalizedProgress, SpeedMultiplier);
 		}
 	}
 }

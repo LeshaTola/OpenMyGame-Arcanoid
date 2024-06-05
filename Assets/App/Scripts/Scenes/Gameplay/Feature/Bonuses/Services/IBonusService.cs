@@ -1,5 +1,7 @@
-﻿using Scenes.Gameplay.Feature.Bonuses.Commands;
+﻿using Features.Saves.Gameplay;
+using Scenes.Gameplay.Feature.Bonuses.Commands;
 using System;
+using System.Collections.Generic;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Services
 {
@@ -14,5 +16,9 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 		void StopBonus(IBonusCommand bonusCommand);
 		void CleanupActiveBonuses();
 		void CleanupFallingBonuses();
+		IBonusCommand GetBonusCommand(string id);
+		Bonus GetBonus(string id);
+		List<ActiveBonus> GetActiveBonuses();
+		List<BonusPosition> GetBonusesPositions();
 	}
 }

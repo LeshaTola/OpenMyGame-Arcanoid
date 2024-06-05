@@ -1,4 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
+using Features.Saves.Gameplay;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Player.Ball.Services
 {
@@ -6,14 +9,19 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 	{
 		float SpeedMultiplier { get; }
 
-		void ChangeBallsSpeed(float multiplier);
 		Ball GetBall();
-		void PauseBalls();
 		void ReleaseBall(Ball ball);
-		void Reset();
-		void ResumeBalls();
-		UniTask StopAllBallsAsync(float duration);
+
+		void PushBalls();
+		void PushBalls(Dictionary<Ball, Vector2> ballsDirections);
+		void StopBalls();
+		UniTask StopBallsAsync(float duration);
+
 		void ActivateRageMode();
 		void DeactivateRageMode();
+
+		void ChangeBallsSpeed(float multiplier);
+		List<BallData> GetBallsData();
+		void Reset();
 	}
 }

@@ -1,4 +1,5 @@
-﻿using Features.StateMachine;
+﻿using Features.Saves.Gameplay;
+using Features.StateMachine;
 using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Blocks;
@@ -40,7 +41,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 
 		public void StartBonus(IBonusCommand bonusCommand)
 		{
-			var activeBonus = bonusCommands.FirstOrDefault(x => x.Id == bonusCommand.Id);
+			var activeBonus = bonusCommands.FirstOrDefault(x => x.Id.Equals(bonusCommand.Id));
 			if (activeBonus != null)
 			{
 				activeBonus.Timer = activeBonus.Duration;
@@ -111,11 +112,39 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			}
 		}
 
+		public List<ActiveBonus> GetActiveBonuses()
+		{
+			var activeBonuses = new List<ActiveBonus>();
+			foreach (IBonusCommand bonusCommand in bonusCommands)
+			{
+				activeBonuses.Add(new ActiveBonus()
+				{
+					Id = bonusCommand.Id,
+					RemainingTime = bonusCommand.Timer
+				});
+			}
+			return activeBonuses;
+		}
+
+		public List<BonusPosition> GetBonusesPositions()
+		{
+			var bonusesPositions = new List<BonusPosition>();
+			foreach (Bonus bonus in pool.Active)
+			{
+				bonusesPositions.Add(new BonusPosition()
+				{
+					Id = bonus.BonusCommand.Id,
+					Position = bonus.transform.position
+				});
+			}
+			return bonusesPositions;
+		}
+
 		private void RemoveAllConflicts(IBonusCommand bonusCommand)
 		{
-			foreach (int bonusId in bonusCommand.Conflicts)
+			foreach (string bonusId in bonusCommand.Conflicts)
 			{
-				var conflictBonus = bonusCommands.FirstOrDefault(x => x.Id == bonusId);
+				var conflictBonus = bonusCommands.FirstOrDefault(x => x.Id.Equals(bonusId));
 				if (conflictBonus != null)
 				{
 					commandsToRemove.Add(conflictBonus);
@@ -142,6 +171,19 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			return bonusId;
 		}
 
+		public IBonusCommand GetBonusCommand(string id)
+		{
+			return bonusCommandsFactory.GetBonusCommand(id);
+		}
+
+		public Bonus GetBonus(string id)
+		{
+			Bonus bonus = pool.Get();
+			IBonusCommand bonusCommand = GetBonusCommand(id);
+			bonus.Setup(bonusCommand, pool, this);
+			return bonus;
+		}
+
 		private void OnBlockDestroyed(Block block)
 		{
 			string bonusId = GetBonusId(block);
@@ -150,10 +192,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 				return;
 			}
 
-			Bonus bonus = pool.Get();
-			IBonusCommand bonusCommand = bonusCommandsFactory.GetBonusCommand(bonusId);
-			bonus.Setup(bonusCommand, pool, this);
-
+			Bonus bonus = GetBonus(bonusId);
 			bonus.transform.position = block.transform.position;
 		}
 

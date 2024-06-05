@@ -26,14 +26,14 @@ namespace Scenes.Gameplay.StateMachine.States
 			base.Enter();
 			timeProvider.TimeMultiplier = 0;
 			routerShowMenu.ShowMenu();
-			ballService.PauseBalls();
+			ballService.StopBalls();
 		}
 
 		public override void Exit()
 		{
 			base.Exit();
 			timeProvider.TimeMultiplier = 1;
-			ballService.ResumeBalls();
+			ballService.PushBalls();
 		}
 	}
 }

@@ -4,6 +4,7 @@ using Features.Saves;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers;
+using Scenes.Gameplay.Feature.LevelCreation.Saves;
 using Scenes.PackSelection.Feature.Packs;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +18,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 		private IPackProvider packProvider;
 		private IFileProvider fileProvider;
 		private ILevelInfoProvider levelInfoProvider;
+		private ILevelSavingService levelSavingService;
 		private ILevelMechanicsController levelMechanicsController;
 		private TextAsset defaultLevelInfo;
 		private List<LevelMechanics> levelMechanics;
@@ -26,6 +28,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 					  IFileProvider fileProvider,
 					  ILevelInfoProvider levelInfoProvider,
 					  ILevelMechanicsController levelMechanicsController,
+					  ILevelSavingService levelSavingService,
 					  TextAsset defaultLevelInfo,
 					  List<LevelMechanics> levelMechanics)
 		{
@@ -34,6 +37,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 			this.fileProvider = fileProvider;
 			this.levelInfoProvider = levelInfoProvider;
 			this.levelMechanicsController = levelMechanicsController;
+			this.levelSavingService = levelSavingService;
 			this.defaultLevelInfo = defaultLevelInfo;
 			this.levelMechanics = levelMechanics;
 		}

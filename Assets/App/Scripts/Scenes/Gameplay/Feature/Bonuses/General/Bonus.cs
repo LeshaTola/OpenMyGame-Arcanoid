@@ -17,6 +17,7 @@ namespace Scenes.Gameplay.Feature.Bonuses
 		IBonusService bonusService;
 
 		public BonusMovement Movement { get => movement; }
+		public IBonusCommand BonusCommand { get => bonusCommand; }
 
 		public void Setup(IBonusCommand bonusCommand, IPool<Bonus> pool, IBonusService bonusService)
 		{
