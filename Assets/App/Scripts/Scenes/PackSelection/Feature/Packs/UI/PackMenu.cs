@@ -51,6 +51,7 @@ namespace Scenes.PackSelection.Feature.Packs.UI
 					IsCompeted = false,
 					IsOpened = packs.Last() == pack
 				};
+				packsData.Add(pack.Id, packData);
 			}
 			else
 			{
