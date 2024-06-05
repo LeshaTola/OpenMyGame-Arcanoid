@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using Features.Energy;
+using Features.Energy.Controllers;
 using Features.Energy.UI;
 using Features.Popups.Languages;
 using Features.Popups.WinPopup.ViewModels;

@@ -1,7 +1,6 @@
 ﻿using Features.Energy.Providers;
 using Features.Saves;
 using Features.StateMachine.States;
-using Module.Saves;
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.StateMachine.States.Win.Routers;
@@ -14,7 +13,6 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 	{
 		private IRouterShowWin routerShowWin;
 		private IPackProvider packProvider;
-		private IDataProvider<PlayerProgressData> dataProvider;
 		private IBallService ballService;
 		private IEnergyProvider energyProvider;
 
@@ -24,14 +22,12 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 
 		public WinState(IRouterShowWin routerShowWin,
 				  IPackProvider packProvider,
-				  IDataProvider<PlayerProgressData> dataProvider,
 				  IBallService ballService,
 				  IEnergyProvider energyProvider,
 				  Plate plate)
 		{
 			this.routerShowWin = routerShowWin;
 			this.packProvider = packProvider;
-			this.dataProvider = dataProvider;
 			this.ballService = ballService;
 			this.energyProvider = energyProvider;
 			this.plate = plate;
@@ -51,13 +47,12 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 
 			await ballService.StopAllBallsAsync(BallsStopDuration);
 
-			PlayerProgressData playerData = dataProvider.GetData();
 			routerShowWin.ShowWin(packProvider.CurrentPack, packProvider.SavedPackData);
-			ProcessPacks(playerData);
+			ProcessPacks();
 		}
 
 
-		private void ProcessPacks(PlayerProgressData playerData)
+		private void ProcessPacks()
 		{
 			SavedPackData savedPackData = packProvider.SavedPackData;
 			Pack currentPack = packProvider.CurrentPack;
@@ -66,21 +61,21 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 				return;
 			}
 
-			CompleteLevel(savedPackData, playerData);
+			CompleteLevel(savedPackData);
 			if (savedPackData.CurrentLevel > currentPack.MaxLevel)
 			{
-				OpenNextPack(savedPackData, playerData);
+				OpenNextPack(savedPackData);
 			}
-			SaveData(playerData);
+			packProvider.SaveData();
 		}
 
-		private void CompleteLevel(SavedPackData savedPackData, PlayerProgressData playerData)
+		private void CompleteLevel(SavedPackData savedPackData)
 		{
 			savedPackData.CurrentLevel++;
-			playerData.Packs[savedPackData.Id] = savedPackData;
+			packProvider.PacksData[savedPackData.Id] = savedPackData;
 		}
 
-		private void OpenNextPack(SavedPackData savedPackData, PlayerProgressData playerData)
+		private void OpenNextPack(SavedPackData savedPackData)
 		{
 			savedPackData.IsCompeted = true;
 
@@ -90,24 +85,15 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 				return;
 			}
 			string nextPackID = packProvider.Packs[nextPackIndex].Id;
-			playerData.Packs[nextPackID].IsOpened = true;
-
-			SetNextPack(playerData, nextPackIndex, nextPackID);
+			var nextPackData = packProvider.PacksData[nextPackID];
+			nextPackData.IsOpened = true;
+			SetNextPack(nextPackData, nextPackIndex);
 		}
 
-		private void SetNextPack(PlayerProgressData playerData, int nextPackIndex, string nextPackID)
+		private void SetNextPack(SavedPackData nextPackData, int nextPackIndex)
 		{
 			packProvider.PackIndex = nextPackIndex;
-			packProvider.SavedPackData = playerData.Packs[nextPackID];
-		}
-
-		private void SaveData(PlayerProgressData playerData)
-		{
-			if (packProvider.SavedPackData == null)
-			{
-				return;
-			}
-			dataProvider.SaveData(playerData);
+			packProvider.SavedPackData = nextPackData;
 		}
 	}
 }

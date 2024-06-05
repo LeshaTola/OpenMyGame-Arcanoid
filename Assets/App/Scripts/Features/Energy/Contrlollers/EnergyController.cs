@@ -1,7 +1,7 @@
 ﻿using Features.Energy.Providers;
 using Features.Energy.UI;
 
-namespace Features.Energy
+namespace Features.Energy.Controllers
 {
 	public class EnergyController : IEnergyController
 	{

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Features.Saves.Energy
+namespace Features.Energy.Saves
 {
 	[Serializable]
 	public class EnergyData

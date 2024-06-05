@@ -14,7 +14,9 @@ namespace Features.Energy.Providers
 
 		void AddEnergy(int energy);
 		void ReduceEnergy(int energy);
-		void StartEnergyRecoveringAsync(float startTimer = 0);
+		void StartEnergyRecoveringAsync();
+		void LoadData();
+		void SaveData();
 	}
 }
 

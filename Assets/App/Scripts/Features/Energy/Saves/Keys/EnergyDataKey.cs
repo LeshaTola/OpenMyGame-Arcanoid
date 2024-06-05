@@ -1,4 +1,4 @@
-﻿namespace Features.Saves.Energy.Keys
+﻿namespace Features.Energy.Saves.Keys
 {
 	public class EnergyDataKey
 	{

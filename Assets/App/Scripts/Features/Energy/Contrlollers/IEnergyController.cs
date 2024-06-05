@@ -1,4 +1,4 @@
-﻿namespace Features.Energy
+﻿namespace Features.Energy.Controllers
 {
 	public interface IEnergyController
 	{

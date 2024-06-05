@@ -1,4 +1,4 @@
-﻿using Features.Energy;
+﻿using Features.Energy.Controllers;
 using Zenject;
 
 namespace Features.Bootstrap

@@ -1,27 +1,18 @@
-﻿using Assets.App.Scripts.Features.Saves.PlayerProgress.Controllers;
-using Features.Energy.Providers;
+﻿using Features.Energy.Providers;
 using Features.ProjectCondition.Providers;
-using Features.Saves.Energy.Controllers;
 using Scenes.PackSelection.Feature.Packs;
 
 namespace Features.Saves
 {
 	public class ProjectSavesController : IProjectSavesController
 	{
-		private IEnergySavesController energySavesController;
 		private IEnergyProvider energyProvider;
-
-		private IPlayerProgressSavesController playerProgressSavesController;
 		private IPackProvider packProvider;
 
 		public ProjectSavesController(IProjectConditionProvider projectConditionProvider,
-								IPlayerProgressSavesController playerProgressSavesController,
-								IEnergySavesController energySavesController,
 								IEnergyProvider energyProvider,
 								IPackProvider packProvider)
 		{
-			this.playerProgressSavesController = playerProgressSavesController;
-			this.energySavesController = energySavesController;
 			this.energyProvider = energyProvider;
 			this.packProvider = packProvider;
 
@@ -32,19 +23,20 @@ namespace Features.Saves
 
 		public void SaveAllData()
 		{
-			energySavesController.SaveEnergyData(energyProvider);
+			energyProvider.SaveData();
+			packProvider.SaveData();
 		}
 
 		private void LoadAllData()
 		{
-			energySavesController.LoadEnergyData(energyProvider);
-			playerProgressSavesController.LoadPlayerProgress(packProvider);
+			energyProvider.LoadData();
+			packProvider.LoadData();
 		}
 
 		private void OnApplicationStart()
 		{
 			LoadAllData();
-			energyProvider.StartEnergyRecoveringAsync(energyProvider.RemainingRecoveryTime);
+			energyProvider.StartEnergyRecoveringAsync();
 		}
 
 		private void OnApplicationPaused(bool pause)
