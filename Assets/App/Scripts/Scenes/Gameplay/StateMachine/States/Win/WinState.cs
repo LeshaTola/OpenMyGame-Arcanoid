@@ -47,7 +47,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 
 			await ballService.StopAllBallsAsync(BallsStopDuration);
 
-			routerShowWin.ShowWin(packProvider.CurrentPack, packProvider.SavedPackData);
+			routerShowWin.ShowWin();
 			ProcessPacks();
 		}
 
@@ -80,7 +80,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 			savedPackData.IsCompeted = true;
 
 			int nextPackIndex = packProvider.PackIndex - 1;
-			if (packProvider.Packs.Count <= nextPackIndex)
+			if (nextPackIndex < 0)
 			{
 				return;
 			}
