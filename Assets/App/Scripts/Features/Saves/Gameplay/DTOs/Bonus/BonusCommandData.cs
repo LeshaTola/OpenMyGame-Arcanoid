@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Features.Saves.Gameplay
+namespace Features.Saves.Gameplay.DTO.Bonuses
 {
 	[Serializable]
-	public struct ActiveBonus
+	public struct BonusCommandData
 	{
 		public string Id;
 		public float RemainingTime;

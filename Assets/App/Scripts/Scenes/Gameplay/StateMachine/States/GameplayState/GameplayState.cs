@@ -1,7 +1,7 @@
 using Features.StateMachine;
 using Features.StateMachine.States;
 using Scenes.Gameplay.Feature.Blocks.Animation;
-using Scenes.Gameplay.Feature.Bonuses.Services;
+using Scenes.Gameplay.Feature.Bonuses.Provider;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.Player;
@@ -20,7 +20,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		private IProgressController progressController;
 		private IHealthController healthController;
 		private IBoundaryValidator boundaryValidator;
-		private IBonusService bonusService;
+		private IBonusServicesProvider bonusServicesProvider;
 		private IInput input;
 		private IAnimation cameraAnimation;
 		private IFieldSizeProvider fieldSizeProvider;
@@ -36,7 +36,7 @@ namespace Scenes.Gameplay.StateMachine.States
 					   IInput input,
 					   IAnimation cameraAnimation,
 					   IFieldSizeProvider fieldSizeProvider,
-					   IBonusService bonusService,
+					   IBonusServicesProvider bonusServicesProvider,
 					   Plate plate,
 					   GameplayHeaderUI headerUI,
 					   List<IUpdatable> updatables,
@@ -51,7 +51,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			this.progressController = progressController;
 			this.healthController = healthController;
 			this.boundaryValidator = boundaryValidator;
-			this.bonusService = bonusService;
+			this.bonusServicesProvider = bonusServicesProvider;
 			this.updatables = updatables;
 		}
 
@@ -80,8 +80,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			base.Exit();
 
-			bonusService.CleanupActiveBonuses();
-			bonusService.CleanupFallingBonuses();
+			bonusServicesProvider.Cleanup();
 
 			headerUI.OnMenuButtonCLicked -= OnMenuButtonCLicked;
 			headerUI.OnNextLevelButtonCLicked -= OnNextLevelButtonCLicked;

@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using Features.Saves.Gameplay;
+using Features.Saves.Gameplay.DTO.Balls;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +21,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		void DeactivateRageMode();
 
 		void ChangeBallsSpeed(float multiplier);
-		List<BallData> GetBallsData();
+		BallsServiceState GetBallServiceState();
+		void SetBallServiceState(BallsServiceState state);
 		void Reset();
 	}
 }

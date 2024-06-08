@@ -1,5 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using Features.Saves.Gameplay;
+using Features.Saves.Gameplay.DTO.Balls;
 using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Progress;
@@ -110,23 +110,6 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			}
 		}
 
-		public List<BallData> GetBallsData()
-		{
-			List<BallData> ballsData = new();
-
-			foreach (var ball in pool.Active)
-			{
-				ballsData.Add(new BallData
-				{
-					Position = ball.transform.position,
-					Direction = ball.Movement.Direction,
-					IsOnPlate = ball.transform.parent != null,
-				});
-			}
-
-			return ballsData;
-		}
-
 		public void Reset()
 		{
 			SpeedMultiplier = 1;
@@ -157,6 +140,43 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 				newDirection = ball.Movement.GetValidDirection();
 			}
 			ball.Movement.Push(newDirection, progressController.NormalizedProgress, SpeedMultiplier);
+		}
+
+		public BallsServiceState GetBallServiceState()
+		{
+			List<BallData> ballsData = new();
+
+			foreach (var ball in pool.Active)
+			{
+				ballsData.Add(new BallData
+				{
+					Position = ball.transform.position,
+					Direction = ball.Movement.Direction,
+					IsOnPlate = ball.transform.parent != null,
+				});
+			}
+
+			return new BallsServiceState()
+			{
+				BallsData = ballsData
+			};
+		}
+
+		public void SetBallServiceState(BallsServiceState state)
+		{
+			foreach (BallData ballData in state.BallsData)
+			{
+				Ball newBall = GetBall();
+				newBall.transform.position = ballData.Position;
+				newBall.Movement.Push(ballData.Direction);
+
+				if (!ballData.IsOnPlate)
+				{
+					return;
+				}
+				newBall.Movement.Rb.simulated = false;
+				//newBall.transform.SetParent(plate.transform);
+			}
 		}
 	}
 }

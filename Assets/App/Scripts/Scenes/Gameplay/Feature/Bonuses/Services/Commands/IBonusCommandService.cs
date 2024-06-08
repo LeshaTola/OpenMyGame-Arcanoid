@@ -1,11 +1,11 @@
-﻿using Features.Saves.Gameplay;
+﻿using Features.Saves.Gameplay.DTO.Bonuses;
 using Scenes.Gameplay.Feature.Bonuses.Commands;
 using System;
 using System.Collections.Generic;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Services
 {
-	public interface IBonusService
+	public interface IBonusCommandService
 	{
 		event Action<IBonusCommand> OnBonusStart;
 		event Action<IBonusCommand> OnBonusUpdate;
@@ -14,11 +14,11 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 		void StartBonus(IBonusCommand bonusCommand);
 		void UpdateBonus();
 		void StopBonus(IBonusCommand bonusCommand);
-		void CleanupActiveBonuses();
-		void CleanupFallingBonuses();
+
+		List<BonusCommandData> GetBonusesCommandsData();
+		void SetBonusesCommandsData(List<BonusCommandData> bonusCommands);
+
+		void Cleanup();
 		IBonusCommand GetBonusCommand(string id);
-		Bonus GetBonus(string id);
-		List<ActiveBonus> GetActiveBonuses();
-		List<BonusPosition> GetBonusesPositions();
 	}
 }

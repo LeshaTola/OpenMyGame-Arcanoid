@@ -14,12 +14,12 @@ namespace Scenes.Gameplay.Feature.Bonuses
 
 		private IBonusCommand bonusCommand;
 		private IPool<Bonus> pool;
-		IBonusService bonusService;
+		IBonusCommandService bonusService;
 
 		public BonusMovement Movement { get => movement; }
 		public IBonusCommand BonusCommand { get => bonusCommand; }
 
-		public void Setup(IBonusCommand bonusCommand, IPool<Bonus> pool, IBonusService bonusService)
+		public void Setup(IBonusCommand bonusCommand, IPool<Bonus> pool, IBonusCommandService bonusService)
 		{
 			this.pool = pool;
 			this.bonusCommand = bonusCommand;

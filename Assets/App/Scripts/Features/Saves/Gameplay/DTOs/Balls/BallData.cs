@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Features.Saves.Gameplay
+namespace Features.Saves.Gameplay.DTO.Balls
 {
 	[Serializable]
 	public struct BallData

@@ -31,7 +31,6 @@ namespace Scenes.Gameplay.Bootstrap
 			Container.Bind<IAnimation>().FromInstance(cameraAnimation).AsSingle().WhenInjectedInto<GameplayState>();
 			Container.BindInstance(mainCamera).AsSingle();
 
-
 			BindResetService();
 			BindProgressController();
 			BindHealthController();

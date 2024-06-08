@@ -1,42 +1,30 @@
-﻿using Features.Saves.Gameplay;
-using Features.StateMachine;
-using Module.ObjectPool;
+﻿using Features.Saves.Gameplay.DTO.Bonuses;
 using Module.TimeProvider;
-using Scenes.Gameplay.Feature.Blocks;
-using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
-using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
 using Scenes.Gameplay.Feature.Bonuses.Commands;
 using Scenes.Gameplay.Feature.Bonuses.Factories;
-using Scenes.Gameplay.Feature.LevelCreation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Services
 {
-	public class BonusService : IBonusService, IUpdatable
+	public class BonusCommandService : IBonusCommandService
 	{
 		public event Action<IBonusCommand> OnBonusStart;
 		public event Action<IBonusCommand> OnBonusUpdate;
 		public event Action<IBonusCommand> OnBonusStop;
 
-		private IPool<Bonus> pool;
 		private IBonusCommandsFactory bonusCommandsFactory;
 		private ITimeProvider timeProvider;
 
 		private List<IBonusCommand> bonusCommands = new();
 		private List<IBonusCommand> commandsToRemove = new();
 
-		public BonusService(IPool<Bonus> pool,
-					  IBonusCommandsFactory bonusCommandsFactory,
-					  ILevelGenerator levelGenerator,
+		public BonusCommandService(IBonusCommandsFactory bonusCommandsFactory,
 					  ITimeProvider timeProvider)
 		{
-			this.pool = pool;
-			this.timeProvider = timeProvider;
 			this.bonusCommandsFactory = bonusCommandsFactory;
-
-			levelGenerator.OnBlockDestroyed += OnBlockDestroyed;
+			this.timeProvider = timeProvider;
 		}
 
 		public void StartBonus(IBonusCommand bonusCommand)
@@ -51,7 +39,6 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			RemoveAllConflicts(bonusCommand);
 
 			bonusCommand.StartBonus();
-
 			if (bonusCommand.Duration <= 0)
 			{
 				return;
@@ -82,7 +69,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			bonusCommands.Remove(bonusCommand);
 		}
 
-		public void CleanupActiveBonuses()
+		public void Cleanup()
 		{
 			var bonuses = new List<IBonusCommand>(bonusCommands);
 			foreach (var command in bonuses)
@@ -93,31 +80,17 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			bonuses.Clear();
 		}
 
-		public void CleanupFallingBonuses()
+		public IBonusCommand GetBonusCommand(string id)
 		{
-			var bonuses = new List<Bonus>(pool.Active);
-			foreach (Bonus bonus in bonuses)
-			{
-				bonus.Release();
-			}
-			bonuses.Clear();
+			return bonusCommandsFactory.GetBonusCommand(id);
 		}
 
-		public void Update()
+		public List<BonusCommandData> GetBonusesCommandsData()
 		{
-			UpdateBonus();
-			foreach (Bonus bonus in pool.Active)
-			{
-				bonus.Movement.Move(timeProvider.DeltaTime);
-			}
-		}
-
-		public List<ActiveBonus> GetActiveBonuses()
-		{
-			var activeBonuses = new List<ActiveBonus>();
+			var activeBonuses = new List<BonusCommandData>();
 			foreach (IBonusCommand bonusCommand in bonusCommands)
 			{
-				activeBonuses.Add(new ActiveBonus()
+				activeBonuses.Add(new BonusCommandData()
 				{
 					Id = bonusCommand.Id,
 					RemainingTime = bonusCommand.Timer
@@ -126,18 +99,14 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			return activeBonuses;
 		}
 
-		public List<BonusPosition> GetBonusesPositions()
+		public void SetBonusesCommandsData(List<BonusCommandData> bonusCommands)
 		{
-			var bonusesPositions = new List<BonusPosition>();
-			foreach (Bonus bonus in pool.Active)
+			foreach (var bonusData in bonusCommands)
 			{
-				bonusesPositions.Add(new BonusPosition()
-				{
-					Id = bonus.BonusCommand.Id,
-					Position = bonus.transform.position
-				});
+				var bonusCommand = GetBonusCommand(bonusData.Id);
+				StartBonus(bonusCommand);
+				bonusCommand.Timer = bonusData.RemainingTime;
 			}
-			return bonusesPositions;
 		}
 
 		private void RemoveAllConflicts(IBonusCommand bonusCommand)
@@ -151,49 +120,6 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 				}
 			}
 			StopCommandsToRemove();
-		}
-
-		private string GetBonusId(Block block)
-		{
-			var healthComponent = block.Config.GetComponent<HealthComponent>();
-			if (healthComponent == null)
-			{
-				return default;
-			}
-
-			var dropBonusComponent = block.Config.GetComponent<DropBonusComponent>(healthComponent.DeathComponents);
-			if (dropBonusComponent == null)
-			{
-				return default;
-			}
-
-			string bonusId = dropBonusComponent.BonusId;
-			return bonusId;
-		}
-
-		public IBonusCommand GetBonusCommand(string id)
-		{
-			return bonusCommandsFactory.GetBonusCommand(id);
-		}
-
-		public Bonus GetBonus(string id)
-		{
-			Bonus bonus = pool.Get();
-			IBonusCommand bonusCommand = GetBonusCommand(id);
-			bonus.Setup(bonusCommand, pool, this);
-			return bonus;
-		}
-
-		private void OnBlockDestroyed(Block block)
-		{
-			string bonusId = GetBonusId(block);
-			if (string.IsNullOrEmpty(bonusId))
-			{
-				return;
-			}
-
-			Bonus bonus = GetBonus(bonusId);
-			bonus.transform.position = block.transform.position;
 		}
 
 		private void StopCommandsToRemove()
