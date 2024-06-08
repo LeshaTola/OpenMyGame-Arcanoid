@@ -15,6 +15,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 		[UnityEngine.SerializeField] List<IComponent> damageComponents;
 
 		public List<IComponent> DeathComponents { get => deathComponents; }
+		public int Health { get => health; }
 
 		public override void Init(Block block)
 		{
@@ -38,6 +39,17 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 			{
 				component.Execute();
 			}
+		}
+
+		public void SetHealth(int health)
+		{
+			this.health = health;
+			if (health <= 0)
+			{
+				Kill();
+				return;
+			}
+			SetCrack();
 		}
 
 		public void ReduceHealth(int damage)

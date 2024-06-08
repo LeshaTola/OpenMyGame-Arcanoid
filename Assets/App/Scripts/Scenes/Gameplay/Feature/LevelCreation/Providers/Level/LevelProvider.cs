@@ -1,4 +1,6 @@
-﻿using Scenes.Gameplay.Feature.Blocks;
+﻿using Features.Saves.Gameplay.DTOs.Level;
+using Scenes.Gameplay.Feature.Blocks;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -38,15 +40,43 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Providers.Level
 			}
 		}
 
-		public LevelInfo GetCurrentLevelStateInfo()
+		public LevelState GetLevelState()
 		{
-			return new LevelInfo()
+			return new LevelState()
 			{
-				Height = levelInfo.Height,
-				Width = levelInfo.Width,
-				BlocksMatrix = GetBlocksMatrix(),
-				BonusesMatrix = levelInfo.BonusesMatrix,
+				levelInfo = new LevelInfo()
+				{
+					Height = levelInfo.Height,
+					Width = levelInfo.Width,
+					BlocksMatrix = GetBlocksMatrix(),
+					BonusesMatrix = levelInfo.BonusesMatrix,
+				},
+				blockHealth = GetBlocksHealth()
 			};
+		}
+
+		private Dictionary<Vector2, int> GetBlocksHealth()
+		{
+			Dictionary<Vector2, int> blocksHealth = new();
+			foreach (var key in blocks.Keys)
+			{
+				if (blocks[key].Config.TryGetComponent(out HealthComponent healthComponent))
+				{
+					blocksHealth.Add(key, healthComponent.Health);
+				}
+			}
+			return blocksHealth;
+		}
+
+		public void SetLevelState(LevelState levelState)
+		{
+			foreach (var key in blocks.Keys)
+			{
+				if (blocks[key].Config.TryGetComponent(out HealthComponent healthComponent))
+				{
+					healthComponent.SetHealth(levelState.blockHealth[key]);
+				}
+			}
 		}
 
 		private int[,] GetBlocksMatrix()

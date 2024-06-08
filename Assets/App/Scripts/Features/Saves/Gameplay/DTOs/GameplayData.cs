@@ -1,6 +1,7 @@
 ﻿using Features.Saves.Gameplay.DTO.Balls;
 using Features.Saves.Gameplay.DTO.Bonuses;
-using Scenes.Gameplay.Feature.LevelCreation;
+using Features.Saves.Gameplay.DTO.Plate;
+using Features.Saves.Gameplay.DTOs.Level;
 using System;
 
 namespace Features.Saves.Gameplay
@@ -9,8 +10,9 @@ namespace Features.Saves.Gameplay
 	public class GameplayData
 	{
 		public SavedPackData PackData;
-		public LevelInfo LevelInfo;
 
+		public LevelState LevelState;
+		public PlateState PlateState;
 		public BonusServiceState BonusServiceState;
 		public BallsServiceState BallsServiceState;
 	}

@@ -2,8 +2,6 @@
 {
 	public interface ILevelSavingService
 	{
-		LevelInfo LoadedLevelInfo { get; }
-
 		void LoadData();
 		void SaveData();
 	}

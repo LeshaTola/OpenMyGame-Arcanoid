@@ -8,6 +8,5 @@ namespace Features.Saves.Gameplay.DTO.Balls
 	{
 		public Vector3 Position;
 		public Vector3 Direction;
-		public bool IsOnPlate;
 	}
 }

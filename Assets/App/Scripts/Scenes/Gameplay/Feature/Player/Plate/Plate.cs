@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Features.Saves.Gameplay.DTO.Plate;
 using Features.StateMachine;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
@@ -7,6 +8,7 @@ using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
 using Scenes.Gameplay.Feature.Reset;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -55,9 +57,7 @@ namespace Scenes.Gameplay.Feature.Player
 			{
 				return;
 			}
-			connectedBalls.Add(ball);
-			ball.transform.SetParent(transform);
-			ball.Movement.Rb.simulated = false;
+			AddConnectedBall(ball);
 		}
 
 		public void ChangeWidth(float multiplier, float duration = 0)
@@ -104,6 +104,33 @@ namespace Scenes.Gameplay.Feature.Player
 			}
 
 			ClampPosition();
+		}
+
+		public PlateState GetPlateState()
+		{
+			return new PlateState
+			{
+				Position = transform.position,
+				BallsLocalPositions = connectedBalls.Select(x => x.transform.localPosition).ToList(),
+			};
+		}
+
+		public void SetPlateState(PlateState state)
+		{
+			transform.position = state.Position;
+			foreach (Vector3 ballPosition in state.BallsLocalPositions)
+			{
+				Ball.Ball ball = ballService.GetBall();
+				AddConnectedBall(ball);
+				ball.transform.localPosition = ballPosition;
+			}
+		}
+
+		private void AddConnectedBall(Ball.Ball ball)
+		{
+			connectedBalls.Add(ball);
+			ball.transform.SetParent(transform);
+			ball.Movement.Rb.simulated = false;
 		}
 
 		private void AnimateWidth(float from, float to, float duration = 0)

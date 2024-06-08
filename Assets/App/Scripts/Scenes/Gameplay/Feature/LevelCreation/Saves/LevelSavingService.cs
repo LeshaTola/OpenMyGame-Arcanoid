@@ -18,10 +18,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 		private IBonusServicesProvider bonusServicesProvider;
 		private Plate plate;
 
-		private LevelInfo loadedLevelInfo;
-
-		public LevelInfo LoadedLevelInfo { get => loadedLevelInfo; }
-
 		public LevelSavingService(ILevelProvider levelProvider,
 							IPackProvider packProvider,
 							IBallService ballService,
@@ -39,9 +35,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 		{
 			GameplayData gameplayData = new GameplayData()
 			{
-				LevelInfo = levelProvider.GetCurrentLevelStateInfo(),
+				LevelState = levelProvider.GetLevelState(),
 				BonusServiceState = bonusServicesProvider.GetBonusServiceState(),
 				BallsServiceState = ballService.GetBallServiceState(),
+				PlateState = plate.GetPlateState(),
 			};
 
 			dataProvider.SaveData(gameplayData);
@@ -55,15 +52,11 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 				return;
 			}
 
-			LoadLevelInfo(loadedGameplayData);
+			levelProvider.SetLevelState(loadedGameplayData.LevelState);
 			LoadPackProvider(loadedGameplayData);
 			bonusServicesProvider.SetBonusServiceState(loadedGameplayData.BonusServiceState);
 			ballService.SetBallServiceState(loadedGameplayData.BallsServiceState);
-		}
-
-		private void LoadLevelInfo(GameplayData loadedGameplayData)
-		{
-			loadedLevelInfo = loadedGameplayData.LevelInfo;
+			plate.SetPlateState(loadedGameplayData.PlateState);
 		}
 
 		private void LoadPackProvider(GameplayData loadedGameplayData)

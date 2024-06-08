@@ -148,11 +148,15 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 
 			foreach (var ball in pool.Active)
 			{
+				if (ball.transform.parent != null)
+				{
+					continue;
+				}
+
 				ballsData.Add(new BallData
 				{
 					Position = ball.transform.position,
 					Direction = ball.Movement.Direction,
-					IsOnPlate = ball.transform.parent != null,
 				});
 			}
 
@@ -169,13 +173,6 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 				Ball newBall = GetBall();
 				newBall.transform.position = ballData.Position;
 				newBall.Movement.Push(ballData.Direction);
-
-				if (!ballData.IsOnPlate)
-				{
-					return;
-				}
-				newBall.Movement.Rb.simulated = false;
-				//newBall.transform.SetParent(plate.transform);
 			}
 		}
 	}
