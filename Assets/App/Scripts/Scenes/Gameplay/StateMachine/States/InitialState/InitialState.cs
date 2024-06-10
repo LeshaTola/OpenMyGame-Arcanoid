@@ -1,6 +1,7 @@
 ﻿using Features.Saves;
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
+using Scenes.Gameplay.Feature.Bonuses.Provider;
 using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.LevelCreation.Services;
 using Scenes.Gameplay.Feature.Reset.Services;
@@ -17,6 +18,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		private ILevelService levelService;
 		private IPackInfoUI packInfoUI;
 		private IResetService resetService;
+		private IBonusServicesProvider bonusServicesProvider;
 
 		private bool firstPlay = true;
 
@@ -25,6 +27,7 @@ namespace Scenes.Gameplay.StateMachine.States
 					  ILevelService levelService,
 					  IPackInfoUI packInfoUI,
 					  IPackProvider packProvider,
+					   IBonusServicesProvider bonusServicesProvider,
 					  IResetService resetService)
 		{
 			this.healthController = healthController;
@@ -33,6 +36,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			this.packInfoUI = packInfoUI;
 			this.packProvider = packProvider;
 			this.resetService = resetService;
+			this.bonusServicesProvider = bonusServicesProvider;
 		}
 
 		public override void Enter()
@@ -44,6 +48,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		private async void EnterAsync()
 		{
 			resetService.Reset();
+			bonusServicesProvider.Cleanup();
 			PlaySceneTransition();
 
 			SetupUi();
