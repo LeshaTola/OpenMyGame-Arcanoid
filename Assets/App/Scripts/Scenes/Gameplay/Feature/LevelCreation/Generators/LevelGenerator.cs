@@ -33,14 +33,14 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private float blockWidth;
 
 		public LevelGenerator(IProgressController progressController,
-						IFieldSizeProvider fieldController,
+						IFieldSizeProvider fieldSizeProvider,
 						IBlockFactory blockFactory,
 						ILevelProvider levelProvider,
 						LevelConfig levelConfig,
 						BonusesDatabase bonusesDatabase)
 		{
 			this.progressController = progressController;
-			this.fieldSizeProvider = fieldController;
+			this.fieldSizeProvider = fieldSizeProvider;
 			this.blockFactory = blockFactory;
 			this.levelConfig = levelConfig;
 			this.bonusesDatabase = bonusesDatabase;

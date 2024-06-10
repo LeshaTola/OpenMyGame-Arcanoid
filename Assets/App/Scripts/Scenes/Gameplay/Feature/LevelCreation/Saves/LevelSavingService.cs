@@ -1,4 +1,5 @@
 ﻿using Features.Saves.Gameplay;
+using Features.Saves.Gameplay.DTOs.Level;
 using Features.Saves.Gameplay.Providers;
 using Module.Saves;
 using Scenes.Gameplay.Feature.Bonuses.Provider;
@@ -40,6 +41,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 			gameplaySavesProvider.OnLoad += OnLoad;
 		}
 
+		public LevelState LevelState { get; private set; }
+
 		public void SaveData()
 		{
 			GameplayData gameplayData = new GameplayData()
@@ -62,7 +65,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 				return;
 			}
 
-			levelProvider.SetLevelState(loadedGameplayData.LevelState);
+			//levelProvider.SetLevelState(loadedGameplayData.LevelState);
+			LevelState = loadedGameplayData.LevelState;
 			LoadPackProvider(loadedGameplayData);
 			bonusServicesProvider.SetBonusServiceState(loadedGameplayData.BonusServiceState);
 			ballService.SetBallServiceState(loadedGameplayData.BallsServiceState);

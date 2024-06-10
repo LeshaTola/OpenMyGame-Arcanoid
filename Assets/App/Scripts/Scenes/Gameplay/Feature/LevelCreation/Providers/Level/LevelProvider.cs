@@ -56,6 +56,18 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Providers.Level
 			};
 		}
 
+		public void SetLevelState(LevelState levelState)
+		{
+			/*levelGenerator.GenerateLevelAsync(levelState.levelInfo);
+			foreach (var key in blocks.Keys)
+			{
+				if (blocks[key].Config.TryGetComponent(out HealthComponent healthComponent))
+				{
+					healthComponent.SetHealth(levelState.blockHealth[new(key)]);
+				}
+			}*/
+		}
+
 		private Dictionary<JsonVector2, int> GetBlocksHealth()
 		{
 			Dictionary<JsonVector2, int> blocksHealth = new();
@@ -67,17 +79,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Providers.Level
 				}
 			}
 			return blocksHealth;
-		}
-
-		public void SetLevelState(LevelState levelState)
-		{
-			foreach (var key in blocks.Keys)
-			{
-				if (blocks[key].Config.TryGetComponent(out HealthComponent healthComponent))
-				{
-					healthComponent.SetHealth(levelState.blockHealth[new(key)]);
-				}
-			}
 		}
 
 		private int[,] GetBlocksMatrix()

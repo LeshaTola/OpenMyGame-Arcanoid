@@ -1,8 +1,10 @@
 ﻿using Features.Saves;
+using Features.Saves.Gameplay.Providers;
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using Scenes.Gameplay.Feature.Bonuses.Provider;
 using Scenes.Gameplay.Feature.Health;
+using Scenes.Gameplay.Feature.LevelCreation.Saves;
 using Scenes.Gameplay.Feature.LevelCreation.Services;
 using Scenes.Gameplay.Feature.Reset.Services;
 using Scenes.Gameplay.Feature.UI;
@@ -20,6 +22,9 @@ namespace Scenes.Gameplay.StateMachine.States
 		private IResetService resetService;
 		private IBonusServicesProvider bonusServicesProvider;
 
+		private ILevelSavingService levelSavingService;
+		private IGameplaySavesProvider gameplaySavesProvider;
+
 		private bool firstPlay = true;
 
 		public InitialState(IHealthController healthController,
@@ -27,8 +32,11 @@ namespace Scenes.Gameplay.StateMachine.States
 					  ILevelService levelService,
 					  IPackInfoUI packInfoUI,
 					  IPackProvider packProvider,
-					   IBonusServicesProvider bonusServicesProvider,
-					  IResetService resetService)
+					  IBonusServicesProvider bonusServicesProvider,
+					  IResetService resetService,
+
+					  ILevelSavingService levelSavingService,
+					  IGameplaySavesProvider gameplaySavesProvider)
 		{
 			this.healthController = healthController;
 			this.sceneTransition = sceneTransition;
@@ -37,10 +45,23 @@ namespace Scenes.Gameplay.StateMachine.States
 			this.packProvider = packProvider;
 			this.resetService = resetService;
 			this.bonusServicesProvider = bonusServicesProvider;
+
+			this.levelSavingService = levelSavingService;
+			this.gameplaySavesProvider = gameplaySavesProvider;
+
 		}
 
 		public override void Enter()
 		{
+			PlaySceneTransition();
+
+			if (gameplaySavesProvider.IsContinue)
+			{
+				levelSavingService.LoadData();
+				gameplaySavesProvider.IsContinue = false;
+				return;
+			}
+
 			base.Enter();
 			EnterAsync();
 		}
@@ -49,10 +70,16 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			resetService.Reset();
 			bonusServicesProvider.Cleanup();
-			PlaySceneTransition();
 
 			SetupUi();
-			await levelService.SetupLevelAsync();
+			if (packProvider.CurrentPack == null || packProvider.SavedPackData == null)
+			{
+				await levelService.SetupDefaultLevelAsync();
+			}
+			else
+			{
+				await levelService.SetupLevelFromPackAsync(packProvider.CurrentPack, packProvider.SavedPackData);
+			}
 
 			healthController.ResetHealth();
 
