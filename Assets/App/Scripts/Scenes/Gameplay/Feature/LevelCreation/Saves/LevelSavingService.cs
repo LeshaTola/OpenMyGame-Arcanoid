@@ -1,10 +1,13 @@
-﻿using Features.Saves.Gameplay;
+﻿using Cysharp.Threading.Tasks;
+using Features.Saves.Gameplay;
 using Features.Saves.Gameplay.Providers;
 using Module.Saves;
 using Scenes.Gameplay.Feature.Bonuses.Provider;
+using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.LevelCreation.Services;
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
+using Scenes.Gameplay.Feature.Progress;
 using Scenes.PackSelection.Feature.Packs;
 
 namespace Scenes.Gameplay.Feature.LevelCreation.Saves
@@ -20,12 +23,17 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 		private IGameplaySavesProvider gameplaySavesProvider;
 		private Plate plate;
 
+		private IHealthController healthController;
+		private IProgressController progressController;
+
 		public LevelSavingService(IDataProvider<GameplayData> dataProvider,
 							IGameplaySavesProvider gameplaySavesProvider,
 							ILevelService levelService,
 							IPackProvider packProvider,
 							IBallService ballService,
 							IBonusServicesProvider bonusServicesProvider,
+							IHealthController healthController,
+							IProgressController progressController,
 							Plate plate)
 		{
 			this.dataProvider = dataProvider;
@@ -34,6 +42,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 			this.ballService = ballService;
 			this.bonusServicesProvider = bonusServicesProvider;
 			this.gameplaySavesProvider = gameplaySavesProvider;
+			this.healthController = healthController;
+			this.progressController = progressController;
 			this.plate = plate;
 
 			gameplaySavesProvider.OnSave += OnSave;
@@ -45,6 +55,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 			GameplayData gameplayData = new GameplayData()
 			{
 				LevelState = levelService.GetLevelState(),
+				ProgressState = progressController.GetProgressState(),
+				HealthState = healthController.GetHealthState(),
 				BonusServiceState = bonusServicesProvider.GetBonusServiceState(),
 				BallsServiceState = ballService.GetBallServiceState(),
 				PackData = packProvider.SavedPackData,
@@ -54,7 +66,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 			dataProvider.SaveData(gameplayData);
 		}
 
-		public void LoadData()
+		public async UniTask LoadDataAsync()
 		{
 			GameplayData loadedGameplayData = dataProvider.GetData();
 			if (loadedGameplayData == null)
@@ -62,11 +74,16 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 				return;
 			}
 
-			levelService.SetLevelState(loadedGameplayData.LevelState);
 			LoadPackProvider(loadedGameplayData);
-			bonusServicesProvider.SetBonusServiceState(loadedGameplayData.BonusServiceState);
-			ballService.SetBallServiceState(loadedGameplayData.BallsServiceState);
+			progressController.SetProgressState(loadedGameplayData.ProgressState);
+			healthController.SetHealthState(loadedGameplayData.HealthState);
 			plate.SetPlateState(loadedGameplayData.PlateState);
+			ballService.SetBallServiceState(loadedGameplayData.BallsServiceState);
+			bonusServicesProvider.SetBonusServiceState(loadedGameplayData.BonusServiceState);
+
+			await levelService.SetLevelStateAsync(loadedGameplayData.LevelState);
+			progressController.SetProgressState(loadedGameplayData.ProgressState);
+			ballService.PushBalls();
 		}
 
 		public void Cleanup()
@@ -86,9 +103,9 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 			SaveData();
 		}
 
-		private void OnLoad()
+		private async void OnLoad()
 		{
-			LoadData();
+			await LoadDataAsync();
 		}
 	}
 }

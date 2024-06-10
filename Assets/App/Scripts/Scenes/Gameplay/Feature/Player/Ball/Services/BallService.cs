@@ -149,7 +149,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 
 			foreach (var ball in pool.Active)
 			{
-				if (ball.transform.parent != null)
+				if (ball.transform.parent != null && ball.transform.parent.gameObject.TryGetComponent(out Plate plate))
 				{
 					continue;
 				}
@@ -172,8 +172,9 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			foreach (BallData ballData in state.BallsData)
 			{
 				Ball newBall = GetBall();
-				newBall.transform.position = new Vector2(ballData.Position.X, ballData.Position.Y);
-				newBall.Movement.Push(new Vector2(ballData.Direction.X, ballData.Direction.Y));
+				newBall.Movement.Rb.simulated = true;
+				newBall.transform.position = new(ballData.Position.X, ballData.Position.Y);
+				lastBallsDirections.Add(newBall, new(ballData.Direction.X, ballData.Direction.Y));
 			}
 		}
 	}

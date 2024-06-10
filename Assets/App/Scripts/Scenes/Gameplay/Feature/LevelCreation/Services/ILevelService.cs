@@ -9,7 +9,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 	public interface ILevelService
 	{
 		LevelState GetLevelState();
-		void SetLevelState(LevelState levelState);
+		UniTask SetLevelStateAsync(LevelState levelState);
 
 		UniTask SetupDefaultLevelAsync();
 		Task SetupLevelFromPackAsync(Pack currentPack, SavedPackData savedPackData);

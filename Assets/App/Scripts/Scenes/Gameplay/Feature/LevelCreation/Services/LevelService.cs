@@ -87,10 +87,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 			};
 		}
 
-		public void SetLevelState(LevelState levelState)
+		public async UniTask SetLevelStateAsync(LevelState levelState)
 		{
 			levelInfo = levelState.levelInfo;
-			levelGenerator.GenerateLevelAsync(levelInfo);
+			await levelGenerator.GenerateLevelAsync(levelInfo);
 		}
 
 		private Dictionary<JsonVector2, int> GetBlocksHealth()

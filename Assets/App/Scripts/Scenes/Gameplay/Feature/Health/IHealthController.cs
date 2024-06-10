@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Features.Saves.Gameplay.DTOs.Health;
+using System;
 
 namespace Scenes.Gameplay.Feature.Health
 {
@@ -10,7 +11,9 @@ namespace Scenes.Gameplay.Feature.Health
 		event Action OnDeath;
 
 		void AddHealth(int health);
+		HealthState GetHealthState();
 		void ReduceHealth(int health);
 		void ResetHealth();
+		void SetHealthState(HealthState healthState);
 	}
 }

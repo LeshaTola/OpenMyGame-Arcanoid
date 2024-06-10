@@ -1,3 +1,4 @@
+using Features.Saves.Gameplay.DTOs.Health;
 using Scenes.Gameplay.Feature.Health.Configs;
 using System;
 using Zenject;
@@ -65,6 +66,20 @@ namespace Scenes.Gameplay.Feature.Health
 		public void ResetHealth()
 		{
 			AddHealth(config.Health);
+		}
+
+		public void SetHealthState(HealthState healthState)
+		{
+			currentHealth = 0;
+			AddHealth(healthState.Health);
+		}
+
+		public HealthState GetHealthState()
+		{
+			return new HealthState()
+			{
+				Health = currentHealth,
+			};
 		}
 	}
 }

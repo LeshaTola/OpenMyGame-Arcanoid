@@ -56,8 +56,9 @@ namespace Scenes.Gameplay.StateMachine.States
 
 			if (gameplaySavesProvider.IsContinue)
 			{
-				levelSavingService.LoadData();
+				levelSavingService.LoadDataAsync();
 				gameplaySavesProvider.IsContinue = false;
+				StateMachine.ChangeState<GameplayState>();
 				return;
 			}
 

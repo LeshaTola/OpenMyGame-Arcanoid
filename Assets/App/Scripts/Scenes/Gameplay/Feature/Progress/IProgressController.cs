@@ -1,4 +1,5 @@
-﻿using Scenes.Gameplay.Feature.Blocks;
+﻿using Features.Saves.Gameplay.DTOs.Progress;
+using Scenes.Gameplay.Feature.Blocks;
 using System;
 using System.Collections.Generic;
 
@@ -14,5 +15,7 @@ namespace Scenes.Gameplay.Feature.Progress
 		void Init(List<Block> blocks);
 		void ProcessProgress();
 		void InitiateWin();
+		void SetProgressState(ProgressState state);
+		ProgressState GetProgressState();
 	}
 }

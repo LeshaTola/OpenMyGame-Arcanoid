@@ -1,4 +1,5 @@
-﻿using Scenes.Gameplay.Feature.Blocks;
+﻿using Features.Saves.Gameplay.DTOs.Progress;
+using Scenes.Gameplay.Feature.Blocks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
 using System;
@@ -81,6 +82,22 @@ namespace Scenes.Gameplay.Feature.Progress
 			currentBlocksCount = startBlocksCount;
 
 			ProcessProgress();
+		}
+
+		public void SetProgressState(ProgressState state)
+		{
+			startBlocksCount = state.StartBlockCount;
+			currentBlocksCount = state.CurrentBlockCount;
+			progressUI.UpdateProgress(Progress);
+		}
+
+		public ProgressState GetProgressState()
+		{
+			return new ProgressState()
+			{
+				StartBlockCount = startBlocksCount,
+				CurrentBlockCount = currentBlocksCount,
+			};
 		}
 
 		private void SubscribeOnBlock(Block block)

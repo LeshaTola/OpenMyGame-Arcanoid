@@ -1,9 +1,11 @@
-﻿namespace Scenes.Gameplay.Feature.LevelCreation.Saves
+﻿using Cysharp.Threading.Tasks;
+
+namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 {
 	public interface ILevelSavingService
 	{
 		void Cleanup();
-		void LoadData();
+		UniTask LoadDataAsync();
 		void SaveData();
 	}
 }
