@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Features.Saves.Gameplay.DTO.Plate;
 using Features.StateMachine;
+using Module.Saves.Structs;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.Feature.Player.Machineguns;
@@ -110,19 +111,23 @@ namespace Scenes.Gameplay.Feature.Player
 		{
 			return new PlateState
 			{
-				Position = transform.position,
-				BallsLocalPositions = connectedBalls.Select(x => x.transform.localPosition).ToList(),
+				Position = new JsonVector2()
+				{
+					X = transform.position.x,
+					Y = transform.position.y
+				},
+				BallsLocalPositions = connectedBalls.Select(x => new JsonVector2(x.transform.localPosition)).ToList(),
 			};
 		}
 
 		public void SetPlateState(PlateState state)
 		{
-			transform.position = state.Position;
-			foreach (Vector3 ballPosition in state.BallsLocalPositions)
+			transform.position = new Vector2(state.Position.X, state.Position.Y);
+			foreach (JsonVector2 ballPosition in state.BallsLocalPositions)
 			{
 				Ball.Ball ball = ballService.GetBall();
 				AddConnectedBall(ball);
-				ball.transform.localPosition = ballPosition;
+				ball.transform.localPosition = new(ballPosition.X, ballPosition.Y);
 			}
 		}
 

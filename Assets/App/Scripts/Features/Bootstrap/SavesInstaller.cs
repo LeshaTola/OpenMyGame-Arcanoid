@@ -2,6 +2,9 @@
 using Features.Energy.Saves.Keys;
 using Features.ProjectCondition.Providers;
 using Features.Saves;
+using Features.Saves.Gameplay;
+using Features.Saves.Gameplay.Keys;
+using Features.Saves.Gameplay.Providers;
 using Features.Saves.Keys;
 using Features.Saves.Localization;
 using Features.Saves.Localization.Keys;
@@ -22,9 +25,19 @@ namespace Features.Bootstrap
 			BindPlayerProgressDataProvider();
 			BindLocalizationDataProvider();
 			BindEnergyDataProvider();
+			BindGameplayDataProvider();
+			Container.Bind<IGameplaySavesProvider>().To<GameplaySavesProvider>().AsSingle();
 
 			Container.Bind<IProjectSavesController>().To<ProjectSavesController>().AsSingle().NonLazy();
 			Container.Bind<IProjectConditionProvider>().FromInstance(projectConditionProvider.Value).AsSingle();
+		}
+
+		private void BindGameplayDataProvider()
+		{
+			Container.Bind<IDataProvider<GameplayData>>()
+				.To<DataProvider<GameplayData>>()
+				.AsSingle()
+				.WithArguments(GameplayDataKey.KEY);
 		}
 
 		private void BindStorage()

@@ -1,4 +1,5 @@
 ﻿using Features.Saves.Gameplay.DTOs.Level;
+using Module.Saves.Structs;
 using Scenes.Gameplay.Feature.Blocks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using System.Collections.Generic;
@@ -51,18 +52,18 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Providers.Level
 					BlocksMatrix = GetBlocksMatrix(),
 					BonusesMatrix = levelInfo.BonusesMatrix,
 				},
-				blockHealth = GetBlocksHealth()
+				//blockHealth = GetBlocksHealth()
 			};
 		}
 
-		private Dictionary<Vector2, int> GetBlocksHealth()
+		private Dictionary<JsonVector2, int> GetBlocksHealth()
 		{
-			Dictionary<Vector2, int> blocksHealth = new();
+			Dictionary<JsonVector2, int> blocksHealth = new();
 			foreach (var key in blocks.Keys)
 			{
 				if (blocks[key].Config.TryGetComponent(out HealthComponent healthComponent))
 				{
-					blocksHealth.Add(key, healthComponent.Health);
+					blocksHealth.Add(new(key), healthComponent.Health);
 				}
 			}
 			return blocksHealth;
@@ -74,7 +75,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Providers.Level
 			{
 				if (blocks[key].Config.TryGetComponent(out HealthComponent healthComponent))
 				{
-					healthComponent.SetHealth(levelState.blockHealth[key]);
+					healthComponent.SetHealth(levelState.blockHealth[new(key)]);
 				}
 			}
 		}

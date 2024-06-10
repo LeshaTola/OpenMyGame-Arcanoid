@@ -2,6 +2,7 @@
 {
 	public interface ILevelSavingService
 	{
+		void Cleanup();
 		void LoadData();
 		void SaveData();
 	}

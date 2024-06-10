@@ -24,6 +24,16 @@ namespace Module.Saves
 			return JsonConvert.DeserializeObject<T>(json);
 		}
 
+		public bool HasData()
+		{
+			string json = storage.GetString(key);
+			if (string.IsNullOrEmpty(json))
+			{
+				return false;
+			}
+			return true;
+		}
+
 		public void SaveData(T data)
 		{
 			string json = JsonConvert.SerializeObject(data);

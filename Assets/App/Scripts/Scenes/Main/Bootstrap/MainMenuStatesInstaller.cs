@@ -2,6 +2,7 @@ using Features.Bootstrap;
 using Features.StateMachine;
 using Features.StateMachine.States;
 using Scenes.Main.StateMachine.States.Initial;
+using Scenes.Main.StateMachine.States.LoadGameplayScene;
 using UnityEngine;
 using Zenject;
 
@@ -29,6 +30,7 @@ namespace Scenes.Main.Bootstrap
 
 		private void BindLoadNextState()
 		{
+			Container.Bind<LoadGameplaySceneState>().AsSingle();
 			Container.Bind<LoadSceneState>().AsSingle();
 			Container.Bind<LoadSceneStateStep>().AsTransient();
 		}

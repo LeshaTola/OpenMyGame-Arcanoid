@@ -7,6 +7,7 @@ using Scenes.Gameplay.Feature.LevelCreation.Mechanics;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Factories;
 using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
+using Scenes.Gameplay.Feature.LevelCreation.Saves;
 using Scenes.Gameplay.Feature.LevelCreation.Services;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace Scenes.Gameplay.Bootstrap
 			BindLevelGenerator();
 			BindLevelService();
 			BindLevelProvider();
+			Container.Bind<ILevelSavingService>().To<LevelSavingService>().AsSingle();
 		}
 
 		private void BindLevelMechanicsFactory()

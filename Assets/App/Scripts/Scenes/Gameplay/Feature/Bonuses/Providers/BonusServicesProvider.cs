@@ -9,6 +9,12 @@ namespace Scenes.Gameplay.Feature.Bonuses.Provider
 		private IBonusService bonusService;
 		private IBonusCommandService bonusCommandService;
 
+		public BonusServicesProvider(IBonusService bonusService, IBonusCommandService bonusCommandService)
+		{
+			this.bonusService = bonusService;
+			this.bonusCommandService = bonusCommandService;
+		}
+
 		public BonusServiceState GetBonusServiceState()
 		{
 			return new BonusServiceState()

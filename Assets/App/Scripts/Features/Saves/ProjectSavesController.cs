@@ -1,5 +1,6 @@
 ﻿using Features.Energy.Providers;
 using Features.ProjectCondition.Providers;
+using Features.Saves.Gameplay.Providers;
 using Scenes.PackSelection.Feature.Packs;
 
 namespace Features.Saves
@@ -8,15 +9,18 @@ namespace Features.Saves
 	{
 		private IEnergyProvider energyProvider;
 		private IPackProvider packProvider;
+		private IGameplaySavesProvider gameplaySavesProvider;
 
 		public ProjectSavesController(IProjectConditionProvider projectConditionProvider,
 								IEnergyProvider energyProvider,
-								IPackProvider packProvider)
+								IPackProvider packProvider,
+								IGameplaySavesProvider gameplaySavesProvider)
 		{
 			this.energyProvider = energyProvider;
 			this.packProvider = packProvider;
+			this.gameplaySavesProvider = gameplaySavesProvider;
 
-			projectConditionProvider.OnApplicationStart += OnApplicationStart; ;
+			projectConditionProvider.OnApplicationStart += OnApplicationStart;
 			projectConditionProvider.OnApplicationQuitted += OnApplicationQuitted;
 			projectConditionProvider.OnApplicationPaused += OnApplicationPaused;
 		}
@@ -25,6 +29,7 @@ namespace Features.Saves
 		{
 			energyProvider.SaveData();
 			packProvider.SaveData();
+			gameplaySavesProvider.SaveData();
 		}
 
 		private void LoadAllData()

@@ -18,10 +18,12 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services.Bonuses
 		private IBonusCommandService bonusCommandsService;
 
 		public BonusService(ILevelGenerator levelGenerator,
+							 IPool<Bonus> pool,
 							 ITimeProvider timeProvider,
 							 IBonusCommandService bonusCommandsService)
 		{
 			this.timeProvider = timeProvider;
+			this.pool = pool;
 			this.bonusCommandsService = bonusCommandsService;
 
 			levelGenerator.OnBlockDestroyed += OnBlockDestroyed;
@@ -44,7 +46,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services.Bonuses
 				bonusesPositions.Add(new BonusPosition()
 				{
 					Id = bonus.BonusCommand.Id,
-					Position = bonus.transform.position
+					Position = new(bonus.transform.position)
 				});
 			}
 			return bonusesPositions;
@@ -55,7 +57,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services.Bonuses
 			foreach (BonusPosition bonusData in bonusPositions)
 			{
 				Bonus bonus = GetBonus(bonusData.Id);
-				bonus.transform.position = bonusData.Position;
+				bonus.transform.position = new(bonusData.Position.X, bonusData.Position.Y);
 			}
 		}
 

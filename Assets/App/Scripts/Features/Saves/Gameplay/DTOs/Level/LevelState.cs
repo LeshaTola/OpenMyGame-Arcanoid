@@ -1,7 +1,7 @@
-﻿using Scenes.Gameplay.Feature.LevelCreation;
+﻿using Module.Saves.Structs;
+using Scenes.Gameplay.Feature.LevelCreation;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Features.Saves.Gameplay.DTOs.Level
 {
@@ -9,6 +9,6 @@ namespace Features.Saves.Gameplay.DTOs.Level
 	public struct LevelState
 	{
 		public LevelInfo levelInfo;
-		public Dictionary<Vector2, int> blockHealth;
+		public Dictionary<JsonVector2, int> blockHealth;
 	}
 }

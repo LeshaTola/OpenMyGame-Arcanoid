@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using Module.Saves.Structs;
+using System;
 
 namespace Features.Saves.Gameplay
 {
@@ -7,6 +7,6 @@ namespace Features.Saves.Gameplay
 	public struct BonusPosition
 	{
 		public string Id;
-		public Vector3 Position;
+		public JsonVector2 Position;
 	}
 }

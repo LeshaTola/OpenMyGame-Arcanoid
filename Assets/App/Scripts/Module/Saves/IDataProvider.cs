@@ -4,5 +4,6 @@
 	{
 		void SaveData(T data);
 		T GetData();
+		bool HasData();
 	}
 }

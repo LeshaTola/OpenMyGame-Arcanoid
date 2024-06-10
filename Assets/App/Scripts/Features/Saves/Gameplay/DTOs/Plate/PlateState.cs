@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Module.Saves.Structs;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Features.Saves.Gameplay.DTO.Plate
 {
 	[Serializable]
 	public struct PlateState
 	{
-		public Vector2 Position;
-		public List<Vector3> BallsLocalPositions;
+		public JsonVector2 Position;
+		public List<JsonVector2> BallsLocalPositions;
 	}
 }

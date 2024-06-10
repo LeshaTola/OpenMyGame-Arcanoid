@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Features.Saves.Gameplay.DTO.Balls;
 using Module.ObjectPool;
+using Module.Saves.Structs;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Progress;
 using System.Collections.Generic;
@@ -155,8 +156,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 
 				ballsData.Add(new BallData
 				{
-					Position = ball.transform.position,
-					Direction = ball.Movement.Direction,
+					Position = new JsonVector2(ball.transform.position),
+					Direction = new JsonVector2(ball.Movement.Direction),
 				});
 			}
 
@@ -171,8 +172,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			foreach (BallData ballData in state.BallsData)
 			{
 				Ball newBall = GetBall();
-				newBall.transform.position = ballData.Position;
-				newBall.Movement.Push(ballData.Direction);
+				newBall.transform.position = new Vector2(ballData.Position.X, ballData.Position.Y);
+				newBall.Movement.Push(new Vector2(ballData.Direction.X, ballData.Direction.Y));
 			}
 		}
 	}

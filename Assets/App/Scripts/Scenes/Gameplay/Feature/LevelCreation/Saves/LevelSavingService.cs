@@ -1,4 +1,5 @@
 ﻿using Features.Saves.Gameplay;
+using Features.Saves.Gameplay.Providers;
 using Module.Saves;
 using Scenes.Gameplay.Feature.Bonuses.Provider;
 using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
@@ -16,19 +17,27 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 		private IPackProvider packProvider;
 		private IBallService ballService;
 		private IBonusServicesProvider bonusServicesProvider;
+		private IGameplaySavesProvider gameplaySavesProvider;
 		private Plate plate;
 
-		public LevelSavingService(ILevelProvider levelProvider,
+		public LevelSavingService(IDataProvider<GameplayData> dataProvider,
+							IGameplaySavesProvider gameplaySavesProvider,
+							ILevelProvider levelProvider,
 							IPackProvider packProvider,
 							IBallService ballService,
 							IBonusServicesProvider bonusServicesProvider,
 							Plate plate)
 		{
+			this.dataProvider = dataProvider;
 			this.levelProvider = levelProvider;
 			this.packProvider = packProvider;
 			this.ballService = ballService;
 			this.bonusServicesProvider = bonusServicesProvider;
+			this.gameplaySavesProvider = gameplaySavesProvider;
 			this.plate = plate;
+
+			gameplaySavesProvider.OnSave += OnSave;
+			gameplaySavesProvider.OnLoad += OnLoad;
 		}
 
 		public void SaveData()
@@ -38,6 +47,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 				LevelState = levelProvider.GetLevelState(),
 				BonusServiceState = bonusServicesProvider.GetBonusServiceState(),
 				BallsServiceState = ballService.GetBallServiceState(),
+				PackData = packProvider.SavedPackData,
 				PlateState = plate.GetPlateState(),
 			};
 
@@ -59,10 +69,26 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 			plate.SetPlateState(loadedGameplayData.PlateState);
 		}
 
+		public void Cleanup()
+		{
+			gameplaySavesProvider.OnSave -= OnSave;
+			gameplaySavesProvider.OnLoad -= OnLoad;
+		}
+
 		private void LoadPackProvider(GameplayData loadedGameplayData)
 		{
 			packProvider.SavedPackData = loadedGameplayData.PackData;
 			packProvider.PackIndex = packProvider.Packs.FindIndex(x => x.Id.Equals(loadedGameplayData.PackData.Id));
+		}
+
+		private void OnSave()
+		{
+			SaveData();
+		}
+
+		private void OnLoad()
+		{
+			LoadData();
 		}
 	}
 }

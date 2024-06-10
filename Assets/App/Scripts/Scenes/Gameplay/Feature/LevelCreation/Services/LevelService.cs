@@ -1,9 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
 using Features.FileProvider;
 using Features.Saves;
+using Features.Saves.Gameplay.Providers;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers;
+using Scenes.Gameplay.Feature.LevelCreation.Saves;
 using Scenes.PackSelection.Feature.Packs;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +17,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 	{
 		private ILevelGenerator levelGenerator;
 		private IPackProvider packProvider;
+		private IGameplaySavesProvider gameplaySavesProvider;
 		private IFileProvider fileProvider;
 		private ILevelInfoProvider levelInfoProvider;
+		private ILevelSavingService levelSavingService;
 		private ILevelMechanicsController levelMechanicsController;
 		private TextAsset defaultLevelInfo;
 		private List<LevelMechanics> levelMechanics;
@@ -26,8 +30,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 					  IFileProvider fileProvider,
 					  ILevelInfoProvider levelInfoProvider,
 					  ILevelMechanicsController levelMechanicsController,
+					  ILevelSavingService levelSavingService,
 					  TextAsset defaultLevelInfo,
-					  List<LevelMechanics> levelMechanics)
+					  List<LevelMechanics> levelMechanics,
+					  IGameplaySavesProvider gameplaySavesProvider)
 		{
 			this.levelGenerator = levelGenerator;
 			this.packProvider = packProvider;
@@ -36,21 +42,29 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 			this.levelMechanicsController = levelMechanicsController;
 			this.defaultLevelInfo = defaultLevelInfo;
 			this.levelMechanics = levelMechanics;
+			this.gameplaySavesProvider = gameplaySavesProvider;
+			this.levelSavingService = levelSavingService;
 		}
 
 		public async UniTask SetupLevelAsync()
 		{
 			var currentPack = packProvider.CurrentPack;
 			SavedPackData savedPackData = packProvider.SavedPackData;
+			levelMechanicsController.Cleanup();
+
+			if (gameplaySavesProvider.IsContinue)
+			{
+				levelSavingService.LoadData();
+				gameplaySavesProvider.IsContinue = false;
+				return;
+			}
+
 			if (currentPack == null || savedPackData == null)
 			{
-				levelMechanicsController.CleanUp();
 				await levelGenerator.GenerateLevelAsync(levelInfoProvider.GetLevelInfo(defaultLevelInfo.text));
 				levelMechanicsController.StartLevelMechanics(levelMechanics);
 				return;
 			}
-
-			levelMechanicsController.CleanUp();
 
 			var currentLevel = currentPack.LevelSettings[savedPackData.CurrentLevel];
 			string path = Path.Combine(currentPack.RelativeLevelsPath, currentLevel.LevelName);
