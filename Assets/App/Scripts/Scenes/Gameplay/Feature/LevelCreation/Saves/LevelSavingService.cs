@@ -1,9 +1,8 @@
 ﻿using Features.Saves.Gameplay;
-using Features.Saves.Gameplay.DTOs.Level;
 using Features.Saves.Gameplay.Providers;
 using Module.Saves;
 using Scenes.Gameplay.Feature.Bonuses.Provider;
-using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
+using Scenes.Gameplay.Feature.LevelCreation.Services;
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.PackSelection.Feature.Packs;
@@ -14,7 +13,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 	{
 		private IDataProvider<GameplayData> dataProvider;
 
-		private ILevelProvider levelProvider;
+		private ILevelService levelService;
 		private IPackProvider packProvider;
 		private IBallService ballService;
 		private IBonusServicesProvider bonusServicesProvider;
@@ -23,14 +22,14 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 
 		public LevelSavingService(IDataProvider<GameplayData> dataProvider,
 							IGameplaySavesProvider gameplaySavesProvider,
-							ILevelProvider levelProvider,
+							ILevelService levelService,
 							IPackProvider packProvider,
 							IBallService ballService,
 							IBonusServicesProvider bonusServicesProvider,
 							Plate plate)
 		{
 			this.dataProvider = dataProvider;
-			this.levelProvider = levelProvider;
+			this.levelService = levelService;
 			this.packProvider = packProvider;
 			this.ballService = ballService;
 			this.bonusServicesProvider = bonusServicesProvider;
@@ -41,13 +40,11 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 			gameplaySavesProvider.OnLoad += OnLoad;
 		}
 
-		public LevelState LevelState { get; private set; }
-
 		public void SaveData()
 		{
 			GameplayData gameplayData = new GameplayData()
 			{
-				LevelState = levelProvider.GetLevelState(),
+				LevelState = levelService.GetLevelState(),
 				BonusServiceState = bonusServicesProvider.GetBonusServiceState(),
 				BallsServiceState = ballService.GetBallServiceState(),
 				PackData = packProvider.SavedPackData,
@@ -65,8 +62,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 				return;
 			}
 
-			//levelProvider.SetLevelState(loadedGameplayData.LevelState);
-			LevelState = loadedGameplayData.LevelState;
+			levelService.SetLevelState(loadedGameplayData.LevelState);
 			LoadPackProvider(loadedGameplayData);
 			bonusServicesProvider.SetBonusServiceState(loadedGameplayData.BonusServiceState);
 			ballService.SetBallServiceState(loadedGameplayData.BallsServiceState);

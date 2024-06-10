@@ -48,7 +48,6 @@ namespace Scenes.Gameplay.StateMachine.States
 
 			this.levelSavingService = levelSavingService;
 			this.gameplaySavesProvider = gameplaySavesProvider;
-
 		}
 
 		public override void Enter()

@@ -6,7 +6,6 @@ using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
 using Scenes.Gameplay.Feature.Bonuses.Configs;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
-using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
 using Scenes.Gameplay.Feature.Progress;
 using System;
 using System.Collections.Generic;
@@ -26,16 +25,16 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private IProgressController progressController;
 		private IFieldSizeProvider fieldSizeProvider;
 		private IBlockFactory blockFactory;
-		private ILevelProvider levelProvider;
 
 		private Dictionary<Vector2Int, Block> blocks = new();
 		private float animationTime;
 		private float blockWidth;
 
+		public Dictionary<Vector2Int, Block> Blocks { get => blocks; }
+
 		public LevelGenerator(IProgressController progressController,
 						IFieldSizeProvider fieldSizeProvider,
 						IBlockFactory blockFactory,
-						ILevelProvider levelProvider,
 						LevelConfig levelConfig,
 						BonusesDatabase bonusesDatabase)
 		{
@@ -44,7 +43,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			this.blockFactory = blockFactory;
 			this.levelConfig = levelConfig;
 			this.bonusesDatabase = bonusesDatabase;
-			this.levelProvider = levelProvider;
 		}
 
 		public async UniTask GenerateLevelAsync(LevelInfo levelInfo)
@@ -80,7 +78,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			}
 
 			progressController.Init(new List<Block>(blocks.Values));
-			levelProvider.Init(blocks, levelInfo);
 		}
 
 		private void SetAnimationTime(LevelInfo levelInfo)

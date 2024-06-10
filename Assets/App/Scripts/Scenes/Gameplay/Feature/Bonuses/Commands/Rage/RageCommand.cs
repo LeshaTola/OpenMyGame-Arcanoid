@@ -1,4 +1,4 @@
-﻿using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
+﻿using Scenes.Gameplay.Feature.LevelCreation.Services;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Commands.Rage
@@ -6,13 +6,13 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands.Rage
 	public class RageCommand : BonusCommand
 	{
 		private IBallService ballService;
-		private ILevelProvider levelProvider;
+		private ILevelService levelService;
 
 		public RageCommand(IBallService ballService,
-					 ILevelProvider levelProvider)
+					 ILevelService levelService)
 		{
 			this.ballService = ballService;
-			this.levelProvider = levelProvider;
+			this.levelService = levelService;
 		}
 
 		public override void StartBonus()
@@ -20,7 +20,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands.Rage
 			base.StartBonus();
 
 			ballService.ActivateRageMode();
-			levelProvider.TurnOffColliders();
+			levelService.TurnOffColliders();
 		}
 
 		public override void StopBonus()
@@ -28,7 +28,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands.Rage
 			base.StopBonus();
 
 			ballService.DeactivateRageMode();
-			levelProvider.TurnOnColliders();
+			levelService.TurnOnColliders();
 		}
 	}
 }

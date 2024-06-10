@@ -6,7 +6,6 @@ using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Factories;
-using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
 using Scenes.Gameplay.Feature.LevelCreation.Saves;
 using Scenes.Gameplay.Feature.LevelCreation.Services;
 using System.Collections.Generic;
@@ -36,7 +35,6 @@ namespace Scenes.Gameplay.Bootstrap
 			BindBlockFactory();
 			BindLevelGenerator();
 			BindLevelService();
-			BindLevelProvider();
 			Container.Bind<ILevelSavingService>().To<LevelSavingService>().AsSingle();
 		}
 
@@ -81,13 +79,6 @@ namespace Scenes.Gameplay.Bootstrap
 				.To<LevelService>()
 				.AsSingle()
 				.WithArguments(defaultLevelInfo, levelMechanics);
-		}
-
-		private void BindLevelProvider()
-		{
-			Container.Bind<ILevelProvider>()
-				.To<LevelProvider>()
-				.AsSingle();
 		}
 	}
 }
