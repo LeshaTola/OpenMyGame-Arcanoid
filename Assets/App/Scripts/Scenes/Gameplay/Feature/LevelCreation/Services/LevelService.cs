@@ -1,7 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Features.Saves;
 using Features.Saves.Gameplay.DTOs.Level;
-using Module.Saves.Structs;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics;
@@ -83,7 +82,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 					BlocksMatrix = GetBlocksMatrix(),
 					BonusesMatrix = levelInfo.BonusesMatrix,
 				},
-				//blockHealth = GetBlocksHealth()
+				BlocksData = GetBlocksData()
 			};
 		}
 
@@ -91,19 +90,31 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 		{
 			levelInfo = levelState.levelInfo;
 			await levelGenerator.GenerateLevelAsync(levelInfo);
+			foreach (var blockData in levelState.BlocksData)
+			{
+				Vector2Int key = new(blockData.Position.X, blockData.Position.Y);
+				if (levelGenerator.Blocks[key].Config.TryGetComponent(out HealthComponent healthComponent))
+				{
+					healthComponent.SetHealth(blockData.Health);
+				}
+			}
 		}
 
-		private Dictionary<JsonVector2, int> GetBlocksHealth()
+		private List<BlockData> GetBlocksData()
 		{
-			Dictionary<JsonVector2, int> blocksHealth = new();
+			List<BlockData> blocksData = new();
 			foreach (var key in levelGenerator.Blocks.Keys)
 			{
 				if (levelGenerator.Blocks[key].Config.TryGetComponent(out HealthComponent healthComponent))
 				{
-					blocksHealth.Add(new(key), healthComponent.Health);
+					blocksData.Add(new()
+					{
+						Position = new(key),
+						Health = healthComponent.Health
+					});
 				}
 			}
-			return blocksHealth;
+			return blocksData;
 		}
 
 		private int[,] GetBlocksMatrix()
