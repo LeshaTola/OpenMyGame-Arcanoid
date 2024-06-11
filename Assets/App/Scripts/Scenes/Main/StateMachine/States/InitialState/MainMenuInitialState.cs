@@ -1,4 +1,6 @@
-﻿using Features.Saves.Gameplay.Providers;
+﻿using Features.Energy.Providers;
+using Features.Routers;
+using Features.Saves.Gameplay.Providers;
 using Features.StateMachine.States;
 using Features.UI.SceneTransitions;
 using Scenes.Main.Feature.UI;
@@ -13,16 +15,22 @@ namespace Scenes.Main.StateMachine.States.Initial
 		private IRouterShowLanguages routerShowLanguages;
 		private MainMenuUI mainMenuUI;
 		private IGameplaySavesProvider gameplaySavesProvider;
+		private IEnergyProvider energyProvider;
+		private IRouterShowInfoPopup routerInfoPopup;
 
 		public MainMenuInitialState(ISceneTransition sceneTransition,
 							  MainMenuUI mainMenuUI,
 							  IRouterShowLanguages routerShowLanguages,
-							  IGameplaySavesProvider gameplaySavesProvider)
+							  IGameplaySavesProvider gameplaySavesProvider,
+							  IEnergyProvider energyProvider,
+							  IRouterShowInfoPopup routerInfoPopup)
 		{
 			this.sceneTransition = sceneTransition;
 			this.mainMenuUI = mainMenuUI;
 			this.routerShowLanguages = routerShowLanguages;
 			this.gameplaySavesProvider = gameplaySavesProvider;
+			this.energyProvider = energyProvider;
+			this.routerInfoPopup = routerInfoPopup;
 		}
 
 		public override void Enter()
@@ -55,9 +63,15 @@ namespace Scenes.Main.StateMachine.States.Initial
 
 		private void OnContinueButtonClicked()
 		{
+			if (energyProvider.CurrentEnergy < energyProvider.Config.PlayCost)
+			{
+				routerInfoPopup.ShowInfo("not enough energy");
+				return;
+			}
+			energyProvider.ReduceEnergy(energyProvider.Config.PlayCost);
+
 			gameplaySavesProvider.IsContinue = true;
 			StateMachine.ChangeState<LoadGameplaySceneState>();
 		}
-
 	}
 }
