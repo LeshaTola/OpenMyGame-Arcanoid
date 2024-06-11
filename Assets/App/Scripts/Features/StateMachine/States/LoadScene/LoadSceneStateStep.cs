@@ -24,15 +24,25 @@ namespace Features.StateMachine.States
 		{
 			base.Enter();
 
-			DOTween.KillAll();
 			if (sceneTransition != null)
 			{
-				sceneTransition.PlayOn(() => sceneController.LoadScene(scene));
+				sceneTransition.PlayOn(() =>
+					{
+						sceneController.LoadScene(scene);
+						CleanupAnimations();
+					}
+				);
 			}
 			else
 			{
 				sceneController.LoadScene(scene);
+				CleanupAnimations();
 			}
+		}
+
+		private void CleanupAnimations()
+		{
+			DOTween.KillAll();
 		}
 	}
 }
