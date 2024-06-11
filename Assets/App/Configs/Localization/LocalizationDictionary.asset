@@ -15,9 +15,7 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 4900000, guid: d944f6dc065c6a849a9bb30fe1dd5478, type: 3}
-    - {fileID: 4900000, guid: fd1105a6b37f6f8449a4994892131b70, type: 3}
+    ReferencedUnityObjects: []
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -25,8 +23,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: languages
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.TextAsset,
-        UnityEngine.CoreModule]], mscorlib
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String,
+        mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
@@ -44,8 +42,8 @@ MonoBehaviour:
       Entry: 1
       Data: ru
     - Name: $v
-      Entry: 10
-      Data: 0
+      Entry: 1
+      Data: Localization/ru_Localization
     - Name: 
       Entry: 8
       Data: 
@@ -56,8 +54,8 @@ MonoBehaviour:
       Entry: 1
       Data: en
     - Name: $v
-      Entry: 10
-      Data: 1
+      Entry: 1
+      Data: Localization/en_Localization
     - Name: 
       Entry: 8
       Data: 

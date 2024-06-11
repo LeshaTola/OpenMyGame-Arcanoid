@@ -32,12 +32,7 @@ namespace Module.Localization.Localizers
 
 		public void Translate()
 		{
-			if (!localizationSystem.LanguageDictionary.ContainsKey(key))
-			{
-				text.text = key;
-				return;
-			}
-			string newText = localizationSystem.LanguageDictionary[key];
+			string newText = localizationSystem.Translate(key);
 			text.text = newText;
 		}
 

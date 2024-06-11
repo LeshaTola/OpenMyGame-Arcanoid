@@ -1,5 +1,6 @@
 ﻿using Features.Energy.Configs;
 using Features.Energy.Providers;
+using Features.FileProvider;
 using Features.Popups.Languages;
 using Features.ProjectInitServices;
 using Module.Localization;
@@ -37,6 +38,7 @@ namespace Features.Bootstrap
 			BindEnergyProvider();
 
 			BindParser();
+			BindFileProvider();
 			BindLocalizationSystem();
 
 			BindInitProjectService();
@@ -44,6 +46,11 @@ namespace Features.Bootstrap
 
 			BindPackProvider();
 			BindButtonsFactory();
+		}
+
+		private void BindFileProvider()
+		{
+			Container.Bind<IFileProvider>().To<ResourcesFileProvider>().AsSingle();
 		}
 
 		private void BindProjectTimeProvider()

@@ -1,5 +1,4 @@
-﻿using Features.FileProvider;
-using Module.TimeProvider;
+﻿using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Blocks.Animation;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
@@ -36,8 +35,6 @@ namespace Scenes.Gameplay.Bootstrap
 			BindHealthController();
 			BindBoundaryValidator();
 
-			BindFileProvider();
-
 			BindTimeProvider();
 			BindInput();
 		}
@@ -65,11 +62,6 @@ namespace Scenes.Gameplay.Bootstrap
 				.To<ProgressController>()
 				.AsSingle()
 				.WithArguments(winProgress);
-		}
-
-		private void BindFileProvider()
-		{
-			Container.Bind<IFileProvider>().To<ResourcesFileProvider>().AsSingle();
 		}
 
 		private void BindInput()

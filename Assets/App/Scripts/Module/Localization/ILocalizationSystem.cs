@@ -5,14 +5,12 @@ namespace Module.Localization
 {
 	public interface ILocalizationSystem
 	{
-		string Language { get; }
-
-		Dictionary<string, string> LanguageDictionary { get; }
-
 		event Action OnLanguageChanged;
 
-		void ChangeLanguage(string languageKey);
+		string Language { get; }
 
+		void ChangeLanguage(string languageKey);
 		IEnumerable<string> GetLanguages();
+		string Translate(string key);
 	}
 }
