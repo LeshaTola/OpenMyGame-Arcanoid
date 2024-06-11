@@ -93,7 +93,7 @@ MonoBehaviour:
       Entry: 7
       Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
         Assembly-CSharp
-    - Name: health
+    - Name: maxHealth
       Entry: 3
       Data: 1
     - Name: cracksDictionary
