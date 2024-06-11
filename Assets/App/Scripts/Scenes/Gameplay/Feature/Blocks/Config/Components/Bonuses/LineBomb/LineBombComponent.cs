@@ -109,7 +109,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 
 		private void SpawnExplosion(Block blockToDamage)
 		{
-			var newExplosion = blockToDamage.ExplosionsPool.Get();
+			var newExplosion = blockToDamage.KeyPool.Get("explosion");
 			newExplosion.transform.position = blockToDamage.transform.position;
 			newExplosion.Particle.Play();
 		}

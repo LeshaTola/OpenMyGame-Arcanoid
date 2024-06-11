@@ -1,5 +1,4 @@
 ﻿using Features.StateMachine.Factories;
-using Features.StateMachine.States;
 using Zenject;
 
 namespace Features.Bootstrap
@@ -10,13 +9,6 @@ namespace Features.Bootstrap
 		{
 			Container.Bind<IStatesFactory>().To<StatesFactory>().AsSingle();
 			Container.Bind<IStateStepsFactory>().To<StateStepsFactory>().AsSingle();
-
-			BindGlobalInitState();
-		}
-
-		private void BindGlobalInitState()
-		{
-			Container.Bind<GlobalInitialState>().AsSingle();
 		}
 	}
 }
