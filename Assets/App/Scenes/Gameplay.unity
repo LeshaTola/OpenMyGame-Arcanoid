@@ -3449,12 +3449,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.85
+  m_fontSize: 30.75
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30.75
   m_fontStyle: 16
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -3465,7 +3465,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -3506,10 +3506,10 @@ RectTransform:
   m_Father: {fileID: 2586215250580297049}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 22.75, y: -3}
-  m_SizeDelta: {x: 109, y: 40}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 31.4, y: -2.5}
+  m_SizeDelta: {x: -62.801, y: -5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2586215248954793388
 MonoBehaviour:
@@ -3688,11 +3688,11 @@ RectTransform:
   m_Father: {fileID: 811101922}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.087697916, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -54.999695, y: 0}
-  m_SizeDelta: {x: -97, y: 86}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -27.499863, y: 0}
+  m_SizeDelta: {x: -54.999695, y: 86}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2586215250580297050
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3738,6 +3738,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 811101922}
     m_Modifications:
+    - target: {fileID: 6002947602681780704, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002947602681780704, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002947602681780705, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002947602681780705, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002947602681780705, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002947602681780705, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002947602681780705, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002947602681780705, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6002947602681780705, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6002947603015447256, guid: caf0935da66966945a089ad50d9fd58c, type: 3}
       propertyPath: m_Name
       value: HealthBarUI
