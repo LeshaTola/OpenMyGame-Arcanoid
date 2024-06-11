@@ -1,5 +1,6 @@
 ﻿using Features.Energy.Providers;
 using Features.Popups.WinPopup;
+using Features.Popups.WinPopup.Animator;
 using Features.Popups.WinPopup.ViewModels;
 using Module.Localization;
 using Module.PopupLogic.General.Controller;
@@ -14,19 +15,22 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 		private ILocalizationSystem localizationSystem;
 		private IEnergyProvider energyProvider;
 		private IPackProvider packProvider;
+		private IWinPopupAnimator winPopupAnimator;
 		private LoadNextLevelCommand loadNextLevelCommand;
 
 		public RouterShowWin(IPopupController popupController,
 					   LoadNextLevelCommand loadNextLevelCommand,
 					   ILocalizationSystem localizationSystem,
 					   IEnergyProvider energyProvider,
-					   IPackProvider packProvider)
+					   IPackProvider packProvider,
+					   IWinPopupAnimator winPopupAnimator)
 		{
 			this.popupController = popupController;
 			this.loadNextLevelCommand = loadNextLevelCommand;
 			this.localizationSystem = localizationSystem;
 			this.energyProvider = energyProvider;
 			this.packProvider = packProvider;
+			this.winPopupAnimator = winPopupAnimator;
 		}
 
 		public async void ShowWin()
@@ -38,7 +42,8 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 										  packProvider.CurrentPack,
 										  packProvider.SavedPackData,
 										  localizationSystem,
-										  energyProvider);
+										  energyProvider,
+										  winPopupAnimator);
 			popup.Setup(popupViewModel);
 			await popup.Show();
 		}

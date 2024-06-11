@@ -1,14 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using Features.Energy.Controllers;
 using Features.Energy.UI;
 using Features.Popups.Languages;
+using Features.Popups.WinPopup.Animator;
 using Features.Popups.WinPopup.ViewModels;
-using Features.Saves;
 using Features.UI.Animations.SpinAnimation;
 using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
-using Scenes.PackSelection.Feature.Packs.Configs;
 using Sirenix.OdinInspector;
 using TMPro;
 using TNRD;
@@ -72,119 +70,14 @@ namespace Features.Popups.WinPopup
 			Controller.AddActivePopup(this);
 
 			await popupAnimation.Value.Show();
-			await AnimateUI();
+
+			WinAnimationData winAnimationData = GetWinAnimationData();
+
+			await viewModel.WinPopupAnimator.AnimateUI(winAnimationData);
+			energyController = new EnergyController(energySlider.Value, viewModel.EnergyProvider);
+
 			Activate();
 		}
-
-		public async UniTask AnimateUI()
-		{
-			Sequence sequence = DOTween.Sequence();
-
-			SetupHeaderAnimation(sequence);
-			SetupSliderAnimation(sequence);
-			SetupImageAnimation(viewModel.Pack, sequence);
-			SetupLevelAnimation(viewModel.Pack, viewModel.SavedPackData, sequence);
-			SetupButtonAnimation(sequence);
-
-			await sequence.AsyncWaitForCompletion();
-		}
-
-		#region SetupAnimation
-
-		private void SetStartEnergyValue()
-		{
-			energySlider.Value.UpdateUI(viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward, viewModel.EnergyProvider.Config.MaxEnergy);
-		}
-
-		private void SetupHeaderAnimation(Sequence sequence)
-		{
-			sequence.Append(header.transform.DOScale(Vector3.one, levelAnimationDuration).SetEase(Ease.OutBack));
-		}
-
-		private void SetupImageAnimation(Pack pack, Sequence sequence)
-		{
-			sequence.Append(packImageContainer
-				.DOScale(Vector3.one, imageAnimationDuration)
-				.SetEase(Ease.OutBack));
-
-			if (pack == null || packImage.sprite == pack.Sprite)
-			{
-				return;
-			}
-			Tween halfOfRotation = packImage.transform.DORotate(new Vector3(0, 90f, 0), imageAnimationDuration / 2);
-			halfOfRotation.onComplete += () => packImage.sprite = pack.Sprite;
-			Tween secondHalfOfRotation = packImage.transform.DORotate(new Vector3(0, 0, 0), imageAnimationDuration / 2);
-
-			secondHalfOfRotation.onComplete += () =>
-			{
-				packName.Key = pack.Name;
-				packName.Translate();
-			};
-
-			sequence.Append(halfOfRotation);
-			sequence.Append(secondHalfOfRotation);
-		}
-
-		private void SetupSliderAnimation(Sequence sequence)
-		{
-			int startValue = viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward;
-			var sliderAnimation =
-				DOVirtual.Int(
-					startValue,
-					viewModel.EnergyProvider.CurrentEnergy,
-					energyAnimationDuration,
-					value =>
-			{
-				energySlider.Value.UpdateUI(value, viewModel.EnergyProvider.Config.MaxEnergy);
-			});
-
-			sliderAnimation.onComplete += () =>
-			{
-				energyController = new EnergyController(energySlider.Value, viewModel.EnergyProvider);
-			};
-
-			sequence.Append(sliderAnimation);
-		}
-
-		private void SetupLevelAnimation(Pack pack, SavedPackData savedPackData, Sequence sequence)
-		{
-			sequence.Append(levelLabel
-				.DOLocalMove(
-				new Vector2(
-					levelLabel.localPosition.x,
-					levelLabel.localPosition.y - levelLabel.rect.height),
-				imageAnimationDuration).SetEase(Ease.OutBounce));
-			if (pack == null || savedPackData == null)
-			{
-				return;
-			}
-			SetupMaxLevelAnimation(pack, sequence);
-			SetupCurrentLevelAnimation(pack, savedPackData, sequence);
-		}
-
-		private void SetupCurrentLevelAnimation(Pack pack, SavedPackData savedPackData, Sequence sequence)
-		{
-			var levelAnimation = DOVirtual.Int(0, savedPackData.CurrentLevel, levelAnimationDuration, value =>
-			{
-				levelInfo.text = $"{value}/{pack.MaxLevel + 1}";
-			});
-			sequence.Append(levelAnimation);
-		}
-
-		private void SetupMaxLevelAnimation(Pack pack, Sequence sequence)
-		{
-			var maxLevelAnimation = DOVirtual.Int(0, pack.MaxLevel + 1, levelAnimationDuration, value =>
-			{
-				levelInfo.text = $"0/{value}";
-			});
-			sequence.Append(maxLevelAnimation);
-		}
-
-		private void SetupButtonAnimation(Sequence sequence)
-		{
-			sequence.Append(nextButton.transform.DOScale(Vector3.one, buttonAnimationDuration).SetEase(Ease.OutBack));
-		}
-		#endregion
 
 		private void Initialize(IWinPopupViewModel viewModel)
 		{
@@ -201,6 +94,11 @@ namespace Features.Popups.WinPopup
 		{
 			nextButton.onButtonClicked += viewModel.LoadNextLevelCommand.Execute;
 			nextButton.UpdateText(viewModel.LoadNextLevelCommand.Label);
+		}
+
+		private void SetStartEnergyValue()
+		{
+			energySlider.Value.UpdateUI(viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward, viewModel.EnergyProvider.Config.MaxEnergy);
 		}
 
 		private void Translate()
@@ -233,6 +131,38 @@ namespace Features.Popups.WinPopup
 			levelLabel.localPosition = new Vector2(
 				levelLabel.localPosition.x,
 				levelLabel.localPosition.y + levelLabel.rect.height);
+		}
+
+		private WinAnimationData GetWinAnimationData()
+		{
+			return new WinAnimationData()
+			{
+				buttonAnimationDuration = buttonAnimationDuration,
+				energyAnimationDuration = energyAnimationDuration,
+				imageAnimationDuration = imageAnimationDuration,
+				levelAnimationDuration = levelAnimationDuration,
+
+				EnergySlider = energySlider,
+				NextButton = nextButton,
+				Lines = lines,
+				PackImageContainer = packImageContainer,
+				PackImage = packImage,
+				Header = header,
+				PackPreNameText = packPreNameText,
+				PackName = packName,
+				LevelLabel = levelLabel,
+				LevelInfo = levelInfo,
+
+				targetEnergy = viewModel.EnergyProvider.CurrentEnergy,
+				startEnergy = viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward,
+				maxEnergy = viewModel.EnergyProvider.Config.MaxEnergy,
+
+				targetLevel = viewModel.SavedPackData.CurrentLevel,
+				maxLevel = viewModel.Pack.MaxLevel + 1,
+
+				targetPackName = viewModel.Pack.Name,
+				targetSprite = viewModel.Pack.Sprite,
+			};
 		}
 	}
 }

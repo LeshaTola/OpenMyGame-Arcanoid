@@ -9,6 +9,7 @@ using Scenes.Gameplay.Feature.LevelCreation.Services;
 using Scenes.Gameplay.Feature.Reset.Services;
 using Scenes.Gameplay.Feature.UI;
 using Scenes.PackSelection.Feature.Packs;
+using Scenes.PackSelection.Feature.Packs.Configs;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
@@ -58,6 +59,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			{
 				levelSavingService.LoadDataAsync();
 				gameplaySavesProvider.IsContinue = false;
+				SetupUi(packProvider.CurrentPack, packProvider.SavedPackData);
 				StateMachine.ChangeState<GameplayState>();
 				return;
 			}
@@ -71,13 +73,13 @@ namespace Scenes.Gameplay.StateMachine.States
 			resetService.Reset();
 			bonusServicesProvider.Cleanup();
 
-			SetupUi();
 			if (packProvider.CurrentPack == null || packProvider.SavedPackData == null)
 			{
 				await levelService.SetupDefaultLevelAsync();
 			}
 			else
 			{
+				SetupUi(packProvider.CurrentPack, packProvider.SavedPackData);
 				await levelService.SetupLevelFromPackAsync(packProvider.CurrentPack, packProvider.SavedPackData);
 			}
 
@@ -95,14 +97,8 @@ namespace Scenes.Gameplay.StateMachine.States
 			}
 		}
 
-		private void SetupUi()
+		private void SetupUi(Pack currentPack, SavedPackData savedPackData)
 		{
-			var currentPack = packProvider.CurrentPack;
-			SavedPackData savedPackData = packProvider.SavedPackData;
-			if (currentPack == null || savedPackData == null)
-			{
-				return;
-			}
 			packInfoUI.Init(currentPack.Sprite, savedPackData.CurrentLevel, currentPack.MaxLevel);
 		}
 	}

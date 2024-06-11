@@ -1,4 +1,5 @@
 ﻿using Features.Popups.Animations.Animator;
+using Features.Popups.WinPopup.Animator;
 using Module.PopupLogic.Configs;
 using Module.PopupLogic.General.Controller;
 using Module.PopupLogic.General.Providers;
@@ -34,6 +35,7 @@ namespace Scenes.Gameplay.Bootstrap
 		private void BindPopupAnimator()
 		{
 			Container.Bind<IPopupAnimator>().To<GeneralPopupAnimator>().AsTransient();
+			Container.Bind<IWinPopupAnimator>().To<WinPopupAnimator>().AsTransient();
 		}
 	}
 }
