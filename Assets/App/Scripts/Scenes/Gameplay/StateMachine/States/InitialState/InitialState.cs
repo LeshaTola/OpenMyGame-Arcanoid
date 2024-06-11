@@ -10,6 +10,7 @@ using Scenes.Gameplay.Feature.Reset.Services;
 using Scenes.Gameplay.Feature.UI;
 using Scenes.PackSelection.Feature.Packs;
 using Scenes.PackSelection.Feature.Packs.Configs;
+using System.Threading.Tasks;
 
 namespace Scenes.Gameplay.StateMachine.States
 {
@@ -53,25 +54,27 @@ namespace Scenes.Gameplay.StateMachine.States
 
 		public override void Enter()
 		{
-			PlaySceneTransition();
-
-			if (gameplaySavesProvider.IsContinue)
-			{
-				levelSavingService.LoadDataAsync();
-				gameplaySavesProvider.IsContinue = false;
-				SetupUi(packProvider.CurrentPack, packProvider.SavedPackData);
-				StateMachine.ChangeState<GameplayState>();
-				return;
-			}
-
 			base.Enter();
 			EnterAsync();
 		}
 
 		private async void EnterAsync()
 		{
+			PlaySceneTransition();
+
+			if (gameplaySavesProvider.IsContinue)
+			{
+				await LoadLevelToContinue();
+				return;
+			}
+			await LoadNormalLevel();
+		}
+
+		private async Task LoadNormalLevel()
+		{
 			resetService.Reset();
 			bonusServicesProvider.Cleanup();
+			healthController.ResetHealth();
 
 			if (packProvider.CurrentPack == null || packProvider.SavedPackData == null)
 			{
@@ -83,9 +86,15 @@ namespace Scenes.Gameplay.StateMachine.States
 				await levelService.SetupLevelFromPackAsync(packProvider.CurrentPack, packProvider.SavedPackData);
 			}
 
-			healthController.ResetHealth();
-
 			StateMachine.ChangeState<ResetState>();
+		}
+
+		private async Task LoadLevelToContinue()
+		{
+			await levelSavingService.LoadDataAsync();
+			gameplaySavesProvider.IsContinue = false;
+			SetupUi(packProvider.CurrentPack, packProvider.SavedPackData);
+			StateMachine.ChangeState<GameplayState>();
 		}
 
 		private void PlaySceneTransition()

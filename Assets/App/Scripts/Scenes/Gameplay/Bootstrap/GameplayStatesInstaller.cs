@@ -19,7 +19,6 @@ namespace Scenes.Gameplay.Bootstrap
 			StatesFactoriesInstaller.Install(Container);
 
 			BindStateMachine();
-			BindGlobalInitState();
 			BindResetState();
 			BindGameplayState();
 			BindPauseState();
@@ -64,11 +63,6 @@ namespace Scenes.Gameplay.Bootstrap
 			Container.Bind<LoadSceneState>().AsSingle();
 			Container.Bind<LoadSceneStateStep>().AsSingle();
 			Container.Bind<CleanupLoadSceneStateStep>().AsSingle();
-		}
-
-		private void BindGlobalInitState()
-		{
-			Container.Bind<GlobalInitialState>().AsSingle();
 		}
 
 		private void BindStateMachine()

@@ -15,7 +15,6 @@ namespace Scenes.PackSelection.Bootstrap
 			StatesFactoriesInstaller.Install(Container);
 
 			BindStateMachine();
-			BindGlobalInitState();
 			BindInitialState();
 			BindLoadNextState();
 		}
@@ -30,11 +29,6 @@ namespace Scenes.PackSelection.Bootstrap
 			Container.Bind<LoadSceneState>().AsSingle();
 			Container.Bind<LoadMainMenuState>().AsSingle();
 			Container.Bind<LoadSceneStateStep>().AsTransient();
-		}
-
-		private void BindGlobalInitState()
-		{
-			Container.Bind<GlobalInitialState>().AsSingle();
 		}
 
 		private void BindStateMachine()

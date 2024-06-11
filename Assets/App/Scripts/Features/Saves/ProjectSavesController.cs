@@ -20,9 +20,21 @@ namespace Features.Saves
 			this.packProvider = packProvider;
 			this.gameplaySavesProvider = gameplaySavesProvider;
 
-			projectConditionProvider.OnApplicationStart += OnApplicationStart;
+			projectConditionProvider.OnApplicationFocused += OnApplicationFocused; ;
 			projectConditionProvider.OnApplicationQuitted += OnApplicationQuitted;
 			projectConditionProvider.OnApplicationPaused += OnApplicationPaused;
+		}
+
+		private void OnApplicationFocused(bool focus)
+		{
+			if (focus)
+			{
+				energyProvider.LoadData();
+			}
+			else
+			{
+				SaveAllData();
+			}
 		}
 
 		public void SaveAllData()
@@ -32,16 +44,10 @@ namespace Features.Saves
 			gameplaySavesProvider.SaveData();
 		}
 
-		private void LoadAllData()
+		public void LoadAllData()
 		{
 			energyProvider.LoadData();
 			packProvider.LoadData();
-		}
-
-		private void OnApplicationStart()
-		{
-			LoadAllData();
-			energyProvider.StartEnergyRecoveringAsync();
 		}
 
 		private void OnApplicationPaused(bool pause)

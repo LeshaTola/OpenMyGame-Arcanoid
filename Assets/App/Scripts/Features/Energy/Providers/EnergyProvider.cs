@@ -49,7 +49,11 @@ namespace Features.Energy.Providers
 					OnEnergyTimerChanged?.Invoke();
 				}
 				timer = config.RecoveryTime;
-				AddEnergy(config.RecoveryEnergy);
+
+				if (CurrentEnergy < config.MaxEnergy)
+				{
+					AddEnergy(config.RecoveryEnergy);
+				}
 			}
 		}
 
@@ -104,7 +108,7 @@ namespace Features.Energy.Providers
 			int totalEnergy = energyData.Energy;
 			int additionalEnergy = GetAdditionalEnergyBetweenSessions(energyData, totalEnergy);
 			totalEnergy += additionalEnergy;
-
+			CurrentEnergy = 0;
 			AddEnergy(totalEnergy);
 		}
 

@@ -18,7 +18,6 @@ namespace Scenes.Main.Bootstrap
 			MainMenuRoutersInstaller.Install(Container);
 
 			BindStateMachine();
-			BindGlobalInitState();
 			BindInitialState();
 			BindLoadNextState();
 		}
@@ -33,11 +32,6 @@ namespace Scenes.Main.Bootstrap
 			Container.Bind<LoadGameplaySceneState>().AsSingle();
 			Container.Bind<LoadSceneState>().AsSingle();
 			Container.Bind<LoadSceneStateStep>().AsTransient();
-		}
-
-		private void BindGlobalInitState()
-		{
-			Container.Bind<GlobalInitialState>().AsSingle();
 		}
 
 		private void BindStateMachine()
