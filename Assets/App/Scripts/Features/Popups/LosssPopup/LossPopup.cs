@@ -1,7 +1,9 @@
-﻿using Features.Popups.Languages;
+﻿using Cysharp.Threading.Tasks;
+using Features.Popups.Languages;
 using Features.Popups.Loss.ViewModels;
 using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Features.Popups.Loss
@@ -12,7 +14,8 @@ namespace Features.Popups.Loss
 
 		[SerializeField] private PopupButton restartButton;
 		[SerializeField] private PopupButton backButton;
-		[SerializeField] private PopupButton continueButton;
+		[SerializeField] private PopupButton addLifeButton;
+		[SerializeField] private float animationDuration = 0.15f;
 
 		private ILossPopupViewModel viewModel;
 
@@ -22,6 +25,28 @@ namespace Features.Popups.Loss
 			Initialize(viewModel);
 			SetupLogic(viewModel);
 			Translate();
+
+			viewModel.PopupAnimator.Setup(header,
+				new List<PopupButton>
+					{
+						restartButton,
+						backButton,
+						addLifeButton,
+					},
+				animationDuration);
+			viewModel.PopupAnimator.ResetAnimation();
+		}
+
+		public async override UniTask Show()
+		{
+			await base.Show();
+			await viewModel.PopupAnimator.ShowAnimation();
+		}
+
+		public async override UniTask Hide()
+		{
+			await viewModel.PopupAnimator.HideAnimation();
+			await base.Hide();
 		}
 
 		private void SetupLogic(ILossPopupViewModel viewModel)
@@ -29,8 +54,8 @@ namespace Features.Popups.Loss
 			restartButton.onButtonClicked += viewModel.RestartCommand.Execute;
 			restartButton.UpdateText(viewModel.RestartCommand.Label);
 
-			continueButton.onButtonClicked += viewModel.ContinueCommand.Execute;
-			continueButton.UpdateText(viewModel.ContinueCommand.Label);
+			addLifeButton.onButtonClicked += viewModel.ContinueCommand.Execute;
+			addLifeButton.UpdateText(viewModel.ContinueCommand.Label);
 
 			backButton.onButtonClicked += viewModel.BackCommand.Execute;
 			backButton.UpdateText(viewModel.BackCommand.Label);
@@ -41,7 +66,7 @@ namespace Features.Popups.Loss
 			header.Translate();
 
 			restartButton.Translate();
-			continueButton.Translate();
+			addLifeButton.Translate();
 			backButton.Translate();
 		}
 
@@ -51,7 +76,7 @@ namespace Features.Popups.Loss
 			header.Init(viewModel.LocalizationSystem);
 
 			restartButton.Init(viewModel.LocalizationSystem);
-			continueButton.Init(viewModel.LocalizationSystem);
+			addLifeButton.Init(viewModel.LocalizationSystem);
 			backButton.Init(viewModel.LocalizationSystem);
 		}
 
@@ -60,7 +85,7 @@ namespace Features.Popups.Loss
 			if (viewModel != null)
 			{
 				restartButton.onButtonClicked -= viewModel.RestartCommand.Execute;
-				continueButton.onButtonClicked -= viewModel.ContinueCommand.Execute;
+				addLifeButton.onButtonClicked -= viewModel.ContinueCommand.Execute;
 				backButton.onButtonClicked -= viewModel.BackCommand.Execute;
 			}
 		}

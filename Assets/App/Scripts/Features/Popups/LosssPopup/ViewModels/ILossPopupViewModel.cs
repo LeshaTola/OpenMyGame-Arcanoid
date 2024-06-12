@@ -1,4 +1,5 @@
-﻿using Module.Commands;
+﻿using Features.Popups.Animations.Animator;
+using Module.Commands;
 using Module.Localization;
 
 namespace Features.Popups.Loss.ViewModels
@@ -8,6 +9,8 @@ namespace Features.Popups.Loss.ViewModels
 		public ILabeledCommand RestartCommand { get; }
 		public ILabeledCommand ContinueCommand { get; }
 		public ILabeledCommand BackCommand { get; }
-		ILocalizationSystem LocalizationSystem { get; }
+		public ILocalizationSystem LocalizationSystem { get; }
+		public IPopupAnimator PopupAnimator { get; }
+
 	}
 }

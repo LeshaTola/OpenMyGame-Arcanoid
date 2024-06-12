@@ -11,7 +11,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Controllers
 		private IPool<BonusTimerUI> pool;
 
 		public BonusesController(IBonusesUI bonusesUI,
-						   IBonusService bonusService,
+						   IBonusCommandService bonusService,
 						   IPool<BonusTimerUI> pool)
 		{
 			this.bonusesUI = bonusesUI;

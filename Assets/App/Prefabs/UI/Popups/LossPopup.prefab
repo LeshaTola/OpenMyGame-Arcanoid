@@ -220,7 +220,8 @@ MonoBehaviour:
   header: {fileID: 1633097240522702342}
   restartButton: {fileID: 5973487851597815341}
   backButton: {fileID: 5079113044644693395}
-  continueButton: {fileID: 6450090877518711337}
+  addLifeButton: {fileID: 6450090877518711337}
+  animationDuration: 0.15
   references:
     version: 2
     RefIds:
@@ -238,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6320ecc365bb0424eb15eed72dc4e808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationTime: 0.5
+  animationTime: 0.3
 --- !u!223 &7419400496068126763
 Canvas:
   m_ObjectHideFlags: 0
@@ -572,7 +573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7009702589508987233, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_text
-      value: continue
+      value: +1 Life
       objectReference: {fileID: 0}
     - target: {fileID: 7009702589508987239, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Layer
@@ -584,7 +585,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 2a6407d4e689be64881d4c214c557b84, type: 3}
     - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Name
-      value: Continue
+      value: +1 Life
       objectReference: {fileID: 0}
     - target: {fileID: 7009702590521921605, guid: e4db1f5902713e24aad86666950c7721, type: 3}
       propertyPath: m_Layer

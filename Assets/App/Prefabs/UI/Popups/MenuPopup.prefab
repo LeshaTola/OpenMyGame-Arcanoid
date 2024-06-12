@@ -145,6 +145,7 @@ MonoBehaviour:
   restartButton: {fileID: 3355527572035590827}
   backButton: {fileID: 2217043810424779060}
   resumeButton: {fileID: 3273433991828931525}
+  animationDuration: 0.15
   references:
     version: 2
     RefIds:
@@ -162,7 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6320ecc365bb0424eb15eed72dc4e808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationTime: 0.5
+  animationTime: 0.3
 --- !u!223 &8661108109095142355
 Canvas:
   m_ObjectHideFlags: 0

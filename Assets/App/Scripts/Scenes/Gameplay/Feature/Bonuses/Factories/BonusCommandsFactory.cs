@@ -20,8 +20,9 @@ namespace Scenes.Gameplay.Feature.Bonuses.Factories
 		{
 			var originalBonus = bonusesDatabase.Bonuses[bonusId];
 			Type bonusType = originalBonus.GetType();
-			var bonusCommand = (IBonusCommand)diContainer.Instantiate(bonusType);
+			IBonusCommand bonusCommand = (IBonusCommand)diContainer.Instantiate(bonusType);
 			bonusCommand.Clone(originalBonus);
+			bonusCommand.Init(bonusId);
 			return bonusCommand;
 		}
 	}

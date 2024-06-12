@@ -1,4 +1,5 @@
-﻿using Features.Popups.Menu;
+﻿using Features.Popups.Animations.Animator;
+using Features.Popups.Menu;
 using Features.Popups.Menu.ViewModels;
 using Module.Localization;
 using Module.PopupLogic.General.Controller;
@@ -10,31 +11,38 @@ namespace Scenes.Gameplay.StateMachine.States.Win.Routers
 	{
 		private IPopupController popupController;
 		private ILocalizationSystem localizationSystem;
+		private IPopupAnimator popupAnimator;
 
 		private RestartCommand restartCommand;
 		private BackCommand backCommand;
 		private ResumeCommand resumeCommand;
 
-
 		public RouterShowMenu(IPopupController popupController,
 						RestartCommand restartCommand,
 						BackCommand backCommand,
 						ResumeCommand resumeCommand,
-						ILocalizationSystem localizationSystem)
+						ILocalizationSystem localizationSystem,
+						IPopupAnimator popupAnimator)
 		{
 			this.popupController = popupController;
+			this.localizationSystem = localizationSystem;
+			this.popupAnimator = popupAnimator;
+
 			this.restartCommand = restartCommand;
 			this.backCommand = backCommand;
 			this.resumeCommand = resumeCommand;
-			this.localizationSystem = localizationSystem;
 		}
 
-		public void ShowMenu()
+		public async void ShowMenu()
 		{
 			MenuPopup popup = popupController.GetPopup<MenuPopup>();
-			MenuPopupViewModel popupViewModel = new(restartCommand, backCommand, resumeCommand, localizationSystem);
+			MenuPopupViewModel popupViewModel = new(restartCommand,
+										   backCommand,
+										   resumeCommand,
+										   localizationSystem,
+										   popupAnimator);
 			popup.Setup(popupViewModel);
-			popup.Show();
+			await popup.Show();
 		}
 	}
 }

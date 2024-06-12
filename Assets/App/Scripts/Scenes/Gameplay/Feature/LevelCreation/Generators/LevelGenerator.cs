@@ -6,7 +6,6 @@ using Scenes.Gameplay.Feature.Blocks.Config.Components.Score;
 using Scenes.Gameplay.Feature.Bonuses.Configs;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
-using Scenes.Gameplay.Feature.LevelCreation.Providers.Level;
 using Scenes.Gameplay.Feature.Progress;
 using System;
 using System.Collections.Generic;
@@ -26,39 +25,37 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private IProgressController progressController;
 		private IFieldSizeProvider fieldSizeProvider;
 		private IBlockFactory blockFactory;
-		private ILevelProvider levelProvider;
 
 		private Dictionary<Vector2Int, Block> blocks = new();
 		private float animationTime;
 		private float blockWidth;
 
+		public Dictionary<Vector2Int, Block> Blocks { get => blocks; }
+
 		public LevelGenerator(IProgressController progressController,
-						IFieldSizeProvider fieldController,
+						IFieldSizeProvider fieldSizeProvider,
 						IBlockFactory blockFactory,
-						ILevelProvider levelProvider,
 						LevelConfig levelConfig,
 						BonusesDatabase bonusesDatabase)
 		{
 			this.progressController = progressController;
-			this.fieldSizeProvider = fieldController;
+			this.fieldSizeProvider = fieldSizeProvider;
 			this.blockFactory = blockFactory;
 			this.levelConfig = levelConfig;
 			this.bonusesDatabase = bonusesDatabase;
-			this.levelProvider = levelProvider;
 		}
 
 		public async UniTask GenerateLevelAsync(LevelInfo levelInfo)
 		{
+			progressController.ProcessProgress();
+
 			if (blocks.Count > 0)
 			{
 				await DestroyLevelAsync();
 			}
 
-			GameField gameField = fieldSizeProvider.GetGameField();
-			blockWidth = GetBlockWidth(levelInfo, gameField);
-
-			int blocksCount = levelInfo.BlocksMatrix.Cast<int>().Count(x => x != -1);
-			animationTime = levelConfig.BuildingTime / blocksCount;
+			blockWidth = GetBlockWidth(levelInfo);
+			SetAnimationTime(levelInfo);
 
 			for (int i = 0; i < levelInfo.Height; i++)
 			{
@@ -81,7 +78,12 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			}
 
 			progressController.Init(new List<Block>(blocks.Values));
-			levelProvider.Init(blocks);
+		}
+
+		private void SetAnimationTime(LevelInfo levelInfo)
+		{
+			int blocksCount = levelInfo.BlocksMatrix.Cast<int>().Count(x => x != -1);
+			animationTime = levelConfig.BuildingTime / blocksCount;
 		}
 
 		private void AddBonusComponent(LevelInfo levelInfo, int i, int j, Block block)
@@ -168,9 +170,9 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			return new Vector2(horizontalOffset, verticalOffset);
 		}
 
-		private float GetBlockWidth(LevelInfo levelInfo, GameField gameField)
+		private float GetBlockWidth(LevelInfo levelInfo)
 		{
-			return (gameField.Width - (levelInfo.Width - 1) * levelConfig.Spacing) / levelInfo.Width;
+			return (fieldSizeProvider.GameField.Width - (levelInfo.Width - 1) * levelConfig.Spacing) / levelInfo.Width;
 		}
 
 		private Vector2 GetTopPosition(Block block, Vector2 position)

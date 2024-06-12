@@ -1,9 +1,11 @@
-﻿using Features.Saves.Localization;
+﻿using Features.FileProvider;
+using Features.Saves.Localization;
 using Module.Localization.Configs;
 using Module.Localization.Parsers;
 using Module.Saves;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Module.Localization
 {
@@ -14,6 +16,7 @@ namespace Module.Localization
 		private LocalizationDictionary localizationDictionary;
 		private string language;
 		private IParser parser;
+		private IFileProvider fileProvider;
 		private IDataProvider<LocalizationData> dataProvider;
 
 		private Dictionary<string, string> languageDictionary = new();
@@ -21,11 +24,13 @@ namespace Module.Localization
 		public LocalizationSystem(LocalizationDictionary localizationDictionary,
 							string language,
 							IParser parser,
+							IFileProvider fileProvider,
 							IDataProvider<LocalizationData> dataProvider)
 		{
 			this.localizationDictionary = localizationDictionary;
 			this.language = language;
 			this.parser = parser;
+			this.fileProvider = fileProvider;
 			this.dataProvider = dataProvider;
 
 			languageDictionary = new();
@@ -34,7 +39,6 @@ namespace Module.Localization
 			ChangeLanguage(this.language);
 		}
 		public string Language { get => language; }
-		public Dictionary<string, string> LanguageDictionary { get => languageDictionary; }
 
 		public void ChangeLanguage(string languageKey)
 		{
@@ -44,7 +48,8 @@ namespace Module.Localization
 			}
 
 			language = languageKey;
-			languageDictionary = parser.Parse(localizationDictionary.Languages[language].text);
+			TextAsset localizationFile = fileProvider.GetTextAsset(localizationDictionary.Languages[language]);
+			languageDictionary = parser.Parse(localizationFile.text);
 			OnLanguageChanged?.Invoke();
 			SaveLocalization(languageKey);
 		}
@@ -73,6 +78,15 @@ namespace Module.Localization
 			{
 				LanguageKey = languageKey,
 			});
+		}
+
+		public string Translate(string key)
+		{
+			if (!languageDictionary.ContainsKey(key))
+			{
+				return key;
+			}
+			return languageDictionary[key];
 		}
 	}
 }

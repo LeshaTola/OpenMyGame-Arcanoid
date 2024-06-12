@@ -5,13 +5,14 @@ namespace Features.ProjectCondition.Providers
 {
 	public class ProjectConditionProvider : MonoBehaviour, IProjectConditionProvider
 	{
-		public event Action OnApplicationStart;
+		public event Action<bool> OnApplicationFocused;
 		public event Action<bool> OnApplicationPaused;
 		public event Action OnApplicationQuitted;
 
-		private void Start()
+
+		private void OnApplicationFocus(bool focus)
 		{
-			OnApplicationStart?.Invoke();
+			OnApplicationFocused?.Invoke(focus);
 		}
 
 		private void OnApplicationPause(bool pause)

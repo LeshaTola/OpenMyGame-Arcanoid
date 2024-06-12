@@ -23,8 +23,13 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers
 			}
 		}
 
-		public void CleanUp()
+		public void Cleanup()
 		{
+			if (levelMechanicsList == null || levelMechanicsList.Count <= 0)
+			{
+				return;
+			}
+
 			foreach (var levelMechanics in levelMechanicsList)
 			{
 				levelMechanics.StopMechanics();

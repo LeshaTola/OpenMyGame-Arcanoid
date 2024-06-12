@@ -1,35 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Module.Localization.Parsers
 {
 	public class CSVParser : IParser
 	{
 		private char lineSeparator = '\n';
-		private string surround = "\"";
-		private string fieldSeparator = "\",\"";
+
 
 		public Dictionary<string, string> Parse(string localizationFile)
 		{
-
 			string[] lines = localizationFile.Split(lineSeparator);
-			string[] headers = lines[0].Split(fieldSeparator, StringSplitOptions.None);
 
 			Dictionary<string, string> parsedLanguage = GetDictionary(lines);
-
 			return parsedLanguage;
 		}
 
 		private Dictionary<string, string> GetDictionary(string[] lines)
 		{
-			//Regex regex = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+			Regex regex = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
 
 			Dictionary<string, string> parsedLanguage = new();
 			for (int i = 1; i < lines.Length; i++)
 			{
 				string line = lines[i];
 
-				string[] fields = line.Split(fieldSeparator);
+				string[] fields = regex.Split(line);
 				for (int j = 0; j < fields.Length; j++)
 				{
 					fields[j] = removeQuotes(fields[j]);
@@ -47,9 +43,13 @@ namespace Module.Localization.Parsers
 			return parsedLanguage;
 		}
 
-		string removeQuotes(string s)
+		string removeQuotes(string field)
 		{
-			return s.Replace(surround, "");
+
+			field = field.Replace("\r", "");
+			field = field.Substring(1, field.Length - 2);
+			field = field.Replace("\"\"", "\"");
+			return field;
 		}
 	}
 }

@@ -1,9 +1,10 @@
-﻿using Assets.App.Scripts.Features.Saves.PlayerProgress.Controllers;
+﻿using Features.Energy.Saves;
+using Features.Energy.Saves.Keys;
 using Features.ProjectCondition.Providers;
 using Features.Saves;
-using Features.Saves.Energy;
-using Features.Saves.Energy.Controllers;
-using Features.Saves.Energy.Keys;
+using Features.Saves.Gameplay;
+using Features.Saves.Gameplay.Keys;
+using Features.Saves.Gameplay.Providers;
 using Features.Saves.Keys;
 using Features.Saves.Localization;
 using Features.Saves.Localization.Keys;
@@ -24,12 +25,19 @@ namespace Features.Bootstrap
 			BindPlayerProgressDataProvider();
 			BindLocalizationDataProvider();
 			BindEnergyDataProvider();
-
-			Container.Bind<IEnergySavesController>().To<EnergySavesController>().AsSingle();
-			Container.Bind<IPlayerProgressSavesController>().To<PlayerProgressSavesController>().AsSingle();
+			BindGameplayDataProvider();
+			Container.Bind<IGameplaySavesProvider>().To<GameplaySavesProvider>().AsSingle();
 
 			Container.Bind<IProjectSavesController>().To<ProjectSavesController>().AsSingle().NonLazy();
 			Container.Bind<IProjectConditionProvider>().FromInstance(projectConditionProvider.Value).AsSingle();
+		}
+
+		private void BindGameplayDataProvider()
+		{
+			Container.Bind<IDataProvider<GameplayData>>()
+				.To<DataProvider<GameplayData>>()
+				.AsSingle()
+				.WithArguments(GameplayDataKey.KEY);
 		}
 
 		private void BindStorage()

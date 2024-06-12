@@ -1,50 +1,53 @@
-﻿using Assets.App.Scripts.Features.Saves.PlayerProgress.Controllers;
-using Features.Energy.Providers;
+﻿using Features.Energy.Providers;
 using Features.ProjectCondition.Providers;
-using Features.Saves.Energy.Controllers;
+using Features.Saves.Gameplay.Providers;
 using Scenes.PackSelection.Feature.Packs;
 
 namespace Features.Saves
 {
 	public class ProjectSavesController : IProjectSavesController
 	{
-		private IEnergySavesController energySavesController;
 		private IEnergyProvider energyProvider;
-
-		private IPlayerProgressSavesController playerProgressSavesController;
 		private IPackProvider packProvider;
+		private IGameplaySavesProvider gameplaySavesProvider;
 
 		public ProjectSavesController(IProjectConditionProvider projectConditionProvider,
-								IPlayerProgressSavesController playerProgressSavesController,
-								IEnergySavesController energySavesController,
 								IEnergyProvider energyProvider,
-								IPackProvider packProvider)
+								IPackProvider packProvider,
+								IGameplaySavesProvider gameplaySavesProvider)
 		{
-			this.playerProgressSavesController = playerProgressSavesController;
-			this.energySavesController = energySavesController;
 			this.energyProvider = energyProvider;
 			this.packProvider = packProvider;
+			this.gameplaySavesProvider = gameplaySavesProvider;
 
-			projectConditionProvider.OnApplicationStart += OnApplicationStart; ;
+			projectConditionProvider.OnApplicationFocused += OnApplicationFocused; ;
 			projectConditionProvider.OnApplicationQuitted += OnApplicationQuitted;
 			projectConditionProvider.OnApplicationPaused += OnApplicationPaused;
 		}
 
+		private void OnApplicationFocused(bool focus)
+		{
+			if (focus)
+			{
+				energyProvider.LoadData();
+			}
+			else
+			{
+				SaveAllData();
+			}
+		}
+
 		public void SaveAllData()
 		{
-			energySavesController.SaveEnergyData(energyProvider);
+			energyProvider.SaveData();
+			packProvider.SaveData();
+			gameplaySavesProvider.SaveData();
 		}
 
-		private void LoadAllData()
+		public void LoadAllData()
 		{
-			energySavesController.LoadEnergyData(energyProvider);
-			playerProgressSavesController.LoadPlayerProgress(packProvider);
-		}
-
-		private void OnApplicationStart()
-		{
-			LoadAllData();
-			energyProvider.StartEnergyRecoveringAsync(energyProvider.RemainingRecoveryTime);
+			energyProvider.LoadData();
+			packProvider.LoadData();
 		}
 
 		private void OnApplicationPaused(bool pause)

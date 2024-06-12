@@ -1,4 +1,5 @@
-﻿using Module.Commands;
+﻿using Features.Popups.Animations.Animator;
+using Module.Commands;
 using Module.Localization;
 
 namespace Features.Popups.Menu.ViewModels
@@ -8,12 +9,14 @@ namespace Features.Popups.Menu.ViewModels
 		public MenuPopupViewModel(ILabeledCommand restartCommand,
 							ILabeledCommand backCommand,
 							ILabeledCommand resumeCommand,
-							ILocalizationSystem localizationSystem)
+							ILocalizationSystem localizationSystem,
+							IPopupAnimator popupAnimator)
 		{
 			RestartCommand = restartCommand;
 			BackCommand = backCommand;
 			ResumeCommand = resumeCommand;
 			LocalizationSystem = localizationSystem;
+			PopupAnimator = popupAnimator;
 
 		}
 
@@ -21,5 +24,6 @@ namespace Features.Popups.Menu.ViewModels
 		public ILabeledCommand BackCommand { get; }
 		public ILabeledCommand ResumeCommand { get; }
 		public ILocalizationSystem LocalizationSystem { get; }
+		public IPopupAnimator PopupAnimator { get; }
 	}
 }

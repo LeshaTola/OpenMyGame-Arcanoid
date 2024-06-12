@@ -8,6 +8,8 @@ namespace Features.StateMachine.States
 		private Type nextState;
 		private IProjectInitService projectInitService;
 
+		private bool isValid = true;
+
 		public GlobalInitialState(IProjectInitService projectInitService)
 		{
 			this.projectInitService = projectInitService;
@@ -17,7 +19,13 @@ namespace Features.StateMachine.States
 
 		public override void Enter()
 		{
-			projectInitService.InitProject();
+			if (isValid)
+			{
+				projectInitService.InitProject();
+
+				isValid = false;
+			}
+
 			StateMachine.ChangeState(nextState);
 		}
 	}

@@ -17,7 +17,6 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 11400000, guid: 01e9ec3208433514c86f40327b57db26, type: 2}
-    - {fileID: 6293484886570509708, guid: 7fe4928e5bb102341b63eb575536ccb8, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -94,7 +93,7 @@ MonoBehaviour:
       Entry: 7
       Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
         Assembly-CSharp
-    - Name: health
+    - Name: maxHealth
       Entry: 3
       Data: 1
     - Name: cracksDictionary
@@ -109,61 +108,11 @@ MonoBehaviour:
       Data: 2
     - Name: 
       Entry: 7
-      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb.LineBombComponent,
-        Assembly-CSharp
-    - Name: pauseBetweenExplosions
-      Entry: 4
-      Data: 0.2
-    - Name: steps
-      Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[UnityEngine.Vector2Int, UnityEngine.CoreModule]],
-        mscorlib
-    - Name: 
-      Entry: 12
-      Data: 2
-    - Name: 
-      Entry: 7
-      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: 1
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
-    - Name: 
-      Entry: 3
-      Data: -1
-    - Name: 
-      Entry: 3
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: explosionParticles
-      Entry: 10
-      Data: 1
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
         Assembly-CSharp
     - Name: animation
       Entry: 7
-      Data: 12|Scenes.Gameplay.Feature.Blocks.Animation.ScaleAnimation, Assembly-CSharp
+      Data: 10|Scenes.Gameplay.Feature.Blocks.Animation.ScaleAnimation, Assembly-CSharp
     - Name: duration
       Entry: 4
       Data: 0.5
@@ -204,6 +153,78 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.BombComponent,
+        Assembly-CSharp
+    - Name: pauseBetweenExplosions
+      Entry: 4
+      Data: 0.2
+    - Name: bombStrategy
+      Entry: 7
+      Data: 12|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.LinedBombStrategy,
+        Assembly-CSharp
+    - Name: steps
+      Entry: 7
+      Data: 13|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Line,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Line, Assembly-CSharp
+    - Name: Direction
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: iterations
+      Entry: 3
+      Data: -1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Line, Assembly-CSharp
+    - Name: Direction
+      Entry: 7
+      Data: UnityEngine.Vector2Int, UnityEngine.CoreModule
+    - Name: 
+      Entry: 3
+      Data: -1
+    - Name: 
+      Entry: 3
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: iterations
+      Entry: 3
+      Data: -1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -211,18 +232,18 @@ MonoBehaviour:
       Data: 
     - Name: damageComponents
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 14|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 14|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
+      Data: 15|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
         Assembly-CSharp
     - Name: blockAnimation
       Entry: 7
-      Data: 15|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
+      Data: 16|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
         Assembly-CSharp
     - Name: duration
       Entry: 4
@@ -253,7 +274,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
+      Data: 17|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8

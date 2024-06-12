@@ -1,4 +1,5 @@
-﻿using Module.Localization.Localizers;
+﻿using Cysharp.Threading.Tasks;
+using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,39 @@ namespace Features.Popups.Languages
 	{
 		[SerializeField] private TMProLocalizer header;
 		[SerializeField] private RectTransform buttonsContainer;
+		[SerializeField] private float animationDuration = 0.15f;
 
 		private List<PopupButton> buttons = new();
+		private IGeneralPopupViewModel viewModel;
 
 		public void Setup(IGeneralPopupViewModel viewModel)
 		{
-			CleanUp();
 
+			CleanUp();
+			SetupLogic(viewModel);
+			Initialize(viewModel);
+			Translate();
+
+			this.viewModel = viewModel;
+			viewModel.PopupAnimator.Setup(header, buttons, animationDuration);
+			viewModel.PopupAnimator.ResetAnimation();
+		}
+
+		public async override UniTask Show()
+		{
+			await base.Show();
+			await viewModel.PopupAnimator.ShowAnimation();
+
+		}
+
+		public async override UniTask Hide()
+		{
+			await viewModel.PopupAnimator.HideAnimation();
+			await base.Hide();
+		}
+
+		private void SetupLogic(IGeneralPopupViewModel viewModel)
+		{
 			foreach (var command in viewModel.Commands)
 			{
 				PopupButton button = viewModel.ButtonsFactory.GetButton();
@@ -29,9 +56,6 @@ namespace Features.Popups.Languages
 
 				buttons.Add(button);
 			}
-
-			Initialize(viewModel);
-			Translate();
 		}
 
 		private void Translate()
@@ -55,6 +79,7 @@ namespace Features.Popups.Languages
 			{
 				Destroy(child.gameObject);
 			}
+			buttons.Clear();
 		}
 	}
 }

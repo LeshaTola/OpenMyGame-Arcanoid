@@ -2,6 +2,7 @@
 {
 	public interface IProjectSavesController
 	{
+		void LoadAllData();
 		void SaveAllData();
 	}
 }

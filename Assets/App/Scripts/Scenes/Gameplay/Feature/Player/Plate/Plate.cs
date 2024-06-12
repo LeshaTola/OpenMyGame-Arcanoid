@@ -1,5 +1,7 @@
 ﻿using DG.Tweening;
+using Features.Saves.Gameplay.DTO.Plate;
 using Features.StateMachine;
+using Module.Saves.Structs;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.Feature.Player.Machineguns;
@@ -7,6 +9,7 @@ using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
 using Scenes.Gameplay.Feature.Reset;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -55,9 +58,7 @@ namespace Scenes.Gameplay.Feature.Player
 			{
 				return;
 			}
-			connectedBalls.Add(ball);
-			ball.transform.SetParent(transform);
-			ball.Movement.Rb.simulated = false;
+			AddConnectedBall(ball);
 		}
 
 		public void ChangeWidth(float multiplier, float duration = 0)
@@ -104,6 +105,37 @@ namespace Scenes.Gameplay.Feature.Player
 			}
 
 			ClampPosition();
+		}
+
+		public PlateState GetPlateState()
+		{
+			return new PlateState
+			{
+				Position = new JsonVector2()
+				{
+					X = transform.position.x,
+					Y = transform.position.y
+				},
+				BallsLocalPositions = connectedBalls.Select(x => new JsonVector2(x.transform.localPosition)).ToList(),
+			};
+		}
+
+		public void SetPlateState(PlateState state)
+		{
+			transform.position = new Vector2(state.Position.X, state.Position.Y);
+			foreach (JsonVector2 ballPosition in state.BallsLocalPositions)
+			{
+				Ball.Ball ball = ballService.GetBall();
+				AddConnectedBall(ball);
+				ball.transform.localPosition = new(ballPosition.X, ballPosition.Y);
+			}
+		}
+
+		private void AddConnectedBall(Ball.Ball ball)
+		{
+			connectedBalls.Add(ball);
+			ball.transform.SetParent(transform);
+			ball.Movement.Rb.simulated = false;
 		}
 
 		private void AnimateWidth(float from, float to, float duration = 0)

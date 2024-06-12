@@ -1,24 +1,29 @@
 ﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.General;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 {
-	public class HealthComponent : Component
+	public class HealthComponent : General.Component
 	{
 		public event Action<Block> OnDeath;
 
-		[UnityEngine.SerializeField] private int health;
-		[UnityEngine.SerializeField] private CracksDictionary cracksDictionary;
-		[UnityEngine.SerializeField] List<IComponent> deathComponents;
-		[UnityEngine.SerializeField] List<IComponent> damageComponents;
+		[SerializeField] private int maxHealth;
+		[SerializeField] private CracksDictionary cracksDictionary;
+		[SerializeField] List<IComponent> deathComponents;
+		[SerializeField] List<IComponent> damageComponents;
+
+		private int health;
 
 		public List<IComponent> DeathComponents { get => deathComponents; }
+		public int Health { get => health; }
 
 		public override void Init(Block block)
 		{
 			base.Init(block);
+			health = maxHealth;
 			foreach (var component in deathComponents)
 			{
 				component.Init(block);
@@ -40,6 +45,18 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 			}
 		}
 
+		public void SetHealth(int health)
+		{
+			this.health = health;
+			if (health <= 0)
+			{
+				Kill();
+				return;
+			}
+
+			SetCrack();
+		}
+
 		public void ReduceHealth(int damage)
 		{
 			health -= damage;
@@ -54,11 +71,17 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Health
 				component.Execute();
 			}
 
+
 			SetCrack();
 		}
 
 		private void SetCrack()
 		{
+			if (health >= maxHealth)
+			{
+				return;
+			}
+
 			foreach (var key in cracksDictionary.Cracks.Keys)
 			{
 				if (key.IsValid(health))

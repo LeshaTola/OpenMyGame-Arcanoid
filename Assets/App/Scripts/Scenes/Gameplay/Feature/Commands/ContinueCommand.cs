@@ -30,15 +30,20 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		public void Execute()
 		{
+			ExecuteAsync();
+		}
+
+		public async void ExecuteAsync()
+		{
 			int continueCost = (int)(energyProvider.Config.PlayCost * energyProvider.Config.ContinueCostMultiplier);
-			if (continueCost < energyProvider.Config.PlayCost)
+			if (energyProvider.CurrentEnergy < continueCost)
 			{
 				routerInfoPopup.ShowInfo("not enough energy");
 				return;
 			}
 			energyProvider.ReduceEnergy(continueCost);
 
-			popupController.HidePopup();
+			await popupController.HidePopup();
 			stateMachine.ChangeState<ResetState>();
 		}
 	}

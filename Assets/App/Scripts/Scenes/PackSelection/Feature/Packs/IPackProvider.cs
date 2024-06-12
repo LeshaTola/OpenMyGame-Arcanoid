@@ -11,5 +11,10 @@ namespace Scenes.PackSelection.Feature.Packs
 		int PackIndex { get; set; }
 		Pack CurrentPack { get; }
 		SavedPackData SavedPackData { get; set; }
+		bool IsFirstSession { get; }
+		Dictionary<string, SavedPackData> PacksData { get; }
+
+		void LoadData();
+		void SaveData();
 	}
 }

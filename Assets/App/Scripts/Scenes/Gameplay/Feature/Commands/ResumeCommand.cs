@@ -20,8 +20,13 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		public void Execute()
 		{
+			ExecuteAsync();
+		}
+
+		private async void ExecuteAsync()
+		{
+			await popupController.HidePopup();
 			stateMachine.ChangeState<GameplayState>();
-			popupController.HidePopup();
 		}
 	}
 }

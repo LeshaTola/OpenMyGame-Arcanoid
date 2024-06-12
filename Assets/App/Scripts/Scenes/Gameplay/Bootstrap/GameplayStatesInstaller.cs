@@ -2,6 +2,7 @@
 using Features.StateMachine;
 using Features.StateMachine.States;
 using Scenes.Gameplay.StateMachine.States;
+using Scenes.Gameplay.StateMachine.States.LoadScene;
 using Scenes.Gameplay.StateMachine.States.Loss;
 using Scenes.Gameplay.StateMachine.States.Win;
 using UnityEngine;
@@ -18,7 +19,6 @@ namespace Scenes.Gameplay.Bootstrap
 			StatesFactoriesInstaller.Install(Container);
 
 			BindStateMachine();
-			BindGlobalInitState();
 			BindResetState();
 			BindGameplayState();
 			BindPauseState();
@@ -61,12 +61,8 @@ namespace Scenes.Gameplay.Bootstrap
 		private void BindLoadNextState()
 		{
 			Container.Bind<LoadSceneState>().AsSingle();
-			Container.Bind<LoadSceneStateStep>().AsTransient();
-		}
-
-		private void BindGlobalInitState()
-		{
-			Container.Bind<GlobalInitialState>().AsSingle();
+			Container.Bind<LoadSceneStateStep>().AsSingle();
+			Container.Bind<CleanupLoadSceneStateStep>().AsSingle();
 		}
 
 		private void BindStateMachine()

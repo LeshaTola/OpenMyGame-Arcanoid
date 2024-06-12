@@ -1,4 +1,5 @@
-﻿using Features.Popups.Languages;
+﻿using Features.Popups.Animations.Animator;
+using Features.Popups.Languages;
 using Module.Commands;
 using Module.Localization;
 using Module.PopupLogic.General.Controller;
@@ -11,24 +12,30 @@ namespace Scenes.Main.StateMachine.States.InitialState.Routers
 		private IPopupController popupController;
 		private ILocalizationSystem localizationSystem;
 		private IButtonsFactory buttonsFactory;
+		private IPopupAnimator popupAnimator;
 
 		public RouterShowLanguages(IPopupController popupController,
 							 ILocalizationSystem localizationSystem,
-							 IButtonsFactory buttonsFactory)
+							 IButtonsFactory buttonsFactory,
+							 IPopupAnimator popupAnimator)
 		{
 			this.popupController = popupController;
 			this.localizationSystem = localizationSystem;
 			this.buttonsFactory = buttonsFactory;
+			this.popupAnimator = popupAnimator;
 		}
 
-		public void ShowLanguages()
+		public async void ShowLanguages()
 		{
 			var languagesPopup = popupController.GetPopup<LanguagesPopup>();
 			IEnumerable<ILabeledCommand> commands = FormCommands();
-			IGeneralPopupViewModel viewModel = new GeneralPopupViewModel("languages", commands, localizationSystem, buttonsFactory);
+			IGeneralPopupViewModel viewModel = new GeneralPopupViewModel("languages",
+																commands,
+																localizationSystem,
+																buttonsFactory,
+																popupAnimator);
 			languagesPopup.Setup(viewModel);
-			languagesPopup.Show();
-
+			await languagesPopup.Show();
 		}
 
 		private IEnumerable<ILabeledCommand> FormCommands()

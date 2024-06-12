@@ -67,9 +67,6 @@ MonoBehaviour:
       Entry: 7
       Data: 2|Scenes.Gameplay.Feature.Bonuses.Commands.Health.AddHealthBonusCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 1
     - Name: sprite
       Entry: 10
       Data: 0
@@ -81,7 +78,7 @@ MonoBehaviour:
       Data: 0
     - Name: conflicts
       Entry: 7
-      Data: 3|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 3|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -110,9 +107,6 @@ MonoBehaviour:
       Entry: 7
       Data: 4|Scenes.Gameplay.Feature.Bonuses.Commands.Health.ReduceHealthBonusCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 2
     - Name: sprite
       Entry: 10
       Data: 2
@@ -124,7 +118,7 @@ MonoBehaviour:
       Data: 0
     - Name: conflicts
       Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 5|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -153,9 +147,6 @@ MonoBehaviour:
       Entry: 7
       Data: 6|Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed.SpeedControlBallsCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 4
     - Name: sprite
       Entry: 10
       Data: 4
@@ -167,13 +158,13 @@ MonoBehaviour:
       Data: 30
     - Name: conflicts
       Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 7|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 3
-      Data: 3
+      Entry: 1
+      Data: SlowDownBalls
     - Name: 
       Entry: 13
       Data: 
@@ -199,9 +190,6 @@ MonoBehaviour:
       Entry: 7
       Data: 8|Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed.SpeedControlBallsCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 3
     - Name: sprite
       Entry: 10
       Data: 6
@@ -213,13 +201,13 @@ MonoBehaviour:
       Data: 5
     - Name: conflicts
       Entry: 7
-      Data: 9|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 9|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 3
-      Data: 4
+      Entry: 1
+      Data: SpeedUpBalls
     - Name: 
       Entry: 13
       Data: 
@@ -245,9 +233,6 @@ MonoBehaviour:
       Entry: 7
       Data: 10|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSizeControlCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 5
     - Name: sprite
       Entry: 10
       Data: 8
@@ -259,13 +244,13 @@ MonoBehaviour:
       Data: 5
     - Name: conflicts
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 11|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 3
-      Data: 6
+      Entry: 1
+      Data: ShrinkPlate
     - Name: 
       Entry: 13
       Data: 
@@ -294,9 +279,6 @@ MonoBehaviour:
       Entry: 7
       Data: 12|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSizeControlCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 6
     - Name: sprite
       Entry: 10
       Data: 10
@@ -308,13 +290,13 @@ MonoBehaviour:
       Data: 5
     - Name: conflicts
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 13|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 3
-      Data: 5
+      Entry: 1
+      Data: ExpandPlate
     - Name: 
       Entry: 13
       Data: 
@@ -343,9 +325,6 @@ MonoBehaviour:
       Entry: 7
       Data: 14|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSpeedControlCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 8
     - Name: sprite
       Entry: 10
       Data: 12
@@ -357,13 +336,13 @@ MonoBehaviour:
       Data: 30
     - Name: conflicts
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 15|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 3
-      Data: 7
+      Entry: 1
+      Data: SlowDownPlate
     - Name: 
       Entry: 13
       Data: 
@@ -389,9 +368,6 @@ MonoBehaviour:
       Entry: 7
       Data: 16|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSpeedControlCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 7
     - Name: sprite
       Entry: 10
       Data: 14
@@ -403,13 +379,13 @@ MonoBehaviour:
       Data: 5
     - Name: conflicts
       Entry: 7
-      Data: 17|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 17|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
-      Entry: 3
-      Data: 8
+      Entry: 1
+      Data: SpeedUpPlate
     - Name: 
       Entry: 13
       Data: 
@@ -434,9 +410,6 @@ MonoBehaviour:
     - Name: $v
       Entry: 7
       Data: 18|Scenes.Gameplay.Feature.Bonuses.Commands.Rage.RageCommand, Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 9
     - Name: sprite
       Entry: 10
       Data: 16
@@ -448,7 +421,7 @@ MonoBehaviour:
       Data: 30
     - Name: conflicts
       Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 19|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -474,9 +447,6 @@ MonoBehaviour:
       Entry: 7
       Data: 20|Scenes.Gameplay.Feature.Bonuses.Commands.StickyPlate.StickyPlateCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 10
     - Name: sprite
       Entry: 10
       Data: 18
@@ -488,7 +458,7 @@ MonoBehaviour:
       Data: 10
     - Name: conflicts
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 21|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -514,9 +484,6 @@ MonoBehaviour:
       Entry: 7
       Data: 22|Scenes.Gameplay.Feature.Bonuses.Commands.Machineguns.MachinegunCommand,
         Assembly-CSharp
-    - Name: id
-      Entry: 3
-      Data: 11
     - Name: sprite
       Entry: 10
       Data: 20
@@ -528,7 +495,7 @@ MonoBehaviour:
       Data: 20
     - Name: conflicts
       Entry: 7
-      Data: 23|System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib
+      Data: 23|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0

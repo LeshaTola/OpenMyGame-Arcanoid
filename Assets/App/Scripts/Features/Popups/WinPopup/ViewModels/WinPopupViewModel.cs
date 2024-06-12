@@ -1,4 +1,5 @@
 ﻿using Features.Energy.Providers;
+using Features.Popups.WinPopup.Animator;
 using Features.Saves;
 using Module.Commands;
 using Module.Localization;
@@ -12,13 +13,15 @@ namespace Features.Popups.WinPopup.ViewModels
 						   Pack pack,
 						   SavedPackData savedPackData,
 						   ILocalizationSystem localization,
-						   IEnergyProvider energyProvider)
+						   IEnergyProvider energyProvider,
+						   IWinPopupAnimator winPopupAnimator)
 		{
 			LoadNextLevelCommand = loadNextLevelCommand;
 			LocalizationSystem = localization;
 			Pack = pack;
 			SavedPackData = savedPackData;
 			EnergyProvider = energyProvider;
+			WinPopupAnimator = winPopupAnimator;
 		}
 
 		public IEnergyProvider EnergyProvider { get; }
@@ -26,5 +29,6 @@ namespace Features.Popups.WinPopup.ViewModels
 		public ILocalizationSystem LocalizationSystem { get; }
 		public Pack Pack { get; }
 		public SavedPackData SavedPackData { get; }
+		public IWinPopupAnimator WinPopupAnimator { get; }
 	}
 }

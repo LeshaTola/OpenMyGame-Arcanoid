@@ -1,6 +1,6 @@
-﻿using DG.Tweening;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Module.PopupLogic.General;
-using System;
 using UnityEngine;
 
 namespace Features.Popups.Animations
@@ -10,18 +10,18 @@ namespace Features.Popups.Animations
 		[SerializeField] private float animationTime;
 		private Tween tweenAnimation;
 
-		public void Hide(Action onComplete = null)
+		public async UniTask Hide()
 		{
 			CleanUp();
-			tweenAnimation = transform.DOScale(Vector2.zero, animationTime);
-			tweenAnimation.onComplete += () => onComplete?.Invoke();
+			tweenAnimation = transform.DOScale(Vector2.zero, animationTime).SetEase(Ease.InBack);
+			await tweenAnimation.AsyncWaitForCompletion();
 		}
 
-		public void Show(Action onComplete = null)
+		public async UniTask Show()
 		{
 			CleanUp();
-			tweenAnimation = transform.DOScale(Vector2.one, animationTime);
-			tweenAnimation.onComplete += () => onComplete?.Invoke();
+			tweenAnimation = transform.DOScale(Vector2.one, animationTime).SetEase(Ease.OutBack);
+			await tweenAnimation.AsyncWaitForCompletion();
 		}
 
 		private void CleanUp()

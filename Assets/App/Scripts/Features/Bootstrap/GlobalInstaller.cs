@@ -1,7 +1,9 @@
 ﻿using Features.Energy.Configs;
 using Features.Energy.Providers;
+using Features.FileProvider;
 using Features.Popups.Languages;
 using Features.ProjectInitServices;
+using Features.StateMachine.States;
 using Module.Localization;
 using Module.Localization.Configs;
 using Module.Localization.Parsers;
@@ -32,11 +34,13 @@ namespace Features.Bootstrap
 		{
 			ProjectCommandInstaller.Install(Container);
 			ProjectRoutersInstaller.Install(Container);
+			StatesFactoriesInstaller.Install(Container);
 
 			BindProjectTimeProvider();
 			BindEnergyProvider();
 
 			BindParser();
+			BindFileProvider();
 			BindLocalizationSystem();
 
 			BindInitProjectService();
@@ -44,6 +48,17 @@ namespace Features.Bootstrap
 
 			BindPackProvider();
 			BindButtonsFactory();
+			BindGlobalInitState();
+		}
+
+		private void BindGlobalInitState()
+		{
+			Container.Bind<GlobalInitialState>().AsSingle();
+		}
+
+		private void BindFileProvider()
+		{
+			Container.Bind<IFileProvider>().To<ResourcesFileProvider>().AsSingle();
 		}
 
 		private void BindProjectTimeProvider()

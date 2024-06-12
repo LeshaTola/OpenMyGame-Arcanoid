@@ -3,7 +3,9 @@ using Scenes.Gameplay.Feature.Bonuses;
 using Scenes.Gameplay.Feature.Bonuses.Configs;
 using Scenes.Gameplay.Feature.Bonuses.Controllers;
 using Scenes.Gameplay.Feature.Bonuses.Factories;
+using Scenes.Gameplay.Feature.Bonuses.Provider;
 using Scenes.Gameplay.Feature.Bonuses.Services;
+using Scenes.Gameplay.Feature.Bonuses.Services.Bonuses;
 using Scenes.Gameplay.Feature.Bonuses.UI;
 using UnityEngine;
 using Zenject;
@@ -31,6 +33,13 @@ namespace Scenes.Gameplay.Bootstrap
 			BindBonusesPool();
 			BindBonusCommandsFactory();
 			BindBonusService();
+			BindBonusServicesProvider();
+
+		}
+
+		private void BindBonusServicesProvider()
+		{
+			Container.Bind<IBonusServicesProvider>().To<BonusServicesProvider>().AsSingle().NonLazy();
 		}
 
 		private void BindBonusesController()
@@ -53,6 +62,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindBonusService()
 		{
+			Container.BindInterfacesTo<BonusCommandService>().AsSingle().NonLazy();
 			Container.BindInterfacesTo<BonusService>().AsSingle().NonLazy();
 		}
 

@@ -12,7 +12,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private Block blockTemplate;
 		private Transform container;
 		private DiContainer diContainer;
-		public BlockFactory(BlocksDictionary blocksDictionary, Block blockTemplate, Transform container, DiContainer diContainer)
+		public BlockFactory(BlocksDictionary blocksDictionary,
+					  Block blockTemplate,
+					  Transform container,
+					  DiContainer diContainer)
 		{
 			this.blocksDictionary = blocksDictionary;
 			this.blockTemplate = blockTemplate;
