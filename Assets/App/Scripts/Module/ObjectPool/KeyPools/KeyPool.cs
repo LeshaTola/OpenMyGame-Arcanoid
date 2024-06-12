@@ -7,14 +7,14 @@ namespace Module.ObjectPool.KeyPools
 	{
 		private Dictionary<string, IPool<T>> poolsDictionary = new();
 
-		public KeyPool(List<KeyPoolObject<T>> pooledObjects)
+		public KeyPool(Dictionary<string, PoolObject<T>> pooledObjects, Transform container)
 		{
-			foreach (var pooledObject in pooledObjects)
+			foreach (var key in pooledObjects.Keys)
 			{
-				var pool = new MonoBehObjectPool<T>(pooledObject.Template,
-										pooledObject.PreloadCount,
-										pooledObject.Container);
-				poolsDictionary.Add(pooledObject.Key, pool);
+				var pool = new MonoBehObjectPool<T>(pooledObjects[key].Template,
+										pooledObjects[key].PreloadCount,
+										container);
+				poolsDictionary.Add(key, pool);
 			}
 		}
 
@@ -48,4 +48,5 @@ namespace Module.ObjectPool.KeyPools
 			Debug.LogError($"There is no such pool key: {key}");
 		}
 	}
+
 }

@@ -1,6 +1,5 @@
 ﻿using Module.ObjectPool;
 using Module.ObjectPool.KeyPools;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -8,7 +7,8 @@ namespace Scenes.Gameplay.Bootstrap
 {
 	public class ParticlesKeyPoolInstaller : MonoInstaller
 	{
-		[SerializeField] private List<KeyPoolObject<PooledParticle>> particles;
+		[SerializeField] private ParticlesDatabase particlesDatabase;
+		[SerializeField] private Transform container;
 
 		public override void InstallBindings()
 		{
@@ -17,7 +17,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindExplosionsParticlePool()
 		{
-			Container.Bind<KeyPool<PooledParticle>>().AsSingle().WithArguments(particles);
+			Container.Bind<KeyPool<PooledParticle>>().AsSingle().WithArguments(particlesDatabase.Particles, container);
 		}
 	}
 }

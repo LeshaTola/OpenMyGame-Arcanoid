@@ -1,6 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
+using Module.ObjectPool.KeyPools;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
+using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +12,9 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb
 	{
 		[SerializeField] private float pauseBetweenExplosions;
 		[SerializeField] private IBombStrategy bombStrategy;
+		[SerializeField] private ParticlesDatabase particlesDatabase;
+		[ValueDropdown("@particlesDatabase.GetKeys()")]
+		[SerializeField] private string particleKey;
 
 		public override void Execute()
 		{
@@ -48,16 +53,9 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb
 
 		private void SpawnExplosion(Block blockToDamage)
 		{
-			var newExplosion = blockToDamage.KeyPool.Get("explosion");
+			var newExplosion = blockToDamage.KeyPool.Get(particleKey);
 			newExplosion.transform.position = blockToDamage.transform.position;
 			newExplosion.Particle.Play();
 		}
-
-	}
-
-	public struct Line
-	{
-		public Vector2Int Direction;
-		[Min(-1)] public int iterations;
 	}
 }
