@@ -3,6 +3,7 @@ using Features.Saves.Gameplay.DTO.Balls;
 using Module.ObjectPool;
 using Module.Saves.Structs;
 using Module.TimeProvider;
+using Scenes.Gameplay.Feature.Player.Ball.Providers.CollisionParticles;
 using Scenes.Gameplay.Feature.Progress;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,16 +14,21 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 	{
 		private IPool<Ball> pool;
 		private IProgressController progressController;
+		private ICollisionParticlesProvider collisionParticlesProvider;
 		private ITimeProvider timeProvider;
 
 		private Dictionary<Ball, Vector2> lastBallsDirections = new();
 		private bool isRageMode = false;
 		public float SpeedMultiplier { get; private set; } = 1;
 
-		public BallService(IPool<Ball> pool, IProgressController progressController, ITimeProvider timeProvider)
+		public BallService(IPool<Ball> pool,
+					 IProgressController progressController,
+					 ICollisionParticlesProvider collisionParticlesProvider,
+					 ITimeProvider timeProvider)
 		{
 			this.pool = pool;
 			this.progressController = progressController;
+			this.collisionParticlesProvider = collisionParticlesProvider;
 			this.timeProvider = timeProvider;
 		}
 
@@ -135,6 +141,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 
 		private void OnBallCollisionEnter(Ball ball, Collision2D collision)
 		{
+			collisionParticlesProvider.SpawnParticle(collision);
+
 			Vector2 newDirection = ball.Movement.Direction;
 			if (!collision.gameObject.TryGetComponent(out Plate player))
 			{

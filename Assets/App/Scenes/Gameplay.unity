@@ -209,37 +209,6 @@ Transform:
   m_Father: {fileID: 1396913684}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &96762086
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 96762087}
-  m_Layer: 0
-  m_Name: Explosions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &96762087
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 96762086}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1569730024}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182341186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,7 +1617,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   config: {fileID: 11400000, guid: 78d46ddd9d24dea41bdca5d6ca982b23, type: 2}
-  rb: {fileID: 1629776038}
   plate: {fileID: 1134754029}
   machinegun: {fileID: 1288053781}
 --- !u!1 &1059541119
@@ -2020,6 +1988,7 @@ MonoBehaviour:
   ballCount: 10
   ballTemplate: {fileID: 2332535626420645355, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
   ballsContainer: {fileID: 2076856196}
+  collisionToParticlesDatabase: {fileID: 11400000, guid: eef54fa0218129440b59dfb1df00b323, type: 2}
 --- !u!1 &1396913683
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,11 +2249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58caa030725ad35458bee453f84d3361, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles:
-  - Key: explosion
-    PreloadCount: 10
-    Template: {fileID: -1098025931163850044, guid: 7fe4928e5bb102341b63eb575536ccb8, type: 3}
-    Container: {fileID: 1569730024}
+  particlesDatabase: {fileID: 11400000, guid: 659f8539c99a55749a33af895e5521c6, type: 2}
+  container: {fileID: 1569730024}
 --- !u!1 &1569730023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2312,8 +2278,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 96762087}
+  m_Children: []
   m_Father: {fileID: 575408181}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2454,11 +2419,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!50 &1629776038 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 7227145046741339303, guid: 3dd483596f843f14fad79ff9517d3923, type: 3}
-  m_PrefabInstance: {fileID: 7227145047771133005}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1686923470
 GameObject:
   m_ObjectHideFlags: 0
