@@ -16,6 +16,17 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb
 			new (-1, 0),
 		};
 
+		public List<Block> GetSameBlocks(Block block)
+		{
+			List<Block> blocks = new();
+			var positions = GetSameBlocksPositions(block);
+			foreach (var position in positions)
+			{
+				blocks.Add(block.Neighbors[position]);
+			}
+			return blocks;
+		}
+
 		public List<Vector2Int> GetSameBlocksPositions(Block block)
 		{
 			openNodes.Clear();

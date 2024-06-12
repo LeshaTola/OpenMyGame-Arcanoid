@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,63 +8,41 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb
 {
 	public class BombComponent : General.Component
 	{
-		[SerializeField] private int damage;
 		[SerializeField] private float pauseBetweenExplosions;
+		[SerializeField] private IBombStrategy bombStrategy;
 
 		public override void Execute()
 		{
-			ExecuteAsync();
-		}
+			base.Execute();
 
-		private async void ExecuteAsync()
-		{
-			List<Block> blocksToDamage;
-
-			blocksToDamage = GetBlocksOnRadius(Block.MatrixPosition);
-			await DamageBlocksAsync(blocksToDamage);
-		}
-
-		private List<Block> GetBlocksOnRadius(Vector2Int center)
-		{
-			List<Block> blocksToDamage = new();
-
-			for (int i = -1; i <= 1; i++)
+			bombStrategy.Init(Block);
+			List<List<Block>> blocksToDestroyLists = bombStrategy.GetBlocksToDestroy();
+			if (blocksToDestroyLists == null || blocksToDestroyLists.Count <= 0)
 			{
-				for (int j = -1; j <= 1; j++)
-				{
-					if (i == 0 && j == 0)
-					{
-						continue;
-					}
-
-					Vector2Int pos = new(center.x + i, center.y + j);
-					if (Block.Neighbors.TryGetValue(pos, out Block block))
-					{
-						blocksToDamage.Add(block);
-					}
-				}
+				return;
 			}
 
-			return blocksToDamage;
+			foreach (var list in blocksToDestroyLists)
+			{
+				DestroyBlocksAsync(list);
+			}
 		}
 
-		private async UniTask DamageBlocksAsync(List<Block> blocksToDamage)
+		private async void DestroyBlocksAsync(List<Block> blocksToDestroy)
 		{
-			foreach (var block in blocksToDamage)
+			foreach (var block in blocksToDestroy)
 			{
 				if (block == null)
 				{
 					continue;
 				}
 
-				HealthComponent healthComponent = block.Config.GetComponent<HealthComponent>();
-				if (healthComponent == null)
+				if (block.Config.TryGetComponent(out HealthComponent healthComponent))
 				{
-					return;
+					SpawnExplosion(block);
+					healthComponent.Kill();
 				}
-				healthComponent.ReduceHealth(damage);
-				SpawnExplosion(block);
-				await UniTask.Delay(TimeSpan.FromSeconds(pauseBetweenExplosions));
+				await UniTask.Delay(System.TimeSpan.FromSeconds(pauseBetweenExplosions));
 			}
 		}
 
@@ -74,5 +52,12 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb
 			newExplosion.transform.position = blockToDamage.transform.position;
 			newExplosion.Particle.Play();
 		}
+
+	}
+
+	public struct Line
+	{
+		public Vector2Int Direction;
+		[Min(-1)] public int iterations;
 	}
 }
