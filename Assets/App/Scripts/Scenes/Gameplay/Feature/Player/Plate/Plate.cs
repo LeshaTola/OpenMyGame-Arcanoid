@@ -95,13 +95,15 @@ namespace Scenes.Gameplay.Feature.Player
 
 		void IUpdatable.Update()
 		{
-			movement.ApplyDrag();
 			Vector2 targetPosition = input.GetPosition();
-			Vector2 direction;
 			if (!targetPosition.Equals(default) && fieldController.GameField.IsValid(targetPosition))
 			{
-				direction = GetDirection(targetPosition);
+				Vector2 direction = new(targetPosition.x, transform.position.y);
 				movement.Move(direction, SpeedMultiplier);
+			}
+			else
+			{
+				movement.ApplyDrag();
 			}
 
 			ClampPosition();
@@ -144,11 +146,6 @@ namespace Scenes.Gameplay.Feature.Player
 			{
 				boxCollider.size = new Vector2(value, boxCollider.size.y);
 			});
-		}
-
-		private Vector2 GetDirection(Vector2 targetPosition)
-		{
-			return new(targetPosition.x - transform.position.x, 0f);
 		}
 
 		private void ClampPosition()

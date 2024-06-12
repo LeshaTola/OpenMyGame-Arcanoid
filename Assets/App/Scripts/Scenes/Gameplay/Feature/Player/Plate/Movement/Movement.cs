@@ -7,31 +7,26 @@ namespace Scenes.Gameplay.Feature.Player
 	public class Movement : IMovement
 	{
 		private MovementConfig config;
-		private Rigidbody2D rb;
+		private Transform transform;
 		private ITimeProvider timeProvider;
 
+		private Vector2 targetPosition;
+		private float speed;
+
 		public Movement(MovementConfig config,
-				  Rigidbody2D rb,
+				  Transform transform,
 				  ITimeProvider timeProvider)
 		{
 			this.config = config;
-			this.rb = rb;
+			this.transform = transform;
 			this.timeProvider = timeProvider;
 		}
 
-		public void Move(Vector2 moveDirection, float speedMultiplier = 1f)
+		public void Move(Vector2 targetPosition, float speedMultiplier = 1f)
 		{
-			if (moveDirection.magnitude < config.DeadZone)
-			{
-				rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, config.Deceleration * timeProvider.DeltaTime);
-				return;
-			}
-
-			rb.velocity =
-				Vector2.Lerp(
-					rb.velocity,
-					moveDirection.normalized * config.Speed * speedMultiplier,
-					config.Acceleration * timeProvider.DeltaTime);
+			speed = config.Speed * speedMultiplier;
+			this.targetPosition = targetPosition;
+			MoveImmediate();
 		}
 
 		public void ApplyDrag()
@@ -41,14 +36,27 @@ namespace Scenes.Gameplay.Feature.Player
 
 		private void ApplyDrag(float drag)
 		{
-			var velocity = rb.velocity;
-			velocity -= velocity * timeProvider.DeltaTime * drag;
-			rb.velocity = velocity;
+			if (speed <= 0)
+			{
+				speed = 0;
+				return;
+			}
+
+			speed -= drag * timeProvider.DeltaTime;
+			MoveImmediate();
+		}
+
+		private void MoveImmediate()
+		{
+			transform.position = Vector2.MoveTowards(transform.position,
+				 targetPosition,
+				 timeProvider.DeltaTime * speed);
 		}
 
 		public void Stop()
 		{
-			rb.velocity = Vector2.zero;
+			targetPosition = transform.position;
+			speed = 0f;
 		}
 	}
 }

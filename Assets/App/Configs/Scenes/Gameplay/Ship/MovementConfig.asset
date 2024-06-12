@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb859ba54c0fae40b2b7fe7bbd3e03c, type: 3}
   m_Name: MovementConfig
   m_EditorClassIdentifier: 
-  speed: 8
-  drag: 4
+  speed: 6
+  drag: 12
   deceleration: 12
   acceleration: 10
   deadZone: 0.25
