@@ -59,9 +59,9 @@ namespace Features.Popups.WinPopup
 			SetupLogic(viewModel);
 			Translate();
 
-			lines.StartAnimation();
-			SetStartEnergyValue();
+			ResetUI();
 
+			lines.StartAnimation();
 		}
 
 		public async override UniTask Show()
@@ -96,11 +96,6 @@ namespace Features.Popups.WinPopup
 			nextButton.UpdateText(viewModel.LoadNextLevelCommand.Label);
 		}
 
-		private void SetStartEnergyValue()
-		{
-			energySlider.Value.UpdateUI(viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward, viewModel.EnergyProvider.Config.MaxEnergy);
-		}
-
 		private void Translate()
 		{
 			header.Translate();
@@ -111,8 +106,6 @@ namespace Features.Popups.WinPopup
 
 		private void CleanUp()
 		{
-			ResetUI();
-
 			if (viewModel != null)
 			{
 				nextButton.onButtonClicked -= viewModel.LoadNextLevelCommand.Execute;
@@ -122,7 +115,19 @@ namespace Features.Popups.WinPopup
 
 		private void ResetUI()
 		{
-			levelInfo.text = "0/0";
+			if (viewModel.Pack == null || viewModel.SavedPackData == null)
+			{
+				levelInfo.text = $"0/{viewModel.Pack.MaxLevel + 1}";
+			}
+			else
+			{
+				levelInfo.text = $"0/0";
+			}
+
+			energySlider.Value.UpdateUI(
+				viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward,
+				viewModel.EnergyProvider.Config.MaxEnergy);
+
 			packName.Text.text = "";
 
 			header.transform.localScale = Vector3.zero;
@@ -157,11 +162,11 @@ namespace Features.Popups.WinPopup
 				startEnergy = viewModel.EnergyProvider.CurrentEnergy - viewModel.EnergyProvider.Config.WinReward,
 				maxEnergy = viewModel.EnergyProvider.Config.MaxEnergy,
 
-				targetLevel = viewModel.SavedPackData.CurrentLevel,
-				maxLevel = viewModel.Pack.MaxLevel + 1,
+				targetLevel = viewModel.SavedPackData == null ? 1 : viewModel.SavedPackData.CurrentLevel,
+				maxLevel = viewModel.Pack == null ? 1 : viewModel.Pack.MaxLevel + 1,
 
-				targetPackName = viewModel.Pack.Name,
-				targetSprite = viewModel.Pack.Sprite,
+				targetPackName = viewModel.Pack == null ? "Test" : viewModel.Pack.Name,
+				targetSprite = viewModel.Pack == null ? null : viewModel.Pack.Sprite,
 			};
 		}
 	}

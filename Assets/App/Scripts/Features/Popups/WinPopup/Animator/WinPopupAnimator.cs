@@ -36,7 +36,7 @@ namespace Features.Popups.WinPopup.Animator
 				.DOScale(Vector3.one, winAnimationData.imageAnimationDuration)
 				.SetEase(Ease.OutBack));
 
-			if (winAnimationData.PackImage.sprite == winAnimationData.targetSprite)
+			if (winAnimationData.targetSprite != null && winAnimationData.PackImage.sprite == winAnimationData.targetSprite)
 			{
 				SetPackName();
 				return;
