@@ -117,11 +117,11 @@ namespace Features.Popups.WinPopup
 		{
 			if (viewModel.Pack == null || viewModel.SavedPackData == null)
 			{
-				levelInfo.text = $"0/{viewModel.Pack.MaxLevel + 1}";
+				levelInfo.text = $"0/0";
 			}
 			else
 			{
-				levelInfo.text = $"0/0";
+				levelInfo.text = $"0/{viewModel.Pack.MaxLevel + 1}";
 			}
 
 			energySlider.Value.UpdateUI(
