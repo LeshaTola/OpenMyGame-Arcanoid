@@ -133,7 +133,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 		private Block PrepareBlock(Block block)
 		{
-			block.ResizeBlock(blockWidth);
+			block.Resize(blockWidth);
 			SubscribeOnBlock(block);
 			return block;
 		}

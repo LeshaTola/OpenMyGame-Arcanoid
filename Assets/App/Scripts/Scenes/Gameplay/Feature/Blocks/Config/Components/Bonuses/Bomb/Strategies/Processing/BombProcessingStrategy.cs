@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
-using Module.ObjectPool.KeyPools;
-using Sirenix.OdinInspector;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Partcles;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,18 +9,10 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategi
 	{
 		[SerializeField] protected float pauseBetweenExplosions;
 
-		[SerializeField] private ParticlesDatabase particlesDatabase;
-		[ShowIf("@particlesDatabase!=null")]
-		[ValueDropdown("@particlesDatabase.GetKeys()")]
-		[SerializeField] private string particleKey;
+		[SerializeField] private SpawnParticlesComponent spawnParticlesComponent;
+
+		public SpawnParticlesComponent SpawnParticlesComponent { get => spawnParticlesComponent; }
 
 		public abstract UniTask Process(List<Block> blocks);
-
-		public void SpawnExplosion(Block blockToDamage)
-		{
-			var newExplosion = blockToDamage.KeyPool.Get(particleKey);
-			newExplosion.transform.position = blockToDamage.transform.position;
-			newExplosion.Particle.Play();
-		}
 	}
 }

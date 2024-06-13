@@ -16,8 +16,8 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 01e9ec3208433514c86f40327b57db26, type: 2}
     - {fileID: 11400000, guid: 659f8539c99a55749a33af895e5521c6, type: 2}
+    - {fileID: 11400000, guid: 01e9ec3208433514c86f40327b57db26, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -57,23 +57,57 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: spawnParticlesComponent
+      Entry: 7
+      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.Partcles.SpawnParticlesComponent,
+        Assembly-CSharp
+    - Name: changeColor
+      Entry: 5
+      Data: true
+    - Name: particleColor
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 0.7607843
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: particlesDatabase
+      Entry: 10
+      Data: 0
+    - Name: particleKey
+      Entry: 1
+      Data: BlockCollision
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.TriggerComponent,
+      Data: 5|Scenes.Gameplay.Feature.Blocks.Config.Components.TriggerComponent,
         Assembly-CSharp
     - Name: triggerComponents
       Entry: 7
-      Data: 5|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 6|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 6|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
+      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.ReduceHealthComponent,
         Assembly-CSharp
     - Name: damage
       Entry: 3
@@ -92,28 +126,28 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
+      Data: 8|Scenes.Gameplay.Feature.Blocks.Config.Components.Health.HealthComponent,
         Assembly-CSharp
     - Name: maxHealth
       Entry: 3
       Data: 1
     - Name: cracksDictionary
       Entry: 10
-      Data: 0
+      Data: 1
     - Name: deathComponents
       Entry: 7
-      Data: 8|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 9|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 9|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
+      Data: 10|Scenes.Gameplay.Feature.Blocks.Config.Components.DestroyComponent,
         Assembly-CSharp
     - Name: animation
       Entry: 7
-      Data: 10|Scenes.Gameplay.Feature.Blocks.Animation.ScaleAnimation, Assembly-CSharp
+      Data: 11|Scenes.Gameplay.Feature.Blocks.Animation.ScaleAnimation, Assembly-CSharp
     - Name: duration
       Entry: 4
       Data: 0.5
@@ -155,28 +189,56 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.BombComponent,
+      Data: 12|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.BombComponent,
         Assembly-CSharp
     - Name: getBlocksStrategy
       Entry: 7
-      Data: 12|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.ColorBombStrategy,
+      Data: 13|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.ColorBombStrategy,
         Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
     - Name: processBlocksStrategy
       Entry: 7
-      Data: 13|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.Processing.KillBlockStrategy,
+      Data: 14|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.Processing.KillBlockStrategy,
         Assembly-CSharp
     - Name: pauseBetweenExplosions
       Entry: 4
       Data: 0.2
+    - Name: spawnParticlesComponent
+      Entry: 7
+      Data: 15|Scenes.Gameplay.Feature.Blocks.Config.Components.Partcles.SpawnParticlesComponent,
+        Assembly-CSharp
+    - Name: changeColor
+      Entry: 5
+      Data: false
+    - Name: particleColor
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: particlesDatabase
       Entry: 10
-      Data: 1
+      Data: 0
     - Name: particleKey
       Entry: 1
       Data: Explosion
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -191,18 +253,18 @@ MonoBehaviour:
       Data: 
     - Name: damageComponents
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 16|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 15|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
+      Data: 17|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
         Assembly-CSharp
     - Name: blockAnimation
       Entry: 7
-      Data: 16|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
+      Data: 18|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
         Assembly-CSharp
     - Name: duration
       Entry: 4
@@ -233,7 +295,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
+      Data: 19|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8

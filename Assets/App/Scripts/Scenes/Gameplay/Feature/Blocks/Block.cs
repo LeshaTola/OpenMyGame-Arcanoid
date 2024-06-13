@@ -59,7 +59,7 @@ namespace Scenes.Gameplay.Feature.Blocks
 			MatrixPosition = matrixPosition;
 		}
 
-		public void ResizeBlock(float width)
+		public void Resize(float width)
 		{
 			SizeMultiplier = width / Width;
 
@@ -77,7 +77,7 @@ namespace Scenes.Gameplay.Feature.Blocks
 		{
 			if (config.TryGetComponent(out CollisionComponent collisionComponent))
 			{
-				collisionComponent.CollisionGameObject = col.gameObject;
+				collisionComponent.Collision2D = col;
 				collisionComponent.Execute();
 			}
 		}

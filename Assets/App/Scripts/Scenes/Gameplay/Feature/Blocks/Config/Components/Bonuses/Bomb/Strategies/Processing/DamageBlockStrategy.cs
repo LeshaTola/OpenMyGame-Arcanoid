@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Partcles;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +20,8 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategi
 
 				if (block.Config.TryGetComponent(out HealthComponent healthComponent))
 				{
-					SpawnExplosion(block);
+					SpawnParticlesComponent.Init(block);
+					SpawnParticlesComponent.SpawnParticle(block.transform.position, Vector2.zero, block.SizeMultiplier);
 					healthComponent.ReduceHealth(damage);
 				}
 				await UniTask.Delay(System.TimeSpan.FromSeconds(pauseBetweenExplosions));
