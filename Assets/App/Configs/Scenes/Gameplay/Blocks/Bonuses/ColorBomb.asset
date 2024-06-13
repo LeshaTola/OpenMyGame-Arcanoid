@@ -158,11 +158,15 @@ MonoBehaviour:
       Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.BombComponent,
         Assembly-CSharp
     - Name: getBlocksStrategy
-      Entry: 6
+      Entry: 7
+      Data: 12|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.ColorBombStrategy,
+        Assembly-CSharp
+    - Name: 
+      Entry: 8
       Data: 
     - Name: processBlocksStrategy
       Entry: 7
-      Data: 12|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.Processing.KillBlockStrategy,
+      Data: 13|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.Processing.KillBlockStrategy,
         Assembly-CSharp
     - Name: pauseBetweenExplosions
       Entry: 4
@@ -187,18 +191,18 @@ MonoBehaviour:
       Data: 
     - Name: damageComponents
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
+      Data: 14|System.Collections.Generic.List`1[[Scenes.Gameplay.Feature.Blocks.Config.Components.General.IComponent,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 14|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
+      Data: 15|Scenes.Gameplay.Feature.Blocks.Config.Components.Animation.AnimationComponent,
         Assembly-CSharp
     - Name: blockAnimation
       Entry: 7
-      Data: 15|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
+      Data: 16|Scenes.Gameplay.Feature.Blocks.Animation.ShakeGameObjectAnimation,
         Assembly-CSharp
     - Name: duration
       Entry: 4
@@ -229,7 +233,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
+      Data: 17|Scenes.Gameplay.Feature.Blocks.Config.Components.Score.ScoreComponent,
         Assembly-CSharp
     - Name: 
       Entry: 8
