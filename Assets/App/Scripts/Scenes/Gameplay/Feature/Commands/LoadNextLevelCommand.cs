@@ -38,7 +38,7 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		private async UniTask LoadMainMenu()
 		{
-			await popupController.HidePopup();
+			await popupController.HideLastPopup();
 			stateMachine.ChangeState<LoadSceneState>();
 		}
 
@@ -51,7 +51,7 @@ namespace Scenes.Gameplay.Feature.Commands
 			}
 			energyProvider.ReduceEnergy(energyProvider.Config.PlayCost);
 
-			await popupController.HidePopup();
+			await popupController.HideLastPopup();
 			stateMachine.ChangeState<InitialState>();
 		}
 

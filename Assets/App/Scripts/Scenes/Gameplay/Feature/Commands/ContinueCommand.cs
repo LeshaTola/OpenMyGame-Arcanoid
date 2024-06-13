@@ -43,7 +43,7 @@ namespace Scenes.Gameplay.Feature.Commands
 			}
 			energyProvider.ReduceEnergy(continueCost);
 
-			await popupController.HidePopup();
+			await popupController.HideLastPopup();
 			stateMachine.ChangeState<ResetState>();
 		}
 	}

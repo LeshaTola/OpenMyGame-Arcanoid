@@ -17,7 +17,7 @@ namespace Features.Commands
 
 		public void Execute()
 		{
-			popupController.HidePopup();
+			popupController.HideLastPopup();
 		}
 	}
 }

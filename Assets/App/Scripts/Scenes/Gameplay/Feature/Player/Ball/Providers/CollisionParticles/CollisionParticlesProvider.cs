@@ -24,9 +24,6 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Providers.CollisionParticles
 				{
 					var particle = particles.Get(objectToParticle.Value);
 					particle.transform.position = collision.contacts[0].point;
-					/*var normal = collision.contacts[0].normal;
-					var rotation = Quaternion.FromToRotation(particle.transform.rotation.eulerAngles, Quaternion.LookRotation(normal).eulerAngles);
-					particle.transform.rotation = rotation;*/
 					particle.transform.up = collision.contacts[0].normal;
 					particle.Particle.Play();
 				}

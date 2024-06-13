@@ -23,7 +23,7 @@ namespace Scenes.Main.StateMachine.States.InitialState.Routers
 		public void Execute()
 		{
 			localizationSystem.ChangeLanguage(languageKey);
-			popupController.HidePopup();
+			popupController.HideLastPopup();
 		}
 	}
 }
