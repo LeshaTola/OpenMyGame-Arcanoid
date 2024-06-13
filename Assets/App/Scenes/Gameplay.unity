@@ -1426,7 +1426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
-  defaultLevelInfo: {fileID: 4900000, guid: d3bb464fd635acb48972cd9376619034, type: 3}
+  defaultLevelInfo: {fileID: 4900000, guid: 5bd84033b06cb8647b3fad26aa89e3a0, type: 3}
   levelMechanics:
   - rid: 4565741859545284612
   blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
@@ -1985,7 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13222bb3180dfb7468a1d0416a683b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballCount: 10
+  ballCount: 5
   ballTemplate: {fileID: 2332535626420645355, guid: 57f966f13a05bae478b699fb295358d0, type: 3}
   ballsContainer: {fileID: 2076856196}
   collisionToParticlesDatabase: {fileID: 11400000, guid: eef54fa0218129440b59dfb1df00b323, type: 2}

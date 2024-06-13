@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Commands
 {
-	public abstract class BonusCommand : IBonusCommand
+	public class BonusConfig
 	{
-		private string id;
-
 		[PreviewField]
 		[SerializeField]
 		private Sprite sprite;
@@ -19,31 +17,26 @@ namespace Scenes.Gameplay.Feature.Bonuses.Commands
 		[SerializeField] private float duration;
 		[SerializeField] private List<string> conflicts;
 
-		public string Id { get => id; }
 		public Sprite Sprite { get => sprite; }
 		public Sprite BlockSprite { get => blockSprite; }
 		public float Duration { get => duration; }
 		public List<string> Conflicts => conflicts;
+	}
 
+	public abstract class BonusCommand : IBonusCommand
+	{
+		public string Id { get; private set; }
 		public float Timer { get; set; }
+		public abstract BonusConfig Config { get; }
 
 		public void Init(string id)
 		{
-			this.id = id;
-		}
-
-		public virtual void Clone(IBonusCommand command)
-		{
-			id = command.Id;
-			sprite = command.Sprite;
-			blockSprite = command.BlockSprite;
-			duration = command.Duration;
-			conflicts = command.Conflicts;
+			Id = id;
 		}
 
 		public virtual void StartBonus()
 		{
-			Timer = Duration;
+			Timer = Config.Duration;
 		}
 
 		public virtual void StopBonus()

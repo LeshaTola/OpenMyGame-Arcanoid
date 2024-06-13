@@ -10,13 +10,13 @@ namespace Scenes.Gameplay.Feature.Bonuses.UI
 
 		public void AddTimer(IBonusCommand command, BonusTimerUI timer)
 		{
-			timer.UpdateSprite(command.Sprite);
+			timer.UpdateSprite(command.Config.Sprite);
 			timers.Add(command, timer);
 		}
 
 		public void UpdateTimer(IBonusCommand command)
 		{
-			float normalizedValue = command.Timer / command.Duration;
+			float normalizedValue = command.Timer / command.Config.Duration;
 			timers[command].UpdateTimer(normalizedValue);
 		}
 

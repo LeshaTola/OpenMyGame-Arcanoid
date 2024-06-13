@@ -98,7 +98,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 			DropBonusComponent dropBonusComponent = new(bonusId);
 			block.Config.AddComponentIfNull(dropBonusComponent, healthComponent.DeathComponents);
-			block.Visual.SetBonus(bonusesDatabase.Bonuses[bonusId].BlockSprite);
+			block.Visual.SetBonus(bonusesDatabase.Bonuses[bonusId].Config.BlockSprite);
 		}
 
 		public async UniTask DestroyLevelAsync()

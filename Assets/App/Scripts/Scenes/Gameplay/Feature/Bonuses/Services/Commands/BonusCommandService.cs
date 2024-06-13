@@ -32,14 +32,14 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 			var activeBonus = bonusCommands.FirstOrDefault(x => x.Id.Equals(bonusCommand.Id));
 			if (activeBonus != null)
 			{
-				activeBonus.Timer = activeBonus.Duration;
+				activeBonus.Timer = activeBonus.Config.Duration;
 				return;
 			}
 
 			RemoveAllConflicts(bonusCommand);
 
 			bonusCommand.StartBonus();
-			if (bonusCommand.Duration <= 0)
+			if (bonusCommand.Config.Duration <= 0)
 			{
 				return;
 			}
@@ -111,7 +111,7 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 
 		private void RemoveAllConflicts(IBonusCommand bonusCommand)
 		{
-			foreach (string bonusId in bonusCommand.Conflicts)
+			foreach (string bonusId in bonusCommand.Config.Conflicts)
 			{
 				var conflictBonus = bonusCommands.FirstOrDefault(x => x.Id.Equals(bonusId));
 				if (conflictBonus != null)

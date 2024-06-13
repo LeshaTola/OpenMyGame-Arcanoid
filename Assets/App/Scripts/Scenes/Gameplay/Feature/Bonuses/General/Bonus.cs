@@ -24,7 +24,7 @@ namespace Scenes.Gameplay.Feature.Bonuses
 			this.pool = pool;
 			this.bonusCommand = bonusCommand;
 			this.bonusService = bonusService;
-			visual.UpdateVisual(bonusCommand.Sprite);
+			visual.UpdateVisual(bonusCommand.Config.Sprite);
 		}
 
 		private void OnTriggerEnter2D(Collider2D collision)

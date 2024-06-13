@@ -119,7 +119,7 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 
 			if (value != null && bonusesDatabase.Bonuses.ContainsKey(value))
 			{
-				GUI.DrawTexture(rect, bonusesDatabase.Bonuses[value].BlockSprite?.texture);
+				GUI.DrawTexture(rect, bonusesDatabase.Bonuses[value].Config.BlockSprite?.texture);
 			}
 			return value;
 		}
