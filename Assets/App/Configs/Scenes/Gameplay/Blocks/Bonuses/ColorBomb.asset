@@ -157,22 +157,25 @@ MonoBehaviour:
       Entry: 7
       Data: 11|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.BombComponent,
         Assembly-CSharp
+    - Name: getBlocksStrategy
+      Entry: 6
+      Data: 
+    - Name: processBlocksStrategy
+      Entry: 7
+      Data: 12|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.Processing.KillBlockStrategy,
+        Assembly-CSharp
     - Name: pauseBetweenExplosions
       Entry: 4
       Data: 0.2
-    - Name: bombStrategy
-      Entry: 7
-      Data: 12|Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.ColorBombStrategy,
-        Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
     - Name: particlesDatabase
       Entry: 10
       Data: 1
     - Name: particleKey
       Entry: 1
       Data: Explosion
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 

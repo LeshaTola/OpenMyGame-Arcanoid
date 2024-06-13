@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.GetBlocks;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies
 {
-	public interface IBombStrategy
-	{
-		public void Init(Block block);
-		List<List<Block>> GetBlocksToDestroy();
-	}
-
-	public class ClassicBomb : IBombStrategy
+	public class ClassicBomb : IGetBlocksStrategy
 	{
 		private LinedBombStrategy bombStrategy;
 		private List<Line> steps;
@@ -68,7 +63,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategi
 			};
 		}
 
-		public List<List<Block>> GetBlocksToDestroy()
+		public List<List<Block>> GetBlocksLists()
 		{
 			List<List<Block>> flattenBlockLists = new(1);
 

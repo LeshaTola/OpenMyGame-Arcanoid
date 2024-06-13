@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.GetBlocks;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies
 {
-	public class LinedBombStrategy : IBombStrategy
+	public class LinedBombStrategy : IGetBlocksStrategy
 	{
 		[SerializeField] private List<Line> steps;
 
@@ -14,7 +15,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategi
 			this.block = block;
 		}
 
-		public List<List<Block>> GetBlocksToDestroy()
+		public List<List<Block>> GetBlocksLists()
 		{
 			return GetBlocksToDestroy(steps);
 		}

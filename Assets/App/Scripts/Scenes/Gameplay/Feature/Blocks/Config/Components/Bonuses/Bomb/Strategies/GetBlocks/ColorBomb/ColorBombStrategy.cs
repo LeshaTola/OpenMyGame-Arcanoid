@@ -1,11 +1,12 @@
-﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb;
+﻿using Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies.GetBlocks;
+using Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.ColorBomb;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategies
 {
-	public class ColorBombStrategy : IBombStrategy
+	public class ColorBombStrategy : IGetBlocksStrategy
 	{
 		private Block block;
 		private List<Vector2Int> pattern;
@@ -22,7 +23,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategi
 			};
 		}
 
-		public List<List<Block>> GetBlocksToDestroy()
+		public List<List<Block>> GetBlocksLists()
 		{
 			List<Block> neighbors = GetNeighbors();
 			if (neighbors.Count <= 0)
