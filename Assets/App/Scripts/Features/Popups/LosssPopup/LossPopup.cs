@@ -1,9 +1,12 @@
 ﻿using Cysharp.Threading.Tasks;
+using Features.Energy.Controllers;
+using Features.Energy.UI;
 using Features.Popups.Languages;
 using Features.Popups.Loss.ViewModels;
 using Module.Localization.Localizers;
 using Module.PopupLogic.General.Popups;
 using System.Collections.Generic;
+using TNRD;
 using UnityEngine;
 
 namespace Features.Popups.Loss
@@ -15,9 +18,11 @@ namespace Features.Popups.Loss
 		[SerializeField] private PopupButton restartButton;
 		[SerializeField] private PopupButton backButton;
 		[SerializeField] private PopupButton addLifeButton;
+		[SerializeField] private SerializableInterface<IEnergySliderUI> energySlider;
 		[SerializeField] private float animationDuration = 0.15f;
 
 		private ILossPopupViewModel viewModel;
+		private EnergyController energyController;
 
 		public void Setup(ILossPopupViewModel viewModel)
 		{
@@ -35,6 +40,9 @@ namespace Features.Popups.Loss
 					},
 				animationDuration);
 			viewModel.PopupAnimator.ResetAnimation();
+
+			energyController = new EnergyController(energySlider.Value, viewModel.EnergyProvider);
+			energyController.UpdateUI();
 		}
 
 		public async override UniTask Show()
@@ -87,6 +95,7 @@ namespace Features.Popups.Loss
 				restartButton.onButtonClicked -= viewModel.RestartCommand.Execute;
 				addLifeButton.onButtonClicked -= viewModel.ContinueCommand.Execute;
 				backButton.onButtonClicked -= viewModel.BackCommand.Execute;
+				energyController.CleanUp();
 			}
 		}
 	}
