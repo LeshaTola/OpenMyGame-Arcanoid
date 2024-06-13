@@ -71,6 +71,20 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services.Bonuses
 			bonuses.Clear();
 		}
 
+		private void OnBlockDestroyed(Block block)
+		{
+			string bonusId = GetBonusId(block);
+			if (string.IsNullOrEmpty(bonusId))
+			{
+				return;
+			}
+
+			Bonus bonus = GetBonus(bonusId);
+			bonus.transform.position = block.transform.position;
+			bonus.Resize(block.SizeMultiplier);
+		}
+
+
 		private string GetBonusId(Block block)
 		{
 			var healthComponent = block.Config.GetComponent<HealthComponent>();
@@ -95,18 +109,6 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services.Bonuses
 			IBonusCommand bonusCommand = bonusCommandsService.GetBonusCommand(id);
 			bonus.Setup(bonusCommand, pool, bonusCommandsService);
 			return bonus;
-		}
-
-		private void OnBlockDestroyed(Block block)
-		{
-			string bonusId = GetBonusId(block);
-			if (string.IsNullOrEmpty(bonusId))
-			{
-				return;
-			}
-
-			Bonus bonus = GetBonus(bonusId);
-			bonus.transform.position = block.transform.position;
 		}
 	}
 }

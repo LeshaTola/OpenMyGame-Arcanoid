@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Module.MinMaxValue
 {
@@ -16,6 +17,11 @@ namespace Module.MinMaxValue
 		public float GetRandom()
 		{
 			return UnityEngine.Random.Range(Min, Max);
+		}
+
+		public float Clamp(float value)
+		{
+			return Mathf.Clamp(value, Min, Max);
 		}
 	}
 }

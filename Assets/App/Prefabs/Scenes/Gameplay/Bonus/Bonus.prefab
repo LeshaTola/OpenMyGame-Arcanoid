@@ -97,6 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visual: {fileID: 2375013808219794462}
   movement: {fileID: 6301789554597367843}
+  config: {fileID: 11400000, guid: 36339ef99275bda4496217ee099516a5, type: 2}
 --- !u!114 &6301789554597367843
 MonoBehaviour:
   m_ObjectHideFlags: 0

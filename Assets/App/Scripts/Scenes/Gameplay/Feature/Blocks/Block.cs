@@ -37,6 +37,8 @@ namespace Scenes.Gameplay.Feature.Blocks
 			private set => boxCollider.size = new Vector2(boxCollider.size.x, value);
 		}
 
+		public float SizeMultiplier { get; private set; }
+
 		[Inject]
 		public void Construct(IBallService ballService, KeyPool<PooledParticle> keyPool)
 		{
@@ -59,10 +61,10 @@ namespace Scenes.Gameplay.Feature.Blocks
 
 		public void ResizeBlock(float width)
 		{
-			float multiplier = width / Width;
+			SizeMultiplier = width / Width;
 
-			ResizeCollider(multiplier);
-			visual.Resize(multiplier);
+			ResizeCollider(SizeMultiplier);
+			visual.Resize(SizeMultiplier);
 		}
 
 		private void ResizeCollider(float multiplier)
