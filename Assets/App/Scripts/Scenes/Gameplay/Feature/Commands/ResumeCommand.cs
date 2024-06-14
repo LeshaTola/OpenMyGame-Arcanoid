@@ -25,7 +25,7 @@ namespace Scenes.Gameplay.Feature.Commands
 
 		private async void ExecuteAsync()
 		{
-			await popupController.HidePopup();
+			await popupController.HideLastPopup();
 			stateMachine.ChangeState<GameplayState>();
 		}
 	}

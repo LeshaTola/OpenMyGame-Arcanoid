@@ -10,14 +10,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 
 		public Vector2 Direction { get => rb.velocity.normalized; }
 		public Rigidbody2D Rb { get => rb; }
-
-		private Vector2[] axes =
-		{
-			Vector2.up,
-			Vector2.down,
-			Vector2.left,
-			Vector2.right
-		};
+		public BallMovementConfig Config { get => config; }
 
 		public void Push(Vector2 direction)
 		{
@@ -26,27 +19,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball
 
 		public void Push(Vector2 direction, float factor, float multiplier = 1)
 		{
-			float additionalSpeed = config.Speed * (config.SpeedMultiplier - 1) * factor;
-			rb.velocity = direction.normalized * (config.Speed + additionalSpeed) * multiplier;
-		}
-
-		public Vector2 GetValidDirection()
-		{
-			return GetValidDirection(rb.velocity);
-		}
-
-		public Vector2 GetValidDirection(Vector2 direction)
-		{
-			foreach (Vector2 axis in axes)
-			{
-				float angle = Vector2.Angle(direction, axis);
-				if (angle < config.MinAngle)
-				{
-					float rotateAngle = config.MinAngle - angle;
-					direction = Quaternion.Euler(0, 0, rotateAngle) * direction;
-				}
-			}
-			return direction;
+			float additionalSpeed = Config.Speed * (Config.SpeedMultiplier - 1) * factor;
+			rb.velocity = direction.normalized * (Config.Speed + additionalSpeed) * multiplier;
 		}
 	}
 }

@@ -2,18 +2,20 @@
 using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.RageMode.Services;
 using System.Threading;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 {
-	public class BirdLevelMechanics : LevelMechanics
+	public class BirdLevelMechanics : ILevelMechanics
 	{
 		[SerializeField] private BirdConfig config;
 
 		private IPool<Bird> birdsPool;
 		private IFieldSizeProvider fieldSizeProvider;
 		private ITimeProvider timeProvider;
+		private IRageModeService rageModeService;
 
 		private CancellationTokenSource cancellationTokenSource;
 		private Bird bird;
@@ -25,37 +27,48 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 		public BirdLevelMechanics(IPool<Bird> birdsPool,
 							IFieldSizeProvider fieldSizeProvider,
 							ITimeProvider timeProvider,
+							IRageModeService rageModeService,
 							BirdConfig config)
 		{
 			this.birdsPool = birdsPool;
 			this.fieldSizeProvider = fieldSizeProvider;
+			this.rageModeService = rageModeService;
 			this.timeProvider = timeProvider;
 			this.config = config;
 
 			timer = config.TimeToRespawn;
 		}
 
-		public override void StartMechanics()
+		public void StartMechanics()
 		{
-			cancellationTokenSource = new CancellationTokenSource();
-			ControlBirdAsync(cancellationTokenSource.Token).Forget();
+			if (cancellationTokenSource == null)
+			{
+				cancellationTokenSource = new CancellationTokenSource();
+				ControlBirdAsync(cancellationTokenSource.Token).Forget();
+			}
 		}
 
-		public override void StopMechanics()
+		public void StopMechanics()
 		{
-			if (bird != null)
-			{
-				birdsPool.Release(bird);
-				bird = null;
-				isBirdAlive = false;
-			}
-
 			if (cancellationTokenSource != null)
 			{
 				cancellationTokenSource.Cancel();
 				cancellationTokenSource.Dispose();
 				cancellationTokenSource = null;
 			}
+		}
+
+		public void Cleanup()
+		{
+			if (bird != null)
+			{
+				rageModeService.RemoveEnraged(bird);
+				birdsPool.Release(bird);
+				bird = null;
+				isBirdAlive = false;
+			}
+
+			StopMechanics();
 		}
 
 		private async UniTaskVoid ControlBirdAsync(CancellationToken cancellationToken)
@@ -119,6 +132,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 			if (bird == null)
 			{
 				bird = birdsPool.Get();
+				rageModeService.AddEnraged(bird);
 				bird.OnDeath += OnBirdDeath;
 			}
 

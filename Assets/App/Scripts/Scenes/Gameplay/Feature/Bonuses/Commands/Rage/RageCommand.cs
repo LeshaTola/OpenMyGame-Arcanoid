@@ -1,34 +1,33 @@
-﻿using Scenes.Gameplay.Feature.LevelCreation.Services;
-using Scenes.Gameplay.Feature.Player.Ball.Services;
+﻿using Scenes.Gameplay.Feature.RageMode.Services;
+using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Commands.Rage
 {
 	public class RageCommand : BonusCommand
 	{
-		private IBallService ballService;
-		private ILevelService levelService;
+		[SerializeField] private BonusConfig config;
 
-		public RageCommand(IBallService ballService,
-					 ILevelService levelService)
+		private IRageModeService rageModeService;
+
+		public RageCommand(IRageModeService rageModeService,
+					  BonusConfig config)
 		{
-			this.ballService = ballService;
-			this.levelService = levelService;
+			this.rageModeService = rageModeService;
+			this.config = config;
 		}
+
+		public override BonusConfig Config => config;
 
 		public override void StartBonus()
 		{
 			base.StartBonus();
-
-			ballService.ActivateRageMode();
-			levelService.TurnOffColliders();
+			rageModeService.ActivateRageMode();
 		}
 
 		public override void StopBonus()
 		{
 			base.StopBonus();
-
-			ballService.DeactivateRageMode();
-			levelService.TurnOnColliders();
+			rageModeService.DeactivateRageMode();
 		}
 	}
 }

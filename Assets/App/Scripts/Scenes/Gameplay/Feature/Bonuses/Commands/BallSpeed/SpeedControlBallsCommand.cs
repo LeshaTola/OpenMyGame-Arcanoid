@@ -1,33 +1,37 @@
 ﻿using Scenes.Gameplay.Feature.Player.Ball.Services;
+using System;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed
 {
-	public class SpeedControlBallsCommand : BonusCommand
+	[Serializable]
+	public class BallsSpeedControlBonusConfig : BonusConfig
 	{
 		[SerializeField] private float multiplier;
+
+		public float Multiplier { get => multiplier; }
+	}
+
+	public class SpeedControlBallsCommand : BonusCommand
+	{
+		[SerializeField] private BallsSpeedControlBonusConfig config;
 
 		private IBallService ballService;
 		private float prevSpeedMultiplier;
 
-		public SpeedControlBallsCommand(IBallService ballService)
+		public SpeedControlBallsCommand(IBallService ballService, BallsSpeedControlBonusConfig config)
 		{
 			this.ballService = ballService;
+			this.config = config;
 		}
 
-		public override void Clone(IBonusCommand command)
-		{
-			base.Clone(command);
-
-			SpeedControlBallsCommand concreteCommand = ((SpeedControlBallsCommand)command);
-			multiplier = concreteCommand.multiplier;
-		}
+		public override BonusConfig Config => config;
 
 		public override void StartBonus()
 		{
 			base.StartBonus();
 			prevSpeedMultiplier = ballService.SpeedMultiplier;
-			ballService.ChangeBallsSpeed(multiplier);
+			ballService.ChangeBallsSpeed(config.Multiplier);
 		}
 
 		public override void StopBonus()

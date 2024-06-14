@@ -4,7 +4,6 @@ using Scenes.Gameplay.Feature.LevelCreation;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -65,26 +64,27 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 				Event.current.Use();
 			}
 
-			Color cellColor;
-			if (blocksDictionary.Blocks.ContainsKey(value))
+			if (value != -1 && blocksDictionary.Blocks.ContainsKey(value))
 			{
-				cellColor = blocksDictionary.Blocks[value].Color;
-				EditorGUI.DrawRect(rect.Padding(1), cellColor);
+				GUI.DrawTexture(rect, blocksDictionary.Blocks[value].Sprite?.texture);
 			}
 
 			return value;
 		}
 
-		public List<int> GetIds()
+		public IEnumerable<ValueDropdownItem<int>> GetIds()
 		{
+			List<ValueDropdownItem<int>> values = new();
 			if (blocksDictionary == null)
 			{
 				return null;
 			}
 
-			var ids = new List<int>(blocksDictionary.Blocks.Keys);
-			ids.Sort();
-			return ids;
+			foreach (var key in blocksDictionary.Blocks.Keys)
+			{
+				values.Add(new ValueDropdownItem<int>(blocksDictionary.Blocks[key].BlockName, key));
+			}
+			return values;
 		}
 		#endregion
 
@@ -119,7 +119,7 @@ namespace Scenes.Gameplay.Features.LevelCreation.Editor
 
 			if (value != null && bonusesDatabase.Bonuses.ContainsKey(value))
 			{
-				GUI.DrawTexture(rect, bonusesDatabase.Bonuses[value].BlockSprite?.texture);
+				GUI.DrawTexture(rect, bonusesDatabase.Bonuses[value].Config.BlockSprite?.texture);
 			}
 			return value;
 		}

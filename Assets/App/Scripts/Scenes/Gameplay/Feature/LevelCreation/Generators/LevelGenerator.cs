@@ -7,6 +7,7 @@ using Scenes.Gameplay.Feature.Bonuses.Configs;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.LevelCreation.Configs;
 using Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.Feature.RageMode.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 		private IProgressController progressController;
 		private IFieldSizeProvider fieldSizeProvider;
+		private IRageModeService rageModeService;
 		private IBlockFactory blockFactory;
 
 		private Dictionary<Vector2Int, Block> blocks = new();
@@ -34,12 +36,14 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 		public LevelGenerator(IProgressController progressController,
 						IFieldSizeProvider fieldSizeProvider,
+						IRageModeService rageModeService,
 						IBlockFactory blockFactory,
 						LevelConfig levelConfig,
 						BonusesDatabase bonusesDatabase)
 		{
 			this.progressController = progressController;
 			this.fieldSizeProvider = fieldSizeProvider;
+			this.rageModeService = rageModeService;
 			this.blockFactory = blockFactory;
 			this.levelConfig = levelConfig;
 			this.bonusesDatabase = bonusesDatabase;
@@ -98,7 +102,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 			DropBonusComponent dropBonusComponent = new(bonusId);
 			block.Config.AddComponentIfNull(dropBonusComponent, healthComponent.DeathComponents);
-			block.Visual.SetBonus(bonusesDatabase.Bonuses[bonusId].BlockSprite);
+			block.Visual.SetBonus(bonusesDatabase.Bonuses[bonusId].Config.BlockSprite);
 		}
 
 		public async UniTask DestroyLevelAsync()
@@ -117,7 +121,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 			Vector2 newPosition = GetTopPosition(block, block.transform.position);
 			Tween animation = block.transform.DOMove(newPosition, animationTime);
 			animation.SetEase(Ease.InBounce);
+
 			await animation.AsyncWaitForCompletion();
+
+			rageModeService.RemoveEnraged(block);
 			GameObject.Destroy(block.gameObject);
 		}
 
@@ -133,7 +140,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 		private Block PrepareBlock(Block block)
 		{
-			block.ResizeBlock(blockWidth);
+			block.Resize(blockWidth);
+			rageModeService.AddEnraged(block);
 			SubscribeOnBlock(block);
 			return block;
 		}
@@ -160,6 +168,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		{
 			OnBlockDestroyed?.Invoke(block);
 			blocks.Remove(block.MatrixPosition);
+			rageModeService.RemoveEnraged(block);
 			UnsubscribeFromBlock(block);
 		}
 

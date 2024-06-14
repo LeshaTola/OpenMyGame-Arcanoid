@@ -1,0 +1,612 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40814fd577d26324e920195043cf85f6, type: 3}
+  m_Name: BonusesDatabase
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 21300000, guid: e4f4f5cad217f03458ff8e4396e388b5, type: 3}
+    - {fileID: 21300000, guid: 81e43397f6a8b7b4f9440a401ab658dc, type: 3}
+    - {fileID: 21300000, guid: e146c0dd7c6c06349a80f0afab6cad08, type: 3}
+    - {fileID: 21300000, guid: c53df5bcc1363b44892019af1e3b72b7, type: 3}
+    - {fileID: 21300000, guid: 80bf961859811714da50a4ac86341b1b, type: 3}
+    - {fileID: 21300000, guid: fcb14f6594f04044b8f97bb71112eae3, type: 3}
+    - {fileID: 21300000, guid: b89ab4054f4a43441a179fa8543f8e89, type: 3}
+    - {fileID: 21300000, guid: bb9e0445cb8088f449962df979e83f60, type: 3}
+    - {fileID: 21300000, guid: e77dd0d73342ec04e86583b2a3a5cfb1, type: 3}
+    - {fileID: 21300000, guid: 07e7ad7fa8b2fe747be0bc0e7002c7f0, type: 3}
+    - {fileID: 21300000, guid: 7593a0701e3876844b15d605062213a4, type: 3}
+    - {fileID: 21300000, guid: 3433fec8c69dc4647897ab4d3acc0c4a, type: 3}
+    - {fileID: 21300000, guid: 72324236e0afd8245a117be4e9783e03, type: 3}
+    - {fileID: 21300000, guid: d1264e3e6264f3049b4263848ccf5494, type: 3}
+    - {fileID: 21300000, guid: 0bd948ddff69fa040b8f8be3290349af, type: 3}
+    - {fileID: 21300000, guid: 1a86d196ecbdd7c43909f2287b4ea730, type: 3}
+    - {fileID: 21300000, guid: 7454ab0eca9a022418ab08c7d1680d0c, type: 3}
+    - {fileID: 21300000, guid: fdc74b82fc11b114a981954e137a89c1, type: 3}
+    - {fileID: 21300000, guid: 2e0b8a18b42e662489afe2d68fc842a0, type: 3}
+    - {fileID: 21300000, guid: 51927907c07cc0e4fb98a1a5a4e7a711, type: 3}
+    - {fileID: 21300000, guid: 42204dfcf2deb534eba0ee44a77c752e, type: 3}
+    - {fileID: 21300000, guid: 969d67079c3ef66428b1bc1797c9e407, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: bonuses
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[Scenes.Gameplay.Feature.Bonuses.Commands.IBonusCommand,
+        Assembly-CSharp]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 11
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: AddHealth
+    - Name: $v
+      Entry: 7
+      Data: 2|Scenes.Gameplay.Feature.Bonuses.Commands.Health.ChangeHealthBonusCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 3|Scenes.Gameplay.Feature.Bonuses.Commands.Health.ChangeHealthBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 0
+    - Name: blockSprite
+      Entry: 10
+      Data: 1
+    - Name: duration
+      Entry: 4
+      Data: 0
+    - Name: conflicts
+      Entry: 7
+      Data: 4|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: health
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: ReduceHealth
+    - Name: $v
+      Entry: 7
+      Data: 5|Scenes.Gameplay.Feature.Bonuses.Commands.Health.ChangeHealthBonusCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 6|Scenes.Gameplay.Feature.Bonuses.Commands.Health.ChangeHealthBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 2
+    - Name: blockSprite
+      Entry: 10
+      Data: 3
+    - Name: duration
+      Entry: 4
+      Data: 0
+    - Name: conflicts
+      Entry: 7
+      Data: 7|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: health
+      Entry: 3
+      Data: -1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SpeedUpBalls
+    - Name: $v
+      Entry: 7
+      Data: 8|Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed.SpeedControlBallsCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 9|Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed.BallsSpeedControlBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 4
+    - Name: blockSprite
+      Entry: 10
+      Data: 5
+    - Name: duration
+      Entry: 4
+      Data: 10
+    - Name: conflicts
+      Entry: 7
+      Data: 10|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: SlowDownBalls
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: multiplier
+      Entry: 4
+      Data: 1.75
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SlowDownBalls
+    - Name: $v
+      Entry: 7
+      Data: 11|Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed.SpeedControlBallsCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 12|Scenes.Gameplay.Feature.Bonuses.Commands.BallSpeed.BallsSpeedControlBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 6
+    - Name: blockSprite
+      Entry: 10
+      Data: 7
+    - Name: duration
+      Entry: 4
+      Data: 10
+    - Name: conflicts
+      Entry: 7
+      Data: 13|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: SpeedUpBalls
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: multiplier
+      Entry: 4
+      Data: 0.35
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: ExpandPlate
+    - Name: $v
+      Entry: 7
+      Data: 14|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSizeControlCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 15|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSizeControlBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 8
+    - Name: blockSprite
+      Entry: 10
+      Data: 9
+    - Name: duration
+      Entry: 4
+      Data: 20
+    - Name: conflicts
+      Entry: 7
+      Data: 16|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: ShrinkPlate
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: multiplier
+      Entry: 4
+      Data: 1.75
+    - Name: resizeDuration
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: ShrinkPlate
+    - Name: $v
+      Entry: 7
+      Data: 17|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSizeControlCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 18|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSizeControlBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 10
+    - Name: blockSprite
+      Entry: 10
+      Data: 11
+    - Name: duration
+      Entry: 4
+      Data: 20
+    - Name: conflicts
+      Entry: 7
+      Data: 19|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: ExpandPlate
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: multiplier
+      Entry: 4
+      Data: 0.75
+    - Name: resizeDuration
+      Entry: 4
+      Data: 0.5
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SpeedUpPlate
+    - Name: $v
+      Entry: 7
+      Data: 20|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSpeedControlCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 21|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSpeedControlBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 12
+    - Name: blockSprite
+      Entry: 10
+      Data: 13
+    - Name: duration
+      Entry: 4
+      Data: 10
+    - Name: conflicts
+      Entry: 7
+      Data: 22|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: SlowDownPlate
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: multiplier
+      Entry: 4
+      Data: 1.75
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: SlowDownPlate
+    - Name: $v
+      Entry: 7
+      Data: 23|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSpeedControlCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 24|Scenes.Gameplay.Feature.Bonuses.Commands.PlateSize.PlateSpeedControlBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 14
+    - Name: blockSprite
+      Entry: 10
+      Data: 15
+    - Name: duration
+      Entry: 4
+      Data: 10
+    - Name: conflicts
+      Entry: 7
+      Data: 25|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 1
+      Data: SpeedUpPlate
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: multiplier
+      Entry: 4
+      Data: 0.8
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Rage
+    - Name: $v
+      Entry: 7
+      Data: 26|Scenes.Gameplay.Feature.Bonuses.Commands.Rage.RageCommand, Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 27|Scenes.Gameplay.Feature.Bonuses.Commands.BonusConfig, Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 16
+    - Name: blockSprite
+      Entry: 10
+      Data: 17
+    - Name: duration
+      Entry: 4
+      Data: 10
+    - Name: conflicts
+      Entry: 7
+      Data: 28|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: StickyPlate
+    - Name: $v
+      Entry: 7
+      Data: 29|Scenes.Gameplay.Feature.Bonuses.Commands.StickyPlate.StickyPlateCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 30|Scenes.Gameplay.Feature.Bonuses.Commands.BonusConfig, Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 18
+    - Name: blockSprite
+      Entry: 10
+      Data: 19
+    - Name: duration
+      Entry: 4
+      Data: 20
+    - Name: conflicts
+      Entry: 7
+      Data: 31|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Machinegun
+    - Name: $v
+      Entry: 7
+      Data: 32|Scenes.Gameplay.Feature.Bonuses.Commands.Machineguns.MachinegunCommand,
+        Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 33|Scenes.Gameplay.Feature.Bonuses.Commands.Machineguns.MachinegunBonusConfig,
+        Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 20
+    - Name: blockSprite
+      Entry: 10
+      Data: 21
+    - Name: duration
+      Entry: 4
+      Data: 20
+    - Name: conflicts
+      Entry: 7
+      Data: 34|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: timeBetweenShots
+      Entry: 4
+      Data: 1
+    - Name: bulletParams
+      Entry: 7
+      Data: Scenes.Gameplay.Feature.Player.Machineguns.Bullets.BulletParams, Assembly-CSharp
+    - Name: Damage
+      Entry: 3
+      Data: 1
+    - Name: Speed
+      Entry: 4
+      Data: 4
+    - Name: IsArmorPiercing
+      Entry: 5
+      Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

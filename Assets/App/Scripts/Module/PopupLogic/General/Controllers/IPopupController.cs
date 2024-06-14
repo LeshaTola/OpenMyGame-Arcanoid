@@ -5,9 +5,8 @@ namespace Module.PopupLogic.General.Controller
 {
 	public interface IPopupController
 	{
-		UniTask HidePopup();
+		UniTask HideLastPopup();
 		T GetPopup<T>() where T : Popup;
-		UniTask ShowPopup(Popup popup);
 		void AddActivePopup(Popup popup);
 		void RemoveActivePopup(Popup popup);
 	}

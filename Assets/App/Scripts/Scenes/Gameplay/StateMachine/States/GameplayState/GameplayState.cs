@@ -3,6 +3,7 @@ using Features.StateMachine.States;
 using Scenes.Gameplay.Feature.Blocks.Animation;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
+using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers;
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
@@ -22,6 +23,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		private IInput input;
 		private IAnimation cameraAnimation;
 		private IFieldSizeProvider fieldSizeProvider;
+		private ILevelMechanicsController levelMechanicsController;
 		private Camera camera;
 		private Plate plate;
 		private GameplayHeaderUI headerUI;
@@ -34,6 +36,7 @@ namespace Scenes.Gameplay.StateMachine.States
 					   IInput input,
 					   IAnimation cameraAnimation,
 					   IFieldSizeProvider fieldSizeProvider,
+					   ILevelMechanicsController levelMechanicsController,
 					   Plate plate,
 					   GameplayHeaderUI headerUI,
 					   List<IUpdatable> updatables,
@@ -43,6 +46,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			this.camera = camera;
 			this.cameraAnimation = cameraAnimation;
 			this.fieldSizeProvider = fieldSizeProvider;
+			this.levelMechanicsController = levelMechanicsController;
 			this.plate = plate;
 			this.headerUI = headerUI;
 			this.progressController = progressController;
@@ -54,6 +58,8 @@ namespace Scenes.Gameplay.StateMachine.States
 		public override void Enter()
 		{
 			base.Enter();
+			levelMechanicsController.StartLevelMechanics();
+
 			headerUI.OnMenuButtonCLicked += OnMenuButtonCLicked;
 			headerUI.OnNextLevelButtonCLicked += OnNextLevelButtonCLicked;
 
@@ -75,7 +81,7 @@ namespace Scenes.Gameplay.StateMachine.States
 		public override void Exit()
 		{
 			base.Exit();
-
+			levelMechanicsController.StopLevelMechanics();
 
 			headerUI.OnMenuButtonCLicked -= OnMenuButtonCLicked;
 			headerUI.OnNextLevelButtonCLicked -= OnNextLevelButtonCLicked;

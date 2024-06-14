@@ -1,13 +1,19 @@
 ﻿using Scenes.Gameplay.Feature.Damage;
+using Scenes.Gameplay.Feature.RageMode.Entities;
 using System;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 {
-	public class Bird : MonoBehaviour, IDamageable
+	public class Bird : MonoBehaviour, IDamageable, IEnraged
 	{
+		private const int DEFAULT_DAMAGE = 1;
+
+		[SerializeField] private Collider2D birdCollider;
+
 		public event Action OnDeath;
 
+		private int damage = DEFAULT_DAMAGE;
 		private int health;
 
 		public void Init(int health)
@@ -30,6 +36,15 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 			transform.position = newPosition;
 		}
 
+
+		private void ApplyDamage(GameObject gameObject)
+		{
+			if (gameObject.TryGetComponent(out IDamager damager))
+			{
+				ReduceHealth(damage);
+			}
+		}
+
 		private void ReduceHealth(int value)
 		{
 			health -= value;
@@ -39,12 +54,16 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 			}
 		}
 
-		private void ApplyDamage(GameObject gameObject)
+		public void ActivateRageMode()
 		{
-			if (gameObject.TryGetComponent(out IDamager damager))
-			{
-				ReduceHealth(1);
-			}
+			birdCollider.isTrigger = true;
+			damage = 999999;
+		}
+
+		public void DeactivateRageMode()
+		{
+			birdCollider.isTrigger = false;
+			damage = DEFAULT_DAMAGE;
 		}
 	}
 }

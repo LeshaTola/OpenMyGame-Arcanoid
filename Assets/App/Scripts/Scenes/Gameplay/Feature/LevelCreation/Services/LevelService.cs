@@ -19,7 +19,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 		private ILevelInfoProvider levelInfoProvider;
 		private ILevelMechanicsController levelMechanicsController;
 		private TextAsset defaultLevelInfo;
-		private List<LevelMechanics> levelMechanics;
+		private List<ILevelMechanics> levelMechanics;
 
 		private LevelInfo levelInfo;
 
@@ -27,7 +27,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 					  ILevelInfoProvider levelInfoProvider,
 					  ILevelMechanicsController levelMechanicsController,
 					  TextAsset defaultLevelInfo,
-					  List<LevelMechanics> levelMechanics)
+					  List<ILevelMechanics> levelMechanics)
 		{
 			this.levelGenerator = levelGenerator;
 			this.levelInfoProvider = levelInfoProvider;
@@ -44,7 +44,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 			levelInfo = levelInfoProvider.GetLevelInfoByPath(path);
 			await levelGenerator.GenerateLevelAsync(levelInfo);
 
-			levelMechanicsController.StartLevelMechanics(currentLevel.LevelMechanics);
+			levelMechanicsController.SetupLevelMechanics(currentLevel.LevelMechanics);
 		}
 
 		public async UniTask SetupDefaultLevelAsync()
@@ -52,23 +52,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 			levelMechanicsController.Cleanup();
 			levelInfo = levelInfoProvider.GetLevelInfo(defaultLevelInfo.text);
 			await levelGenerator.GenerateLevelAsync(levelInfo);
-			levelMechanicsController.StartLevelMechanics(levelMechanics);
-		}
-
-		public void TurnOffColliders()
-		{
-			foreach (var block in levelGenerator.Blocks.Values)
-			{
-				block.BoxCollider.isTrigger = true;
-			}
-		}
-
-		public void TurnOnColliders()
-		{
-			foreach (var block in levelGenerator.Blocks.Values)
-			{
-				block.BoxCollider.isTrigger = false;
-			}
+			levelMechanicsController.SetupLevelMechanics(levelMechanics);
 		}
 
 		public LevelState GetLevelState()

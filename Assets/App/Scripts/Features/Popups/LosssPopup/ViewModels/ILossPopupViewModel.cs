@@ -1,4 +1,5 @@
-﻿using Features.Popups.Animations.Animator;
+﻿using Features.Energy.Providers;
+using Features.Popups.Animations.Animator;
 using Module.Commands;
 using Module.Localization;
 
@@ -11,6 +12,7 @@ namespace Features.Popups.Loss.ViewModels
 		public ILabeledCommand BackCommand { get; }
 		public ILocalizationSystem LocalizationSystem { get; }
 		public IPopupAnimator PopupAnimator { get; }
+		public IEnergyProvider EnergyProvider { get; }
 
 	}
 }

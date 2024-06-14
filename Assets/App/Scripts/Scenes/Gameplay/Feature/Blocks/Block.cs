@@ -5,13 +5,14 @@ using Scenes.Gameplay.Feature.Blocks.Config.Components;
 using Scenes.Gameplay.Feature.Damage;
 using Scenes.Gameplay.Feature.Player.Ball;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
+using Scenes.Gameplay.Feature.RageMode.Entities;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace Scenes.Gameplay.Feature.Blocks
 {
-	public class Block : MonoBehaviour, IDamageable
+	public class Block : MonoBehaviour, IDamageable, IEnraged
 	{
 		[SerializeField] private BlockConfig config;
 		[SerializeField] private BlockVisual visual;
@@ -37,6 +38,8 @@ namespace Scenes.Gameplay.Feature.Blocks
 			private set => boxCollider.size = new Vector2(boxCollider.size.x, value);
 		}
 
+		public float SizeMultiplier { get; private set; }
+
 		[Inject]
 		public void Construct(IBallService ballService, KeyPool<PooledParticle> keyPool)
 		{
@@ -57,12 +60,12 @@ namespace Scenes.Gameplay.Feature.Blocks
 			MatrixPosition = matrixPosition;
 		}
 
-		public void ResizeBlock(float width)
+		public void Resize(float width)
 		{
-			float multiplier = width / Width;
+			SizeMultiplier = width / Width;
 
-			ResizeCollider(multiplier);
-			visual.Resize(multiplier);
+			ResizeCollider(SizeMultiplier);
+			visual.Resize(SizeMultiplier);
 		}
 
 		private void ResizeCollider(float multiplier)
@@ -75,7 +78,7 @@ namespace Scenes.Gameplay.Feature.Blocks
 		{
 			if (config.TryGetComponent(out CollisionComponent collisionComponent))
 			{
-				collisionComponent.CollisionGameObject = col.gameObject;
+				collisionComponent.Collision2D = col;
 				collisionComponent.Execute();
 			}
 		}
@@ -92,6 +95,17 @@ namespace Scenes.Gameplay.Feature.Blocks
 				triggerComponent.TriggerGameObject = collision.gameObject;
 				triggerComponent.Execute();
 			}
+		}
+
+		public void ActivateRageMode()
+		{
+			boxCollider.isTrigger = true;
+		}
+
+		public void DeactivateRageMode()
+		{
+			boxCollider.isTrigger = false;
+
 		}
 	}
 }

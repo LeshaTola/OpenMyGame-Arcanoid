@@ -1,6 +1,8 @@
 ﻿using Module.ObjectPool;
 using Scenes.Gameplay.Feature.Player.Ball;
+using Scenes.Gameplay.Feature.Player.Ball.Providers.CollisionParticles;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
+using Scenes.Gameplay.Feature.Player.Ball.Services.AngleCorrector;
 using UnityEngine;
 using Zenject;
 
@@ -13,10 +15,30 @@ namespace Scenes.Gameplay.Bootstrap
 		[SerializeField] private Ball ballTemplate;
 		[SerializeField] private Transform ballsContainer;
 
+		[SerializeField] private CollisionToParticlesDatabase collisionToParticlesDatabase;
+
 		public override void InstallBindings()
 		{
 			BindBallsPool();
 			BindBallService();
+			BindAngleCorrectorService();
+			BindICollisionParticlesProvider();
+
+		}
+
+		private void BindICollisionParticlesProvider()
+		{
+			Container.Bind<ICollisionParticlesProvider>()
+				.To<CollisionParticlesProvider>()
+				.AsSingle()
+				.WithArguments(collisionToParticlesDatabase);
+		}
+
+		private void BindAngleCorrectorService()
+		{
+			Container.Bind<IAngleCorrectorService>()
+					.To<AngleCorrectorService>()
+					.AsSingle();
 		}
 
 		private void BindBallsPool()

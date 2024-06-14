@@ -1,4 +1,5 @@
-﻿using Features.Popups.Animations.Animator;
+﻿using Features.Energy.Providers;
+using Features.Popups.Animations.Animator;
 using Features.Popups.Loss;
 using Features.Popups.Loss.ViewModels;
 using Module.Localization;
@@ -15,14 +16,15 @@ namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
 		private ContinueCommand continueCommand;
 		private BackCommand backCommand;
 		private IPopupAnimator popupAnimator;
-
+		private IEnergyProvider energyProvider;
 
 		public RouterShowLoss(IPopupController popupController,
 						RestartCommand restartCommand,
 						ContinueCommand continueCommand,
 						BackCommand backCommand,
 						ILocalizationSystem localizationSystem,
-						IPopupAnimator popupAnimator)
+						IPopupAnimator popupAnimator,
+						IEnergyProvider energyProvider)
 		{
 			this.popupController = popupController;
 			this.restartCommand = restartCommand;
@@ -30,6 +32,7 @@ namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
 			this.backCommand = backCommand;
 			this.localizationSystem = localizationSystem;
 			this.popupAnimator = popupAnimator;
+			this.energyProvider = energyProvider;
 		}
 
 		public async void ShowLoss()
@@ -39,7 +42,8 @@ namespace Scenes.Gameplay.StateMachine.States.Loss.Routers
 											   continueCommand,
 											   backCommand,
 											   localizationSystem,
-											   popupAnimator);
+											   popupAnimator,
+											   energyProvider);
 			popup.Setup(lossPopupViewModel);
 			await popup.Show();
 		}

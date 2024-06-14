@@ -2,6 +2,6 @@
 {
 	public interface ILevelMechanicsFactory
 	{
-		LevelMechanics GetLevelMechanics(LevelMechanics originalMechanics);
+		ILevelMechanics GetLevelMechanics(ILevelMechanics originalMechanics);
 	}
 }

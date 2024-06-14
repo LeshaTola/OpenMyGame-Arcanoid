@@ -36,7 +36,7 @@ namespace Features.Popups.WinPopup.Animator
 				.DOScale(Vector3.one, winAnimationData.imageAnimationDuration)
 				.SetEase(Ease.OutBack));
 
-			if (winAnimationData.PackImage.sprite == winAnimationData.targetSprite)
+			if (winAnimationData.targetSprite != null && winAnimationData.PackImage.sprite == winAnimationData.targetSprite)
 			{
 				SetPackName();
 				return;
@@ -89,7 +89,7 @@ namespace Features.Popups.WinPopup.Animator
 
 		private void SetupCurrentLevelAnimation(Sequence sequence)
 		{
-			var levelAnimation = DOVirtual.Int(0, winAnimationData.targetLevel, winAnimationData.levelAnimationDuration, value =>
+			var levelAnimation = DOVirtual.Int(winAnimationData.targetLevel, winAnimationData.targetLevel, winAnimationData.levelAnimationDuration, value =>
 			{
 				winAnimationData.LevelInfo.text = $"{value}/{winAnimationData.maxLevel}";
 			});

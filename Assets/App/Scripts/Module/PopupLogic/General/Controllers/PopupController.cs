@@ -21,15 +21,10 @@ namespace Module.PopupLogic.General.Controller
 			currentPopups = new();
 		}
 
-		public async UniTask ShowPopup(Popup popup)
-		{
-			await popup.Show();
-		}
-
 		public void AddActivePopup(Popup popup)
 		{
 			DeactivatePrevPopup();
-			popup.Canvas.sortingLayerName = "UI";//TODO: remove magic
+			popup.Canvas.sortingLayerName = "UI";
 			popup.Canvas.sortingOrder = currentPopups.Count + 1;
 			currentPopups.Add(popup);
 		}
@@ -58,7 +53,7 @@ namespace Module.PopupLogic.General.Controller
 			return (T)popup;
 		}
 
-		public async UniTask HidePopup()
+		public async UniTask HideLastPopup()
 		{
 			if (currentPopups.Count <= 0)
 			{
