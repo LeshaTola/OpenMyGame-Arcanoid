@@ -17,9 +17,6 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		void StopBalls();
 		UniTask StopBallsAsync(float duration);
 
-		void ActivateRageMode();
-		void DeactivateRageMode();
-
 		void ChangeBallsSpeed(float multiplier);
 		BallsServiceState GetBallServiceState();
 		void SetBallServiceState(BallsServiceState state);

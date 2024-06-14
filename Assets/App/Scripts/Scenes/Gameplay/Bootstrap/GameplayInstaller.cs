@@ -5,6 +5,7 @@ using Scenes.Gameplay.Feature.Health;
 using Scenes.Gameplay.Feature.Health.Configs;
 using Scenes.Gameplay.Feature.Player.PlayerInput;
 using Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.Feature.RageMode.Services;
 using Scenes.Gameplay.Feature.Reset.Services;
 using Scenes.Gameplay.StateMachine.States;
 using UnityEngine;
@@ -27,16 +28,32 @@ namespace Scenes.Gameplay.Bootstrap
 		{
 			RouterInstaller.Install(Container);
 
-			Container.Bind<IAnimation>().FromInstance(cameraAnimation).AsSingle().WhenInjectedInto<GameplayState>();
-			Container.BindInstance(mainCamera).AsSingle();
+			BindCameraAnimator();
+			BindCamera();
 
 			BindResetService();
+			BindRageModeService();
 			BindProgressController();
 			BindHealthController();
 			BindBoundaryValidator();
 
 			BindTimeProvider();
 			BindInput();
+		}
+
+		private void BindRageModeService()
+		{
+			Container.Bind<IRageModeService>().To<RageModeService>().AsSingle();
+		}
+
+		private void BindCamera()
+		{
+			Container.BindInstance(mainCamera).AsSingle();
+		}
+
+		private void BindCameraAnimator()
+		{
+			Container.Bind<IAnimation>().FromInstance(cameraAnimation).AsSingle().WhenInjectedInto<GameplayState>();
 		}
 
 		private void BindResetService()

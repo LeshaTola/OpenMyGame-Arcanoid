@@ -55,22 +55,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 			levelMechanicsController.SetupLevelMechanics(levelMechanics);
 		}
 
-		public void TurnOffColliders()
-		{
-			foreach (var block in levelGenerator.Blocks.Values)
-			{
-				block.BoxCollider.isTrigger = true;
-			}
-		}
-
-		public void TurnOnColliders()
-		{
-			foreach (var block in levelGenerator.Blocks.Values)
-			{
-				block.BoxCollider.isTrigger = false;
-			}
-		}
-
 		public LevelState GetLevelState()
 		{
 			return new LevelState()

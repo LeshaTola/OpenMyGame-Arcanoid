@@ -13,8 +13,5 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 
 		UniTask SetupDefaultLevelAsync();
 		Task SetupLevelFromPackAsync(Pack currentPack, SavedPackData savedPackData);
-
-		void TurnOffColliders();
-		void TurnOnColliders();
 	}
 }

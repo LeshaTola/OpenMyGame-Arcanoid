@@ -1,9 +1,10 @@
 ﻿using Scenes.Gameplay.Feature.Player.Configs;
+using Scenes.Gameplay.Feature.RageMode.Entities;
 using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Player.Ball
 {
-	public class BallVisual : MonoBehaviour
+	public class BallVisual : MonoBehaviour, IEnraged
 	{
 		[SerializeField] private SpriteRenderer spriteRenderer;
 		[SerializeField] private BallVisualConfig config;

@@ -6,6 +6,7 @@ using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Player.Ball.Providers.CollisionParticles;
 using Scenes.Gameplay.Feature.Player.Ball.Services.AngleCorrector;
 using Scenes.Gameplay.Feature.Progress;
+using Scenes.Gameplay.Feature.RageMode.Services;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,27 +14,30 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 {
 	public class BallService : IBallService
 	{
-		private IPool<Ball> pool;
-		private IProgressController progressController;
 		private ICollisionParticlesProvider collisionParticlesProvider;
 		private IAngleCorrectorService angleCorrectorService;
+		private IProgressController progressController;
+		private IRageModeService rageModeService;
 		private ITimeProvider timeProvider;
+		private IPool<Ball> pool;
 
 		private Dictionary<Ball, Vector2> lastBallsDirections = new();
-		private bool isRageMode = false;
 		public float SpeedMultiplier { get; private set; } = 1;
 
-		public BallService(IPool<Ball> pool,
-					 IProgressController progressController,
+		public BallService(
 					 ICollisionParticlesProvider collisionParticlesProvider,
 					 IAngleCorrectorService angleCorrectorService,
-					 ITimeProvider timeProvider)
+					 IProgressController progressController,
+					 IRageModeService rageModeService,
+					 ITimeProvider timeProvider,
+					 IPool<Ball> pool)
 		{
-			this.pool = pool;
-			this.progressController = progressController;
 			this.collisionParticlesProvider = collisionParticlesProvider;
 			this.angleCorrectorService = angleCorrectorService;
+			this.progressController = progressController;
+			this.rageModeService = rageModeService;
 			this.timeProvider = timeProvider;
+			this.pool = pool;
 		}
 
 		public Ball GetBall()
@@ -41,10 +45,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			Ball ball = pool.Get();
 			ball.Init(this);
 			ball.OnCollisionEnter += OnBallCollisionEnter;
-			if (isRageMode)
-			{
-				ball.Visual.ActivateRageMode();
-			}
+			rageModeService.AddEnraged(ball.Visual);
 
 			return ball;
 		}
@@ -52,25 +53,8 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		public void ReleaseBall(Ball ball)
 		{
 			ball.OnCollisionEnter -= OnBallCollisionEnter;
+			rageModeService.RemoveEnraged(ball.Visual);
 			pool.Release(ball);
-		}
-
-		public void ActivateRageMode()
-		{
-			isRageMode = true;
-			foreach (Ball ball in pool.Active)
-			{
-				ball.Visual.ActivateRageMode();
-			}
-		}
-
-		public void DeactivateRageMode()
-		{
-			isRageMode = false;
-			foreach (Ball ball in pool.Active)
-			{
-				ball.Visual.DeactivateRageMode();
-			}
 		}
 
 		public void ChangeBallsSpeed(float multiplier)

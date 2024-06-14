@@ -2,6 +2,7 @@
 using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Field;
+using Scenes.Gameplay.Feature.RageMode.Services;
 using System.Threading;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 		private IPool<Bird> birdsPool;
 		private IFieldSizeProvider fieldSizeProvider;
 		private ITimeProvider timeProvider;
+		private IRageModeService rageModeService;
 
 		private CancellationTokenSource cancellationTokenSource;
 		private Bird bird;
@@ -25,10 +27,12 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 		public BirdLevelMechanics(IPool<Bird> birdsPool,
 							IFieldSizeProvider fieldSizeProvider,
 							ITimeProvider timeProvider,
+							IRageModeService rageModeService,
 							BirdConfig config)
 		{
 			this.birdsPool = birdsPool;
 			this.fieldSizeProvider = fieldSizeProvider;
+			this.rageModeService = rageModeService;
 			this.timeProvider = timeProvider;
 			this.config = config;
 
@@ -58,6 +62,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 		{
 			if (bird != null)
 			{
+				rageModeService.RemoveEnraged(bird);
 				birdsPool.Release(bird);
 				bird = null;
 				isBirdAlive = false;
@@ -127,6 +132,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 			if (bird == null)
 			{
 				bird = birdsPool.Get();
+				rageModeService.AddEnraged(bird);
 				bird.OnDeath += OnBirdDeath;
 			}
 

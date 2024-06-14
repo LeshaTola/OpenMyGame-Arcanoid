@@ -5,13 +5,14 @@ using Scenes.Gameplay.Feature.Blocks.Config.Components;
 using Scenes.Gameplay.Feature.Damage;
 using Scenes.Gameplay.Feature.Player.Ball;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
+using Scenes.Gameplay.Feature.RageMode.Entities;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 namespace Scenes.Gameplay.Feature.Blocks
 {
-	public class Block : MonoBehaviour, IDamageable
+	public class Block : MonoBehaviour, IDamageable, IEnraged
 	{
 		[SerializeField] private BlockConfig config;
 		[SerializeField] private BlockVisual visual;
@@ -94,6 +95,17 @@ namespace Scenes.Gameplay.Feature.Blocks
 				triggerComponent.TriggerGameObject = collision.gameObject;
 				triggerComponent.Execute();
 			}
+		}
+
+		public void ActivateRageMode()
+		{
+			boxCollider.isTrigger = true;
+		}
+
+		public void DeactivateRageMode()
+		{
+			boxCollider.isTrigger = false;
+
 		}
 	}
 }
