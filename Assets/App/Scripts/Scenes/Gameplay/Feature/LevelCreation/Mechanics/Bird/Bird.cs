@@ -30,20 +30,21 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 			transform.position = newPosition;
 		}
 
-		private void ReduceHealth(int value)
-		{
-			health -= value;
-			if (health <= 0)
-			{
-				OnDeath?.Invoke();
-			}
-		}
 
 		private void ApplyDamage(GameObject gameObject)
 		{
 			if (gameObject.TryGetComponent(out IDamager damager))
 			{
 				ReduceHealth(1);
+			}
+		}
+
+		private void ReduceHealth(int value)
+		{
+			health -= value;
+			if (health <= 0)
+			{
+				OnDeath?.Invoke();
 			}
 		}
 	}

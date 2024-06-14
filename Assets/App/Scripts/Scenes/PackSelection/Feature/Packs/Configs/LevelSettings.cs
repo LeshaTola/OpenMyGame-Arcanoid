@@ -13,6 +13,6 @@ namespace Scenes.PackSelection.Feature.Packs.Configs
 		public string LevelName;
 		[FoldoutGroup("@LevelName")]
 		[SerializeReference]
-		public List<LevelMechanics> LevelMechanics;
+		public List<ILevelMechanics> LevelMechanics;
 	}
 }

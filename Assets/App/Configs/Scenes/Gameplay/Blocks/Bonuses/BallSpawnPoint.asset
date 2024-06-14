@@ -61,6 +61,9 @@ MonoBehaviour:
       Entry: 7
       Data: 4|Scenes.Gameplay.Feature.Blocks.Config.Components.Partcles.SpawnParticlesComponent,
         Assembly-CSharp
+    - Name: changeColor
+      Entry: 5
+      Data: true
     - Name: particleColor
       Entry: 7
       Data: UnityEngine.Color, UnityEngine.CoreModule

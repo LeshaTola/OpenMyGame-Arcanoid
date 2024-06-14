@@ -12,10 +12,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Factories
 			this.diContainer = diContainer;
 		}
 
-		public LevelMechanics GetLevelMechanics(LevelMechanics originalMechanics)
+		public ILevelMechanics GetLevelMechanics(ILevelMechanics originalMechanics)
 		{
 			Type type = originalMechanics.GetType();
-			return (LevelMechanics)diContainer.Resolve(type);
+			return (ILevelMechanics)diContainer.Resolve(type);
 		}
 	}
 }

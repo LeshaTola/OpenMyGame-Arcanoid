@@ -19,7 +19,7 @@ namespace Scenes.Gameplay.Bootstrap
 		[Header("Level Creation")]
 		[SerializeField] private LevelConfig levelConfig;
 		[SerializeField] private TextAsset defaultLevelInfo;
-		[SerializeField][SerializeReference] private List<LevelMechanics> levelMechanics;
+		[SerializeField][SerializeReference] private List<ILevelMechanics> levelMechanics;
 		[SerializeField] private BlocksDictionary blocksDictionary;
 		[SerializeField] private BonusesDatabase bonusesDatabase;
 		[SerializeField] private Block blockTemplate;

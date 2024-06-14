@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 {
-	public class BirdLevelMechanics : LevelMechanics
+	public class BirdLevelMechanics : ILevelMechanics
 	{
 		[SerializeField] private BirdConfig config;
 
@@ -35,13 +35,26 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 			timer = config.TimeToRespawn;
 		}
 
-		public override void StartMechanics()
+		public void StartMechanics()
 		{
-			cancellationTokenSource = new CancellationTokenSource();
-			ControlBirdAsync(cancellationTokenSource.Token).Forget();
+			if (cancellationTokenSource == null)
+			{
+				cancellationTokenSource = new CancellationTokenSource();
+				ControlBirdAsync(cancellationTokenSource.Token).Forget();
+			}
 		}
 
-		public override void StopMechanics()
+		public void StopMechanics()
+		{
+			if (cancellationTokenSource != null)
+			{
+				cancellationTokenSource.Cancel();
+				cancellationTokenSource.Dispose();
+				cancellationTokenSource = null;
+			}
+		}
+
+		public void Cleanup()
 		{
 			if (bird != null)
 			{
@@ -50,12 +63,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 				isBirdAlive = false;
 			}
 
-			if (cancellationTokenSource != null)
-			{
-				cancellationTokenSource.Cancel();
-				cancellationTokenSource.Dispose();
-				cancellationTokenSource = null;
-			}
+			StopMechanics();
 		}
 
 		private async UniTaskVoid ControlBirdAsync(CancellationToken cancellationToken)

@@ -4,7 +4,9 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers
 {
 	public interface ILevelMechanicsController
 	{
-		void StartLevelMechanics(List<LevelMechanics> levelMechanicsList);
+		void SetupLevelMechanics(List<ILevelMechanics> levelMechanicsList);
+		void StopLevelMechanics();
 		void Cleanup();
+		void StartLevelMechanics();
 	}
 }
