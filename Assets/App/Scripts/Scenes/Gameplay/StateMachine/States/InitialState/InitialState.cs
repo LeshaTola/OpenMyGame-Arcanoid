@@ -72,8 +72,8 @@ namespace Scenes.Gameplay.StateMachine.States
 
 		private async Task LoadNormalLevel()
 		{
-			resetService.Reset();
 			bonusServicesProvider.Cleanup();
+			resetService.Reset();
 			healthController.ResetHealth();
 
 			if (packProvider.CurrentPack == null || packProvider.SavedPackData == null)

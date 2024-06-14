@@ -20,8 +20,8 @@ namespace Scenes.Gameplay.StateMachine.States
 		{
 			base.Enter();
 
-			resetService.Reset();
 			bonusServicesProvider.Cleanup();
+			resetService.Reset();
 			StateMachine.ChangeState<GameplayState>();
 		}
 	}
