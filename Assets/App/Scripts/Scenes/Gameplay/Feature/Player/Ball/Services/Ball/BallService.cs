@@ -4,6 +4,7 @@ using Module.ObjectPool;
 using Module.Saves.Structs;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Player.Ball.Providers.CollisionParticles;
+using Scenes.Gameplay.Feature.Player.Ball.Services.AngleCorrector;
 using Scenes.Gameplay.Feature.Progress;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		private IPool<Ball> pool;
 		private IProgressController progressController;
 		private ICollisionParticlesProvider collisionParticlesProvider;
+		private IAngleCorrectorService angleCorrectorService;
 		private ITimeProvider timeProvider;
 
 		private Dictionary<Ball, Vector2> lastBallsDirections = new();
@@ -24,11 +26,13 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		public BallService(IPool<Ball> pool,
 					 IProgressController progressController,
 					 ICollisionParticlesProvider collisionParticlesProvider,
+					 IAngleCorrectorService angleCorrectorService,
 					 ITimeProvider timeProvider)
 		{
 			this.pool = pool;
 			this.progressController = progressController;
 			this.collisionParticlesProvider = collisionParticlesProvider;
+			this.angleCorrectorService = angleCorrectorService;
 			this.timeProvider = timeProvider;
 		}
 
@@ -146,7 +150,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			Vector2 newDirection = ball.Movement.Direction;
 			if (!collision.gameObject.TryGetComponent(out Plate player))
 			{
-				newDirection = ball.Movement.GetValidDirection();
+				newDirection = angleCorrectorService.GetCorrectAngle(ball.Movement.Direction, ball.Movement.Config.MinAngle);
 			}
 			ball.Movement.Push(newDirection, progressController.NormalizedProgress, SpeedMultiplier);
 		}
@@ -186,4 +190,5 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 			}
 		}
 	}
+
 }
