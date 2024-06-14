@@ -20,7 +20,14 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services.AngleCorrector
 				if (angle < minAngle)
 				{
 					float rotateAngle = minAngle - angle;
-					vector = Quaternion.Euler(0, 0, rotateAngle) * vector;
+					var tempVector = Quaternion.Euler(0, 0, rotateAngle) * vector;
+					float tempAngle = Vector2.Angle(tempVector, axis);
+					if (tempAngle < minAngle)
+					{
+						tempVector = Quaternion.Euler(0, 0, -rotateAngle) * vector;
+					}
+					vector = tempVector;
+					break;
 				}
 			}
 			return vector;
