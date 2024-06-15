@@ -20,6 +20,8 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 		private List<IBonusCommand> bonusCommands = new();
 		private List<IBonusCommand> commandsToRemove = new();
 
+		public List<IBonusCommand> BonusCommands { get => bonusCommands; }
+
 		public BonusCommandService(IBonusCommandsFactory bonusCommandsFactory,
 					  ITimeProvider timeProvider)
 		{

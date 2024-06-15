@@ -1,4 +1,5 @@
 ﻿using Features.StateMachine;
+using Scenes.Gameplay.Feature.Autopilot.Factories;
 using Scenes.Gameplay.Feature.Autopilot.Services.Entities;
 using Scenes.Gameplay.Feature.Bonuses.Services;
 using Scenes.Gameplay.Feature.Bonuses.Services.Bonuses;
@@ -19,19 +20,22 @@ namespace Scenes.Gameplay.Feature.Autopilot.Services
 		private IBonusService bonusService;
 		private IBallService ballService;
 		private IBonusCommandService commandService;
+		private IAutopilotStrategyFactory autopilotStrategyFactory;
 
 
 		public AutopilotService(Plate plate,
 								IInput input,
 								IBonusService bonusService,
 								IBallService ballService,
-								IBonusCommandService commandService)
+								IBonusCommandService commandService,
+								IAutopilotStrategyFactory autopilotStrategyFactory)
 		{
 			this.plate = plate;
 			this.input = input;
 			this.bonusService = bonusService;
 			this.ballService = ballService;
 			this.commandService = commandService;
+			this.autopilotStrategyFactory = autopilotStrategyFactory;
 		}
 
 		public List<AutopilotTarget> Targets { get; private set; }
@@ -53,6 +57,10 @@ namespace Scenes.Gameplay.Feature.Autopilot.Services
 		{
 			if (IsActive)
 			{
+				foreach (var command in commandService.BonusCommands)
+				{
+					autopilotStrategyFactory.GetAutopilotStrategy(command.Id)?.Execute();
+				}
 				plate.Movement.Move(GetPriorityDirection());
 			}
 		}
@@ -61,10 +69,6 @@ namespace Scenes.Gameplay.Feature.Autopilot.Services
 		{
 			float MinY = ballService.Balls.Min(x => x.transform.position.y);
 			List<Ball> ball = ballService.Balls.Where(x => x.transform.position.y == MinY).ToList();
-			/*			foreach (var ball in ballService.Balls)
-						{
-
-						}*/
 
 			return new Vector2(ball[0].transform.position.x, plate.transform.position.y);
 		}

@@ -1,4 +1,6 @@
 ﻿using Module.TimeProvider;
+using Scenes.Gameplay.Feature.Autopilot.Configs;
+using Scenes.Gameplay.Feature.Autopilot.Factories;
 using Scenes.Gameplay.Feature.Autopilot.Services;
 using Scenes.Gameplay.Feature.Blocks.Animation;
 using Scenes.Gameplay.Feature.Field;
@@ -25,6 +27,9 @@ namespace Scenes.Gameplay.Bootstrap
 		[Header("Health")]
 		[SerializeField] private HealthConfig config;
 
+		[Header("Autopilot")]
+		[SerializeField] private AutopilotBonusStrategyDatabase strategyDatabase;
+
 		public override void InstallBindings()
 		{
 			RouterInstaller.Install(Container);
@@ -34,7 +39,9 @@ namespace Scenes.Gameplay.Bootstrap
 
 			BindResetService();
 			BindRageModeService();
+
 			BindAutopilotService();
+			BindAutopilotStrategyFactory();
 
 			BindProgressController();
 			BindHealthController();
@@ -47,6 +54,14 @@ namespace Scenes.Gameplay.Bootstrap
 		private void BindAutopilotService()
 		{
 			Container.BindInterfacesTo<AutopilotService>().AsSingle();
+		}
+
+		private void BindAutopilotStrategyFactory()
+		{
+			Container.Bind<IAutopilotStrategyFactory>()
+				.To<AutopilotStrategyFactory>()
+				.AsSingle()
+				.WithArguments(strategyDatabase);
 		}
 
 		private void BindRageModeService()
