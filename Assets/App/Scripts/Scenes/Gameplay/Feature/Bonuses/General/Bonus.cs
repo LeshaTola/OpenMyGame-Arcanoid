@@ -53,9 +53,9 @@ namespace Scenes.Gameplay.Feature.Bonuses
 
 		public void Release()
 		{
+			SizeMultiplier = 1;
+			transform.localScale = Vector3.one;
 			pool.Release(this);
-			SizeMultiplier = 1 / SizeMultiplier;
-			Resize();
 		}
 	}
 }

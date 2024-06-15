@@ -41,7 +41,7 @@ namespace Scenes.Gameplay.Feature.Field
 
 			foreach (Bonus bonus in bonusesToRemove)
 			{
-				bonusesPool.Release(bonus);
+				bonus.Release();
 			}
 
 			bonusesToRemove.Clear();
