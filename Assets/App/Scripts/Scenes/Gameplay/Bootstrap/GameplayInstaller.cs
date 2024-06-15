@@ -1,4 +1,5 @@
 ﻿using Module.TimeProvider;
+using Scenes.Gameplay.Feature.Autopilot.Services;
 using Scenes.Gameplay.Feature.Blocks.Animation;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
@@ -33,12 +34,19 @@ namespace Scenes.Gameplay.Bootstrap
 
 			BindResetService();
 			BindRageModeService();
+			BindAutopilotService();
+
 			BindProgressController();
 			BindHealthController();
 			BindBoundaryValidator();
 
 			BindTimeProvider();
 			BindInput();
+		}
+
+		private void BindAutopilotService()
+		{
+			Container.BindInterfacesTo<AutopilotService>().AsSingle();
 		}
 
 		private void BindRageModeService()

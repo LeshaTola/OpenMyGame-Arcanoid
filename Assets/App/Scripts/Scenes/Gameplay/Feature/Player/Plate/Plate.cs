@@ -33,6 +33,7 @@ namespace Scenes.Gameplay.Feature.Player
 
 		public float SpeedMultiplier { get; set; } = 1;
 		public bool IsSticky { get; set; } = false;
+		public IMovement Movement { get => movement; }
 
 		[Inject]
 		public void Construct(IFieldSizeProvider fieldController,

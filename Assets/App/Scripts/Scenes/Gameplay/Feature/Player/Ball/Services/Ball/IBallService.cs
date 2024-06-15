@@ -7,6 +7,7 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 {
 	public interface IBallService
 	{
+		IEnumerable<Ball> Balls { get; }
 		float SpeedMultiplier { get; }
 
 		Ball GetBall();

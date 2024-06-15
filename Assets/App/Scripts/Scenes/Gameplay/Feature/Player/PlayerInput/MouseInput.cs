@@ -16,8 +16,15 @@ namespace Scenes.Gameplay.Feature.Player.PlayerInput
 			this.mainCamera = mainCamera;
 		}
 
+		public bool IsActive { get; set; } = true;
+
 		public Vector2 GetPosition()
 		{
+			if (!IsActive)
+			{
+				return default;
+			}
+
 			if (Input.GetMouseButton(0))
 			{
 				return GetMousePosition();
@@ -27,6 +34,11 @@ namespace Scenes.Gameplay.Feature.Player.PlayerInput
 
 		public void Tick()
 		{
+			if (!IsActive)
+			{
+				return;
+			}
+
 			if (Input.GetMouseButtonDown(0))
 			{
 				OnStartInput?.Invoke(GetMousePosition());

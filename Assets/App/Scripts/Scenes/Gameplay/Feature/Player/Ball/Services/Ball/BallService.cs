@@ -21,8 +21,10 @@ namespace Scenes.Gameplay.Feature.Player.Ball.Services
 		private ITimeProvider timeProvider;
 		private IPool<Ball> pool;
 
+		public IEnumerable<Ball> Balls { get => pool.Active; }
 		private Dictionary<Ball, Vector2> lastBallsDirections = new();
 		public float SpeedMultiplier { get; private set; } = 1;
+
 
 		public BallService(
 					 ICollisionParticlesProvider collisionParticlesProvider,
