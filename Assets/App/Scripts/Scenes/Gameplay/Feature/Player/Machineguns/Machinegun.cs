@@ -74,7 +74,7 @@ namespace Scenes.Gameplay.Feature.Player.Machineguns
 			foreach (var spawnPoint in bulletSpawnPoints)
 			{
 				var distanceVector = spawnPoint.localPosition - Vector3.zero;
-				spawnPoint.localPosition = new Vector2(distanceVector.x * multiplier, spawnPoint.localPosition.y);
+				AnimateWidth(spawnPoint, spawnPoint.transform.position.x, distanceVector.x * multiplier, duration);
 			}
 		}
 
@@ -90,7 +90,6 @@ namespace Scenes.Gameplay.Feature.Player.Machineguns
 		{
 			DOVirtual.Float(from, to, duration, value =>
 			{
-
 				spawnPoint.localPosition = new Vector2(value, spawnPoint.localPosition.y);
 			});
 		}

@@ -64,18 +64,18 @@ namespace Scenes.Gameplay.Feature.Player
 
 		public void ChangeWidth(float multiplier, float duration = 0)
 		{
-			AnimateWidth(defaultWidth, defaultWidth * multiplier, duration);
-
 			visual.ChangeWidth(multiplier, duration);
 			machinegun.ChangeWidth(multiplier, duration);
+
+			AnimateWidth(defaultWidth, defaultWidth * multiplier, duration);
 		}
 
 		public void ResetWidth(float duration = 0)
 		{
-			AnimateWidth(boxCollider.size.x, defaultWidth, duration);
-
 			visual.ResetWidth(duration);
 			machinegun.ResetWidth(duration);
+
+			AnimateWidth(boxCollider.size.x, defaultWidth, duration);
 		}
 
 		public void PushBalls()
