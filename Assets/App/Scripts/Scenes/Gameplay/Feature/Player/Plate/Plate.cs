@@ -56,10 +56,17 @@ namespace Scenes.Gameplay.Feature.Player
 
 		private void OnCollisionEnter2D(Collision2D collision)
 		{
-			if (!IsSticky || !collision.gameObject.TryGetComponent(out Ball.Ball ball))
+			if (!collision.gameObject.TryGetComponent(out Ball.Ball ball))
 			{
 				return;
 			}
+
+			if (!IsSticky)
+			{
+				visual.PlayPunchingAnimation(collision.contacts[0].normal);
+				return;
+			}
+
 			AddConnectedBall(ball);
 		}
 
