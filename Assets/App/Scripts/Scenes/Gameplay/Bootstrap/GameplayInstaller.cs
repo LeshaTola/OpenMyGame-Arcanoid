@@ -29,6 +29,7 @@ namespace Scenes.Gameplay.Bootstrap
 
 		[Header("Autopilot")]
 		[SerializeField] private AutopilotBonusStrategyDatabase strategyDatabase;
+		[SerializeField] private AutopilotConfig autopilotConfig;
 
 		public override void InstallBindings()
 		{
@@ -53,7 +54,9 @@ namespace Scenes.Gameplay.Bootstrap
 
 		private void BindAutopilotService()
 		{
-			Container.BindInterfacesTo<AutopilotService>().AsSingle();
+			Container.BindInterfacesTo<AutopilotService>()
+				.AsSingle()
+				.WithArguments(autopilotConfig);
 		}
 
 		private void BindAutopilotStrategyFactory()

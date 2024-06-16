@@ -46,9 +46,9 @@
     ],
     [
       56,
+      7,
       56,
-      56,
-      56,
+      7,
       56
     ]
   ],
@@ -68,11 +68,11 @@
       "none"
     ],
     [
+      "none",
       "ShrinkPlate",
-      "ExpandPlate",
+      "none",
       "ShrinkPlate",
-      "ExpandPlate",
-      "ShrinkPlate"
+      "none"
     ],
     [
       "none",
@@ -97,9 +97,9 @@
     ],
     [
       null,
+      "ExpandPlate",
       null,
-      null,
-      null,
+      "ExpandPlate",
       null
     ]
   ]
