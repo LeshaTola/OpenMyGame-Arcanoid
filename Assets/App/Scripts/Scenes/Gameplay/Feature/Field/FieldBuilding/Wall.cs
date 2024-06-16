@@ -1,9 +1,8 @@
-﻿using Scenes.Gameplay.Feature.Damage;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Scenes.Gameplay.Feature.Field
 {
-	public class Wall : MonoBehaviour, IDamageable
+	public class Wall : MonoBehaviour
 	{
 
 	}
