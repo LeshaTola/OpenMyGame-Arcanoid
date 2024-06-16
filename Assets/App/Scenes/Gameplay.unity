@@ -442,6 +442,8 @@ MonoBehaviour:
     rid: 4565741859545284613
   winProgress: 100
   config: {fileID: 11400000, guid: 9104e3cf5bc727641bc7d7f5a1e53a69, type: 2}
+  strategyDatabase: {fileID: 11400000, guid: f0efbd41896495b42841803d839d5656, type: 2}
+  autopilotConfig: {fileID: 11400000, guid: 02a668b5c7eee094c9d061c800b07d76, type: 2}
   references:
     version: 2
     RefIds:
