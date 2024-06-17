@@ -3,6 +3,7 @@ using Module.Saves;
 using Scenes.PackSelection.Feature.Packs.Configs;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Scenes.PackSelection.Feature.Packs
 {
@@ -27,6 +28,12 @@ namespace Scenes.PackSelection.Feature.Packs
 
 		public void SaveData()
 		{
+			if (PacksData == null || PacksData.Count <= 0)
+			{
+				Debug.LogError("Attempt to load empty PacksData");
+				return;
+			}
+
 			dataProvider.SaveData(new PlayerProgressData
 			{
 				IsFirstSession = this.IsFirstSession,

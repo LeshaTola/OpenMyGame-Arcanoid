@@ -1,106 +1,68 @@
 {
-  "Height": 5,
-  "Width": 7,
+  "Height": 4,
+  "Width": 5,
   "BlocksMatrix": [
     [
       3,
+      1,
+      5,
+      56
+    ],
+    [
+      6,
+      2,
+      0,
+      7
+    ],
+    [
       3,
+      1,
+      5,
+      7
+    ],
+    [
+      6,
+      2,
+      0,
+      7
+    ],
+    [
       3,
-      3,
-      3
-    ],
-    [
-      6,
-      6,
-      6,
-      6,
-      6
-    ],
-    [
-      2,
-      2,
-      2,
-      2,
-      2
-    ],
-    [
       1,
-      1,
-      1,
-      1,
-      1
-    ],
-    [
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
       5,
-      5,
-      5,
-      5,
-      5
-    ],
-    [
-      56,
-      7,
-      56,
-      7,
       56
     ]
   ],
   "BonusesMatrix": [
     [
-      "AddHealth",
       "none",
-      "AddHealth",
       "none",
-      "AddHealth"
-    ],
-    [
-      "none",
-      "ReduceHealth",
-      "none",
-      "ReduceHealth",
-      "none"
-    ],
-    [
-      "none",
-      "ShrinkPlate",
-      "none",
-      "ShrinkPlate",
+      null,
       "none"
     ],
     [
       "none",
       "none",
-      "none",
-      "SpeedUpPlate",
-      "StickyPlate"
-    ],
-    [
-      "none",
-      "none",
-      "none",
-      "SlowDownPlate",
+      null,
       "Machinegun"
     ],
     [
-      null,
-      null,
-      "Autopilot",
+      "none",
+      "none",
       null,
       "Autopilot"
     ],
     [
+      "none",
+      "none",
+      "none",
+      "StickyPlate"
+    ],
+    [
+      "none",
       null,
-      "ExpandPlate",
       null,
-      "ExpandPlate",
-      null
+      "none"
     ]
   ]
 }
