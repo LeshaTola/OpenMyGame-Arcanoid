@@ -37,6 +37,8 @@ MonoBehaviour:
     LevelMechanics: []
   - LevelName: Tutorial_Machinegun
     LevelMechanics: []
+  - LevelName: Tutorial_Autopilot
+    LevelMechanics: []
   references:
     version: 2
     RefIds: []
