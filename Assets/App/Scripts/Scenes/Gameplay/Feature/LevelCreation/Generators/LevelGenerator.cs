@@ -118,8 +118,7 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 
 		private async Task DestroyBlockAsync(Block block)
 		{
-			Vector2 newPosition = GetTopPosition(block, block.transform.position);
-			Tween animation = block.transform.DOMove(newPosition, animationTime);
+			Tween animation = block.transform.DOScale(Vector2.zero, animationTime);
 			animation.SetEase(Ease.InBounce);
 
 			await animation.AsyncWaitForCompletion();
@@ -131,9 +130,10 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private async UniTask PlaceBlockAsync(int i, int j, Block block)
 		{
 			Vector2 newPosition = GetNewBlockPosition(fieldSizeProvider.GameField, i, j, block);
-			block.transform.position = GetTopPosition(block, newPosition);
+			block.transform.position = newPosition;
 
-			var animation = block.transform.DOMove(newPosition, animationTime);
+			block.transform.localScale = Vector2.zero;
+			var animation = block.transform.DOScale(Vector2.one, animationTime);
 			animation.SetEase(Ease.OutBounce);
 			await animation.AsyncWaitForCompletion();
 		}
@@ -182,11 +182,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation
 		private float GetBlockWidth(LevelInfo levelInfo)
 		{
 			return (fieldSizeProvider.GameField.Width - (levelInfo.Width - 1) * levelConfig.Spacing) / levelInfo.Width;
-		}
-
-		private Vector2 GetTopPosition(Block block, Vector2 position)
-		{
-			return new Vector2(position.x, fieldSizeProvider.GameField.MaxY + block.Height);
 		}
 	}
 }
