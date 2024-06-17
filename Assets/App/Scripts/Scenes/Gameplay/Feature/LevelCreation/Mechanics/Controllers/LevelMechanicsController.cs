@@ -1,4 +1,5 @@
-﻿using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Factories;
+﻿using Features.Saves.Gameplay.DTO.LevelMechanics;
+using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Factories;
 using System.Collections.Generic;
 
 namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers
@@ -60,6 +61,26 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers
 		private bool IsLevelMechanicsEmpty()
 		{
 			return levelMechanicsList == null || levelMechanicsList.Count <= 0;
+		}
+
+		public LevelMechanicsControllerState GetState()
+		{
+			LevelMechanicsControllerState state = new();
+			foreach (var mechanics in levelMechanicsList)
+			{
+				state.LevelMechanics.Add(mechanics.GetMechanicsData());
+			}
+			return state;
+		}
+
+		public void SetState(LevelMechanicsControllerState state)
+		{
+			foreach (var mechanics in state.LevelMechanics)
+			{
+				ILevelMechanics levelMechanics = levelMechanicsFactory.GetLevelMechanics(mechanics.Type);
+				levelMechanics.SetMechanicsData(mechanics);
+				levelMechanicsList.Add(levelMechanics);
+			}
 		}
 	}
 }

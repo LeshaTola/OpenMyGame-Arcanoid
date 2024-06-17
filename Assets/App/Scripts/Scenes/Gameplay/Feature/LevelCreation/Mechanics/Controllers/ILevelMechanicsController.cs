@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Features.Saves.Gameplay.DTO.LevelMechanics;
+using System.Collections.Generic;
 
 namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers
 {
@@ -8,5 +9,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers
 		void StopLevelMechanics();
 		void Cleanup();
 		void StartLevelMechanics();
+
+		LevelMechanicsControllerState GetState();
+		void SetState(LevelMechanicsControllerState state);
 	}
 }

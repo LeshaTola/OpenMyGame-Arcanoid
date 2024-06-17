@@ -19,10 +19,17 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 		private int health;
 
 		public BirdVisual Visual { get => visual; }
-
-		public void Init(int health)
+		public int Health
 		{
-			this.health = health;
+			get => health;
+			set
+			{
+				health = value;
+				if (health <= 0)
+				{
+					OnDeath?.Invoke();
+				}
+			}
 		}
 
 		private async void OnCollisionEnter2D(Collision2D collision)

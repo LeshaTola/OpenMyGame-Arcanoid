@@ -1,4 +1,5 @@
-﻿using Scenes.Gameplay.Feature.LevelCreation;
+﻿using Features.Saves.Gameplay.DTO.LevelMechanics;
+using Scenes.Gameplay.Feature.LevelCreation;
 using System;
 using System.Collections.Generic;
 
@@ -9,5 +10,6 @@ namespace Features.Saves.Gameplay.DTOs.Level
 	{
 		public LevelInfo levelInfo;
 		public List<BlockData> BlocksData;
+		public LevelMechanicsControllerState levelMechanicsControllerState;
 	}
 }

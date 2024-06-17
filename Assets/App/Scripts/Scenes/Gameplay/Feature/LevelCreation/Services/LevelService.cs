@@ -66,12 +66,15 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 					BlocksMatrix = GetBlocksMatrix(),
 					BonusesMatrix = levelInfo.BonusesMatrix,
 				},
-				BlocksData = GetBlocksData()
+				BlocksData = GetBlocksData(),
+				levelMechanicsControllerState = levelMechanicsController.GetState()
 			};
 		}
 
 		public async UniTask SetLevelStateAsync(LevelState levelState)
 		{
+			levelMechanicsController.SetState(levelState.levelMechanicsControllerState);
+
 			levelInfo = levelState.levelInfo;
 			await levelGenerator.GenerateLevelAsync(levelInfo);
 			foreach (var blockData in levelState.BlocksData)
