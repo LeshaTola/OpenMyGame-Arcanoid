@@ -3,60 +3,60 @@
   "Width": 7,
   "BlocksMatrix": [
     [
-      8,
-      8,
-      8,
-      8,
-      8,
-      -1
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ],
     [
-      8,
-      8,
-      3,
-      8,
-      8,
-      9
-    ],
-    [
-      8,
-      3,
-      3,
-      3,
-      8,
-      -1
-    ],
-    [
-      8,
-      8,
-      3,
-      8,
-      8,
-      9
-    ],
-    [
-      8,
-      8,
-      8,
-      8,
-      8,
-      -1
-    ],
-    [
-      -1,
-      9,
-      0,
-      9,
-      -1,
-      -1
-    ],
-    [
-      -1,
-      -1,
+      1,
       9,
       9,
-      -1,
-      -1
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      9,
+      9,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      9,
+      9,
+      1,
+      9,
+      1
+    ],
+    [
+      1,
+      9,
+      9,
+      1,
+      1,
+      1
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     ]
   ],
   "BonusesMatrix": [
@@ -71,25 +71,9 @@
     [
       null,
       null,
-      "AddHealth",
+      "StickyPlate",
       null,
-      null,
-      null
-    ],
-    [
-      null,
-      "AddHealth",
-      "AddHealth",
-      "AddHealth",
-      "none",
-      null
-    ],
-    [
-      null,
-      null,
-      "AddHealth",
-      null,
-      null,
+      "StickyPlate",
       null
     ],
     [
@@ -103,9 +87,25 @@
     [
       null,
       null,
+      "StickyPlate",
+      null,
+      null,
+      null
+    ],
+    [
       null,
       null,
       null,
+      null,
+      null,
+      null
+    ],
+    [
+      null,
+      null,
+      "StickyPlate",
+      null,
+      "StickyPlate",
       null
     ],
     [

@@ -1,9 +1,9 @@
 {
   "Height": 6,
-  "Width": 7,
+  "Width": 6,
   "BlocksMatrix": [
     [
-      8,
+      -1,
       8,
       8,
       8,
@@ -12,50 +12,42 @@
     ],
     [
       8,
-      8,
-      3,
-      8,
-      8,
-      9
-    ],
-    [
-      8,
-      3,
-      3,
-      3,
-      8,
-      -1
-    ],
-    [
-      8,
-      8,
-      3,
-      8,
-      8,
-      9
-    ],
-    [
-      8,
-      8,
-      8,
-      8,
-      8,
-      -1
-    ],
-    [
-      -1,
       9,
-      0,
+      8,
+      52,
+      6,
+      8
+    ],
+    [
+      8,
+      8,
+      8,
+      52,
+      6,
+      3
+    ],
+    [
+      8,
+      8,
+      8,
+      52,
+      6,
+      3
+    ],
+    [
+      8,
       9,
-      -1,
-      -1
+      8,
+      52,
+      6,
+      8
     ],
     [
       -1,
-      -1,
-      9,
-      9,
-      -1,
+      8,
+      8,
+      8,
+      8,
       -1
     ]
   ],
@@ -70,25 +62,9 @@
     ],
     [
       null,
+      "Machinegun",
       null,
-      "AddHealth",
-      null,
-      null,
-      null
-    ],
-    [
-      null,
-      "AddHealth",
-      "AddHealth",
-      "AddHealth",
       "none",
-      null
-    ],
-    [
-      null,
-      null,
-      "AddHealth",
-      null,
       null,
       null
     ],
@@ -96,15 +72,23 @@
       null,
       null,
       null,
+      "none",
       null,
-      null,
-      null
+      "none"
     ],
     [
       null,
       null,
       null,
+      "none",
       null,
+      "none"
+    ],
+    [
+      null,
+      "Machinegun",
+      null,
+      "none",
       null,
       null
     ],

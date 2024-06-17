@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 2
+    SerializedFormat: 0
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -885,7 +885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelConfig: {fileID: 11400000, guid: 8ca4be1666794f74aaddb5fa66d255f9, type: 2}
-  defaultLevelInfo: {fileID: 4900000, guid: 7629fcc3cfb83314e9b55a2b18274bfd, type: 3}
+  defaultLevelInfo: {fileID: 4900000, guid: dd71a59c06d47fb419003bb7ba3b3e02, type: 3}
   levelMechanics:
   - rid: 4565741859545284612
   blocksDictionary: {fileID: 11400000, guid: fb42b1b71d8fe2244be54d5ca92eaa4e, type: 2}
