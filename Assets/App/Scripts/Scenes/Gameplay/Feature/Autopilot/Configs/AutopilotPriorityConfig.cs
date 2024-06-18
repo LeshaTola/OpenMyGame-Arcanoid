@@ -1,4 +1,5 @@
-﻿using Scenes.Gameplay.Feature.Bonuses.Configs;
+﻿using Scenes.Gameplay.Feature.Bonuses;
+using Scenes.Gameplay.Feature.Bonuses.Configs;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,13 @@ namespace Scenes.Gameplay.Feature.Autopilot.Configs
 			{
 				priority.SetBonusesDatabase(bonusesDatabase);
 			}
+		}
+
+		public bool IsNegative(Bonus bonus)
+		{
+			return Priorities
+						.Find(x => x.BonusId.Equals(bonus.BonusCommand.Id))
+						.Priority < 0;
 		}
 	}
 }

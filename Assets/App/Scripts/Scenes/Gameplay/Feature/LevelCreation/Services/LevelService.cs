@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Features.Saves;
 using Features.Saves.Gameplay.DTOs.Level;
+using Scenes.Gameplay.Feature.Blocks;
 using Scenes.Gameplay.Feature.Blocks.Config.Components.Health;
 using Scenes.Gameplay.Feature.LevelCreation.LevelInfoProviders;
 using Scenes.Gameplay.Feature.LevelCreation.Mechanics;
@@ -8,6 +9,7 @@ using Scenes.Gameplay.Feature.LevelCreation.Mechanics.Controllers;
 using Scenes.PackSelection.Feature.Packs.Configs;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -35,6 +37,8 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Services
 			this.defaultLevelInfo = defaultLevelInfo;
 			this.levelMechanics = levelMechanics;
 		}
+
+		public List<Block> Blocks { get => levelGenerator.Blocks.Values.ToList(); }
 
 		public async Task SetupLevelFromPackAsync(Pack currentPack, SavedPackData savedPackData)
 		{

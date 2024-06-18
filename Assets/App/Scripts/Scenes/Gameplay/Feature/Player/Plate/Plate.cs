@@ -35,6 +35,7 @@ namespace Scenes.Gameplay.Feature.Player
 		public bool IsSticky { get; set; } = false;
 		public IMovement Movement { get => movement; }
 		public BoxCollider2D BoxCollider { get => boxCollider; }
+		public List<Ball.Ball> ConnectedBalls { get => connectedBalls; }
 
 		[Inject]
 		public void Construct(IFieldSizeProvider fieldController,
