@@ -32,13 +32,23 @@ MonoBehaviour:
   - LevelName: Tutorial_LinedBombs
     LevelMechanics: []
   - LevelName: Tutorial_AdditionalBalls
-    LevelMechanics: []
+    LevelMechanics:
+    - rid: 4565742247164772354
   - LevelName: Tutorial_StickyPlatform
     LevelMechanics: []
   - LevelName: Tutorial_Machinegun
     LevelMechanics: []
   - LevelName: Tutorial_Autopilot
-    LevelMechanics: []
+    LevelMechanics:
+    - rid: 4565742247164772352
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4565742247164772352
+      type: {class: BirdLevelMechanics, ns: Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird, asm: Assembly-CSharp}
+      data:
+        config: {fileID: 11400000, guid: ac35249a5216cd84d9c9d84d5980cb0a, type: 2}
+    - rid: 4565742247164772354
+      type: {class: BirdLevelMechanics, ns: Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird, asm: Assembly-CSharp}
+      data:
+        config: {fileID: 0}

@@ -60,6 +60,7 @@ namespace Scenes.Gameplay.StateMachine.States
 			base.Enter();
 			levelMechanicsController.StartLevelMechanics();
 
+
 			headerUI.OnMenuButtonCLicked += OnMenuButtonCLicked;
 			headerUI.OnNextLevelButtonCLicked += OnNextLevelButtonCLicked;
 
@@ -67,6 +68,8 @@ namespace Scenes.Gameplay.StateMachine.States
 			boundaryValidator.OnLastBallFall += OnLastBallFall;
 			healthController.OnDeath += OnDeath;
 			input.OnEndInput += OnEndInput;
+
+			progressController.ProcessProgress();
 		}
 
 		public override void Update()

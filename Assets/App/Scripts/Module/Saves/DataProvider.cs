@@ -18,6 +18,11 @@ namespace Module.Saves
 			this.storage = storage;
 		}
 
+		public void DeleteData()
+		{
+			storage.DeleteString(key);
+		}
+
 		public T GetData()
 		{
 			string json = storage.GetString(key);

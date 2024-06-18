@@ -13,6 +13,11 @@ namespace Module.Saves
 		{
 			PlayerPrefs.SetString(key, value);
 		}
+
+		public void DeleteString(string key)
+		{
+			PlayerPrefs.DeleteKey(key);
+		}
 	}
 
 }

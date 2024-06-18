@@ -86,6 +86,11 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 			ballService.PushBalls();
 		}
 
+		public void DeleteData()
+		{
+			dataProvider.DeleteData();
+		}
+
 		public void Cleanup()
 		{
 			gameplaySavesProvider.OnSave -= OnSave;
