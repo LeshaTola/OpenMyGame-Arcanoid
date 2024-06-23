@@ -7,6 +7,8 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services
 {
 	public interface IBonusCommandService
 	{
+		List<IBonusCommand> BonusCommands { get; }
+
 		event Action<IBonusCommand> OnBonusStart;
 		event Action<IBonusCommand> OnBonusUpdate;
 		event Action<IBonusCommand> OnBonusStop;

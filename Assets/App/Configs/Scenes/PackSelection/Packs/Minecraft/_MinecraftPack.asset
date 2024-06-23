@@ -17,9 +17,13 @@ MonoBehaviour:
   packName: Minecraft
   relativeLevelsPath: Levels\Minecraft
   levelsSettings:
-  - LevelName: MineCraft_Level_1
+  - LevelName: MineCraft_Creeper
     LevelMechanics: []
-  - LevelName: MineCraft_Test
+  - LevelName: MineCraft_Enderman
+    LevelMechanics: []
+  - LevelName: MineCraft_Slime
+    LevelMechanics: []
+  - LevelName: MineCraft_Chicken
     LevelMechanics: []
   references:
     version: 2

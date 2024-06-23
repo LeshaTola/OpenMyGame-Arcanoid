@@ -15,6 +15,11 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Factories
 		public ILevelMechanics GetLevelMechanics(ILevelMechanics originalMechanics)
 		{
 			Type type = originalMechanics.GetType();
+			return GetLevelMechanics(type);
+		}
+
+		public ILevelMechanics GetLevelMechanics(Type type)
+		{
 			return (ILevelMechanics)diContainer.Resolve(type);
 		}
 	}

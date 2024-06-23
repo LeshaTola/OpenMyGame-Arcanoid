@@ -2,6 +2,7 @@
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.Configs;
 using Scenes.Gameplay.Feature.Player.Machineguns;
+using Scenes.Gameplay.Feature.Player.Providers;
 using Scenes.Gameplay.Feature.Reset;
 using Scenes.Gameplay.Feature.Reset.Services;
 using Scenes.Gameplay.StateMachine.States;
@@ -21,6 +22,12 @@ namespace Scenes.Gameplay.Bootstrap
 			BindMachinegun();
 			BindMovement();
 			BindPlate();
+			BindPlateSizeProvider();
+		}
+
+		private void BindPlateSizeProvider()
+		{
+			Container.Bind<IPlateSizeProvider>().To<PlateSizeProvider>().AsSingle();
 		}
 
 		private void BindMachinegun()

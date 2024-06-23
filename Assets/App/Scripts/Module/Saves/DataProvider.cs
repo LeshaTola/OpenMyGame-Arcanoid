@@ -7,10 +7,20 @@ namespace Module.Saves
 		private string key;
 		private IStorage storage;
 
+		private JsonSerializerSettings settings = new()
+		{
+			TypeNameHandling = TypeNameHandling.Auto,
+		};
+
 		public DataProvider(string key, IStorage storage)
 		{
 			this.key = key;
 			this.storage = storage;
+		}
+
+		public void DeleteData()
+		{
+			storage.DeleteString(key);
 		}
 
 		public T GetData()
@@ -21,7 +31,7 @@ namespace Module.Saves
 				return null;
 			}
 
-			return JsonConvert.DeserializeObject<T>(json);
+			return JsonConvert.DeserializeObject<T>(json, settings);
 		}
 
 		public bool HasData()
@@ -36,7 +46,7 @@ namespace Module.Saves
 
 		public void SaveData(T data)
 		{
-			string json = JsonConvert.SerializeObject(data);
+			string json = JsonConvert.SerializeObject(data, settings);
 			storage.SetString(key, json);
 		}
 	}

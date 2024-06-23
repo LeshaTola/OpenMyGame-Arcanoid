@@ -1,4 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
+using Features.Saves.Gameplay.DTO.LevelMechanics;
+using Features.Saves.Gameplay.DTO.LevelMechanics.Bird;
 using Module.ObjectPool;
 using Module.TimeProvider;
 using Scenes.Gameplay.Feature.Field;
@@ -22,7 +24,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 		private bool isBirdAlive;
 		private float timer;
 		private Vector2 targetPosition;
-		private Vector2 direction;
 
 		public BirdLevelMechanics(IPool<Bird> birdsPool,
 							IFieldSizeProvider fieldSizeProvider,
@@ -129,16 +130,21 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 
 		private void SetupBird()
 		{
+			GetBird();
+
+			bird.gameObject.SetActive(true);
+			bird.Health = config.Health;
+			SetBirdPosition();
+		}
+
+		private void GetBird()
+		{
 			if (bird == null)
 			{
 				bird = birdsPool.Get();
 				rageModeService.AddEnraged(bird);
 				bird.OnDeath += OnBirdDeath;
 			}
-
-			bird.gameObject.SetActive(true);
-			bird.Init(config.Health);
-			SetBirdPosition();
 		}
 
 		private void SetBirdPosition()
@@ -149,9 +155,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 			bird.transform.position = new Vector2(xPosition, yPosition);
 
 			targetPosition = new Vector2(-xPosition, yPosition);
-
-			direction = targetPosition - (Vector2)bird.transform.position;
-			direction.Normalize();
 		}
 
 		private bool IsValidPosition()
@@ -165,6 +168,33 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Mechanics.Bird
 		{
 			isBirdAlive = false;
 			bird.gameObject.SetActive(false);
+		}
+
+		public LevelMechanicsData GetMechanicsData()
+		{
+			return new BirdLevelMechanicsData()
+			{
+				Type = GetType(),
+				Health = bird == null ? 0 : bird.Health,
+				Position = bird == null ? new(Vector2.zero) : new(bird.transform.position),
+				TargetPosition = new(targetPosition)
+			};
+		}
+
+		public void SetMechanicsData(LevelMechanicsData data)
+		{
+			BirdLevelMechanicsData birdData = data as BirdLevelMechanicsData;
+			GetBird();
+			if (birdData.Health <= 0)
+			{
+				OnBirdDeath();
+				return;
+			}
+
+			isBirdAlive = true;
+			bird.Health = birdData.Health;
+			bird.transform.position = new(birdData.Position.X, birdData.Position.Y);
+			targetPosition = new(birdData.TargetPosition.X, birdData.TargetPosition.Y);
 		}
 	}
 }

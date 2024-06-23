@@ -71,10 +71,12 @@ namespace Scenes.Gameplay.Feature.Player.Machineguns
 
 		public void ChangeWidth(float multiplier, float duration = 0)
 		{
-			foreach (var spawnPoint in bulletSpawnPoints)
+
+			for (int i = 0; i < bulletSpawnPoints.Count; i++)
 			{
-				var distanceVector = spawnPoint.localPosition - Vector3.zero;
-				spawnPoint.localPosition = new Vector2(distanceVector.x * multiplier, spawnPoint.localPosition.y);
+				Transform spawnPoint = bulletSpawnPoints[i];
+				var distanceVector = defaultBulletSpawnPoints[i] - Vector3.zero;
+				AnimateWidth(spawnPoint, spawnPoint.localPosition.x, distanceVector.x * multiplier, duration);
 			}
 		}
 
@@ -90,7 +92,6 @@ namespace Scenes.Gameplay.Feature.Player.Machineguns
 		{
 			DOVirtual.Float(from, to, duration, value =>
 			{
-
 				spawnPoint.localPosition = new Vector2(value, spawnPoint.localPosition.y);
 			});
 		}

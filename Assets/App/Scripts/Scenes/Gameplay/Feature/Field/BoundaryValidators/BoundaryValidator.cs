@@ -1,6 +1,7 @@
 ﻿using Module.ObjectPool;
 using Scenes.Gameplay.Feature.Bonuses;
 using Scenes.Gameplay.Feature.Player.Ball;
+using Scenes.Gameplay.Feature.Player.Machineguns.Bullets;
 using System;
 using System.Collections.Generic;
 using Zenject;
@@ -13,26 +14,51 @@ namespace Scenes.Gameplay.Feature.Field
 		public event Action OnLastBallFall;
 
 		private IPool<Ball> ballsPool;
+		private IPool<Bullet> bulletPool;
 		private IPool<Bonus> bonusesPool;
 		private IFieldSizeProvider fieldSizeProvider;
 
 		private List<Ball> ballsToRemove;
+		private List<Bullet> bulletsToRemove;
 		private List<Bonus> bonusesToRemove;
 
-		public BoundaryValidator(IPool<Ball> ballsPool, IFieldSizeProvider fieldSizeProvider, IPool<Bonus> bonusesPool)
+		public BoundaryValidator(IPool<Ball> ballsPool,
+						   IPool<Bullet> bulletPool,
+						   IFieldSizeProvider fieldSizeProvider,
+						   IPool<Bonus> bonusesPool)
 		{
 			this.ballsPool = ballsPool;
+			this.bulletPool = bulletPool;
 			this.bonusesPool = bonusesPool;
 			this.fieldSizeProvider = fieldSizeProvider;
 
 			ballsToRemove = new();
+			bulletsToRemove = new();
 			bonusesToRemove = new();
 		}
 
 		public void Tick()
 		{
 			ValidateBalls();
+			ValidateBullets();
 			ValidateBonuses();
+		}
+
+		private void ValidateBullets()
+		{
+			foreach (var bullet in bulletPool.Active)
+			{
+				if (!fieldSizeProvider.GameField.IsValid(bullet.transform.position))
+				{
+					bulletsToRemove.Add(bullet);
+				}
+			}
+
+			foreach (var bullet in bulletsToRemove)
+			{
+				bullet.Release();
+			}
+			bulletsToRemove.Clear();
 		}
 
 		private void ValidateBonuses()
@@ -41,7 +67,7 @@ namespace Scenes.Gameplay.Feature.Field
 
 			foreach (Bonus bonus in bonusesToRemove)
 			{
-				bonusesPool.Release(bonus);
+				bonus.Release();
 			}
 
 			bonusesToRemove.Clear();

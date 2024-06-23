@@ -33,7 +33,7 @@ namespace Features.Saves
 			}
 			else
 			{
-				SaveAllData();
+				energyProvider.SaveData();
 			}
 		}
 

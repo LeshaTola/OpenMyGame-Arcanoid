@@ -1,4 +1,9 @@
-﻿using Module.TimeProvider;
+﻿using Module.AI.Resolver;
+using Module.TimeProvider;
+using Scenes.Gameplay.Feature.AI.Providers;
+using Scenes.Gameplay.Feature.Autopilot.Configs;
+using Scenes.Gameplay.Feature.Autopilot.Factories;
+using Scenes.Gameplay.Feature.Autopilot.Services;
 using Scenes.Gameplay.Feature.Blocks.Animation;
 using Scenes.Gameplay.Feature.Field;
 using Scenes.Gameplay.Feature.Health;
@@ -24,6 +29,9 @@ namespace Scenes.Gameplay.Bootstrap
 		[Header("Health")]
 		[SerializeField] private HealthConfig config;
 
+		[Header("Autopilot")]
+		[SerializeField] private ActionsDatabase actionsDatabase;
+
 		public override void InstallBindings()
 		{
 			RouterInstaller.Install(Container);
@@ -33,12 +41,36 @@ namespace Scenes.Gameplay.Bootstrap
 
 			BindResetService();
 			BindRageModeService();
+
+			AIInstaller.Install(Container);
+			BindAutopilotService();
+			BindAutopilotStrategyFactory();
+			BindNearestObjectProvider();
+
 			BindProgressController();
 			BindHealthController();
 			BindBoundaryValidator();
 
 			BindTimeProvider();
 			BindInput();
+		}
+
+		private void BindNearestObjectProvider()
+		{
+			Container.Bind<INearestObjectProvider>().To<NearestObjectProvider>().AsSingle();
+		}
+
+		private void BindAutopilotService()
+		{
+			Container.BindInterfacesTo<AutopilotService>().AsSingle();
+		}
+
+		private void BindAutopilotStrategyFactory()
+		{
+			Container.Bind<IAutopilotActionsFactory>()
+				.To<AutopilotActionsFactory>()
+				.AsSingle()
+				.WithArguments(actionsDatabase);
 		}
 
 		private void BindRageModeService()
@@ -93,6 +125,31 @@ namespace Scenes.Gameplay.Bootstrap
 			Container.Bind<ITimeProvider>()
 				.To<GameplayTimeProvider>()
 				.AsSingle();
+		}
+	}
+
+	public class AIInstaller : Installer<AIInstaller>
+	{
+		public override void InstallBindings()
+		{
+			//InstallConsiderations();
+			//InstallActions();
+			BindActionResolver();
+		}
+
+		/*public void InstallActions()
+		{
+			Container.BindInterfacesTo<StickyPlatformAction>().AsSingle().WhenInjectedInto<ActionResolver>();
+		}
+
+		public void InstallConsiderations()
+		{
+			Container.BindInterfacesTo<StickyConsideration>().AsSingle();
+		}*/
+
+		private void BindActionResolver()
+		{
+			Container.Bind<IActionResolver>().To<ActionResolver>().AsSingle();
 		}
 	}
 }

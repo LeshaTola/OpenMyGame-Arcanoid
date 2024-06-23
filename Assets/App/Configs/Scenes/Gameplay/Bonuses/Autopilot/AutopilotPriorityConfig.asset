@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8633d75a60455794fa68d113b6d330af, type: 3}
+  m_Name: AutopilotPriorityConfig
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  bonusesDatabase: {fileID: 11400000, guid: c297a95a1444a594592e4272acc36a10, type: 2}
+  ballPriority: 5
+  priorities:
+  - BonusId: AddHealth
+    Priority: 4
+  - BonusId: ReduceHealth
+    Priority: -4
+  - BonusId: SpeedUpBalls
+    Priority: -1
+  - BonusId: SlowDownBalls
+    Priority: 1
+  - BonusId: ExpandPlate
+    Priority: 1
+  - BonusId: ShrinkPlate
+    Priority: -1
+  - BonusId: SpeedUpPlate
+    Priority: 1
+  - BonusId: SlowDownPlate
+    Priority: -1
+  - BonusId: Rage
+    Priority: 1
+  - BonusId: StickyPlate
+    Priority: 1
+  - BonusId: Machinegun
+    Priority: 1
+  - BonusId: Autopilot
+    Priority: 2

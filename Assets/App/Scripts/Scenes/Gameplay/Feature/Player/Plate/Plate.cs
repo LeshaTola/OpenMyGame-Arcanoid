@@ -33,6 +33,9 @@ namespace Scenes.Gameplay.Feature.Player
 
 		public float SpeedMultiplier { get; set; } = 1;
 		public bool IsSticky { get; set; } = false;
+		public IMovement Movement { get => movement; }
+		public BoxCollider2D BoxCollider { get => boxCollider; }
+		public List<Ball.Ball> ConnectedBalls { get => connectedBalls; }
 
 		[Inject]
 		public void Construct(IFieldSizeProvider fieldController,
@@ -54,27 +57,34 @@ namespace Scenes.Gameplay.Feature.Player
 
 		private void OnCollisionEnter2D(Collision2D collision)
 		{
-			if (!IsSticky || !collision.gameObject.TryGetComponent(out Ball.Ball ball))
+			if (!collision.gameObject.TryGetComponent(out Ball.Ball ball))
 			{
 				return;
 			}
+
+			if (!IsSticky)
+			{
+				visual.PlayPunchingAnimation(collision.contacts[0].normal);
+				return;
+			}
+
 			AddConnectedBall(ball);
 		}
 
 		public void ChangeWidth(float multiplier, float duration = 0)
 		{
-			AnimateWidth(defaultWidth, defaultWidth * multiplier, duration);
-
 			visual.ChangeWidth(multiplier, duration);
 			machinegun.ChangeWidth(multiplier, duration);
+
+			AnimateWidth(defaultWidth, defaultWidth * multiplier, duration);
 		}
 
 		public void ResetWidth(float duration = 0)
 		{
-			AnimateWidth(boxCollider.size.x, defaultWidth, duration);
-
 			visual.ResetWidth(duration);
 			machinegun.ResetWidth(duration);
+
+			AnimateWidth(boxCollider.size.x, defaultWidth, duration);
 		}
 
 		public void PushBalls()

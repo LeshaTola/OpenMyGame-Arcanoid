@@ -1,6 +1,7 @@
 ﻿using Features.Energy.Providers;
 using Features.Saves;
 using Features.StateMachine.States;
+using Scenes.Gameplay.Feature.LevelCreation.Saves;
 using Scenes.Gameplay.Feature.Player;
 using Scenes.Gameplay.Feature.Player.Ball.Services;
 using Scenes.Gameplay.StateMachine.States.Win.Routers;
@@ -15,6 +16,7 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 		private IPackProvider packProvider;
 		private IBallService ballService;
 		private IEnergyProvider energyProvider;
+		private ILevelSavingService levelSavingService;
 
 		private Plate plate;
 
@@ -24,18 +26,21 @@ namespace Scenes.Gameplay.StateMachine.States.Win
 				  IPackProvider packProvider,
 				  IBallService ballService,
 				  IEnergyProvider energyProvider,
+				  ILevelSavingService levelSavingService,
 				  Plate plate)
 		{
 			this.routerShowWin = routerShowWin;
 			this.packProvider = packProvider;
 			this.ballService = ballService;
 			this.energyProvider = energyProvider;
+			this.levelSavingService = levelSavingService;
 			this.plate = plate;
 		}
 
 		public override void Enter()
 		{
 			base.Enter();
+			levelSavingService.DeleteData();
 
 			energyProvider.AddEnergy(energyProvider.Config.WinReward);
 			EnterAsync();

@@ -12,7 +12,7 @@ namespace Scenes.Gameplay.Feature.UI
 		public void Init(Sprite sprite, int currentLevel, int maxLevel)
 		{
 			packImage.sprite = sprite;
-			levelText.text = $"{currentLevel + 1}/{maxLevel + 1}";
+			levelText.text = $"{currentLevel}/{maxLevel + 1}";
 		}
 	}
 }

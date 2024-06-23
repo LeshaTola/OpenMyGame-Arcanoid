@@ -7,5 +7,6 @@ namespace Scenes.Gameplay.Feature.LevelCreation.Saves
 		void Cleanup();
 		UniTask LoadDataAsync();
 		void SaveData();
+		void DeleteData();
 	}
 }

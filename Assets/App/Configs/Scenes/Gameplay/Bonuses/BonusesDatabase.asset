@@ -38,6 +38,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 51927907c07cc0e4fb98a1a5a4e7a711, type: 3}
     - {fileID: 21300000, guid: 42204dfcf2deb534eba0ee44a77c752e, type: 3}
     - {fileID: 21300000, guid: 969d67079c3ef66428b1bc1797c9e407, type: 3}
+    - {fileID: 21300000, guid: e965eaa200bf5c94e951a5c4aa47fead, type: 3}
+    - {fileID: 21300000, guid: b1df5e0ab5f5ea344ac0a04819ee2638, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -56,7 +58,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 11
+      Data: 12
     - Name: 
       Entry: 7
       Data: 
@@ -191,7 +193,7 @@ MonoBehaviour:
       Data: 
     - Name: multiplier
       Entry: 4
-      Data: 1.75
+      Data: 1.25
     - Name: 
       Entry: 8
       Data: 
@@ -241,7 +243,7 @@ MonoBehaviour:
       Data: 
     - Name: multiplier
       Entry: 4
-      Data: 0.35
+      Data: 0.5
     - Name: 
       Entry: 8
       Data: 
@@ -592,6 +594,48 @@ MonoBehaviour:
     - Name: IsArmorPiercing
       Entry: 5
       Data: false
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Autopilot
+    - Name: $v
+      Entry: 7
+      Data: 35|Scenes.Gameplay.Feature.Bonuses.Commands.AutoPilot.Autopilot, Assembly-CSharp
+    - Name: config
+      Entry: 7
+      Data: 36|Scenes.Gameplay.Feature.Bonuses.Commands.BonusConfig, Assembly-CSharp
+    - Name: sprite
+      Entry: 10
+      Data: 22
+    - Name: blockSprite
+      Entry: 10
+      Data: 23
+    - Name: duration
+      Entry: 4
+      Data: 30
+    - Name: conflicts
+      Entry: 7
+      Data: 37|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
     - Name: 
       Entry: 8
       Data: 

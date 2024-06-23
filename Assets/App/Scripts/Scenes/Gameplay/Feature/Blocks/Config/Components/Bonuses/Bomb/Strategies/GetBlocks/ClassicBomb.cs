@@ -22,22 +22,7 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategi
 			{
 				new()
 				{
-					Direction = new(1,0),
-					iterations = 1,
-				},
-				new()
-				{
-					Direction = new(0,1),
-					iterations = 1,
-				},
-				new()
-				{
-					Direction = new(1,1),
-					iterations = 1,
-				},
-				new()
-				{
-					Direction = new(-1,0),
+					Direction = new(1,-1),
 					iterations = 1,
 				},
 				new()
@@ -52,12 +37,27 @@ namespace Scenes.Gameplay.Feature.Blocks.Config.Components.Bonuses.Bomb.Strategi
 				},
 				new()
 				{
-					Direction = new(1,-1),
+					Direction = new(-1,0),
 					iterations = 1,
 				},
 				new()
 				{
 					Direction = new(-1,1),
+					iterations = 1,
+				},
+				new()
+				{
+					Direction = new(0,1),
+					iterations = 1,
+				},
+				new()
+				{
+					Direction = new(1,1),
+					iterations = 1,
+				},
+				new()
+				{
+					Direction = new(1,0),
 					iterations = 1,
 				},
 			};

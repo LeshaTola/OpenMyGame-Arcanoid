@@ -1,38 +1,68 @@
 {
-  "Height": 3,
-  "Width": 3,
+  "Height": 4,
+  "Width": 5,
   "BlocksMatrix": [
     [
       3,
       1,
-      3
+      5,
+      56
     ],
     [
-      3,
-      3,
-      1
+      6,
+      2,
+      0,
+      7
     ],
     [
       3,
       1,
-      3
+      5,
+      7
+    ],
+    [
+      6,
+      2,
+      0,
+      7
+    ],
+    [
+      3,
+      1,
+      5,
+      56
     ]
   ],
   "BonusesMatrix": [
     [
-      "ExpandPlate",
       "none",
-      "ShrinkPlate"
+      "none",
+      null,
+      "none"
     ],
     [
       "none",
       "none",
+      null,
       "Machinegun"
     ],
     [
-      "ShrinkPlate",
       "none",
-      "ExpandPlate"
+      "none",
+      null,
+      "Autopilot"
+    ],
+    [
+      "none",
+      "none",
+      "none",
+      "StickyPlate"
+    ],
+    [
+      "none",
+      null,
+      null,
+      "none"
     ]
   ]
 }

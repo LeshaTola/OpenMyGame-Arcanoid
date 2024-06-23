@@ -29,6 +29,8 @@ namespace Scenes.Gameplay.Feature.Bonuses.Services.Bonuses
 			levelGenerator.OnBlockDestroyed += OnBlockDestroyed;
 		}
 
+		public IEnumerable<Bonus> Bonuses { get => pool.Active; }
+
 		public void Update()
 		{
 			bonusCommandsService.UpdateBonus();
